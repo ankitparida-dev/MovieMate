@@ -1,42 +1,32 @@
 # 🎬 MovieMate
 
-MovieMate is a **responsive movie and TV showcase website** built with **HTML, CSS, and JavaScript**.  
-It features a hero section with a trailer, a navigation bar, trending movies, and smooth animations.  
+**MovieMate** is a responsive **movie and TV showcase website** built using **HTML** and **CSS**.  
+It provides a clean interface to explore movies with simple navigation and responsive layouts.  
 
 ---
 
 ## ✨ Features
-- 🎥 **Hero Section** with background image & YouTube trailer overlay  
-- 🔎 **Search Bar** for quick movie lookup  
-- 🔥 **Trending Section** with scrollable movie cards  
-- 🎞️ **Trailer Button** with smooth fade transition  
-- 🌙 **Theme Switcher** (light/dark toggle – optional)  
-- 📱 **Responsive Design** (works on desktop & mobile)  
+
+- 🔎 **Search Movies** – Quickly look up movies  
+- ⭐ **Add to Watchlist** – Save your favorite movies for later (static placeholder in HTML/CSS)  
+- 📜 **View History** – Keep track of previously explored movies (static layout)  
+- 🏷️ **Search with Tags** – Filter movies by categories or tags (styled in CSS)  
+- 🎥 **View Movie Details** – Display basic movie information in a structured format  
 
 ---
 
 ## 🛠️ Technologies Used
 
-HTML5 – Structure
+- **HTML5** – Structure & semantic markup  
+- **CSS3** – Styling, Flexbox, Grid, Gradients, Responsive Design  
 
-CSS3 – Styling, flexbox, gradients, overlays
+---
 
-JavaScript (Vanilla) – Interactivity, transitions
+## 📌 Note
+This project is built **only with HTML & CSS**.  
+No JavaScript or backend functionality is implemented.  
 
-## 🔮 Future Improvements
+---
 
-✅ Integrate with TMDB API for real movie data
-
-✅ Add user login & watchlist
-
-✅ Improve carousel with autoplay & swipe gestures
-
-✅ Deploy online via GitHub Pages / Netlify
-
-## 📸 Demo
-
-Open the site in your browser.
-
-Click Trailer → background fades, YouTube trailer plays.
-
-Scroll down to explore Trending Movies.
+## 👨‍💻 Author
+Developed with ❤️ using **HTML & CSS**
