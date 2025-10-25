@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Css files/Style.css">
+    <link rel="icon" href="Media files/Logo.png" type="icon">
 </head>
 <body>
     <!-- ===== LOADING SCREEN ===== -->
@@ -16,15 +17,10 @@
         <div class="loading-content">
             <div class="loading-logo">
                 <div class="logo">
-                    <i class="fas fa-film" style="font-size: 3rem; color: var(--secondary);"></i>
-                    <span class="logo-text">MovieMate</span>
+                    <img src="Media files/Logo.png" alt="MovieMate logo">
                 </div>
             </div>
             <div class="loading-animation">
-                <div class="loading-book">
-                    <i class="fas fa-film"></i>
-                </div>
-                
                 <div class="loading-text-content">
                     <h2 class="loading-text">Welcome to MovieMate</h2>
                     <p class="loading-subtext">Loading your cinematic experience...</p>
@@ -61,8 +57,7 @@
                 <nav class="navbar">
                     <div class="nav-brand">
                         <a href="#" class="logo">
-                            <i class="fas fa-film" style="font-size: 2rem; color: var(--secondary);"></i>
-                            <span class="brand-name">MovieMate</span>
+                           <video src="Media files/moviemate.mp4" alt="Moviemate Logo" autoplay muted loop playsinline width="250" height="80"></video>
                         </a>
                     </div>
                     
@@ -77,7 +72,7 @@
                             <a href="#" class="nav-link">TV Shows</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Trending</a>
+                            <a href="#" class="nav-link">More</a>
                         </li>
                     </ul>
                     
@@ -89,7 +84,6 @@
                         
                         <div class="auth-buttons">
                             <button class="btn btn-outline">Login</button>
-                            <button class="btn btn-primary">Join MovieMate</button>
                         </div>
                     </div>
                 </nav>
@@ -174,18 +168,14 @@
                 <div class="upcoming-grid">
                     <!-- Movie 1 -->
                     <div class="upcoming-card interactive-feature">
-                        <img src="https://images.unsplash.com/photo-1594908900066-3f47337549f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Dune: Part Two" class="upcoming-image">
+                        <img src="Media files/Avatar.png" alt="Avatar" class="upcoming-image">
                         <div class="upcoming-content">
-                            <h3 class="upcoming-title">Dune: Part Two</h3>
+                            <h3 class="upcoming-title">Avatar: Fire and Ash</h3>
                             <div class="upcoming-meta">
-                                <span>March 1, 2024</span>
-                                <div class="upcoming-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>9.2</span>
-                                </div>
+                                <span>March 19, 2025</span>
                             </div>
                             <p class="upcoming-description">
-                                Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.
+                               Jake and Neytiri's family grapples with grief after Neteyam's death, encountering a new, aggressive Na'vi tribe, the Ash People, who are led by the fiery Varang, as the conflict on Pandora escalates and a new moral focus emerges.
                             </p>
                             <div class="upcoming-actions">
                                 <button class="upcoming-btn remind-btn">
@@ -202,15 +192,11 @@
 
                     <!-- Movie 2 -->
                     <div class="upcoming-card interactive-feature">
-                        <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Deadpool & Wolverine" class="upcoming-image">
+                        <img src="Media files/AvengersDoomsday.png" alt="AvengersDoomsday" class="upcoming-image">
                         <div class="upcoming-content">
-                            <h3 class="upcoming-title">Deadpool & Wolverine</h3>
+                            <h3 class="upcoming-title">Avengers: Doomsday</h3>
                             <div class="upcoming-meta">
-                                <span>July 26, 2024</span>
-                                <div class="upcoming-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>9.0</span>
-                                </div>
+                                <span>Dec 1,2026</span>
                             </div>
                             <p class="upcoming-description">
                                 Wolverine is recovering from his injuries when he crosses paths with the loudmouth Deadpool. They team up to defeat a common enemy.
@@ -515,9 +501,6 @@
                             <a href="#" class="social-link" aria-label="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="social-link" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
                         </div>
                     </div>
                     
@@ -527,8 +510,7 @@
                             <li><a href="#">Home</a></li>
                             <li><a href="#">Movies</a></li>
                             <li><a href="#">TV Shows</a></li>
-                            <li><a href="#">Trending</a></li>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">More</a></li>
                         </ul>
                     </div>
                     
@@ -540,24 +522,6 @@
                             <li><a href="#">Drama</a></li>
                             <li><a href="#">Sci-Fi</a></li>
                             <li><a href="#">Horror</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h3 class="footer-title">Contact Us</h3>
-                        <ul class="footer-links contact-info">
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>123 Cinema St, Movie City</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone"></i>
-                                <span>+1 234 567 8900</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <span>info@moviemate.com</span>
-                            </li>
                         </ul>
                     </div>
                 </div>
