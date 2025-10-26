@@ -11,6 +11,13 @@
             line-height: 1.6;
             padding: 20px;
         }
+        a {
+            text-decoration: none;
+            color: inherit; 
+        }
+         a:hover {
+            text-decoration: none;
+         }
         .dividing-line{
             margin-bottom: 3rem;
             border-radius: 2px; 
@@ -264,7 +271,7 @@
             background-color: #1a1a3a;
             border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: transform 0.3s;   
         }
 
         .show-card:hover {
@@ -281,14 +288,9 @@
             padding: 15px;
         }
         
-        .show-card h4 {
-            font-size: 16px;
+        .show-content h3 {
+            font-size: 18px;
             margin-bottom: 8px;
-        }
-        
-        .show-card p {
-            color: #b8b8d0;
-            font-size: 14px;
         }
         
         footer {
