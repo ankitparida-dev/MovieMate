@@ -1,6 +1,6 @@
 # 🎬 MovieMate
 
-**MovieMate** is a responsive **movie and TV showcase website** built using **HTML** and **CSS**.  
+**MovieMate** is a responsive **movie and TV showcase website** built using **HTML** and **CSS** and **JavaScript**.  
 It provides a clean interface to explore movies with simple navigation and responsive layouts.  
 
 ---
