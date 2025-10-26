@@ -55,13 +55,13 @@
         <header class="main-header">
             <div class="container">
                 <nav class="navbar">
-                    <div class="nav-brand">
+                    <div class="left-section">
                         <a href="#" class="logo">
                            <video src="Media files/moviemate.mp4" alt="Moviemate Logo" autoplay muted loop playsinline width="250" height="80"></video>
                         </a>
                     </div>
                     
-                    <ul class="nav-menu">
+                    <ul class="middle-section">
                         <li class="nav-item">
                             <a href="#" class="nav-link active">Home</a>
                         </li>
@@ -71,18 +71,15 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">TV Shows</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">More</a>
-                        </li>
                     </ul>
                     
-                    <div class="nav-controls">
+                    <div class="right-section">
                         <div class="search-container">
                             <i class="fas fa-search search-icon"></i>
                             <input type="text" class="search-input" placeholder="Search for movies, TV shows...">
                         </div>
                         
-                        <div class="auth-buttons">
+                        <div class="login-button">
                             <button class="btn btn-outline">Login</button>
                         </div>
                     </div>
@@ -128,13 +125,11 @@
                 </div>
             </div>
         </section>
-
         <!-- ===== INTERSTELLAR SECTION ===== -->
-        <section class="interstellar-section">
+        <section class="movie-section">
             <div class="carousel-image">
                 <div class="overlay"></div>
-                <div class="interstellar-items">
-                    <div class="director-text">A FILM BY CHRISTOPHER NOLAN</div>
+                <div class="movie-items">
                     <span class="spotlight">#1 Spotlight</span>
                     <h1 class="show-name">INTERSTELLAR</h1>
                     <div class="details">
@@ -153,6 +148,81 @@
                     <button class="next">&#10095;</button>
                 </div>
             </div>
+        </section>
+        <!-- ===== TRENDING MOVIES ===== -->
+        <section class="content-section">
+            <div class="container">
+                <div class="content-header">
+                    <h2 class="content-title">Trending Movies and Shows</h2>
+                    <a href="#" class="content-link">
+                        View All
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                
+                <div class="content-grid">
+                    <!-- Movie 1 -->
+                    <div class="content-card interactive-feature">
+                        <img src="Media files/Conjuring.png" alt="Conjuring" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">The Conjuring: Last Rites</h3>
+                            <div class="card-meta">
+                                <span>2025</span>
+                                <div class="card-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>9.3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 2 -->
+                    <div class="content-card interactive-feature">
+                        <img src="Media files/Frankenstein.png" alt="Frankenstein" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Frankenstein</h3>
+                            <div class="card-meta">
+                                <span>2025</span>
+                                <div class="card-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>9.2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 3 -->
+                    <div class="content-card interactive-feature">
+                        <img src="Media files/Chainsawman.png" alt="Chainsaw man" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Chainsaw Man</h3>
+                            <div class="card-meta">
+                                <span>2018-</span>
+                                <div class="card-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>9.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 4 -->
+                    <div class="content-card interactive-feature">
+                        <img src="Media files/Fantasticfour.png" alt="Fantasticfour" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">The Fantastic Four: First Steps </h3>
+                            <div class="card-meta">
+                                <span>2025</span>
+                                <div class="card-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>8.9</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         </section>
 
        <!-- ===== UPCOMING MOVIES SECTION ===== -->
@@ -340,81 +410,7 @@
             </div>
         </section>
 
-        <!-- ===== TRENDING MOVIES ===== -->
-        <section class="content-section">
-            <div class="container">
-                <div class="content-header">
-                    <h2 class="content-title">Trending Movies and Shows</h2>
-                    <a href="#" class="content-link">
-                        View All
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
-                
-                <div class="content-grid">
-                    <!-- Movie 1 -->
-                    <div class="content-card interactive-feature">
-                        <img src="Media files/Conjuring.png" alt="Conjuring" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title">The Conjuring: Last Rites</h3>
-                            <div class="card-meta">
-                                <span>2025</span>
-                                <div class="card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>9.3</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Movie 2 -->
-                    <div class="content-card interactive-feature">
-                        <img src="Media files/Frankenstein.png" alt="Frankenstein" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title">Frankenstein</h3>
-                            <div class="card-meta">
-                                <span>2025</span>
-                                <div class="card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>9.2</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Movie 3 -->
-                    <div class="content-card interactive-feature">
-                        <img src="Media files/Chainsawman.png" alt="Chainsaw man" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title">Chainsaw Man</h3>
-                            <div class="card-meta">
-                                <span>2018-</span>
-                                <div class="card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>9.0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Movie 4 -->
-                    <div class="content-card interactive-feature">
-                        <img src="Media files/Fantasticfour.png" alt="Fantasticfour" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title">The Fantastic Four: First Steps </h3>
-                            <div class="card-meta">
-                                <span>2025</span>
-                                <div class="card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>8.9</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        </section>
+        
 
         <!-- ===== FOOTER ===== -->
         <footer class="main-footer">
@@ -444,7 +440,6 @@
                             <li><a href="#">Home</a></li>
                             <li><a href="#">Movies</a></li>
                             <li><a href="#">TV Shows</a></li>
-                            <li><a href="#">More</a></li>
                         </ul>
                     </div>
                     
@@ -468,6 +463,8 @@
             </div>
         </footer>
     </div>
+    <script src="/api_token.js"></script>
 <script src="Js files/Script.js"></script>
+<script src ="/Js files/landing.js"></script>
 </body>
 </html>
