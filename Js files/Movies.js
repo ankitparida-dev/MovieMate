@@ -1,16 +1,9 @@
-// This all goes in /Js files/Movies.js
-
-// This waits for the HTML to be ready before running
 document.addEventListener('DOMContentLoaded', function() {
-
-  // --- 1. API SETUP & GLOBAL VARIABLES ---
-  
-  // This is your API options, just like before
   const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${API_TOKEN}` // From config.js
+      Authorization: `Bearer ${API_TOKEN}` 
     }
   };
 
@@ -20,23 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const sortSelect = document.getElementById("sort");
   const regionSelect = document.getElementById("region");
   const langSelect = document.getElementById("language");
-
-  // --- 2. THE MAIN FETCH FUNCTION ---
-
-  /**
-   * Fetches movies from TMDB based on the current filter settings
-   * and tells renderMovies() to display them.
-   */
   async function fetchAndRenderMovies() {
-    // 1. Read all the filter values
     const year = yearSelect.value;
     const genre = genreSelect.value;
     const sort = sortSelect.value;
-
-    // 2. Build the API URL
     let url = `https://api.themoviedb.org/3/discover/movie?`;
-
-    // 3. Translate our sort value into an API parameter
     if (sort === "Newest First") {
       url += '&sort_by=release_date.desc';
     } else if (sort === "Oldest First") {
@@ -46,21 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (sort === "Title(Z-A)") {
       url += '&sort_by=original_title.desc';
     } else {
-      // Default sort (like "Popularity")
       url += '&sort_by=popularity.desc';
     }
 
-    // 4. Add year if one is selected
     if (year !== "Default") {
       url += `&primary_release_year=${year}`;
     }
-    
-    // 5. Add genre if one is selected
     if (genre !== "All Genres") {
-      url += `&with_genres=${genre}`; // 'genre' is now an ID!
+      url += `&with_genres=${genre}`; 
     }
-
-    // 6. Fetch the movies
     try {
       const response = await fetch(url, options);      
       const data = await response.json();
@@ -81,12 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
     list.forEach((movie) => {
       const poster = movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : 'Media files/placeholder-poster.png'; // Make a placeholder!
+        : 'Media files/placeholder-poster.png'; 
 
       const year = movie.release_date ? movie.release_date.split('-')[0] : "N/A";
 
       const movieLink = document.createElement('a');
-      // Assumes Movies.html is in 'Html files' folder, so we go up one level
       movieLink.href = `../Html files/about.html?id=${movie.id}`; 
       
       movieLink.innerHTML = `
@@ -102,13 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
       grid.appendChild(movieLink);
     });
   }
-
-  // --- 4. POPULATE THE GENRE DROPDOWN ---
-
-  /**
-   * Fetches all official movie genres from TMDB
-   * and builds the <option> elements for the select dropdown.
-   */
   async function populateGenreDropdown() {
     const url = 'https://api.themoviedb.org/3/genre/movie/list';
     try {
@@ -116,12 +83,11 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
       const data = await response.json();
-      
-      // data.genres is an array of {id: 28, name: "Action"}
+
       data.genres.forEach(genre => {
         const option = document.createElement('option');
-        option.value = genre.id; // The value will be the ID
-        option.innerText = genre.name; // The text will be the Name
+        option.value = genre.id; 
+        option.innerText = genre.name; 
         genreSelect.appendChild(option);
       });
 
@@ -129,10 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error("Error fetching genres:", error);
     }
   }
-
-  // --- 5. ALL EVENT LISTENERS ---
-
-  // Drawer open/close logic (this is your original code)
   const drawer = document.getElementById("drawer");
   const backdrop = document.getElementById("drawerBackdrop");
   
@@ -148,33 +110,21 @@ document.addEventListener('DOMContentLoaded', function() {
     drawer.classList.remove("open");
     backdrop.style.display = "none";
   }
-
-  // Apply button
   document.getElementById("applyBtn").onclick = () => {
-    // All we do is re-run the fetch with the new values
     fetchAndRenderMovies(); 
     closeDrawer();
   };
 
-  // Reset button
   document.getElementById("resetBtn").onclick = () => {
-    // Reset all the dropdowns to their default value
     yearSelect.value = "Default";
     genreSelect.value = "All Genres";
     sortSelect.value = "Newest First";
     regionSelect.value = "Global";
     langSelect.value = "All Languages";
-    
-    // Fetch the default results again
     fetchAndRenderMovies();
     closeDrawer();
   };
-
-
-  // --- 6. INITIAL PAGE LOAD ---
-  
-  // Call our functions to fill the page when it first loads
-  populateGenreDropdown(); // Fill the genres
-  fetchAndRenderMovies(); // Fetch the default popular movies
+  populateGenreDropdown();
+  fetchAndRenderMovies(); 
 
 });

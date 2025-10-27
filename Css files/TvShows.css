@@ -98,7 +98,7 @@ body {
   font-size: 13px;
 }
 
-/* Filter Drawer */
+
 .drawer-backdrop {
   position: fixed;
   inset: 0;
@@ -196,7 +196,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
-/* ===== Hover Effects for Movie Cards ===== */
+
 
 .card {
   background: var(--panel);

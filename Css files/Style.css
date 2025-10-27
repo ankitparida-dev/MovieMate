@@ -1,4 +1,3 @@
-/* ===== RESET & BASE STYLES ===== */
 * {
     margin: 0;
     padding: 0;
@@ -41,8 +40,6 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
-
-/* ===== IMPROVED LOADING SCREEN ===== */
 .loading-screen {
     position: fixed;
     top: 0;
@@ -197,8 +194,6 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
-/* ===== HEADER ===== */
 .main-header {
     box-shadow: var(--shadow);
     position: sticky;
@@ -350,15 +345,13 @@ body {
     color: var(--primary);
     transform: translateY(-2px);
 }
-
-/* ===== HERO SECTION - REDUCED HEIGHT ===== */
 .hero-section {
-    padding: 80px 0; /* Reduced from 120px */
+    padding: 80px 0; 
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: var(--text);
     position: relative;
     overflow: hidden;
-    min-height: 70vh; /* Added minimum height */
+    min-height: 70vh;
     display: flex;
     align-items: center;
 }
@@ -396,15 +389,13 @@ body {
 }
 
 .hero-title {
-    font-size: 3.5rem; /* Slightly reduced */
+    font-size: 3.5rem; 
     margin-bottom: 20px;
     line-height: 1.1;
     color: var(--secondary);
     font-weight: 800;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
-
-/* Typing Animation Container */
 .typing-container {
     margin-bottom: 25px;
     min-height: 60px;
@@ -413,7 +404,7 @@ body {
 }
 
 .type-text {
-    font-size: 1.4rem; /* Slightly reduced */
+    font-size: 1.4rem; 
     font-weight: 500;
     color: var(--text-light);
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -435,7 +426,7 @@ body {
 }
 
 .hero-description {
-    font-size: 1.1rem; /* Slightly reduced */
+    font-size: 1.1rem; 
     margin-bottom: 30px;
     color: var(--text-light);
     line-height: 1.7;
@@ -533,10 +524,9 @@ body {
     100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* ===== INTERSTELLAR SECTION - IMPROVED IMAGE DISPLAY ===== */
 .movie-section {
     position: relative;
-    height: 90vh; /* Changed to 100vh for full viewport height */
+    height: 90vh; 
     overflow: hidden;
     margin: 0;
 }
@@ -658,7 +648,7 @@ body {
 .next-prev {
     position: absolute;
     right: 50px;
-    bottom: 50px; /* Moved up from 100px */
+    bottom: 50px; 
     display: flex;
     gap: 10px;
     z-index: 10;
@@ -680,9 +670,6 @@ body {
 .next-prev button:hover {
     background: rgba(255, 255, 255, 0.3);
 }
-
-/* Rest of your existing CSS remains the same... */
-/* ===== UPCOMING MOVIES SECTION ===== */
 .upcoming-section {
     padding: 80px 0;
     background-color: var(--bg);
@@ -801,8 +788,6 @@ body {
 .info-btn-upcoming:hover {
     background: rgba(255, 255, 255, 0.2);
 }
-
-/* ===== FEATURES SECTION ===== */
 .features-section {
     padding: 80px 0;
     background-color: var(--bg);
@@ -869,7 +854,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* ===== CONTENT SECTIONS ===== */
 .content-section {
     padding: 60px 0;
 }
@@ -900,7 +884,7 @@ body {
     gap: 10px;
 }
 
-/* ===== CONTENT GRID ===== */
+
 .content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -957,7 +941,6 @@ body {
     font-weight: 600;
 }
 
-/* ===== IMPROVED FOOTER ===== */
 .main-footer {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: var(--text);
@@ -1125,7 +1108,6 @@ body {
     gap: 10px;
 }
 
-/* ===== INTERACTIVE FEATURES ===== */
 .interactive-feature {
     transition: var(--transition);
 }
@@ -1134,7 +1116,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
