@@ -12,7 +12,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+     <header class="main-header">
+        <div class="container">
+                <nav class="navbar">
+                    <div class="left-section">
+                        <a href="#" class="logo">
+                           <video src="Media files/moviemate.mp4" alt="Moviemate Logo" autoplay muted loop playsinline width="250" height="80"></video>
+                        </a>
+                    </div>
+                    
+                    <ul class="middle-section">
+                        <li class="nav-item">
+                            <a href="/index.html" class="nav-link active">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Html files/Movies.html" class="nav-link">Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Html files/TvShows.html" class="nav-link">TV Shows</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="right-section">
+                        <div class="search-container">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Search for movies, TV shows...">
+                        </div>
+                        
+                        <div class="login-button">
+                            <a href="/Html files/loginPage.html"><button class="btn btn-outline">Login</button></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    <div class="content-container">
         <header class="show-hero">
             <div class="show-poster">
                 <img src="/projectMedia/wp9256015-interstellar-movie-wallpapers.jpg" alt="Dan Da Dan Season 2">
@@ -170,11 +204,57 @@
                 </div>
             </section>
         </main>
-        
-        <footer>
-            <p>We are USING TMDb API :)</p>
-        </footer>
     </div>
+</div>
+    <footer class="main-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3 class="footer-title">MovieMate</h3>
+                        <p class="footer-description">
+                            Your ultimate destination for discovering and exploring movies and TV shows from around the world.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3 class="footer-title">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="/index.html">Home</a></li>
+                            <li><a href="/Html files/Movies.html">Movies</a></li>
+                            <li><a href="/Html files/TvShows.html">TV Shows</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3 class="footer-title">Genres</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Comedy</a></li>
+                            <li><a href="#">Drama</a></li>
+                            <li><a href="#">Sci-Fi</a></li>
+                            <li><a href="#">Horror</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="copyright">
+                        <p>&copy; 2025 MovieMate. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     <script src="/api_token.js"></script>
     <script src="/Js files/about.js"></script>
 </body>

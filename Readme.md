@@ -29,4 +29,4 @@ This project is built using HTML/CSS & JavaScript
 ---
 
 ## 👨‍💻 Author
-Developed with ❤️ using **HTML & CSS**
+Developed with ❤️ using **HTML & CSS** & **JS**
