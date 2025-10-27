@@ -1,6 +1,6 @@
 # 🎬 MovieMate
 
-**MovieMate** is a responsive **movie and TV showcase website** built using **HTML** and **CSS**.  
+**MovieMate** is a responsive **movie and TV showcase website** built using **HTML** and **CSS** and **JavaScript**.  
 It provides a clean interface to explore movies with simple navigation and responsive layouts.  
 
 ---
@@ -18,13 +18,13 @@ It provides a clean interface to explore movies with simple navigation and respo
 ## 🛠️ Technologies Used
 
 - **HTML5** – Structure & semantic markup  
-- **CSS3** – Styling, Flexbox, Grid, Gradients, Responsive Design  
+- **CSS3** – Styling, Flexbox, Grid, Gradients, Responsive Design
+- **JavaScript** - For Functionality
 
 ---
 
 ## 📌 Note
-This project is built **only with HTML & CSS**.  
-No JavaScript or backend functionality is implemented.  
+This project is built using HTML/CSS & JavaScript 
 
 ---
 
