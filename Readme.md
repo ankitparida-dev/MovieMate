@@ -29,4 +29,4 @@ No JavaScript or backend functionality is implemented.
 ---
 
 ## 👨‍💻 Author
-Developed with ❤️ using **HTML & CSS**
+Developed with ❤️ using **HTML & CSS** & **JS**

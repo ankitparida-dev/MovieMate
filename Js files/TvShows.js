@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         : 'Media files/placeholder-poster.png'; 
       const year = show.first_air_date ? show.first_air_date.split('-')[0] : "N/A";
       const showLink = document.createElement('a');
-      showLink.href = `../Html files/tv-about.html?id=${show.id}`; 
+      showLink.href = `../Html files/about.html?id=${show.id}`; 
       
       showLink.innerHTML = `
         <div class="card">
