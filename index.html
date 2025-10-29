@@ -9,10 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Css_files/Style.css">
-    <link rel="icon" href="Media_files/logo.png" type="icon">
 </head>
 <body>
-
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-logo">
@@ -55,7 +53,6 @@
                 <nav class="navbar">
                     <div class="left-section">
                         <a href="#" class="logo">
-                           <!-- Replaced video with image for better compatibility -->
                            <img src="Media_files/Logo.png" alt="Moviemate Logo" width="250" height="80">
                         </a>
                     </div>
@@ -124,18 +121,17 @@
         </section>
 
         <section class="movie-section">
-            <div class="carousel-image">
+            <div class="carousel-image" id="carouselImage">
                 <div class="overlay"></div>
                 <div class="movie-items">
-                    <img src="Media_files/InterSteller.jpg" alt="InterSteller">
                     <span class="spotlight">#1 Spotlight</span>
-                    <h1 class="show-name">INTERSTELLAR</h1>
+                    <h1 class="show-name" id="showName">INTERSTELLAR</h1>
                     <div class="details">
                         <p><i class="fas fa-play-circle"></i> Movie</p>
                         <p><i class="far fa-clock"></i> 169m</p>
                         <p><i class="far fa-calendar-alt"></i> 2014</p>
                     </div>
-                    <p class="overview">When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.</p>
+                    <p class="overview" id="overview">When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.</p>
                     <div class="interstellar-buttons">
                         <button class="trailer"><i class="fas fa-play"></i> Trailer</button>
                         <button class="detail-button"><a class="detail-link" href="#" target="_self">Details</a></button>
@@ -160,7 +156,7 @@
                 
                 <div class="content-grid">
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/conjuring.png" alt="Conjuring" class="card-image">
+                        <img src="Media_files/Conjuring.png" alt="Conjuring" class="card-image">
                         <div class="card-content">
                             <h3 class="card-title">The Conjuring: Last Rites</h3>
                             <div class="card-meta">
@@ -174,7 +170,7 @@
                     </div>
 
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/frankenstein.png" alt="Frankenstein" class="card-image">
+                        <img src="Media_files/Frankenstein.png" alt="Frankenstein" class="card-image">
                         <div class="card-content">
                             <h3 class="card-title">Frankenstein</h3>
                             <div class="card-meta">
@@ -188,7 +184,7 @@
                     </div>
 
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/chainsawman.png" alt="Chainsaw man" class="card-image">
+                        <img src="Media_files/Chainsawman.png" alt="Chainsaw man" class="card-image">
                         <div class="card-content">
                             <h3 class="card-title">Chainsaw Man</h3>
                             <div class="card-meta">
@@ -202,7 +198,7 @@
                     </div>
 
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/fantasticfour.png" alt="Fantasticfour" class="card-image">
+                        <img src="Media_files/Fantasticfour.png" alt="Fantasticfour" class="card-image">
                         <div class="card-content">
                             <h3 class="card-title">The Fantastic Four: First Steps</h3>
                             <div class="card-meta">
@@ -229,7 +225,7 @@
                 
                 <div class="upcoming-grid">
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/nuremberg.png" alt="Nuremberg" class="upcoming-image">
+                        <img src="Media_files/Nuremberg.png" alt="Nuremberg" class="upcoming-image">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Nuremberg</h3>
                             <div class="upcoming-meta">
@@ -256,7 +252,7 @@
                     </div>
 
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/kantara.png" alt="Kantara" class="upcoming-image">
+                        <img src="Media_files/Kantara.png" alt="Kantara" class="upcoming-image">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Kantara: A Legend – Chapter 1</h3>
                             <div class="upcoming-meta">
@@ -283,7 +279,7 @@
                     </div>
 
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/predatorbadlands.png" alt="Predator" class="upcoming-image">
+                        <img src="Media_files/Predatorbadlands.png" alt="Predator" class="upcoming-image">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Predator: Badlands</h3>
                             <div class="upcoming-meta">
@@ -310,7 +306,7 @@
                     </div>
 
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/avatar.png" alt="Avatar: Fire and Ash" class="upcoming-image">
+                        <img src="Media_files/Avatar.png" alt="Avatar: Fire and Ash" class="upcoming-image">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Avatar: Fire and Ash</h3>
                             <div class="upcoming-meta">
@@ -397,6 +393,79 @@
             </div>
         </section>
 
+        <!-- Feedback Icon -->
+        <div class="feedback-icon" id="feedbackIcon">
+            <i class="fas fa-comment-alt"></i>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div class="feedback-modal" id="feedbackModal">
+            <div class="feedback-container">
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="feedback-header">
+                    <h2 class="feedback-title">Share Your Feedback</h2>
+                    <p class="feedback-subtitle">Help us improve MovieMate by sharing your thoughts</p>
+                </div>
+                
+                <form class="feedback-form" id="feedbackForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackType" class="form-label">Feedback Type</label>
+                        <select id="feedbackType" class="form-select" required>
+                            <option value="" disabled selected>Select feedback type</option>
+                            <option value="suggestion">Suggestion</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="compliment">Compliment</option>
+                            <option value="general">General Feedback</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Rating</label>
+                        <div class="rating-group">
+                            <div class="rating-stars" id="ratingStars">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <span id="ratingValue">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">Your Feedback</label>
+                        <textarea id="message" class="form-textarea" placeholder="Tell us what you think about MovieMate..." required></textarea>
+                    </div>
+                    
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="subscribe" checked>
+                        <label for="subscribe">Send me updates about new features and improvements</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Feedback
+                    </button>
+                </form>
+            </div>
+        </div>
+
         <footer class="main-footer">
             <div class="container">
                 <div class="footer-content">
@@ -447,9 +516,6 @@
             </div>
         </footer>
     </div>
-
-    <script src="Js_files/api_token.js"></script>
     <script src="Js_files/Script.js"></script>
-    <script src="Js_files/landing.js"></script>
 </body>
 </html>
