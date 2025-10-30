@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieMate - Discover Movies & TV Shows</title>
+    <meta name="description" content="Discover thousands of movies and TV shows with MovieMate. Find hidden gems, trending content, and personalized recommendations.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Css_files/Style.css">
+   <link rel="stylesheet" href="Css_files/Style.css">
 </head>
 <body>
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-logo">
                 <div class="logo">
-                    <img src="Media_files/Logo.png" alt="MovieMate logo">
+                    <img src="Media_files/Logo.jpg" alt="MovieMate logo" class="logo-animation">
                 </div>
             </div>
             <div class="loading-animation">
@@ -48,24 +49,24 @@
 
     <div class="main-content" id="mainContent">
         
-        <header class="main-header">
+        <header class="main-header" id="mainHeader">
             <div class="container">
                 <nav class="navbar">
                     <div class="left-section">
                         <a href="#" class="logo">
-                           <img src="Media_files/Logo.png" alt="Moviemate Logo" width="250" height="80">
+                           <img src="Media_files/Logo.jpg" alt="MovieMate Logo" width="250" height="80">
                         </a>
                     </div>
                     
                     <ul class="middle-section">
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link active">Home</a>
+                            <a href="#" class="nav-link active">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="Html_files/movies.html" class="nav-link">Movies</a>
+                            <a href="#" class="nav-link">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a href="Html_files/tvshows.html" class="nav-link">TV Shows</a>
+                            <a href="#" class="nav-link">TV Shows</a>
                         </li>
                     </ul>
                     
@@ -76,7 +77,7 @@
                         </div>
                         
                         <div class="login-button">
-                             <a href="Html_files/loginpage.html"><button class="btn btn-outline">Login</button></a>
+                             <a href="#"><button class="btn btn-outline">Login</button></a>
                         </div>
                     </div>
                 </nav>
@@ -138,8 +139,8 @@
                     </div>
                 </div>
                 <div class="next-prev">
-                    <button class="prev">&#10094;</button>
-                    <button class="next">&#10095;</button>
+                    <button class="prev" aria-label="Previous movie">&#10094;</button>
+                    <button class="next" aria-label="Next movie">&#10095;</button>
                 </div>
             </div>
         </section>
@@ -156,7 +157,7 @@
                 
                 <div class="content-grid">
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/Conjuring.png" alt="Conjuring" class="card-image">
+                        <img src="Media_files/Conjuring.png" alt="Conjuring" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">The Conjuring: Last Rites</h3>
                             <div class="card-meta">
@@ -170,7 +171,7 @@
                     </div>
 
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/Frankenstein.png" alt="Frankenstein" class="card-image">
+                        <img src="Media_files/Frankenstein.png" alt="Frankenstein" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">Frankenstein</h3>
                             <div class="card-meta">
@@ -184,7 +185,7 @@
                     </div>
 
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/Chainsawman.png" alt="Chainsaw man" class="card-image">
+                        <img src="Media_files/Chainsawman.png" alt="Chainsaw man" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">Chainsaw Man</h3>
                             <div class="card-meta">
@@ -198,7 +199,7 @@
                     </div>
 
                     <div class="content-card interactive-feature">
-                        <img src="Media_files/Fantasticfour.png" alt="Fantasticfour" class="card-image">
+                        <img src="Media_files/Fantasticfour.png" alt="Fantasticfour" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">The Fantastic Four: First Steps</h3>
                             <div class="card-meta">
@@ -225,7 +226,7 @@
                 
                 <div class="upcoming-grid">
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/Nuremberg.png" alt="Nuremberg" class="upcoming-image">
+                        <img src="Media_files/Nuremberg.png" alt="Nuremberg" class="upcoming-image" loading="lazy">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Nuremberg</h3>
                             <div class="upcoming-meta">
@@ -252,7 +253,7 @@
                     </div>
 
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/Kantara.png" alt="Kantara" class="upcoming-image">
+                        <img src="Media_files/Kantara.png" alt="Kantara" class="upcoming-image" loading="lazy">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Kantara: A Legend – Chapter 1</h3>
                             <div class="upcoming-meta">
@@ -279,7 +280,7 @@
                     </div>
 
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/Predatorbadlands.png" alt="Predator" class="upcoming-image">
+                        <img src="Media_files/Predatorbadlands.png" alt="Predator" class="upcoming-image" loading="lazy">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Predator: Badlands</h3>
                             <div class="upcoming-meta">
@@ -306,7 +307,7 @@
                     </div>
 
                     <div class="upcoming-card interactive-feature">
-                        <img src="Media_files/Avatar.png" alt="Avatar: Fire and Ash" class="upcoming-image">
+                        <img src="Media_files/Avatar.png" alt="Avatar: Fire and Ash" class="upcoming-image" loading="lazy">
                         <div class="upcoming-content">
                             <h3 class="upcoming-title">Avatar: Fire and Ash</h3>
                             <div class="upcoming-meta">
@@ -355,7 +356,7 @@
                         <p class="feature-description">
                             Access thousands of movies from all genres and eras. From classic cinema to the latest blockbusters.
                         </p>
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 100%;">
+                        <button class="btn btn-primary">
                             Browse Movies
                         </button>
                     </article>
@@ -370,7 +371,7 @@
                         <p class="feature-description">
                             Discover amazing TV series across all genres. Binge-worthy shows and critically acclaimed series.
                         </p>
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 100%;">
+                        <button class="btn btn-primary">
                             Explore TV Shows
                         </button>
                     </article>
@@ -385,7 +386,7 @@
                         <p class="feature-description">
                             Find exactly what you're looking for with our advanced search and filtering options.
                         </p>
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 100%;">
+                        <button class="btn btn-primary">
                             Try Search
                         </button>
                     </article>
@@ -466,55 +467,69 @@
             </div>
         </div>
 
-        <footer class="main-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3 class="footer-title">MovieMate</h3>
-                        <p class="footer-description">
-                            Your ultimate destination for discovering and exploring movies and TV shows from around the world.
-                        </p>
-                        <div class="social-links">
-                            <a href="#" class="social-link" aria-label="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-link" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-link" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h3 class="footer-title">Quick Links</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="Html_files/movies.html">Movies</a></li>
-                            <li><a href="Html_files/tvshows.html">TV Shows</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h3 class="footer-title">Genres</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Comedy</a></li>
-                            <li><a href="#">Drama</a></li>
-                            <li><a href="#">Sci-Fi</a></li>
-                            <li><a href="#">Horror</a></li>
-                        </ul>
+      <footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">MovieMate</h3>
+                <p class="footer-description">
+                    Your ultimate destination for discovering and exploring movies and TV shows from around the world.
+                </p>
+                <div class="tmdb-attribution">
+                    <p class="tmdb-text">
+                        This product uses the TMDB API but is not endorsed or certified by TMDB.
+                    </p>
+                    <div class="tmdb-logo">
+                        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" 
+                             alt="TMDB Logo" 
+                             width="100" 
+                             height="auto">
                     </div>
                 </div>
-                
-                <div class="footer-bottom">
-                    <div class="copyright">
-                        <p>&copy; 2025 MovieMate. All rights reserved.</p>
-                    </div>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
                 </div>
             </div>
-        </footer>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Genres</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Comedy</a></li>
+                    <li><a href="#">Drama</a></li>
+                    <li><a href="#">Sci-Fi</a></li>
+                    <li><a href="#">Horror</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                <p>&copy; 2025 MovieMate. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
     </div>
     <script src="Js_files/Script.js"></script>
 </body>
