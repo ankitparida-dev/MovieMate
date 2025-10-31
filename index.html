@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieMate - Discover Movies & TV Shows</title>
+    <meta name="description" content="Discover thousands of movies and TV shows with MovieMate. Find hidden gems, trending content, and personalized recommendations.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Css files/Style.css">
-    <link rel="icon" href="Media files/Logo.png" type="icon">
+    <link rel="stylesheet" href="Css_files/Style.css">
 </head>
 <body>
-
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-logo">
                 <div class="logo">
-                    <img src="Media_files/Logo.png" alt="MovieMate logo">
+                    <img src="https://via.placeholder.com/200x80/0a192f/2ec4b6?text=MovieMate" alt="MovieMate logo" class="logo-animation">
                 </div>
             </div>
             <div class="loading-animation">
@@ -50,31 +49,24 @@
 
     <div class="main-content" id="mainContent">
         
-        <header class="main-header">
+        <header class="main-header" id="mainHeader">
             <div class="container">
                 <nav class="navbar">
                     <div class="left-section">
                         <a href="#" class="logo">
-                           <video src="Media_files/moviemate.mp4" alt="Moviemate Logo" autoplay muted loop playsinline width="250" height="80"></video>
+                           <img src="https://via.placeholder.com/250x80/0a192f/2ec4b6?text=MovieMate" alt="MovieMate Logo">
                         </a>
                     </div>
                     
                     <ul class="middle-section">
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link active">Home</a>
+                            <a href="#" class="nav-link active" data-page="home">Home</a>
                         </li>
                         <li class="nav-item">
-rangan
-                            <a href="/Html files/Movies.html" class="nav-link">Movies</a>
+                            <a href="#" class="nav-link" data-page="movies">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/Html files/TvShows.html" class="nav-link">TV Shows</a>
-
-                            <a href="Html files/Movies.html" class="nav-link">Movies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="Html files/TvShows.html" class="nav-link">TV Shows</a>
-main
+                            <a href="#" class="nav-link" data-page="tv-shows">TV Shows</a>
                         </li>
                     </ul>
                     
@@ -85,12 +77,13 @@ main
                         </div>
                         
                         <div class="login-button">
-                             <a href="/Html files/loginPage.html"><button class="btn btn-outline">Login</button></a>
+                             <a href="#"><button class="btn btn-outline">Login</button></a>
                         </div>
                     </div>
                 </nav>
             </div>
         </header>
+
         <section class="hero-section">
             <div class="container">
                 <div class="hero-content">
@@ -99,7 +92,6 @@ main
                             Discover Your Next <br>Favourite Movie
                         </h1>
                         
-             
                         <div class="typing-container">
                             <span class="type-text" id="type-text"></span>
                             <span class="cursor">|</span>
@@ -130,25 +122,25 @@ main
         </section>
 
         <section class="movie-section">
-            <div class="carousel-image">
+            <div class="carousel-image" id="carouselImage">
                 <div class="overlay"></div>
                 <div class="movie-items">
                     <span class="spotlight">#1 Spotlight</span>
-                    <h1 class="show-name">INTERSTELLAR</h1>
+                    <h1 class="show-name" id="showName">INTERSTELLAR</h1>
                     <div class="details">
                         <p><i class="fas fa-play-circle"></i> Movie</p>
                         <p><i class="far fa-clock"></i> 169m</p>
                         <p><i class="far fa-calendar-alt"></i> 2014</p>
                     </div>
-                    <p class="overview">When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.</p>
+                    <p class="overview" id="overview">When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.</p>
                     <div class="interstellar-buttons">
                         <button class="trailer"><i class="fas fa-play"></i> Trailer</button>
                         <button class="detail-button"><a class="detail-link" href="#" target="_self">Details</a></button>
                     </div>
                 </div>
                 <div class="next-prev">
-                    <button class="prev">&#10094;</button>
-                    <button class="next">&#10095;</button>
+                    <button class="prev" aria-label="Previous movie">&#10094;</button>
+                    <button class="next" aria-label="Next movie">&#10095;</button>
                 </div>
             </div>
         </section>
@@ -164,9 +156,8 @@ main
                 </div>
                 
                 <div class="content-grid">
-
                     <div class="content-card interactive-feature">
-                        <img src="Media files/Conjuring.png" alt="Conjuring" class="card-image">
+                        <img src="https://via.placeholder.com/300x450/112240/2ec4b6?text=Conjuring" alt="Conjuring" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">The Conjuring: Last Rites</h3>
                             <div class="card-meta">
@@ -179,9 +170,8 @@ main
                         </div>
                     </div>
 
-
                     <div class="content-card interactive-feature">
-                        <img src="Media files/Frankenstein.png" alt="Frankenstein" class="card-image">
+                        <img src="https://via.placeholder.com/300x450/112240/2ec4b6?text=Frankenstein" alt="Frankenstein" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">Frankenstein</h3>
                             <div class="card-meta">
@@ -194,9 +184,8 @@ main
                         </div>
                     </div>
 
-
                     <div class="content-card interactive-feature">
-                        <img src="Media files/Chainsawman.png" alt="Chainsaw man" class="card-image">
+                        <img src="https://via.placeholder.com/300x450/112240/2ec4b6?text=Chainsaw+Man" alt="Chainsaw man" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">Chainsaw Man</h3>
                             <div class="card-meta">
@@ -210,9 +199,9 @@ main
                     </div>
 
                     <div class="content-card interactive-feature">
-                        <img src="Media files/Fantasticfour.png" alt="Fantasticfour" class="card-image">
+                        <img src="https://via.placeholder.com/300x450/112240/2ec4b6?text=Fantastic+Four" alt="Fantasticfour" class="card-image" loading="lazy">
                         <div class="card-content">
-                            <h3 class="card-title">The Fantastic Four: First Steps </h3>
+                            <h3 class="card-title">The Fantastic Four: First Steps</h3>
                             <div class="card-meta">
                                 <span>2025</span>
                                 <div class="card-rating">
@@ -225,131 +214,127 @@ main
                 </div>
             </div>
         </section>
+
+        <section class="upcoming-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Coming Soon</h2>
+                    <p class="section-subtitle">
+                        Get ready for these highly anticipated movies coming to theaters and streaming soon
+                    </p>
+                </div>
+                
+                <div class="upcoming-grid">
+                    <div class="upcoming-card interactive-feature">
+                        <img src="https://via.placeholder.com/400x250/112240/2ec4b6?text=Nuremberg" alt="Nuremberg" class="upcoming-image" loading="lazy">
+                        <div class="upcoming-content">
+                            <h3 class="upcoming-title">Nuremberg</h3>
+                            <div class="upcoming-meta">
+                                <span class="upcoming-date">Sep 7, 2025</span>
+                                <div class="upcoming-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                            <p class="upcoming-description">
+                                During the Nuremberg trials, chief psychiatrist Douglas Kelley interviews Nazi military members to determine whether they are fit to stand trial. There, he enters a "battle of wits" against Adolf Hitler's right-hand man, Hermann Göring.
+                            </p>
+                            <div class="upcoming-actions">
+                                <button class="upcoming-btn remind-btn">
+                                    <i class="fas fa-bell"></i>
+                                    Remind Me
+                                </button>
+                                <button class="upcoming-btn info-btn-upcoming">
+                                    <i class="fas fa-info-circle"></i>
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-card interactive-feature">
+                        <img src="https://via.placeholder.com/400x250/112240/2ec4b6?text=Kantara" alt="Kantara" class="upcoming-image" loading="lazy">
+                        <div class="upcoming-content">
+                            <h3 class="upcoming-title">Kantara: A Legend – Chapter 1</h3>
+                            <div class="upcoming-meta">
+                                <span class="upcoming-date">October 2, 2025</span>
+                                <div class="upcoming-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                            <p class="upcoming-description">
+                                In ancient times, Ishwar sent Panjurli Dev and Gulika Dev to the sacred forest of Kantara to protect its people and preserve harmony. Their divine presence became the foundation of the land's faith and balance.
+                            </p>
+                            <div class="upcoming-actions">
+                                <button class="upcoming-btn remind-btn">
+                                    <i class="fas fa-bell"></i>
+                                    Remind Me
+                                </button>
+                                <button class="upcoming-btn info-btn-upcoming">
+                                    <i class="fas fa-info-circle"></i>
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-card interactive-feature">
+                        <img src="https://via.placeholder.com/400x250/112240/2ec4b6?text=Predator" alt="Predator" class="upcoming-image" loading="lazy">
+                        <div class="upcoming-content">
+                            <h3 class="upcoming-title">Predator: Badlands</h3>
+                            <div class="upcoming-meta">
+                                <span class="upcoming-date">November 7, 2025</span>
+                                <div class="upcoming-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                            <p class="upcoming-description">
+                                On the hostile planet Kalisk, a young outcast Predator named Dek seeks to prove his worth by hunting a legendary foe. Battling the planet's dangers and rogue Predators, his quest becomes a fight for honor and survival.
+                            </p>
+                            <div class="upcoming-actions">
+                                <button class="upcoming-btn remind-btn">
+                                    <i class="fas fa-bell"></i>
+                                    Remind Me
+                                </button>
+                                <button class="upcoming-btn info-btn-upcoming">
+                                    <i class="fas fa-info-circle"></i>
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-card interactive-feature">
+                        <img src="https://via.placeholder.com/400x250/112240/2ec4b6?text=Avatar" alt="Avatar: Fire and Ash" class="upcoming-image" loading="lazy">
+                        <div class="upcoming-content">
+                            <h3 class="upcoming-title">Avatar: Fire and Ash</h3>
+                            <div class="upcoming-meta">
+                                <span class="upcoming-date">December 19, 2025</span>
+                                <div class="upcoming-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                            <p class="upcoming-description">
+                                Jake and Neytiri's family grapples with grief after Neteyam's death, encountering a new, aggressive Na'vi tribe, the Ash People, who are led by the fiery Varang, as the conflict on Pandora escalates and a new moral focus emerges.
+                            </p>
+                            <div class="upcoming-actions">
+                                <button class="upcoming-btn remind-btn">
+                                    <i class="fas fa-bell"></i>
+                                    Remind Me
+                                </button>
+                                <button class="upcoming-btn info-btn-upcoming">
+                                    <i class="fas fa-info-circle"></i>
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-
-<section class="upcoming-section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">Coming Soon</h2>
-            <p class="section-subtitle">
-                Get ready for these highly anticipated movies coming to theaters and streaming soon
-            </p>
-        </div>
-        
-        <div class="upcoming-grid">
-
-            <div class="upcoming-card interactive-feature">
-                <img src="Media files/Nuremberg.png" alt="Nuremberg" class="upcoming-image">
-                <div class="upcoming-content">
-                    <h3 class="upcoming-title">Nuremberg</h3>
-                    <div class="upcoming-meta">
-                        <span class="upcoming-date">Sep 7, 2025</span>
-                        <div class="upcoming-rating">
-                            <i class="fas fa-star"></i>
-                            <span>Coming Soon</span>
-                        </div>
-                    </div>
-                    <p class="upcoming-description">
-                        During the Nuremberg trials, chief psychiatrist Douglas Kelley interviews Nazi military members to determine whether they are fit to stand trial. There, he enters a "battle of wits" against Adolf Hitler's right-hand man, Hermann Göring.
-                    </p>
-                    <div class="upcoming-actions">
-                        <button class="upcoming-btn remind-btn">
-                            <i class="fas fa-bell"></i>
-                            Remind Me
-                        </button>
-                        <button class="upcoming-btn info-btn-upcoming">
-                            <i class="fas fa-info-circle"></i>
-                            Info
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="upcoming-card interactive-feature">
-                <img src="Media files/Kantara.png" alt="Kantara" class="upcoming-image">
-                <div class="upcoming-content">
-                    <h3 class="upcoming-title">Kantara: A Legend – Chapter 1</h3>
-                    <div class="upcoming-meta">
-                        <span class="upcoming-date">October 2,2025</span>
-                        <div class="upcoming-rating">
-                            <i class="fas fa-star"></i>
-                            <span>Coming Soon</span>
-                        </div>
-                    </div>
-                    <p class="upcoming-description">
-                     In ancient times, Ishwar sent Panjurli Dev and Gulika Dev to the sacred forest of Kantara to protect its people and preserve harmony. Their divine presence became the foundation of the land’s faith and balance.
-                    </p>
-                    <div class="upcoming-actions">
-                        <button class="upcoming-btn remind-btn">
-                            <i class="fas fa-bell"></i>
-                            Remind Me
-                        </button>
-                        <button class="upcoming-btn info-btn-upcoming">
-                            <i class="fas fa-info-circle"></i>
-                            Info
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="upcoming-card interactive-feature">
-                <img src="Media files/Predatorbadlands.png" alt="Predator" class="upcoming-image">
-                <div class="upcoming-content">
-                    <h3 class="upcoming-title">Predator: Badlands</h3>
-                    <div class="upcoming-meta">
-                        <span class="upcoming-date">November 7,2025</span>
-                         <div class="upcoming-rating">
-                            <i class="fas fa-star"></i>
-                            <span>Coming Soon</span>
-                        </div>
-                    </div>
-                    <p class="upcoming-description">
-                      On the hostile planet Kalisk, a young outcast Predator named Dek seeks to prove his worth by hunting a legendary foe. Battling the planet’s dangers and rogue Predators, his quest becomes a fight for honor and survival.
-                    </p>
-                    <div class="upcoming-actions">
-                        <button class="upcoming-btn remind-btn">
-                            <i class="fas fa-bell"></i>
-                            Remind Me
-                        </button>
-                        <button class="upcoming-btn info-btn-upcoming">
-                            <i class="fas fa-info-circle"></i>
-                            Info
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="upcoming-card interactive-feature">
-                <img src="Media files/Avatar.png" alt="Avatar: Fire and Ash" class="upcoming-image">
-                <div class="upcoming-content">
-                    <h3 class="upcoming-title">Avatar: Fire and Ash</h3>
-                    <div class="upcoming-meta">
-                        <span class="upcoming-date">December 19, 2025</span>
-                    </div>
-                     <div class="upcoming-rating">
-                            <i class="fas fa-star"></i>
-                            <span>Coming Soon</span>
-                    </div>
-                    <p class="upcoming-description">
-                        Jake and Neytiri's family grapples with grief after Neteyam's death, encountering a new, aggressive Na'vi tribe, the Ash People, who are led by the fiery Varang, as the conflict on Pandora escalates and a new moral focus emerges.
-                    </p>
-                    <div class="upcoming-actions">
-                        <button class="upcoming-btn remind-btn">
-                            <i class="fas fa-bell"></i>
-                            Remind Me
-                        </button>
-                        <button class="upcoming-btn info-btn-upcoming">
-                            <i class="fas fa-info-circle"></i>
-                            Info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 
         <section class="features-section">
             <div class="container">
@@ -371,7 +356,7 @@ main
                         <p class="feature-description">
                             Access thousands of movies from all genres and eras. From classic cinema to the latest blockbusters.
                         </p>
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 100%;">
+                        <button class="btn btn-primary">
                             Browse Movies
                         </button>
                     </article>
@@ -386,7 +371,7 @@ main
                         <p class="feature-description">
                             Discover amazing TV series across all genres. Binge-worthy shows and critically acclaimed series.
                         </p>
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 100%;">
+                        <button class="btn btn-primary">
                             Explore TV Shows
                         </button>
                     </article>
@@ -401,7 +386,7 @@ main
                         <p class="feature-description">
                             Find exactly what you're looking for with our advanced search and filtering options.
                         </p>
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 100%;">
+                        <button class="btn btn-primary">
                             Try Search
                         </button>
                     </article>
@@ -409,58 +394,143 @@ main
             </div>
         </section>
 
-        <footer class="main-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3 class="footer-title">MovieMate</h3>
-                        <p class="footer-description">
-                            Your ultimate destination for discovering and exploring movies and TV shows from around the world.
-                        </p>
-                        <div class="social-links">
-                            <a href="#" class="social-link" aria-label="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-link" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-link" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
+        <!-- Feedback Icon -->
+        <div class="feedback-icon" id="feedbackIcon">
+            <i class="fas fa-comment-alt"></i>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div class="feedback-modal" id="feedbackModal">
+            <div class="feedback-container">
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="feedback-header">
+                    <h2 class="feedback-title">Share Your Feedback</h2>
+                    <p class="feedback-subtitle">Help us improve MovieMate by sharing your thoughts</p>
+                </div>
+                
+                <form class="feedback-form" id="feedbackForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
                         </div>
                     </div>
                     
-                    <div class="footer-section">
-                        <h3 class="footer-title">Quick Links</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="/Html files/Movies.html">Movies</a></li>
-                            <li><a href="/Html files/TvShows.html">TV Shows</a></li>
-                        </ul>
+                    <div class="form-group">
+                        <label for="feedbackType" class="form-label">Feedback Type</label>
+                        <select id="feedbackType" class="form-select" required>
+                            <option value="" disabled selected>Select feedback type</option>
+                            <option value="suggestion">Suggestion</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="compliment">Compliment</option>
+                            <option value="general">General Feedback</option>
+                        </select>
                     </div>
                     
-                    <div class="footer-section">
-                        <h3 class="footer-title">Genres</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Comedy</a></li>
-                            <li><a href="#">Drama</a></li>
-                            <li><a href="#">Sci-Fi</a></li>
-                            <li><a href="#">Horror</a></li>
-                        </ul>
+                    <div class="form-group">
+                        <label class="form-label">Rating</label>
+                        <div class="rating-group">
+                            <div class="rating-stars" id="ratingStars">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <span id="ratingValue">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">Your Feedback</label>
+                        <textarea id="message" class="form-textarea" placeholder="Tell us what you think about MovieMate..." required></textarea>
+                    </div>
+                    
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="subscribe" checked>
+                        <label for="subscribe">Send me updates about new features and improvements</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Feedback
+                    </button>
+                </form>
+            </div>
+        </div>
+
+      <footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">MovieMate</h3>
+                <p class="footer-description">
+                    Your ultimate destination for discovering and exploring movies and TV shows from around the world.
+                </p>
+                <div class="tmdb-attribution">
+                    <p class="tmdb-text">
+                        This product uses the TMDB API but is not endorsed or certified by TMDB.
+                    </p>
+                    <div class="tmdb-logo">
+                        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" 
+                             alt="TMDB Logo" 
+                             width="100" 
+                             height="auto">
                     </div>
                 </div>
-                
-                <div class="footer-bottom">
-                    <div class="copyright">
-                        <p>&copy; 2025 MovieMate. All rights reserved.</p>
-                    </div>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
                 </div>
             </div>
-        </footer>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Genres</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Comedy</a></li>
+                    <li><a href="#">Drama</a></li>
+                    <li><a href="#">Sci-Fi</a></li>
+                    <li><a href="#">Horror</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                <p>&copy; 2025 MovieMate. All rights reserved.</p>
+            </div>
+        </div>
     </div>
-<script src="/api_token.js"></script>
-<script src="/Js files/Script.js"></script>
-<script src ="/Js files/landing.js"></script>
+</footer>
+    </div>
+  <script src="Js_files/Script.js"></script> 
 </body>
 </html>
