@@ -11,7 +11,7 @@
       height: 100vh;
       justify-content: center;
       align-items: center;
-      background: #0b0b0f;
+      background: linear-gradient(135deg, #0a192f 0%, #172a45 50%, #2ec4b6 100%);
       color: #fff;
     }
 
@@ -27,7 +27,7 @@
 
     .login-section {
       flex: 1;
-      background: #15151c;
+      background:transparent;
       padding: 50px;
       display: flex;
       flex-direction: column;
@@ -37,7 +37,7 @@
     .login-section form h2 {
       font-size: 28px;
       margin-bottom: 20px;
-      color: #ff2e63;
+      color: #22a699;
     }
     .login-section label {
       display: block;
@@ -68,7 +68,7 @@
       cursor: pointer;
       font-size: 16px;
       font-weight: bold;
-      background: linear-gradient(135deg, #ff2e63, #ffcc00);
+      background:#22a699;
       color: #000;
       transition: 0.3s;
     }
@@ -83,7 +83,7 @@
 
     .signup-section {
       flex: 1;
-      background: linear-gradient(135deg, #ffcd05, #ee85a8);
+      background:#22a699;
       display: flex;
       flex-direction: column;
       justify-content: center;
