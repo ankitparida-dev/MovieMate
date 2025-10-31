@@ -1,4 +1,4 @@
-* {
+ * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -38,7 +38,7 @@
             --gradient-mixed: linear-gradient(135deg, #2ec4b6 0%, #ff9f1c 100%);
             
             /* 🌊 Enhanced Navbar Blur Effects */
-            --navbar-bg: rgba(10, 25, 47, 0.92);
+            --navbar-bg: rgba(10, 25, 47, 0.85);
             --navbar-border: rgba(46, 196, 182, 0.25);
             --backdrop-effect: blur(20px) saturate(180%) brightness(0.9);
             --backdrop-effect-intense: blur(25px) saturate(200%) brightness(0.8);
@@ -327,7 +327,7 @@
 
         /* Navbar scroll effect - Enhanced blur */
         .main-header.scrolled {
-            background: rgba(5, 16, 33, 0.96);
+            background: rgba(5, 16, 33, 0.92);
             backdrop-filter: var(--backdrop-effect-intense);
             -webkit-backdrop-filter: var(--backdrop-effect-intense);
             padding: 10px 0;
@@ -653,7 +653,6 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
