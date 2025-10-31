@@ -1,4 +1,4 @@
-// Loading screen functionality
+ // Loading screen functionality
         document.addEventListener('DOMContentLoaded', function() {
             const loadingScreen = document.getElementById('loadingScreen');
             const mainContent = document.getElementById('mainContent');
@@ -55,6 +55,7 @@
                     initFeedbackModal();
                     initInteractiveCards();
                     initCarousel();
+                    initNavigation();
                 }, 300);
             }
 
@@ -120,6 +121,30 @@
                 } else {
                     header.classList.remove('scrolled');
                 }
+            });
+        }
+
+        // Navigation functionality
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Here you would typically load the page content
+                    // For this demo, we'll just log the page
+                    const page = this.getAttribute('data-page');
+                    console.log(`Navigating to: ${page}`);
+                });
             });
         }
 
@@ -244,7 +269,7 @@
                 {
                     name: "INTERSTELLAR",
                     overview: "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
-                    background: "linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"
+                    background: "linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1794&q=80')"
                 },
                 {
                     name: "INCEPTION",
