@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="Css_files/Style.css">
 </head>
 <body>
+    <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-logo">
@@ -47,8 +48,10 @@
         </div>
     </div>
 
+    <!-- Main Content -->
     <div class="main-content" id="mainContent">
         
+        <!-- Header -->
         <header class="main-header" id="mainHeader">
             <div class="container">
                 <nav class="navbar">
@@ -78,13 +81,14 @@
                         </div>
                         
                         <div class="login-button">
-                             <a href="#"><button class="btn btn-outline">Login</button></a>
+                            <button class="btn btn-outline">Login</button>
                         </div>
                     </div>
                 </nav>
             </div>
         </header>
 
+        <!-- Hero Section -->
         <section class="hero-section">
             <div class="container">
                 <div class="hero-content">
@@ -122,6 +126,7 @@
             </div>
         </section>
 
+        <!-- Movie Section -->
         <section class="movie-section">
             <div class="carousel-image" id="carouselImage">
                 <div class="overlay"></div>
@@ -132,11 +137,12 @@
                         <p><i class="fas fa-play-circle"></i> Movie</p>
                         <p><i class="far fa-clock"></i> 169m</p>
                         <p><i class="far fa-calendar-alt"></i> 2014</p>
+                        <p><i class="fas fa-star"></i> 8.6/10</p>
                     </div>
                     <p class="overview" id="overview">When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.</p>
                     <div class="interstellar-buttons">
-                        <button class="trailer"><i class="fas fa-play"></i> Trailer</button>
-                        <button class="detail-button"><a class="detail-link" href="#" target="_self">Details</a></button>
+                        <button class="trailer"><i class="fas fa-play"></i> Watch Trailer</button>
+                        <button class="detail-button"><i class="fas fa-info-circle"></i> View Details</button>
                     </div>
                 </div>
                 <div class="next-prev">
@@ -146,6 +152,7 @@
             </div>
         </section>
 
+        <!-- Content Section -->
         <section class="content-section">
             <div class="container">
                 <div class="content-header">
@@ -216,6 +223,7 @@
             </div>
         </section>
 
+        <!-- Upcoming Section -->
         <section class="upcoming-section">
             <div class="container">
                 <div class="section-header">
@@ -337,6 +345,7 @@
             </div>
         </section>
 
+        <!-- Features Section -->
         <section class="features-section">
             <div class="container">
                 <div class="section-header">
@@ -468,70 +477,72 @@
             </div>
         </div>
 
-      <footer class="main-footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 class="footer-title">MovieMate</h3>
-                <p class="footer-description">
-                    Your ultimate destination for discovering and exploring movies and TV shows from around the world.
-                </p>
-                <div class="tmdb-attribution">
-                    <p class="tmdb-text">
-                        This product uses the TMDB API but is not endorsed or certified by TMDB.
-                    </p>
-                    <div class="tmdb-logo">
-                        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" 
-                             alt="TMDB Logo" 
-                             width="100" 
-                             height="auto">
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3 class="footer-title">MovieMate</h3>
+                        <p class="footer-description">
+                            Your ultimate destination for discovering and exploring movies and TV shows from around the world.
+                        </p>
+                        <div class="tmdb-attribution">
+                            <p class="tmdb-text">
+                                This product uses the TMDB API but is not endorsed or certified by TMDB.
+                            </p>
+                            <div class="tmdb-logo">
+                                <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" 
+                                     alt="TMDB Logo" 
+                                     width="100" 
+                                     height="auto">
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3 class="footer-title">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Movies</a></li>
+                            <li><a href="#">TV Shows</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3 class="footer-title">Genres</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Comedy</a></li>
+                            <li><a href="#">Drama</a></li>
+                            <li><a href="#">Sci-Fi</a></li>
+                            <li><a href="#">Horror</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="#" class="social-link" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
+                
+                <div class="footer-bottom">
+                    <div class="copyright">
+                        <p>&copy; 2025 MovieMate. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="footer-section">
-                <h3 class="footer-title">Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">TV Shows</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3 class="footer-title">Genres</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Comedy</a></li>
-                    <li><a href="#">Drama</a></li>
-                    <li><a href="#">Sci-Fi</a></li>
-                    <li><a href="#">Horror</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="copyright">
-                <p>&copy; 2025 MovieMate. All rights reserved.</p>
-            </div>
-        </div>
+        </footer>
     </div>
-</footer>
-    </div>
-  <script src="Js_files/Script.js"></script> 
+
+    <script src="Js_files/Script.js"></script>
 </body>
 </html>
