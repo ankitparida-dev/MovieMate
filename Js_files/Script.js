@@ -404,3 +404,47 @@
             // This will be called after the loading screen completes
             setTimeout(initScrollAnimations, 1000);
         });
+        // Theme toggle functionality
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        // Update theme
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update icon
+        updateThemeIcon(newTheme);
+        
+        // Add click animation
+        this.style.transform = 'scale(0.9) rotate(180deg)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 300);
+    });
+    
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            themeIcon.className = 'fas fa-moon';
+            themeToggle.setAttribute('aria-label', 'Switch to light theme');
+        } else {
+            themeIcon.className = 'fas fa-sun';
+            themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+        }
+    }
+}
+
+// Initialize theme toggle when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // This will be called after the loading screen completes
+    setTimeout(initThemeToggle, 1000);
+});
