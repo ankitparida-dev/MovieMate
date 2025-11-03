@@ -32,5 +32,5 @@ No external frameworks or libraries are used.
 
 ## 👨‍💻 Author
 
-Developed with ❤️ by **Ankit Parida** , **Rangan Biswas** . **Nipun Singh** , **Pushkar Ahuja** 
+Developed with ❤️ by **Ankit Parida** , **Rangan Biswas** , **Nipun Singh** , **Pushkar Ahuja** 
 Built using **HTML**, **CSS**, and **JavaScript**.
