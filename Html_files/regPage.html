@@ -1,50 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie Mate - Register</title>
-  <link rel="stylesheet" href="/Css files/regPage.css">
-  <link rel="icon" href="/Media files/image.png" type="icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | MovieMate</title>
+  <link rel="stylesheet" href="../Css_files/regPage.css" />
 </head>
 <body>
-  <main>
-    <header>
-      <h2>Register</h2>
-    </header>
-
-    <section>
-      <form id="registerForm">
-        <div class="form-group name">
-          <label for="name"><span>*</span> Name</label>
-          <input type="text" id="name" required>
+  <div class="register-container">
+    <div class="form-box">
+      <h2>Create Your Account </h2>
+      <form action="#" method="POST">
+        <div class="input-group">
+          <input type="text" required />
+          <label>Full Name</label>
         </div>
-        
-        <div class="form-group email">
-          <label for="email"><span>*</span> Email</label>
-          <input type="email" id="email" required  pattern="[a-z0.9._%+\-]+@[a-z0.9.\-]+\.[a-z]{2,}$">
+        <div class="input-group">
+          <input type="email" required />
+          <label>Email Address</label>
         </div>
-        
-        <div class="form-group password">
-          <label for="password"><span>*</span> Password</label>
-          <input type="password" id="password" required pattern="[A-Za-z\d]{8,16}" minlength="8" maxlength="16">
+        <div class="input-group">
+          <input type="password" required />
+          <label>Password</label>
         </div>
-        <div class="form-group password">
-          <label for="confirmPassword"><span>*</span> Confirm password</label>
-          <input type="password" id="confirmPassword" required>
+        <div class="input-group">
+          <input type="password" required />
+          <label>Confirm Password</label>
         </div>
-        
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="register-btn">Register</button>
+        <p class="login-link">
+          Already have an account? <a href="loginPage.html">Login</a>
+        </p>
       </form>
-    </section>
-
-    <footer>
-      Already have an account? <a href="/Html files/loginPage.html">Login</a>
-    </footer>
-  </main>
-  <script src="/api_token.js"></script>
+    </div>
+  </div>
 </body>
 </html>
