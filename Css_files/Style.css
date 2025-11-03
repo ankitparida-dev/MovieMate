@@ -92,7 +92,7 @@
             }
         }
 
-        .loading-logo img {
+        .loading-logo video {
             width: 200px;
             height: auto;
             filter: drop-shadow(0 0 20px rgba(46, 196, 182, 0.5));
