@@ -40,33 +40,33 @@
 
 /* 🌊 Light Theme Variables */
 [data-theme="light"] {
-    --primary: #ffffff;
-    --primary-dark: #f8f9fa;
-    --primary-light: #e9ecef;
-    --secondary: #01b4e4; /* TMDB Blue */
-    --secondary-light: #90cea1; /* TMDB Green */
-    --accent: #0d253f; /* TMDB Dark Blue */
-    --accent-light: #1d3a5c;
+    --primary: #d4f1ff;          /* Reduced whitish - more sky blue */
+    --primary-dark: #c4e8ff;     /* Darker sky blue */
+    --primary-light: #e8f7ff;    /* Less white blend */
+    --secondary: #0077b6;        /* Deep Ocean Blue */
+    --secondary-light: #00a8e8;  /* Bright Sky Blue */
+    --accent: #003554;           /* Navy Blue */
+    --accent-light: #005b8f;
     --accent-red: #e63946;
     --accent-red-hover: #ff6b7a;
-    --text: #0d253f; /* TMDB Dark Blue */
-    --text-light: #1d3a5c;
-    --text-muted: #666666;
-    --bg: #ffffff;
-    --bg-dark: #f8f9fa;
-    --bg-light: #e9ecef;
-    --card: #f8f9fa;
-    --card-hover: #e9ecef;
-    --shadow: 0 8px 32px rgba(13, 37, 63, 0.1);
-    --shadow-teal: 0 0 30px rgba(1, 180, 228, 0.3);
-    --shadow-copper: 0 0 30px rgba(144, 206, 161, 0.3);
+    --text: #003554;             /* Navy Blue Text */
+    --text-light: #005b8f;
+    --text-muted: #4a6fa8;
+    --bg: #d4f1ff;               /* Reduced whitish - more sky blue */
+    --bg-dark: #c4e8ff;          /* Darker sky blue */
+    --bg-light: #e8f7ff;         /* Less white blend */
+    --card: #f0faff;             /* Very light sky blue instead of white */
+    --card-hover: #e1f4ff;
+    --shadow: 0 8px 32px rgba(0, 55, 84, 0.15);
+    --shadow-teal: 0 0 30px rgba(0, 119, 182, 0.25);
+    --shadow-copper: 0 0 30px rgba(0, 168, 232, 0.2);
     
-    /* Gradients for Light Theme */
-    --gradient-teal: linear-gradient(135deg, #01b4e4 0%, #90cea1 100%);
-    --gradient-copper: linear-gradient(135deg, #0d253f 0%, #1d3a5c 100%);
-    --gradient-hero: linear-gradient(135deg, #ffffff 0%, #e9ecef 50%, #01b4e4 100%);
-    --gradient-card: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    --gradient-mixed: linear-gradient(135deg, #01b4e4 0%, #90cea1 100%);
+    /* Gradients for Light Theme - More sky blue focused */
+    --gradient-teal: linear-gradient(135deg, #0077b6 0%, #00a8e8 100%);
+    --gradient-copper: linear-gradient(135deg, #003554 0%, #005b8f 100%);
+    --gradient-hero: linear-gradient(135deg, #d4f1ff 0%, #e8f7ff 40%, #00a8e8 100%);
+    --gradient-card: linear-gradient(135deg, #f0faff 0%, #e1f4ff 100%);
+    --gradient-mixed: linear-gradient(135deg, #0077b6 0%, #00a8e8 100%);
 }
 
 body {
@@ -264,25 +264,27 @@ body {
     transition: opacity 0.8s ease-in-out;
 }
 
-/* 🌊 REDESIGNED NAVBAR - UNDERLINE STYLE */
+/* 🌊 ENHANCED NAVBAR - LARGER SIZE WITH TRANSPARENT BLUR */
 .main-header {
-    background: rgba(10, 25, 47, 0.9);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(10, 25, 47, 0.75) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
     position: sticky;
     top: 0;
     z-index: 1000;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(46, 196, 182, 0.2);
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(46, 196, 182, 0.3);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .main-header.scrolled {
-    background: rgba(5, 16, 33, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(46, 196, 182, 0.3);
+    background: rgba(5, 16, 33, 0.88) !important;
+    backdrop-filter: blur(30px) !important;
+    -webkit-backdrop-filter: blur(30px) !important;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(46, 196, 182, 0.4);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
 }
 
 .navbar {
@@ -292,37 +294,39 @@ body {
     transition: var(--transition);
 }
 
-/* 🌊 Logo Video Sizing */
+/* 🌊 Logo Video Sizing - Larger */
 .left-section .logo video {
-    height: 45px;
+    height: 55px;
     width: auto;
     transition: var(--transition);
-    filter: drop-shadow(0 0 10px rgba(46, 196, 182, 0.3));
+    filter: drop-shadow(0 0 15px rgba(46, 196, 182, 0.4));
 }
 
 .main-header.scrolled .left-section .logo video {
-    height: 40px;
+    height: 50px;
 }
 
 .middle-section {
     display: flex;
     list-style: none;
-    gap: 40px;
+    gap: 50px;
 }
 
-/* 🌊 NEW UNDERLINE NAVIGATION STYLE */
+/* 🌊 NEW UNDERLINE NAVIGATION STYLE - Larger */
 .nav-link {
     color: var(--text-light);
     text-decoration: none;
-    font-weight: 600;
-    padding: 10px 0;
+    font-weight: 700;
+    padding: 15px 0;
     position: relative;
     transition: all 0.3s ease;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    letter-spacing: 0.8px;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
 }
 
 .nav-link::after {
@@ -331,10 +335,10 @@ body {
     bottom: 0;
     left: 0;
     width: 0;
-    height: 3px;
+    height: 4px;
     background: var(--gradient-teal);
     transition: width 0.3s ease;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .nav-link:hover {
@@ -352,13 +356,13 @@ body {
 
 .nav-link.active::after {
     width: 100%;
-    box-shadow: 0 0 10px rgba(46, 196, 182, 0.5);
+    box-shadow: 0 0 15px rgba(46, 196, 182, 0.6);
 }
 
 .right-section {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .search-container {
@@ -368,49 +372,52 @@ body {
 
 .search-icon {
     position: absolute;
-    left: 15px;
+    left: 20px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
     transition: var(--transition);
     z-index: 2;
+    font-size: 1.3rem;
 }
 
 .search-input {
-    padding: 12px 15px 12px 40px;
-    border-radius: 25px;
-    border: 1px solid rgba(46, 196, 182, 0.25);
-    background: rgba(23, 42, 69, 0.6);
+    padding: 16px 20px 16px 50px;
+    border-radius: 30px;
+    border: 2px solid rgba(46, 196, 182, 0.3);
+    background: rgba(23, 42, 69, 0.5) !important; /* Dark mode transparency */
     color: var(--text);
-    width: 250px;
+    width: 300px;
     transition: all 0.3s ease;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    font-size: 0.95rem;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    font-size: 1.05rem;
+    font-weight: 500;
 }
 
 .search-input:focus {
     outline: none;
-    border-color: rgba(46, 196, 182, 0.6);
-    background: rgba(29, 58, 92, 0.7);
-    box-shadow: 0 0 30px rgba(46, 196, 182, 0.3);
-    width: 280px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    border-color: rgba(46, 196, 182, 0.7);
+    background: rgba(29, 58, 92, 0.6) !important; /* Dark mode focus */
+    box-shadow: 0 0 40px rgba(46, 196, 182, 0.4);
+    width: 350px;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
 }
+
 
 .search-input:focus + .search-icon {
     color: var(--secondary);
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.2);
 }
 
-/* 🌊 Theme Toggle Button */
+/* 🌊 Theme Toggle Button - Larger */
 .theme-toggle {
-    background: transparent;
+    background: transparent !important;
     border: 2px solid rgba(46, 196, 182, 0.4);
     color: var(--secondary);
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -419,7 +426,9 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    margin-left: 10px;
+    margin-left: 15px;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 
 .theme-toggle::before {
@@ -441,48 +450,50 @@ body {
 }
 
 .theme-toggle:hover {
-    background: rgba(46, 196, 182, 0.1);
-    border-color: rgba(46, 196, 182, 0.6);
-    transform: translateY(-2px) rotate(15deg);
-    box-shadow: 0 5px 15px rgba(46, 196, 182, 0.3);
+    background: rgba(46, 196, 182, 0.15);
+    border-color: rgba(46, 196, 182, 0.7);
+    transform: translateY(-3px) rotate(20deg);
+    box-shadow: 0 8px 25px rgba(46, 196, 182, 0.4);
 }
 
 .theme-toggle i {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     transition: transform 0.3s ease;
 }
 
 .theme-toggle:hover i {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 /* Scrolled state theme toggle */
 .main-header.scrolled .theme-toggle {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
 
 .main-header.scrolled .theme-toggle i {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
-/* 🌊 ENHANCED LOGIN BUTTON */
+/* 🌊 ENHANCED LOGIN BUTTON - Larger */
 .login-button {
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .login-button .btn-outline {
-    background: transparent;
+    background: transparent !important;
     color: var(--secondary);
     border: 2px solid rgba(46, 196, 182, 0.4);
-    padding: 10px 24px;
-    font-weight: 600;
+    padding: 14px 32px;
+    font-weight: 700;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    border-radius: 25px;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
+    border-radius: 30px;
+    font-size: 1.05rem;
+    letter-spacing: 0.8px;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 
 .login-button .btn-outline::before {
@@ -504,21 +515,21 @@ body {
 }
 
 .login-button .btn-outline:hover {
-    background: rgba(46, 196, 182, 0.1);
-    border-color: rgba(46, 196, 182, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(46, 196, 182, 0.3);
+    background: rgba(46, 196, 182, 0.15);
+    border-color: rgba(46, 196, 182, 0.7);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(46, 196, 182, 0.4);
 }
 
 /* Scrolled state login button */
 .main-header.scrolled .login-button .btn-outline {
-    padding: 8px 20px;
-    font-size: 0.9rem;
+    padding: 12px 28px;
+    font-size: 1rem;
 }
 
 /* 🌊 Hero Section */
 .hero-section {
-    padding: 100px 0;
+    padding: 120px 0;
     background: var(--gradient-hero);
     position: relative;
 }
@@ -631,11 +642,11 @@ body {
 }
 
 .info-btn {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08) !important;
     color: var(--text);
     border: 2px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -848,11 +859,11 @@ body {
 }
 
 .trailer {
-    background: rgba(46, 196, 182, 0.15);
+    background: rgba(46, 196, 182, 0.15) !important;
     color: var(--text-light);
     border: 2px solid rgba(46, 196, 182, 0.4);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
 }
 
 .trailer:hover {
@@ -896,12 +907,13 @@ body {
     width: 55px;
     height: 55px;
     border-radius: 50%;
-    background: rgba(46, 196, 182, 0.2);
+    background: rgba(46, 196, 182, 0.2) !important;
     color: var(--text);
     border: 2px solid rgba(46, 196, 182, 0.3);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
     font-size: 1.3rem;
     display: flex;
     align-items: center;
@@ -1666,27 +1678,32 @@ body {
 
 /* 🌊 Light Theme Specific Styles */
 [data-theme="light"] .main-header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(1, 180, 228, 0.2);
+    background: rgba(212, 241, 255, 0.75) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border-bottom: 1px solid rgba(0, 119, 182, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 55, 84, 0.15);
 }
 
 [data-theme="light"] .main-header.scrolled {
-    background: rgba(248, 249, 250, 0.98);
-    border-bottom: 1px solid rgba(1, 180, 228, 0.3);
+    background: rgba(196, 232, 255, 0.88) !important;
+    backdrop-filter: blur(30px) !important;
+    -webkit-backdrop-filter: blur(30px) !important;
+    border-bottom: 1px solid rgba(0, 119, 182, 0.4);
+    box-shadow: 0 8px 40px rgba(0, 55, 84, 0.2);
 }
 
 [data-theme="light"] .search-input {
-    background: rgba(233, 236, 239, 0.8);
-    border: 1px solid rgba(1, 180, 228, 0.25);
-    color: var(--text);
+    background: rgba(233, 236, 239, 0.5) !important; /* Light mode transparency */
+    border: 2px solid rgba(0, 119, 182, 0.3);
 }
 
 [data-theme="light"] .search-input:focus {
-    background: rgba(220, 223, 228, 0.9);
-    border-color: rgba(1, 180, 228, 0.6);
-    box-shadow: 0 0 30px rgba(1, 180, 228, 0.2);
+    border-color: rgba(0, 119, 182, 0.7);
+    background: rgba(220, 223, 228, 0.6) !important; /* Light mode focus */
+    box-shadow: 0 0 40px rgba(0, 119, 182, 0.3);
 }
+
 
 [data-theme="light"] .search-icon {
     color: var(--text-muted);
@@ -1697,23 +1714,22 @@ body {
 }
 
 [data-theme="light"] .login-button .btn-outline {
-    color: var(--secondary);
-    border: 2px solid rgba(1, 180, 228, 0.4);
+    border: 2px solid rgba(0, 119, 182, 0.4);
 }
 
 [data-theme="light"] .login-button .btn-outline:hover {
-    background: rgba(1, 180, 228, 0.1);
-    border-color: rgba(1, 180, 228, 0.6);
+    background: rgba(1, 180, 228, 0.15);
+    border-color: rgba(1, 180, 228, 0.7);
 }
 
 [data-theme="light"] .theme-toggle {
-    border: 2px solid rgba(1, 180, 228, 0.4);
-    color: var(--secondary);
+    border: 2px solid rgba(0, 119, 182, 0.4);
 }
 
+
 [data-theme="light"] .theme-toggle:hover {
-    background: rgba(1, 180, 228, 0.1);
-    border-color: rgba(1, 180, 228, 0.6);
+    background: rgba(1, 180, 228, 0.15);
+    border-color: rgba(1, 180, 228, 0.7);
 }
 
 /* TMDB Logo in Light Theme */
@@ -1761,8 +1777,7 @@ body {
 }
 
 [data-theme="light"] .info-btn {
-    background: rgba(13, 37, 63, 0.08);
-    color: var(--text);
+    background: rgba(13, 37, 63, 0.08) !important;
     border: 2px solid rgba(13, 37, 63, 0.2);
 }
 
@@ -1808,15 +1823,14 @@ body {
 }
 
 [data-theme="light"] .trailer {
-    background: rgba(1, 180, 228, 0.15);
-    color: var(--text-light);
-    border: 2px solid rgba(1, 180, 228, 0.4);
+    background: rgba(0, 119, 182, 0.15) !important;
+    border: 2px solid rgba(0, 119, 182, 0.4);
 }
 
-[data-theme="light"] .prev, 
+[data-theme="light"] .prev,
 [data-theme="light"] .next {
-    background: rgba(1, 180, 228, 0.2);
-    border: 2px solid rgba(1, 180, 228, 0.3);
+    background: rgba(0, 119, 182, 0.2) !important;
+    border: 2px solid rgba(0, 119, 182, 0.3);
 }
 
 /* Content sections light theme */
@@ -2196,20 +2210,21 @@ button:focus:not(.nav-link, .search-input),
     backdrop-filter: var(--backdrop-effect);
     -webkit-backdrop-filter: var(--backdrop-effect);
 }
+
 /* Enhanced Login Link Styling */
 .login-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 24px;
-    font-weight: 600;
+    padding: 14px 32px;
+    font-weight: 700;
     text-decoration: none;
-    border-radius: 25px;
+    border-radius: 30px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
+    font-size: 1.05rem;
+    letter-spacing: 0.8px;
     background: transparent;
     color: var(--secondary);
     border: 2px solid rgba(46, 196, 182, 0.4);
@@ -2234,18 +2249,18 @@ button:focus:not(.nav-link, .search-input),
 }
 
 .login-link:hover {
-    background: rgba(46, 196, 182, 0.1);
-    border-color: rgba(46, 196, 182, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(46, 196, 182, 0.3);
+    background: rgba(46, 196, 182, 0.15);
+    border-color: rgba(46, 196, 182, 0.7);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(46, 196, 182, 0.4);
     color: var(--secondary);
     text-decoration: none;
 }
 
 /* Scrolled state login link */
 .main-header.scrolled .login-link {
-    padding: 8px 20px;
-    font-size: 0.9rem;
+    padding: 12px 28px;
+    font-size: 1rem;
 }
 
 /* Light theme adjustments */
@@ -2255,6 +2270,6 @@ button:focus:not(.nav-link, .search-input),
 }
 
 [data-theme="light"] .login-link:hover {
-    background: rgba(1, 180, 228, 0.1);
-    border-color: rgba(1, 180, 228, 0.6);
+    background: rgba(1, 180, 228, 0.15);
+    border-color: rgba(1, 180, 228, 0.7);
 }
