@@ -448,3 +448,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // This will be called after the loading screen completes
     setTimeout(initThemeToggle, 1000);
 });
+// Enhanced login page navigation
+document.addEventListener('DOMContentLoaded', function() {
+    const loginLinks = document.querySelectorAll('.login-link');
+    
+    loginLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Add a smooth transition effect before navigating
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            
+            // Add a loading state to the button
+            this.classList.add('loading');
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+            
+            // Navigate after a short delay for better UX
+            setTimeout(() => {
+                window.location.href = href;
+            }, 500);
+        });
+    });
+    
+    // Add loading state CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        .login-link.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .fa-spin {
+            animation: fa-spin 1s infinite linear;
+        }
+        
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+});
