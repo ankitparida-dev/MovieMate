@@ -22,10 +22,13 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: linear-gradient(135deg, #0a192f 0%, #172a45 50%, #2ec4b6 100%);
   color: #fff;
   font-family: "Poppins", sans-serif;
 }
+
+
+
 
  .main-header {
     box-shadow: var(--shadow);
