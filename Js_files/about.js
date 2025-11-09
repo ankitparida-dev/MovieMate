@@ -40,6 +40,10 @@ async function getMoviedetails(){
     const dataRec = await responseRec.json();
     console.log(dataRec);
     populateRecommendations(dataRec.results);
+
+    const relatedContentres = await fetch();
+    const relatedContentData = await relatedContentres.json();
+    
 }
 function populateMovieFields(data){
     poster.src = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
@@ -73,6 +77,7 @@ function populateCast(castArray) {
     castContainer.appendChild(castCard);
   });
 }
+
 function populateStaff(crewArray) {
   const staffContainer = document.querySelector('.staff');
   staffContainer.innerHTML = ''; 
