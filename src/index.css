@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  /* This is your main black background */
+  background: #000000; 
+  color: #ffffff;
+  /* This is your main font */
+  font-family: "Rubik", sans-serif;
+}
