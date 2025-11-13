@@ -7,12 +7,37 @@ document.addEventListener('DOMContentLoaded', function() {
         Authorization: `Bearer ${API_TOKEN}` 
       }
     };
+    const searchInput = document.querySelector('.search-input');
+    const searchIcon = document.querySelector('.search-icon');
+    const contentGrid = document.querySelector('.content-grid');
+    const contentTitle = document.querySelector('.content-title');
 
+
+    searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); 
+            triggerSearch();
+        }
+    });
+
+    searchIcon.addEventListener('click', () => {
+        triggerSearch();
+    });
+  
+    function triggerSearch() {
+        const query = searchInput.value.trim(); 
+        if (query) {
+            performSearch(query);
+        } else {
+            contentTitle.innerText = 'Trending Movies and Shows';
+            fetchTrendingMovies(); 
+        }
+    }
 
     fetchTrendingMovies();
     fetchUpcomingMovies();
     async function fetchTrendingMovies() {
-      const url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc';
+     const url = 'https://api.themoviedb.org/3/trending/all/week';
       const grid = document.querySelector('.content-grid');
       if (grid) {
         grid.innerHTML = ''; 
@@ -27,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const data = await response.json();
 
-        data.results.forEach(movie => {
-          const movieCard = createMovieCard(movie);
+        data.results.forEach(item => {
+          const movieCard = createMovieCard(item);
           grid.appendChild(movieCard);
         });
         
@@ -66,24 +91,62 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    function createMovieCard(movie) {
+
+    async function performSearch(query) {
+        const url = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(query)}`;
+        
+        if (!contentGrid) return; 
+        
+        contentGrid.innerHTML = ''; 
+        contentTitle.innerText = `Search Results for "${query}"`; 
+
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error('Search fetch failed');
+
+            const data = await response.json();
+            
+            if (data.results.length === 0) {
+                contentGrid.innerHTML = '<p class="no-results">No movies found for that search.</p>';
+                return;
+            }
+            
+            data.results.forEach(movie => {
+                const movieCard = createMovieCard(movie);
+                contentGrid.appendChild(movieCard);
+            });
+
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+            contentGrid.innerHTML = '<p class.no-results">Sorry, something went wrong.</p>';
+        }
+    }
+      function createMovieCard(item) { 
       const card = document.createElement('div');
       card.classList.add('content-card', 'interactive-feature');
 
-      const poster = movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      const isMovie = item.media_type === 'movie' || (item.title && !item.name);
+      const mediaType = item.media_type ? item.media_type : (isMovie ? 'movie' : 'tv');
+      if (mediaType === 'person') {
+          return null;
+      }
+      const title = item.title || item.name; 
+      const releaseDate = item.release_date || item.first_air_date; 
+
+      const poster = item.poster_path
+        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
         : 'Media files/placeholder-poster.png'; 
       
       card.innerHTML = `
-        <a href="Html files/about.html?id=${movie.id}" class="card-link">
-          <img src="${poster}" alt="${movie.title}" class="card-image">
+        <a href="Html_files/about.html?id=${item.id}&type=${mediaType}" class="card-link">
+          <img src="${poster}" alt="${title}" class="card-image">
           <div class="card-content">
-            <h3 class="card-title">${movie.title}</h3>
+            <h3 class="card-title">${title}</h3>
             <div class="card-meta">
-              <span>${movie.release_date.split('-')[0]}</span>
+              <span>${releaseDate ? releaseDate.split('-')[0] : 'TBA'}</span>
               <div class="card-rating">
                 <i class="fas fa-star"></i>
-                <span>${movie.vote_average.toFixed(1)}</span>
+                <span>${item.vote_average.toFixed(1)}</span>
               </div>
             </div>
           </div>
@@ -96,8 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const card = document.createElement('div');
       card.classList.add('upcoming-card', 'interactive-feature');
       
-      const poster = movie.backdrop_path // Use backdrop for these cards
-        ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+      const poster = movie.poster_path 
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         : 'Media files/placeholder-poster.png';
         
       card.innerHTML = `
@@ -116,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <button class="upcoming-btn remind-btn">
               <i class="fas fa-bell"></i> Remind Me
             </button>
-            <a href="Html files/about.html?id=${movie.id}" class="upcoming-btn info-btn-upcoming">
+            <a href="/Html_Files/about.html?id=${movie.id}" class="upcoming-btn info-btn-upcoming">
               <i class="fas fa-info-circle"></i> Info
             </a>
           </div>
@@ -124,25 +187,5 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       return card;
     }
-
-    function populateSpotlight(movie) {
-      const spotlightSection = document.querySelector('.carousel-image');
-      if (!spotlightSection) return;
-
-      const title = spotlightSection.querySelector('.show-name');
-      const overview = spotlightSection.querySelector('.overview');
-      const detailsLink = spotlightSection.querySelector('.detail-link');
-      const releaseDate = spotlightSection.querySelector('.details p:nth-child(3)');
-      const runtime = spotlightSection.querySelector('.details p:nth-child(2)');
-
-      spotlightSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
-      
-      title.innerText = movie.title;
-      overview.innerText = movie.overview;
-      releaseDate.innerHTML = `<i class="far fa-calendar-alt"></i> ${movie.release_date.split('-')[0]}`;
-      
-      if (runtime) runtime.style.display = 'none'; 
-      detailsLink.href = `Html files/about.html?id=${movie.id}`;
-    }
-
-});
+  
+  });

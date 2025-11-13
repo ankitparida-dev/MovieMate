@@ -56,6 +56,7 @@
                     initInteractiveCards();
                     initCarousel();
                     initNavigation();
+                    initButtonInteractions();
                 }, 300);
             }
 
@@ -130,8 +131,6 @@
             
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
                     // Remove active class from all links
                     navLinks.forEach(item => {
                         item.classList.remove('active');
@@ -140,10 +139,64 @@
                     // Add active class to clicked link
                     this.classList.add('active');
                     
-                    // Here you would typically load the page content
-                    // For this demo, we'll just log the page
+                    // Get the page from data attribute
                     const page = this.getAttribute('data-page');
                     console.log(`Navigating to: ${page}`);
+                    
+                    // For demo purposes, we'll prevent actual navigation
+                    // In a real site, these would be actual page links
+                    if (page === 'home') {
+                        // Already on home page
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (page === 'movies') {
+                        // Navigate to movies section
+                        document.querySelector('.content-section').scrollIntoView({ behavior: 'smooth' });
+                    } else if (page === 'tv-shows') {
+                        // Navigate to upcoming section (as placeholder for TV shows)
+                        document.querySelector('.upcoming-section').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+
+        // Button interactions
+        function initButtonInteractions() {
+            // Hero buttons
+            const heroButtons = document.querySelectorAll('.hero-btn');
+            heroButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                    
+                    if (this.classList.contains('play-btn')) {
+                        // Navigate to movies section
+                        document.querySelector('.content-section').scrollIntoView({ behavior: 'smooth' });
+                    } else if (this.classList.contains('info-btn')) {
+                        // Navigate to features section
+                        document.querySelector('.features-section').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Login button
+            const loginButton = document.querySelector('.login-button .btn');
+            if (loginButton) {
+                loginButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Opening login modal...');
+                });
+            }
+            
+            // Content card buttons
+            const contentButtons = document.querySelectorAll('.content-card, .upcoming-btn, .feature-card .btn');
+            contentButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
                 });
             });
         }
@@ -269,7 +322,7 @@
                 {
                     name: "INTERSTELLAR",
                     overview: "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
-                    background: "linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1794&q=80')"
+                    background: "linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('fHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80')"
                 },
                 {
                     name: "INCEPTION",
@@ -289,6 +342,12 @@
                 carouselImage.style.backgroundImage = movies[currentIndex].background;
                 showName.textContent = movies[currentIndex].name;
                 overview.textContent = movies[currentIndex].overview;
+                
+                // Add transition effect
+                carouselImage.classList.add('changing');
+                setTimeout(() => {
+                    carouselImage.classList.remove('changing');
+                }, 300);
             }
             
             prevBtn.addEventListener('click', function() {
@@ -304,3 +363,128 @@
             // Initialize carousel
             updateCarousel();
         }
+
+        // Add keyboard navigation for carousel
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                document.querySelector('.prev').click();
+            } else if (e.key === 'ArrowRight') {
+                document.querySelector('.next').click();
+            }
+        });
+
+        // Add intersection observer for animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animatedElements = document.querySelectorAll('.content-card, .upcoming-card, .feature-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Initialize scroll animations when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // This will be called after the loading screen completes
+            setTimeout(initScrollAnimations, 1000);
+        });
+        // Theme toggle functionality
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        // Update theme
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update icon
+        updateThemeIcon(newTheme);
+        
+        // Add click animation
+        this.style.transform = 'scale(0.9) rotate(180deg)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 300);
+    });
+    
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            themeIcon.className = 'fas fa-moon';
+            themeToggle.setAttribute('aria-label', 'Switch to light theme');
+        } else {
+            themeIcon.className = 'fas fa-sun';
+            themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+        }
+    }
+}
+
+// Initialize theme toggle when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // This will be called after the loading screen completes
+    setTimeout(initThemeToggle, 1000);
+});
+// Enhanced login page navigation
+document.addEventListener('DOMContentLoaded', function() {
+    const loginLinks = document.querySelectorAll('.login-link');
+    
+    loginLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Add a smooth transition effect before navigating
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            
+            // Add a loading state to the button
+            this.classList.add('loading');
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+            
+            // Navigate after a short delay for better UX
+            setTimeout(() => {
+                window.location.href = href;
+            }, 500);
+        });
+    });
+    
+    // Add loading state CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        .login-link.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .fa-spin {
+            animation: fa-spin 1s infinite linear;
+        }
+        
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+});
