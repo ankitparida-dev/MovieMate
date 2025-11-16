@@ -1,0 +1,159 @@
+.mainFooter {
+  /* ... (no changes) ... */
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: var(--text);
+  padding: 80px 0 30px;
+  border-top: 1px solid var(--bg-light);
+  position: relative;
+  overflow: hidden;
+  padding-left: 6rem;
+}
+
+.mainFooter::before {
+  /* ... (no changes) ... */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1600&q=80")
+    center/cover no-repeat;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.footerContent {
+  /* ... (no changes) ... */
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.footerSection h3 {
+  /* ... (no changes) ... */
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  color: var(--secondary);
+  font-weight: 700;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.footerSection h3::after {
+  /* ... (no changes) ... */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent));
+  border-radius: 2px;
+}
+
+.footerDescription {
+  /* ... (no changes) ... */
+  color: var(--text-light);
+  margin-bottom: 25px;
+  line-height: 1.7;
+  max-width: 400px;
+}
+
+.socialLinks {
+  /* ... (no changes) ... */
+  display: flex;
+  gap: 15px;
+}
+
+.socialLink {
+  /* ... (no changes) ... */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--card), var(--card-hover));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+  border: 2px solid rgba(255,255,255,0.1);
+  font-size: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.socialLink:hover {
+  /* ... (no changes) ... */
+  transform: translateY(-5px) scale(1.1);
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  color: var(--primary);
+}
+
+.footerLinks {
+  list-style: none;
+  /* Add padding: 0 to remove default list padding */
+  padding: 0; 
+}
+
+/* --- THIS IS THE MAIN FIX --- */
+/* Style BOTH <a> and <button> the same way */
+.footerLinks a,
+.footerLinks button {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition);
+  padding: 8px 0;
+  font-size: 1.05rem;
+  display: block;
+
+  /* Button-specific resets */
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left; /* Align text to the left */
+  font-family: inherit; /* Use the same font as the rest */
+}
+
+.footerLinks a:hover,
+.footerLinks button:hover {
+  color: var(--secondary);
+}
+
+/* --- UPDATED BOTTOM BAR --- */
+.footerBottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 30px;
+  color: var(--text-muted);
+  
+  /* Make it a flex container */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+  gap: 20px;
+}
+
+.footerBottom a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* --- NEW TMDB STYLES --- */
+.tmdbCredit {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  opacity: 0.7;
+}
+
+.tmdbCredit p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.tmdbLogo {
+  width: 80px;
+  height: auto;
+}

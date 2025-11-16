@@ -1,0 +1,129 @@
+/* I removed the '*' rule. It should only be in your global.css */
+
+.loginPageWrapper {
+  display: flex;
+  /* Use min-height so it plays nice with the navbar */
+  min-height: 90vh; 
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0a192f 0%, #172a45 50%, #2ec4b6 100%);
+  color: #fff;
+  padding: 40px 20px; /* Add some padding */
+}
+
+/* THIS IS THE FIX. 
+  '.container' is now '.loginContainer' so it CANNOT conflict.
+*/
+.loginContainer {
+  display: flex;
+  width: 900px;
+  height: 550px;
+  margin: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.loginSection {
+  flex: 1;
+  background: transparent;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginSection form h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #22a699;
+}
+.loginSection label {
+  display: block;
+  margin-bottom: 15px; 
+  font-weight: 500;
+  color: #ccc; 
+}
+
+.inputBox {
+  margin-bottom: 20px;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #222;
+  color: #fff;
+}
+
+.loginBtn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background: #22a699;
+  color: #000000;
+  transition: 0.3s;
+  margin-top: 10px;
+  text-decoration: none; /* Moved from 'a' tag */
+}
+.loginBtn:hover {
+  opacity: 0.9;
+}
+
+.signupSection {
+  flex: 1;
+  background: #22a699;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  text-align: center;
+  padding: 40px;
+}
+
+.signupSection h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.signupSection p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.signupSection button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  background: #07747b;
+  color: white; /* Moved from 'a' tag */
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none; /* Moved from 'a' tag */
+}
+.signupSection button:hover {
+  background: #222;
+}
+
+@media (max-width: 850px) {
+  .loginPageWrapper {
+    height: auto;
+    padding: 40px 20px;
+  }
+ 
+  .loginContainer { /* Renamed from .container */
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    height: auto; 
+  }
+}

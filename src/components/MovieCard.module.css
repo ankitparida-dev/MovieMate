@@ -1,0 +1,49 @@
+.card {
+  background: var(--card); /* Your var is --panel, I'll use --card */
+  border-radius: 12px;
+  overflow: hidden; /* <-- This fixes the encapsulation */
+  
+  display: flex;             /* <-- THIS IS THE FIX */
+  flex-direction: column;    /* <-- Stacks poster ON TOP of content */
+  
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(255, 255, 255, 0.15);
+}
+
+.poster {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* Use aspect ratio instead of fixed height */
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--bg-light); /* Good separator */
+  transition: transform 0.4s ease;
+}
+
+.card:hover .poster {
+  transform: scale(1.08);
+}
+
+.content {
+  padding: 15px; /* Give the text a bit more room */
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1rem; /* 15px is good, 1rem is also good */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text); /* Make sure it's not a muted color */
+}
+
+.meta {
+  color: var(--text-muted); /* Your var is --muted */
+  font-size: 0.9rem; /* 13px is good */
+  margin-top: 5px;
+}

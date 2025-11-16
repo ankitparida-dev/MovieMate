@@ -1,0 +1,102 @@
+/* --- 1. Global Reset & Font --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif; /* Uses the font from the new theme */
+}
+
+/* --- 2. NEW Blue/Teal/Copper Theme Variables --- */
+:root {
+  /* 🎨 Deep Teal & Copper Color Scheme */
+  --primary: #0a192f;         /* Deep Navy Blue */
+  --primary-dark: #051021;     /* Darker Navy */
+  --primary-light: #172a45;     /* Lighter Navy */
+  --secondary: #2ec4b6;         /* 🟢 Teal - Primary Accent */
+  --secondary-light: #4fd1c5;   /* Light Teal */
+  --accent: #ff9f1c;           /* 🟠 Copper/Orange - Secondary Accent */
+  --accent-light: #ffb347;     /* Light Copper */
+  --accent-red: #e63946;       /* Crimson Red (still here if you need it) */
+  --accent-red-hover: #ff6b7a; /* Brighter Red */
+  --text: #ffffff;             /* White */
+  --text-light: #e6e6e6;       /* Light Gray */
+  --text-muted: #8892b0;       /* Muted Blue-Gray */
+  --bg: #0a192f;               /* Deep Navy Background */
+  --bg-dark: #051021;           /* Darker Navy */
+  --bg-light: #172a45;         /* Lighter Navy */
+  --card: #112240;             /* Card Background */
+  --card-hover: #1d3a5c;       /* Card Hover */
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-teal: 0 0 30px rgba(46, 196, 182, 0.4);
+  --shadow-copper: 0 0 30px rgba(255, 159, 28, 0.3);
+  --radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 🌊 Teal & Copper Gradients */
+  --gradient-teal: linear-gradient(135deg, #2ec4b6 0%, #4fd1c5 100%);
+  --gradient-copper: linear-gradient(135deg, #ff9f1c 0%, #ffb347 100%);
+  --gradient-hero: linear-gradient(135deg, #0a192f 0%, #172a45 50%, #2ec4b6 100%);
+  --gradient-card: linear-gradient(135deg, #112240 0%, #1d3a5c 100%);
+  --gradient-mixed: linear-gradient(135deg, #2ec4b6 0%, #ff9f1c 100%);
+}
+
+/* --- 3. NEW Body Style with Gradient --- */
+body {
+  background-color: var(--bg); /* Fallback */
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* This is the bluish gradient you wanted */
+  background: linear-gradient(135deg, var(--bg) 0%, var(--primary-light) 50%, var(--bg-dark) 100%);
+  font-family: 'Rubik', sans-serif; /* Make sure body uses the font */
+}
+
+/* --- 4. Your Other Global Styles (Unchanged) --- */
+.container {
+  width: 100%;
+  max-width: 1200px; /* You can change this width */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 🌊 Feedback Icon */
+.feedback-icon {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  /* Updated to use the new gradient */
+  background: var(--gradient-teal, var(--secondary));
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary); /* Uses new --primary color */
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: var(--shadow-teal); /* Use new shadow */
+  transition: var(--transition);
+  animation: pulse 2s infinite;
+}
+
+.feedback-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(46, 196, 182, 0.6); /* Brighter shadow on hover */
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Also add this for the spinner icon */
+.fa-spin {
+  animation: fa-spin 1s infinite linear;
+}
+@keyframes fa-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

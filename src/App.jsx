@@ -1,55 +1,59 @@
-import { useState } from 'react';
-import AppLayout from './AppLayout';   // <-- Import the new layout
-import LandingPage from './LandingPage'; // <-- Import the new home page
-import LoginPage from './LoginPage';
-import RegPage from './RegPage';
-// We will create these next
-// import MoviesPage from './MoviesPage';
-// import TvShowsPage from './TvShowsPage';
-// import AboutPage from './AboutPage';
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Movies from "./pages/Movies";
+import TvShows from "./pages/TvShows";
+import About from "./pages/About";
+import Main from "./pages/Main";
+import LoginPage from './LoginPage';   // <-- 1. IMPORT THIS
+import RegPage from './RegPage';     // <-- 2. IMPORT THIS
 
-function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedItem, setSelectedItem] = useState(null);
+export default function App() {
+  const [page, setPage] = useState("home"); 
+  const [selected, setSelected] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(""); 
 
-  // --- Remote Control Functions ---
-  const showHome = () => { setCurrentPage('home'); setSelectedItem(null); };
-  const showLogin = () => { setCurrentPage('login'); setSelectedItem(null); };
-  const showRegister = () => { setCurrentPage('register'); setSelectedItem(null); };
-  const showMovies = () => { setCurrentPage('movies'); setSelectedItem(null); };
-  const showTvShows = () => { setCurrentPage('tvShows'); setSelectedItem(null); };
-  const handleShowDetails = (id, type) => {
-    setSelectedItem({ id, type });
-    setCurrentPage('about');
+  const openAboutPage = (item) => {
+    const type = item.media_type || (item.title ? "movie" : "tv");
+    setSelected({ id: item.id, type: type });
+    setPage("about");
   };
 
-  // --- Render Logic ---
-  
-  // 1. Check for standalone "Auth" pages
-  if (currentPage === 'login') {
-    return <LoginPage onShowRegister={showRegister} />;
-  } 
-  if (currentPage === 'register') {
-    return <RegPage onShowLogin={showLogin} />;
+  const changePage = (newPage) => {
+    setSearchQuery("");
+    setPage(newPage);
   }
 
-  // 2. For ALL other pages, wrap them in the AppLayout
   return (
-    <AppLayout
-      currentPage={currentPage} // Pass this to set the "active" link
-      onShowHome={showHome}
-      onShowLogin={showLogin}
-      onShowMovies={showMovies}
-      onShowTvShows={showTvShows}
-    >
-      {/* This shows the correct page *inside* the layout */}
-      {currentPage === 'home' && <LandingPage onShowMovies={showMovies} onShowDetails={handleShowDetails} />}
-      {/* {currentPage === 'movies' && <MoviesPage onShowDetails={handleShowDetails} />} */}
-      {/* {currentPage === 'tvShows' && <TvShowsPage onShowDetails={handleShowDetails} />} */}
-      {/* {currentPage === 'about' && <AboutPage item={selectedItem} onShowDetails={handleShowDetails} />} */}
-    
-    </AppLayout>
-  );
-}
+    <>
+      {/* We're NOT hiding the Navbar anymore */}
+      <Navbar 
+        setPage={changePage} 
+        page={page} 
+        onSearch={setSearchQuery} 
+      />
+      
+      {/* --- Your existing pages --- */}
+      {page === "home" && (
+        <Main 
+          onOpen={openAboutPage} 
+          searchQuery={searchQuery}
+        />
+      )}
+      {page === "movies" && <Movies onOpen={openAboutPage} />}
+      {page === "tvshows" && <TvShows onOpen={openAboutPage} />}
+      {page === "about" && selected && (
+        <About selected={selected} setPage={changePage} />
+      )}
+      
+      {/* --- 3. ADD THESE TWO NEW LINES --- */}
+      {page === "login" && <LoginPage setPage={changePage} />}
+      {page === "register" && <RegPage setPage={changePage} />}
+      {page !== "login" && page !== "register" && (
+        <Footer setPage={changePage} />
+      )}
 
-export default App;
+      
+    </>
+  );
+} 

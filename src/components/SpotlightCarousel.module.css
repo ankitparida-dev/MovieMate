@@ -1,0 +1,307 @@
+/* 🌊 ENHANCED INTERSTELLAR SECTION */
+.movieSection {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.carouselImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  /* background-attachment: fixed; */ /* 'fixed' can be buggy, remove if it looks weird */
+  display: flex;
+  align-items: center;
+  transition: background-image 1s ease-in-out; /* <-- So it fades! */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, 
+      rgba(10, 25, 47, 0.95) 0%, 
+      rgba(10, 25, 47, 0.7) 40%, 
+      rgba(10, 25, 47, 0.3) 80%, 
+      transparent 100%);
+  z-index: 1;
+}
+
+.movieItems {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  color: var(--text);
+  padding: 0;
+  animation: slideInFromLeft 1s ease-out;
+  /* NOTE: We add the .container class in the JSX to handle centering */
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.spotlight {
+  display: inline-block;
+  background: var(--gradient-teal);
+  color: var(--secondary--light);
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: spotlightPulse 2s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(46, 196, 182, 0.4);
+}
+
+@keyframes spotlightPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(46, 196, 182, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(46, 196, 182, 0.6);
+  }
+}
+
+.showName {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+  color: var(--secondary);
+  text-shadow: 0 5px 25px rgba(46, 196, 182, 0.5);
+  line-height: 1.1;
+  letter-spacing: 2px;
+}
+
+/* 🌊 IMPROVED DETAILS SECTION */
+.details {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.details p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.details p::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-teal);
+  transition: width 0.3s ease;
+}
+
+.details p:hover::after {
+  width: 100%;
+}
+
+.details p:hover {
+  color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.details i {
+  color: var(--secondary);
+  font-size: 1.1rem;
+}
+
+.overview {
+  line-height: 1.7;
+  margin-bottom: 35px;
+  color: var(--text-light);
+  font-size: 1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+}
+
+/* 🌊 Enhanced Interstellar Buttons */
+.interstellarButtons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.trailer, .detailButton {
+  padding: 15px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.trailer {
+  background: rgba(46, 196, 182, 0.15) !important;
+  color: var(--text-light);
+  border: 2px solid rgba(46, 196, 182, 0.4);
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+}
+
+.trailer:hover {
+  background: rgba(46, 196, 182, 0.25);
+  border-color: rgba(46, 196, 182, 0.8);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 12px 30px rgba(46, 196, 182, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: var(--text);
+}
+
+.detailButton {
+  background: var(--gradient-teal);
+  color: var(--primary);
+  border: 2px solid rgba(46, 196, 182, 0.3);
+  box-shadow: 
+    0 6px 20px rgba(46, 196, 182, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.detailButton:hover {
+  background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(46, 196, 182, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(46, 196, 182, 0.6);
+}
+
+.nextPrev {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  gap: 15px;
+  z-index: 3;
+}
+
+.prev, .next {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: rgba(46, 196, 182, 0.2) !important;
+  color: var(--text);
+  border: 2px solid rgba(46, 196, 182, 0.3);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(46, 196, 182, 0.3);
+  border-color: rgba(46, 196, 182, 0.6);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 196, 182, 0.4);
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 768px) {
+  .showName {
+    font-size: 2.5rem;
+  }
+  
+  .movieItems {
+    /* Don't use .container styles on mobile */
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  
+  .details {
+    gap: 15px;
+  }
+  
+  .details p {
+    font-size: 0.9rem;
+  }
+
+  .interstellarButtons {
+    justify-content: center;
+  }
+  
+  .nextPrev {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .prev, .next {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .movieSection {
+    height: 70vh;
+  }
+  
+  .movieItems {
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  
+  .showName {
+    font-size: 2rem;
+  }
+  
+  .overview {
+    font-size: 1rem;
+  }
+  
+  .trailer, .detailButton {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
+/* ... (all your existing styles) ... */
+
+/* Add this class for the loading placeholder */
+.loadingText {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}

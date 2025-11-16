@@ -1,21 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+/* I removed the '*' and '@import' rules. 
+  These should ONLY be in your global 'index.css' file.
+*/
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-/* This is the new wrapper with your old 'body' styles */
-.reg-page-wrapper {
-  height: 100vh;
+.regPageWrapper {
+  /* Use min-height so it plays nice with the navbar */
+  min-height: 90vh; 
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   background-size: 200% 200%;
   animation: gradientShift 8s ease infinite;
+  padding: 40px 20px; /* Add padding for mobile */
 }
 
 @keyframes gradientShift {
@@ -24,14 +20,15 @@
   100% { background-position: 0% 50%; }
 }
 
-.register-container {
+/* This class name is now "scoped" */
+.registerContainer {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.form-box {
+.formBox {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   border-radius: 20px;
@@ -43,23 +40,23 @@
   transition: 0.4s ease-in-out;
 }
 
-.form-box:hover {
+.formBox:hover {
   transform: scale(1.03);
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
 }
 
-.form-box h2 {
+.formBox h2 {
   font-weight: 600;
   margin-bottom: 30px;
   letter-spacing: 1px;
 }
 
-.input-group {
+.inputGroup {
   position: relative;
   margin-bottom: 25px;
 }
 
-.input-group input {
+.inputGroup input {
   width: 100%;
   padding: 12px 10px;
   background: transparent;
@@ -71,7 +68,7 @@
   transition: 0.3s;
 }
 
-.input-group label {
+.inputGroup label {
   position: absolute;
   left: 10px;
   top: 12px;
@@ -80,16 +77,14 @@
   transition: 0.3s ease;
 }
 
-/* This CSS :focus and :valid is what makes the label "float".
-   It's why we MUST use 'id' and 'htmlFor' in the JSX */
-.input-group input:focus ~ label,
-.input-group input:valid ~ label {
+.inputGroup input:focus ~ label,
+.inputGroup input:valid ~ label {
   top: -10px;
   font-size: 13px;
   color: #00bcd4;
 }
 
-.register-btn {
+.registerBtn {
   width: 100%;
   padding: 12px;
   border: none;
@@ -102,21 +97,28 @@
   transition: 0.4s;
 }
 
-.register-btn:hover {
+.registerBtn:hover {
   background: linear-gradient(135deg, #8e2de2, #00bcd4);
   box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
 }
 
-.login-link {
+.loginLink {
   margin-top: 20px;
   font-size: 14px;
 }
 
-.login-link a {
+.loginLink a {
   color: #00bcd4;
   text-decoration: none;
 }
 
-.login-link a:hover {
+.loginLink a:hover {
   text-decoration: underline;
+}
+
+/* This is for the error message */
+.errorText {
+  color: #ff6b6b; /* A light red */
+  margin-bottom: 15px;
+  font-size: 0.9rem;
 }

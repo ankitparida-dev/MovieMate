@@ -1,95 +1,72 @@
 import { useState } from 'react';
-import './RegPage.css'; // <-- Import your new CSS
+import styles from './RegPage.module.css'; // <-- 1. Import as a module
 
-// This component gets the 'onShowLogin' remote control
-export default function RegPage({ onShowLogin }) {
+// 2. Expect 'setPage' (this matches App.jsx)
+export default function RegPage({ setPage }) { 
   
-  // We need state for all 4 inputs
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(''); // State for error messages
+  const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Stop page refresh
-    
-    // Check if passwords match
+    event.preventDefault(); 
     if (password !== confirmPassword) {
       setError("Passwords don't match!");
-      return; // Stop the function
+      return; 
     }
-    
-    // If they match, clear any old errors and log the data
     setError('');
     console.log('Registering with:', fullName, email, password);
-    // Later, you'd call an API here
   };
 
   return (
-    // Use our new "wrapper" class
-    <div className="reg-page-wrapper">
-      <div className="register-container">
-        <div className="form-box">
+    // 3. Use 'styles' for all classNames
+    <div className={styles.regPageWrapper}>
+      <div className={styles.registerContainer}>
+        <div className={styles.formBox}>
           <h2>Create Your Account</h2>
           <form onSubmit={handleSubmit}>
-            {/* Full Name Input */}
-            <div className="input-group">
+            <div className={styles.inputGroup}>
               <input
-                type="text"
-                id="fullName"
-                required
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                type="text" id="fullName" required
+                value={fullName} onChange={(e) => setFullName(e.target.value)}
               />
               <label htmlFor="fullName">Full Name</label>
             </div>
 
-            {/* Email Input */}
-            <div className="input-group">
+            <div className={styles.inputGroup}>
               <input
-                type="email"
-                id="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="email" id="email" required
+                value={email} onChange={(e) => setEmail(e.target.value)}
               />
               <label htmlFor="email">Email Address</label>
             </div>
 
-            {/* Password Input */}
-            <div className="input-group">
+            <div className={styles.inputGroup}>
               <input
-                type="password"
-                id="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="password" id="password" required
+                value={password} onChange={(e) => setPassword(e.target.value)}
               />
               <label htmlFor="password">Password</label>
             </div>
 
-            {/* Confirm Password Input */}
-            <div className="input-group">
+            <div className={styles.inputGroup}>
               <input
-                type="password"
-                id="confirmPassword"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="password" id="confirmPassword" required
+                value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <label htmlFor="confirmPassword">Confirm Password</label>
             </div>
             
-            {/* Show an error message if the 'error' state is not empty */}
-            {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
+            {error && <p className={styles.errorText}>{error}</p>}
 
-            <button type="submit" className="register-btn">Register</button>
+            <button type="submit" className={styles.registerBtn}>Register</button>
             
-            <p className="login-link">
+            <p className={styles.loginLink}>
               Already have an account? 
-              {/* This link now uses the "remote control" prop */}
-              <a href="#" onClick={onShowLogin}> Login</a>
+              {/* 4. Use setPage('login') to go back */}
+              <a href="#" onClick={() => setPage('login')}> Login</a>
             </p>
           </form>
         </div>
