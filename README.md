@@ -29,7 +29,7 @@ It provides a smooth and modern UI to explore, search, and view movies and shows
 | **JavaScript (ES6+)** | Logic & API handling |
 | **JSON Server** | Local mock backend for Login, Register, Watchlist |
 | **TMDB API (optional)** | Movie & TV show data |
-| **Axios / Fetch** | API communication |
+| **Fetch** | API communication |
 
 ---
 
