@@ -1,3 +1,70 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "ebb5",
+      "fullName": "Rangan",
+      "email": "test@test.com",
+      "password": "1234"
+    }
+  ],
+  "favorites": [
+    {
+      "id": 1311031,
+      "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+      "poster_path": "/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg",
+      "vote_average": 7.8,
+      "release_date": "2025-07-18",
+      "media_type": "movie",
+      "userId": "ebb5"
+    },
+    {
+      "id": 1062722,
+      "title": "Frankenstein",
+      "poster_path": "/g4JtvGlQO7DByTI6frUobqvSL3R.jpg",
+      "vote_average": 7.9,
+      "release_date": "2025-10-17",
+      "media_type": "movie",
+      "userId": "ebb5"
+    }
+  ],
+  "watchlist": [
+    {
+      "id": 1311031,
+      "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+      "poster_path": "/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg",
+      "vote_average": 7.8,
+      "release_date": "2025-07-18",
+      "media_type": "movie",
+      "userId": "ebb5"
+    },
+    {
+      "id": 1062722,
+      "title": "Frankenstein",
+      "poster_path": "/g4JtvGlQO7DByTI6frUobqvSL3R.jpg",
+      "vote_average": 7.9,
+      "release_date": "2025-10-17",
+      "media_type": "movie",
+      "userId": "ebb5"
+    }
+  ],
+  "history": [
+    {
+      "id": 229858,
+      "title": "Fate/strange Fake",
+      "poster_path": "/2r5MEaLYl5lZxzgfSmrDybipngl.jpg",
+      "vote_average": 7.4,
+      "release_date": "2024-12-31",
+      "media_type": "tv",
+      "userId": "ebb5"
+    },
+    {
+      "id": 1062722,
+      "title": "Frankenstein",
+      "poster_path": "/g4JtvGlQO7DByTI6frUobqvSL3R.jpg",
+      "vote_average": 7.9,
+      "release_date": "2025-10-17",
+      "media_type": "movie",
+      "userId": "ebb5"
+    }
+  ]
 }

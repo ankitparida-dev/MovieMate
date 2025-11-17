@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// Correct imports (your structure)
+// Correct imports
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Movies from "./pages/Movies";
@@ -8,18 +8,23 @@ import TvShows from "./pages/TvShows";
 import About from "./pages/About";
 import Main from "./pages/Main";
 
-// Login + Register pages inside pages folder
+// --- 1. IMPORT THE NEW LIBRARY PAGE ---
+import MyLibrary from "./pages/MyLibrary"; 
+
+// Login + Register pages
 import LoginPage from "./LoginPage";
 import RegPage from "./RegPage";
-import { getData, postData } from "./api/api";   // <--- IMPORTANT
+import { getData, postData } from "./api/api";
+
 export default function App() {
   const [page, setPage] = useState("home");
   const [selected, setSelected] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   const openAboutPage = (item) => {
-    const type = item.media_type || (item.title ? "movie" : "tv");
-    setSelected({ id: item.id, type: type });
+    // Ensure we have a media type
+    const type = item.media_type || (item.first_air_date ? "tv" : "movie");
+    setSelected({ ...item, type: type }); // Pass the whole item + type
     setPage("about");
   };
 
@@ -46,8 +51,13 @@ export default function App() {
 
       {page === "tvshows" && <TvShows onOpen={openAboutPage} />}
 
+      {/* --- 2. ADD THE LIBRARY PAGE CONDITION --- */}
+      {page === "library" && (
+        <MyLibrary onOpen={openAboutPage} /> 
+      )}
+
       {page === "about" && selected && (
-        <About selected={selected} setPage={changePage} />
+        <About selected={selected} setPage={changePage} onOpen={openAboutPage}/>
       )}
 
       {/* LOGIN & REGISTER */}

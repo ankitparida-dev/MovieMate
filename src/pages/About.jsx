@@ -1,14 +1,15 @@
-// src/pages/About.jsx
 import { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import { getMovieDetails, getTvDetails, getCredits, getRecommendations, IMG } from "../api/tmdb";
+import { addToFavorites, addToWatchlist, addToHistory } from "../api/api";
 
-export default function About({ selected, setPage }) {
-  // selected: { id, type } where type is "movie" or "tv"
+// 1. Accept 'onOpen' as a prop
+export default function About({ selected, setPage, onOpen }) {
   const [data, setData] = useState(null);
   const [credits, setCredits] = useState({ cast: [], crew: [] });
   const [recs, setRecs] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   const id = selected?.id;
   const type = selected?.type ?? "movie";
 
@@ -16,6 +17,8 @@ export default function About({ selected, setPage }) {
     if (!id) return;
     let mounted = true;
     setLoading(true);
+    // Scroll to top when ID changes (so you don't start at the bottom of the new page)
+    window.scrollTo(0, 0);
 
     async function fetchAll() {
       try {
@@ -51,13 +54,41 @@ export default function About({ selected, setPage }) {
     return () => { mounted = false; };
   }, [id, type]);
 
+  const getMovieObject = () => {
+    return {
+      id: data.id,
+      title: data.title || data.name,
+      poster_path: data.poster_path,
+      vote_average: data.vote_average,
+      release_date: data.release_date || data.first_air_date,
+      media_type: type 
+    };
+  };
+
+  const handleFav = () => {
+    if (!data) return;
+    addToFavorites(getMovieObject());
+  };
+
+  const handleWatchlist = () => {
+    if (!data) return;
+    addToWatchlist(getMovieObject());
+  };
+
+  const handleTrailer = () => {
+    if (!data) return;
+    addToHistory(getMovieObject());
+    // Simple YouTube search
+    const query = `${data.title || data.name} trailer`;
+    window.open(`https://www.youtube.com/results?search_query=${query}`, "_blank");
+  };
+
   if (!id) return null;
   if (loading) return <div className={styles.loading}>Loading details…</div>;
 
   const title = data?.title ?? data?.name ?? "Untitled";
   const poster = data?.poster_path ? `${IMG}${data.poster_path}` : "/placeholder.png";
   const overview = data?.overview ?? "No overview available.";
-  const year = (data?.release_date || data?.first_air_date || "").slice(0, 4) || "N/A";
   const runtime = data?.runtime ?? data?.episode_run_time?.[0] ?? null;
   const rating = data?.vote_average ? Number(data.vote_average).toFixed(1) : "N/A";
   const genres = (data?.genres || []).map(g => g.name).join(", ");
@@ -84,9 +115,15 @@ export default function About({ selected, setPage }) {
           </div>
 
           <div className={styles.actions}>
-            <button className={styles.btnWatch}>Trailer</button>
-            <button className={styles.btnList}>Add to List</button>
-            <button className={styles.favBtn}>❤</button>
+            <button className={styles.btnWatch} onClick={handleTrailer}>
+              Trailer
+            </button>
+            <button className={styles.btnList} onClick={handleWatchlist}>
+              + Watchlist
+            </button>
+            <button className={styles.favBtn} onClick={handleFav}>
+              ❤
+            </button>
           </div>
 
           <section className={styles.overview}>
@@ -110,7 +147,6 @@ export default function About({ selected, setPage }) {
 
         <section className={styles.castSection}>
           <h2 className={styles.sectionTitle}>Cast & Staff</h2>
-
           <h3>Cast</h3>
           <div className={styles.cast}>
             {credits.cast?.slice(0,6).map(person => (
@@ -147,7 +183,13 @@ export default function About({ selected, setPage }) {
           <h2 className={styles.sectionTitle}>Recommended</h2>
           <div className={styles.showGrid}>
             {recs.slice(0,6).map(r => (
-              <article className={styles.showCard} key={r.id}>
+              // 2. Added onClick event to switch pages
+              <article 
+                className={styles.showCard} 
+                key={r.id} 
+                onClick={() => onOpen({ ...r, media_type: type })} // Pass current type (movie/tv)
+                style={{ cursor: "pointer" }} // Make it look clickable
+              >
                 <div className={styles.recImgWrap}>
                   <img src={r.poster_path ? `${IMG}${r.poster_path}` : "/placeholder.png"} alt={r.title ?? r.name} />
                 </div>

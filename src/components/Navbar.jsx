@@ -1,27 +1,31 @@
-import { useState } from 'react'; // <-- Make sure this is imported
+import { useState, useEffect } from 'react'; // <-- 1. Import useEffect
 import styles from "./Navbar.module.css";
-// import logoVideo from '../assets/Media_files/moviemate.mp4'; // <-- Uncomment if you import your video
 
-// Accept 'onSearch' from Main.jsx
 export default function Navbar({ setPage, page, onSearch }) {
   
-  // This state holds what the user is typing
   const [query, setQuery] = useState("");
+  // 2. Add state to check if user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // 3. Check login status when component loads or page changes
+  useEffect(() => {
+    // Check if user object exists in local storage
+    const user = localStorage.getItem("user"); 
+    setIsLoggedIn(!!user); // Set to true if user exists, false if null
+  }, [page]); // This re-checks every time you change pages
 
   const getLinkClass = (pageName) => {
     return `${styles.navLink} ${page === pageName ? styles.active : ''}`;
   };
 
-  // This function runs when the user clicks the icon or presses Enter
   const handleSearch = () => {
     if (query.trim()) {
-      onSearch(query); // Send the query up to Main.jsx
+      onSearch(query);
     } else {
-      onSearch(""); // Clear the search
+      onSearch("");
     }
   };
 
-  // This function handles the "Enter" key press
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
@@ -29,10 +33,16 @@ export default function Navbar({ setPage, page, onSearch }) {
     }
   };
 
-  // Helper to go home (clears search, sets page)
   const goHome = () => {
-    onSearch(""); // Clear search
+    onSearch(""); 
     setPage("home");
+  };
+
+  // 4. Create a Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Clear user from storage
+    setIsLoggedIn(false); // Update state
+    goHome(); // Send user back home
   };
 
   return (
@@ -48,7 +58,7 @@ export default function Navbar({ setPage, page, onSearch }) {
               style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
             >
               <video
-                src="/Media files/moviemate.mp4" // <-- Path from 'public' folder
+                src="/Media files/moviemate.mp4" 
                 autoPlay muted loop playsInline
                 width="250" height="80"
               ></video>
@@ -69,7 +79,7 @@ export default function Navbar({ setPage, page, onSearch }) {
               <button
                 className={getLinkClass("movies")}
                 onClick={() => {
-                  onSearch(""); // Clear search
+                  onSearch(""); 
                   setPage("movies");
                 }}
               >
@@ -80,37 +90,59 @@ export default function Navbar({ setPage, page, onSearch }) {
               <button
                 className={getLinkClass("tvshows")}
                 onClick={() => {
-                  onSearch(""); // Clear search
+                  onSearch(""); 
                   setPage("tvshows");
                 }}
               >
                 TV Shows
               </button>
             </li>
+            
+            {/* 5. ADDED "MY LIBRARY" LINK (Only shows if logged in) */}
+            {isLoggedIn && (
+              <li className={styles.navItem}>
+                <button
+                  className={getLinkClass("library")}
+                  onClick={() => {
+                    onSearch(""); // Clear search
+                    setPage("library");
+                  }}
+                >
+                  My Library
+                </button>
+              </li>
+            )}
+            
           </ul>
 
-          {/* RIGHT SIDE - Search + Login */}
+          {/* RIGHT SIDE - Search + Login/Logout */}
           <div className={styles.rightSection}>
             <div className={styles.searchContainer}>
               <i 
                 className={`fas fa-search ${styles.searchIcon}`} 
-                onClick={handleSearch} // <-- Add click handler
+                onClick={handleSearch} 
               />
               <input
                 type="text"
                 className={styles.searchInput}
                 placeholder="Search for movies, TV shows..."
-                value={query} // <-- Control the input
-                onChange={(e) => setQuery(e.target.value)} // <-- Update state on typing
-                onKeyDown={handleKeyDown} // <-- Add keydown handler
+                value={query} 
+                onChange={(e) => setQuery(e.target.value)} 
+                onKeyDown={handleKeyDown} 
               />
             </div>
             
-            {/* --- THIS IS THE FIX --- */}
-            {/* Back to a simple button like you had */ }
-            <button className={styles.btn} onClick={() => setPage("login")}>
-              Login
-            </button>
+            {/* 6. FIXED: Show "Logout" or "Login" based on state */}
+            {isLoggedIn ? (
+              <button className={styles.btn} onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <button className={styles.btn} onClick={() => setPage("login")}>
+                Login
+              </button>
+            )}
+
           </div>
         </nav>
       </div>

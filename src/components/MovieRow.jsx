@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './MovieRow.module.css';
-import MovieCard from './MovieCard'; // Your existing card component!
-import { request } from '../api/tmdb'; // Your API helper
+import MovieCard from './MovieCard';
+import { request } from '../api/tmdb';
 
-// A placeholder for the row while it's fetching
 const LoadingRow = ({ title }) => (
   <section className={styles.contentSection}>
     <div className="container">
@@ -15,17 +14,18 @@ const LoadingRow = ({ title }) => (
   </section>
 );
 
-export default function MovieRow({ title, path, onOpen }) {
+// 1. Add 'params' to the props (default to empty object)
+export default function MovieRow({ title, path, params = {}, onOpen }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // This hook runs ONCE and re-runs if the 'path' prop ever changes
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
       try {
-        // We fetch data using the 'path' prop
-        const data = await request(path);
+        // 2. Pass 'params' to the request function
+        // This allows the search query to actually reach the API
+        const data = await request(path, params);
         setMovies(data.results ?? []);
       } catch (err) {
         console.error(`Failed to fetch ${title}:`, err);
@@ -35,14 +35,26 @@ export default function MovieRow({ title, path, onOpen }) {
     };
 
     fetchMovies();
-  }, [path, title]); // Re-fetch if the path or title changes
+    // 3. Add stringified params to dependency array
+    // This ensures the search re-runs when you type a new query
+  }, [path, title, JSON.stringify(params)]); 
 
   if (loading) {
     return <LoadingRow title={title} />;
   }
 
-  // If the API fails or returns no movies, just show nothing
   if (movies.length === 0) {
+    // Optional: Show a "No results" message for search
+    if (path.includes("search")) {
+      return (
+        <section className={styles.contentSection}>
+          <div className="container">
+             <h2 className={styles.contentTitle}>{title}</h2>
+             <p style={{color: "#8892b0", marginTop: "20px"}}>No results found.</p>
+          </div>
+        </section>
+      );
+    }
     return null;
   }
 
@@ -51,16 +63,16 @@ export default function MovieRow({ title, path, onOpen }) {
       <div className="container">
         <div className={styles.contentHeader}>
           <h2 className={styles.contentTitle}>{title}</h2>
-          <a href="#" className={styles.contentLink} onClick={(e) => e.preventDefault()}>
-            View All
-            <i className="fas fa-chevron-right"></i>
-          </a>
+          {/* Hide "View All" on search results since it's dynamic */}
+          {!path.includes("search") && (
+            <a href="#" className={styles.contentLink} onClick={(e) => e.preventDefault()}>
+              View All
+              <i className="fas fa-chevron-right"></i>
+            </a>
+          )}
         </div>
         
         <div className={styles.contentGrid}>
-          {/* This is the magic.
-            We loop over the 'movies' state and render a MovieCard for each one.
-          */}
           {movies.map((movie) => (
             <MovieCard 
               key={movie.id} 
