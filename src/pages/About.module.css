@@ -52,8 +52,8 @@
 .btnWatch, .btnList {
   padding: 10px 16px; border-radius: 28px; border: none; cursor: pointer;
 }
-.btnWatch { background: linear-gradient(45deg,#e1dfdf,#000); color:#fff; }
-.btnList, .favBtn { background: #2a2a4a; color:#fff; border-radius: 28px; padding: 10px 14px; }
+.btnWatch { background: linear-gradient(45deg,#5470a4,#2431be); color:#fff; }
+.btnList, .favBtn { background: #5b5b98; color:#fff; border-radius: 28px; padding: 10px 14px; }
 
 .overview { margin-top: 16px; }
 .overview h2 { margin: 0 0 8px; }
