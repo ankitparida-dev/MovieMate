@@ -39,7 +39,7 @@ This project helps in understanding and applying:
 
 - Modular and reusable **React components**
 - State management using `useState` and `useEffect`
-- API handling using **Fetch** or **Axios**
+- API handling using **Fetch**
 - Designing **responsive layouts** with CSS Modules
 - Client-side navigation and page switching
 - Building mock backend features with **JSON Server**
