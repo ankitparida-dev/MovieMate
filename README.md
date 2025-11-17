@@ -50,4 +50,4 @@ This project helps in understanding and applying:
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/yourusername/moviemate.git
+https://github.com/Ankit087-acer/MovieMate.git
