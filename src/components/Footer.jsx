@@ -1,6 +1,9 @@
 import styles from "./Footer.module.css";
 // 1. Import the TMDB logo (you'll need to download it)
 import tmdbLogo from "../assets/tmdb-logo.svg"; 
+import insta from "../assets/instagram.png";
+import facebook from "../assets/facebook.png";
+import tele from "../assets/communication.png";
 
 export default function Footer({ setPage }) {
   return (
@@ -16,9 +19,9 @@ export default function Footer({ setPage }) {
             </p>
             <div className={styles.socialLinks}>
               {/* Note: These require Font Awesome to be linked in your main index.html */}
-              <a href="#" className={styles.socialLink}><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className={styles.socialLink}><i className="fab fa-twitter"></i></a>
-              <a href="#" className={styles.socialLink}><i className="fab fa-instagram"></i></a>
+              <a href="#" className={styles.socialLink}><img src={tele} alt="Telegram" /></a>
+              <a href="#" className={styles.socialLink}><img src={facebook} alt="Facebook" /></a>
+              <a href="#" className={styles.socialLink}><img src={insta} alt="Instagram" /></a>
             </div>
           </div>
 

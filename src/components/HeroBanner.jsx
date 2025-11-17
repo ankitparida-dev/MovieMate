@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './HeroBanner.module.css';
-import playButton from '../assets/play-button.png';
+import playButton from '../assets/video-camera.png';
 // The texts to cycle through from your old JS
 const TEXTS_TO_TYPE = [
   "Cinematic Experience",
