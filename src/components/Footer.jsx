@@ -1,9 +1,5 @@
 import styles from "./Footer.module.css";
-// 1. Import the TMDB logo (you'll need to download it)
 import tmdbLogo from "../assets/tmdb-logo.svg"; 
-import insta from "../assets/instagram.png";
-import facebook from "../assets/facebook.png";
-import tele from "../assets/communication.png";
 
 export default function Footer({ setPage }) {
   return (
@@ -11,47 +7,44 @@ export default function Footer({ setPage }) {
       <div className="container">
         <div className={styles.footerContent}>
           
-          {/* SECTION 1 (No changes) */}
+          {/* SECTION 1 */}
           <div className={styles.footerSection}>
             <h3>MovieMate</h3>
             <p className={styles.footerDescription}>
               Your ultimate destination for discovering and exploring movies and TV shows from around the world.
             </p>
+
+            {/* UPDATED SOCIAL ICONS */}
             <div className={styles.socialLinks}>
-              {/* Note: These require Font Awesome to be linked in your main index.html */}
-              <a href="#" className={styles.socialLink}><img src={tele} alt="Telegram" /></a>
-              <a href="#" className={styles.socialLink}><img src={facebook} alt="Facebook" /></a>
-              <a href="#" className={styles.socialLink}><img src={insta} alt="Instagram" /></a>
+              <a href="#" className={styles.socialLink}>
+                <i className="fa-brands fa-facebook"></i>
+              </a>
+              <a href="#" className={styles.socialLink}>
+                <i className="fa-brands fa-twitter"></i>
+              </a>
+              <a href="#" className={styles.socialLink}>
+                <i className="fa-brands fa-instagram"></i>
+              </a>
+               <a href="#" className={styles.socialLink}>
+                <i className="fa-brands fa-telegram"></i>
+              </a>
             </div>
           </div>
 
-          {/* SECTION 2 (No changes, this was correct) */}
+          {/* SECTION 2 */}
           <div className={styles.footerSection}>
             <h3>Quick Links</h3>
             <ul className={styles.footerLinks}>
-              <li>
-                <button onClick={() => setPage("home")}>
-                  Home
-                </button>
-              </li>
-              <li>
-                <button onClick={() => setPage("movies")}>
-                  Movies
-                </button>
-              </li>
-              <li>
-                <button onClick={() => setPage("tvshows")}>
-                  TV Shows
-                </button>
-              </li>
+              <li><button onClick={() => setPage("home")}>Home</button></li>
+              <li><button onClick={() => setPage("movies")}>Movies</button></li>
+              <li><button onClick={() => setPage("tvshows")}>TV Shows</button></li>
             </ul>
           </div>
 
-          {/* SECTION 3 (CHANGED TO BUTTONS) */}
+          {/* SECTION 3 */}
           <div className={styles.footerSection}>
             <h3>Genres</h3>
             <ul className={styles.footerLinks}>
-              {/* These are now buttons to match your app's logic */}
               <li><button onClick={() => setPage("genre-action")}>Action</button></li>
               <li><button onClick={() => setPage("genre-comedy")}>Comedy</button></li>
               <li><button onClick={() => setPage("genre-drama")}>Drama</button></li>
@@ -61,11 +54,10 @@ export default function Footer({ setPage }) {
           </div>
         </div>
 
-        {/* --- BOTTOM BAR (UPDATED) --- */}
+        {/* BOTTOM BAR */}
         <div className={styles.footerBottom}>
           <p>&copy; 2025 MovieMate. All rights reserved.</p>
-          
-          {/* 2. Added TMDB attribution */}
+
           <div className={styles.tmdbCredit}>
             <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
             <img src={tmdbLogo} alt="The Movie Database" className={styles.tmdbLogo} />
