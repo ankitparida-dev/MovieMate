@@ -1,0 +1,78 @@
+.page {
+  /* Sets up padding for the whole page */
+  padding: 30px;
+  max-width: 1200px; /* Keeps it from getting too wide */
+  margin: 0 auto; /* Centers the page */
+}
+
+.movies-title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* This is the container for your filters */
+.filter-bar {
+  display: flex;
+  gap: 15px; /* Adds space between each item */
+  margin-bottom: 25px;
+  flex-wrap: wrap; /* Lets them stack on small screens */
+}
+
+/* This styles your dropdowns */
+.filter-select {
+  /* --- 1. Resets the ugly default style --- */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* --- 2. Makes it match your dark theme --- */
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 30px 10px 12px; /* Top, Right (for arrow), Bottom, Left */
+  font-size: 15px;
+
+  /* --- 3. Adds a custom dropdown arrow --- */
+  /* This is a simple white arrow encoded in CSS */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%0%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.6-3.6%205.4-7.8%205.4-12.8%200-5-1.8-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px;
+
+  /* --- 4. Sizing --- */
+  /* This makes them share space nicely */
+  flex-grow: 1;
+  min-width: 150px; /* Prevents them from getting too squished */
+}
+
+/* This styles your Apply button */
+.filter-button {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff; /* Matches your Login button vibe */
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background-color: #fff;
+  color: #111;
+}
+
+.loading-text {
+  color: #fff;
+}
+
+/* This is your movie grid */
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}

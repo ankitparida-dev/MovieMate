@@ -1,0 +1,134 @@
+/* src/pages/TvShows.module.css */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.filterBtn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* Drawer styles (isolate to page) */
+.drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.drawer {
+  width: 340px;
+  height: 100%;
+  background: #141414;
+  padding: 20px;
+  animation: slide 0.25s ease forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slide {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.drawerBody {
+  padding-top: 16px;
+  flex: 1;
+  overflow: auto;
+}
+
+.drawerBody label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.drawerBody select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.drawerFooter {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid #333;
+}
+
+.applyBtn {
+  background: var(--accent);
+  border: none;
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.resetBtn {
+  background: #222;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* simple loading UI */
+.loading {
+  color: var(--text-muted);
+  padding: 12px 0;
+}

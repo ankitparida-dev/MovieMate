@@ -1,0 +1,157 @@
+.mainHeader {
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid var(--bg-light);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    padding-right: 4rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.leftSection {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px;
+    transition: var(--transition);
+}
+
+.logo video {
+    width: 250px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.middleSection {
+    display: flex;
+    list-style: none;
+    gap: 4rem;
+}
+
+.navItem {}
+
+.navLink {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+  padding: 8px 0;
+  position: relative;
+  transition: var(--transition);
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+.navLink:hover,
+.active {
+    color: var(--secondary);
+}
+
+.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    border-radius: 2px;
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.searchContainer {
+    position: relative;
+}
+
+.searchInput {
+    padding: 12px 20px 12px 45px;
+    border-radius: 30px;
+    border: 1px solid var(--bg-light);
+    background-color: var(--primary-light);
+    color: var(--text);
+    width: 310px;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background-color: var(--card);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.searchInput::placeholder {
+    color: var(--text-muted);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border: 2px solid var(--secondary);
+    background: transparent;
+    color: var(--secondary);
+}
+.btn:hover {
+    background: var(--secondary);
+    color: var(--primary);
+}
+.btn a {
+    text-decoration: none;
+    color: inherit;
+}
+/* Kill ugly default button styles */
+.navLink,
+.logo button,
+.logoBtn,
+.navItem button {
+  background: none !important;
+  border: none !important;
+  color: inherit !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  font: inherit !important;
+}
+
+/* remove weird outline on click */
+.navLink:focus,
+.navItem button:focus {
+  outline: none !important;
+}

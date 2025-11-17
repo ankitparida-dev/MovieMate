@@ -1,0 +1,124 @@
+/* I removed the '*' and '@import' rules. 
+  These should ONLY be in your global 'index.css' file.
+*/
+
+.regPageWrapper {
+  /* Use min-height so it plays nice with the navbar */
+  min-height: 90vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  padding: 40px 20px; /* Add padding for mobile */
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* This class name is now "scoped" */
+.registerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formBox {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 40px 50px;
+  width: 400px;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  transition: 0.4s ease-in-out;
+}
+
+.formBox:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+.formBox h2 {
+  font-weight: 600;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.inputGroup label {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #ccc;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.inputGroup input:focus ~ label,
+.inputGroup input:valid ~ label {
+  top: -10px;
+  font-size: 13px;
+  color: #00bcd4;
+}
+
+.registerBtn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #00bcd4, #8e2de2);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.registerBtn:hover {
+  background: linear-gradient(135deg, #8e2de2, #00bcd4);
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
+}
+
+.loginLink {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.loginLink a {
+  color: #00bcd4;
+  text-decoration: none;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+}
+
+/* This is for the error message */
+.errorText {
+  color: #ff6b6b; /* A light red */
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}

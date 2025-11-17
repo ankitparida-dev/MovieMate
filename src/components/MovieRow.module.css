@@ -1,0 +1,71 @@
+/* 🌊 ENHANCED CONTENT SECTION */
+.contentSection {
+  padding: 80px 0;
+  background: var(--bg);
+  /* background: var(--primary-light); */ /* You can also alternate colors */
+}
+
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.contentTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.contentLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.05); /* Subtle background */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contentLink:hover {
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contentGrid {
+  display: grid;
+  /* Adjust grid columns to better fit your MovieCard */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.loadingText {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  padding: 20px 0;
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 768px) {
+  .contentHeader {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .contentTitle {
+    font-size: 2rem;
+  }
+  
+  .contentGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+}
