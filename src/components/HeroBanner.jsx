@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './HeroBanner.module.css';
-
+import playButton from '../assets/play-button.png';
 // The texts to cycle through from your old JS
 const TEXTS_TO_TYPE = [
   "Cinematic Experience",
@@ -89,7 +89,7 @@ export default function HeroBanner() {
           
           <div className={styles.heroVisual}>
             <div className={`${styles.heroPlaceholder} ${styles.floatingAnimation}`}>
-              <i className="fas fa-video"></i>
+              <img src={playButton} alt="Play Button" className={styles.playIcon} />
             </div>
           </div>
         </div>

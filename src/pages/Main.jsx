@@ -21,10 +21,10 @@ const HomePageContent = ({ onOpen, searchQuery }) => {
         />
       ) : (
         <>
-          <MovieRow title="🔥 Trending Now" path="/trending/movie/week" onOpen={onOpen} />
-          <MovieRow title="🍿 Top Rated Movies" path="/movie/top_rated" onOpen={onOpen} />
-          <MovieRow title="📺 Popular TV Shows" path="/tv/popular" onOpen={onOpen} />
-          <MovieRow title="🎬 Coming Soon" path="/movie/upcoming" onOpen={onOpen} />
+          <MovieRow title=" Trending Now" path="/trending/movie/week" onOpen={onOpen} />
+          <MovieRow title=" Top Rated Movies" path="/movie/top_rated" onOpen={onOpen} />
+          <MovieRow title=" Popular TV Shows" path="/tv/popular" onOpen={onOpen} />
+          <MovieRow title=" Coming Soon" path="/movie/upcoming" onOpen={onOpen} />
         </>
       )}
     </>

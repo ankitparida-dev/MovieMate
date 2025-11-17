@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './LoadingScreen.module.css';
-
+import logoVideo from "../assets/movielight.mp4";
 export default function LoadingScreen({ progress }) {
   return (
     <div className={styles.loadingScreen}>
@@ -8,7 +8,7 @@ export default function LoadingScreen({ progress }) {
         <div className={styles.loadingLogo}>
           <div className={styles.logo}>
             <video
-              src="/Media files/movielight.mp4" // From 'public' folder
+              src={logoVideo} // From 'public' folder
               alt="MovieMate logo"
               className={styles.logoAnimation}
               loop

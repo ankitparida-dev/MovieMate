@@ -63,13 +63,12 @@ export default function MovieRow({ title, path, params = {}, onOpen }) {
       <div className="container">
         <div className={styles.contentHeader}>
           <h2 className={styles.contentTitle}>{title}</h2>
-          {/* Hide "View All" on search results since it's dynamic */}
-          {!path.includes("search") && (
+          {/* {!path.includes("search") && (
             <a href="#" className={styles.contentLink} onClick={(e) => e.preventDefault()}>
               View All
               <i className="fas fa-chevron-right"></i>
             </a>
-          )}
+          )} */}
         </div>
         
         <div className={styles.contentGrid}>

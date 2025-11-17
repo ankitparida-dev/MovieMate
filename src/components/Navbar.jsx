@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'; // <-- 1. Import useEffect
 import styles from "./Navbar.module.css";
-
+import logoVideo from "../assets/movielight.mp4";
 export default function Navbar({ setPage, page, onSearch }) {
   
   const [query, setQuery] = useState("");
@@ -58,7 +58,7 @@ export default function Navbar({ setPage, page, onSearch }) {
               style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
             >
               <video
-                src="/Media files/moviemate.mp4" 
+                src={logoVideo} 
                 autoPlay muted loop playsInline
                 width="250" height="80"
               ></video>
