@@ -1,4 +1,4 @@
-import { useState } from 'react';
+    import { useState } from 'react';
 import styles from './RegPage.module.css'; // <-- 1. Import as a module
 
 // 2. Expect 'setPage' (this matches App.jsx)
