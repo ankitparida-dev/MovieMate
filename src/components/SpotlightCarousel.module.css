@@ -11,10 +11,9 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  /* background-attachment: fixed; */ /* 'fixed' can be buggy, remove if it looks weird */
   display: flex;
   align-items: center;
-  transition: background-image 1s ease-in-out; /* <-- So it fades! */
+  transition: background-image 1s ease-in-out;
 }
 
 .overlay {
@@ -36,26 +35,20 @@
   z-index: 2;
   max-width: 600px;
   color: var(--text);
-  padding: 0;
+  padding: 0 20px;
   animation: slideInFromLeft 1s ease-out;
-  /* NOTE: We add the .container class in the JSX to handle centering */
 }
 
 @keyframes slideInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  0% { opacity: 0; transform: translateX(-50px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
+/* 🌟 SPOTLIGHT BADGE */
 .spotlight {
   display: inline-block;
-  background: var(--gradient-teal);
-  color: var(--secondary--light);
+  background: linear-gradient(135deg, #2ec4b6, #147d75);
+  color: #fff; /* Ensure visible text */
   padding: 8px 20px;
   border-radius: 25px;
   font-size: 0.9rem;
@@ -65,6 +58,8 @@
   text-transform: uppercase;
   animation: spotlightPulse 2s ease-in-out infinite;
   box-shadow: 0 4px 15px rgba(46, 196, 182, 0.4);
+  position: relative; /* Keeps it above overlay */
+  z-index: 999;
 }
 
 @keyframes spotlightPulse {
@@ -78,6 +73,7 @@
   }
 }
 
+/* 🌊 Show Name */
 .showName {
   font-size: 3.5rem;
   font-weight: 900;
@@ -88,7 +84,7 @@
   letter-spacing: 2px;
 }
 
-/* 🌊 IMPROVED DETAILS SECTION */
+/* 🌊 DETAILS */
 .details {
   display: flex;
   gap: 20px;
@@ -103,11 +99,11 @@
   color: var(--text-light);
   font-weight: 500;
   font-size: 1rem;
-  transition: all 0.3s ease;
   position: relative;
   padding: 0;
-  background: none;
   border: none;
+  background: none;
+  transition: all 0.3s ease;
 }
 
 .details p::after {
@@ -144,11 +140,12 @@
   max-width: 500px;
 }
 
-/* 🌊 Enhanced Interstellar Buttons */
+/* 🌊 INTERSTELLAR BUTTONS */
 .interstellarButtons {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 
 .trailer, .detailButton {
@@ -161,29 +158,23 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Rubik', sans-serif;
   font-size: 1rem;
-  position: relative;
-  overflow: hidden;
   text-decoration: none;
-  letter-spacing: 0.5px;
 }
 
 .trailer {
-  background: rgba(46, 196, 182, 0.15) !important;
+  background: rgba(46, 196, 182, 0.15);
   color: var(--text-light);
   border: 2px solid rgba(46, 196, 182, 0.4);
-  backdrop-filter: blur(15px) !important;
-  -webkit-backdrop-filter: blur(15px) !important;
+  backdrop-filter: blur(15px);
 }
 
 .trailer:hover {
   background: rgba(46, 196, 182, 0.25);
   border-color: rgba(46, 196, 182, 0.8);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 
-    0 12px 30px rgba(46, 196, 182, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 30px rgba(46, 196, 182, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
   color: var(--text);
 }
 
@@ -191,20 +182,19 @@
   background: var(--gradient-teal);
   color: var(--primary);
   border: 2px solid rgba(46, 196, 182, 0.3);
-  box-shadow: 
-    0 6px 20px rgba(46, 196, 182, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(46, 196, 182, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .detailButton:hover {
   background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 
-    0 15px 35px rgba(46, 196, 182, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 15px 35px rgba(46, 196, 182, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
   border-color: rgba(46, 196, 182, 0.6);
 }
 
+/* NEXT / PREV BUTTONS */
 .nextPrev {
   position: absolute;
   bottom: 30px;
@@ -218,13 +208,12 @@
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background: rgba(46, 196, 182, 0.2) !important;
+  background: rgba(46, 196, 182, 0.2);
   color: var(--text);
   border: 2px solid rgba(46, 196, 182, 0.3);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  backdrop-filter: blur(10px);
   font-size: 1.3rem;
   display: flex;
   align-items: center;
@@ -238,70 +227,21 @@
   box-shadow: 0 8px 20px rgba(46, 196, 182, 0.4);
 }
 
-/* --- Responsive Styles --- */
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-  .showName {
-    font-size: 2.5rem;
-  }
-  
-  .movieItems {
-    /* Don't use .container styles on mobile */
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-  
-  .details {
-    gap: 15px;
-  }
-  
-  .details p {
-    font-size: 0.9rem;
-  }
-
-  .interstellarButtons {
-    justify-content: center;
-  }
-  
-  .nextPrev {
-    bottom: 20px;
-    right: 20px;
-  }
-  
-  .prev, .next {
-    width: 45px;
-    height: 45px;
-    font-size: 1rem;
-  }
+  .showName { font-size: 2.5rem; }
+  .movieItems { margin: 0 5%; max-width: 90%; }
+  .details { gap: 15px; }
+  .details p { font-size: 0.9rem; }
+  .interstellarButtons { justify-content: center; }
+  .nextPrev { bottom: 20px; right: 20px; }
+  .prev, .next { width: 45px; height: 45px; font-size: 1rem; }
 }
 
 @media (max-width: 480px) {
-  .movieSection {
-    height: 70vh;
-  }
-  
-  .movieItems {
-    margin-left: 3%;
-    margin-right: 3%;
-  }
-  
-  .showName {
-    font-size: 2rem;
-  }
-  
-  .overview {
-    font-size: 1rem;
-  }
-  
-  .trailer, .detailButton {
-    padding: 12px 24px;
-    font-size: 0.9rem;
-  }
-}
-/* ... (all your existing styles) ... */
-
-/* Add this class for the loading placeholder */
-.loadingText {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-muted);
+  .movieSection { height: 70vh; }
+  .movieItems { margin: 0 3%; }
+  .showName { font-size: 2rem; }
+  .overview { font-size: 0.95rem; }
+  .trailer, .detailButton { padding: 12px 24px; font-size: 0.9rem; }
 }

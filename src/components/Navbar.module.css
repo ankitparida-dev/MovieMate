@@ -1,3 +1,7 @@
+/* ========================== */
+/*       MAIN HEADER          */
+/* ========================== */
+
 .mainHeader {
     box-shadow: var(--shadow);
     position: sticky;
@@ -5,15 +9,24 @@
     border-bottom: 1px solid var(--bg-light);
     backdrop-filter: blur(10px);
     z-index: 100;
-    padding-right: 4rem;
+    padding: 10px 4rem;
+    background: rgba(0, 0, 0, 0.4);
 }
+
+/* ========================== */
+/*          NAVBAR            */
+/* ========================== */
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 0;
+    gap: 2rem;
 }
+
+/* -------------------------- */
+/*          LEFT SIDE         */
+/* -------------------------- */
 
 .leftSection {
     display: flex;
@@ -35,27 +48,28 @@
     border-radius: 8px;
 }
 
+/* -------------------------- */
+/*        MIDDLE NAV LINKS    */
+/* -------------------------- */
+
 .middleSection {
     display: flex;
     list-style: none;
     gap: 4rem;
 }
 
-.navItem {}
-
 .navLink {
-  text-decoration: none;
-  color: var(--text-light);
-  font-weight: 500;
-  padding: 8px 0;
-  position: relative;
-  transition: var(--transition);
-  font-size: 1.1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    padding: 8px 0;
+    position: relative;
+    transition: var(--transition);
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
-
 
 .navLink:hover,
 .active {
@@ -65,7 +79,7 @@
 .active::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 100%;
     height: 2px;
@@ -73,11 +87,19 @@
     border-radius: 2px;
 }
 
+/* -------------------------- */
+/*          RIGHT SIDE        */
+/* -------------------------- */
+
 .rightSection {
     display: flex;
     align-items: center;
-    gap: 4rem;
+    gap: 2.5rem;
 }
+
+/* ========================== */
+/*        SEARCH BAR          */
+/* ========================== */
 
 .searchContainer {
     position: relative;
@@ -98,7 +120,7 @@
     outline: none;
     border-color: var(--secondary);
     background-color: var(--card);
-    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 .searchInput::placeholder {
@@ -114,6 +136,7 @@
     font-size: 1rem;
 }
 
+/* Login / Signup Button */
 .btn {
     padding: 12px 24px;
     border-radius: var(--radius);
@@ -128,30 +151,120 @@
     background: transparent;
     color: var(--secondary);
 }
+
 .btn:hover {
     background: var(--secondary);
     color: var(--primary);
 }
+
 .btn a {
     text-decoration: none;
     color: inherit;
 }
-/* Kill ugly default button styles */
+
+/* Remove default button styles */
 .navLink,
 .logo button,
 .logoBtn,
 .navItem button {
-  background: none !important;
-  border: none !important;
-  color: inherit !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  cursor: pointer !important;
-  font: inherit !important;
+    background: none !important;
+    border: none !important;
+    color: inherit !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    font: inherit !important;
 }
 
-/* remove weird outline on click */
+/* remove weird outline */
 .navLink:focus,
 .navItem button:focus {
-  outline: none !important;
+    outline: none !important;
+}
+
+/* ========================== */
+/*     RESPONSIVE HEADER      */
+/* ========================== */
+
+/* ---------- TABLETS ---------- */
+@media (max-width: 1024px) {
+
+    .mainHeader {
+        padding: 10px 2rem;
+    }
+
+    .middleSection {
+        gap: 2.5rem;
+    }
+
+    .searchInput {
+        width: 240px;
+    }
+
+    .logo video {
+        width: 180px;
+        height: 60px;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .middleSection {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+
+    .searchInput {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .rightSection {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .logo video {
+        width: 160px;
+        height: 50px;
+    }
+}
+
+/* ---------- SMALL PHONES ---------- */
+@media (max-width: 480px) {
+
+    .mainHeader {
+        padding: 8px 1rem;
+    }
+
+    .contentTitle {
+        font-size: 1.8rem;
+    }
+
+    .middleSection {
+        gap: 1rem;
+    }
+
+    .searchInput {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 10px 18px 10px 40px;
+    }
+
+    .logo video {
+        width: 130px;
+        height: 40px;
+    }
+
+    .btn {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
 }

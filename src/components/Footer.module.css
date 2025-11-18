@@ -1,5 +1,4 @@
 .mainFooter {
-  /* ... (no changes) ... */
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: var(--text);
   padding: 80px 0 30px;
@@ -10,7 +9,6 @@
 }
 
 .mainFooter::before {
-  /* ... (no changes) ... */
   content: '';
   position: absolute;
   inset: 0;
@@ -21,7 +19,6 @@
 }
 
 .footerContent {
-  /* ... (no changes) ... */
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 50px;
@@ -30,8 +27,8 @@
   z-index: 1;
 }
 
+/* SECTION TITLE */
 .footerSection h3 {
-  /* ... (no changes) ... */
   font-size: 1.5rem;
   margin-bottom: 25px;
   color: var(--secondary);
@@ -41,7 +38,6 @@
 }
 
 .footerSection h3::after {
-  /* ... (no changes) ... */
   content: '';
   position: absolute;
   bottom: 0;
@@ -51,22 +47,21 @@
   border-radius: 2px;
 }
 
+/* DESCRIPTION */
 .footerDescription {
-  /* ... (no changes) ... */
   color: var(--text-light);
   margin-bottom: 25px;
   line-height: 1.7;
   max-width: 400px;
 }
 
+/* SOCIAL ICONS */
 .socialLinks {
-  /* ... (no changes) ... */
   display: flex;
   gap: 15px;
 }
 
 .socialLink {
-  /* ... (no changes) ... */
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -84,20 +79,17 @@
 }
 
 .socialLink:hover {
-  /* ... (no changes) ... */
   transform: translateY(-5px) scale(1.1);
   background: linear-gradient(135deg, var(--secondary), var(--accent));
   color: var(--primary);
 }
 
+/* LINKS */
 .footerLinks {
   list-style: none;
-  /* Add padding: 0 to remove default list padding */
-  padding: 0; 
+  padding: 0;
 }
 
-/* --- THIS IS THE MAIN FIX --- */
-/* Style BOTH <a> and <button> the same way */
 .footerLinks a,
 .footerLinks button {
   color: var(--text-light);
@@ -106,13 +98,11 @@
   padding: 8px 0;
   font-size: 1.05rem;
   display: block;
-
-  /* Button-specific resets */
   background: none;
   border: none;
   cursor: pointer;
-  text-align: left; /* Align text to the left */
-  font-family: inherit; /* Use the same font as the rest */
+  text-align: left;
+  font-family: inherit;
 }
 
 .footerLinks a:hover,
@@ -120,17 +110,15 @@
   color: var(--secondary);
 }
 
-/* --- UPDATED BOTTOM BAR --- */
+/* BOTTOM BAR */
 .footerBottom {
   border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 30px;
   color: var(--text-muted);
-  
-  /* Make it a flex container */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allows wrapping on small screens */
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -140,7 +128,7 @@
   font-weight: 600;
 }
 
-/* --- NEW TMDB STYLES --- */
+/* TMDB CREDIT */
 .tmdbCredit {
   display: flex;
   align-items: center;
@@ -156,4 +144,69 @@
 .tmdbLogo {
   width: 80px;
   height: auto;
+}
+
+/* ===================================
+   📱 RESPONSIVE MEDIA QUERIES
+   =================================== */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .footerContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .mainFooter {
+    padding-left: 2rem;
+  }
+
+  .socialLink {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+    text-align: left;  
+  }
+
+  .footerSection h3 {
+    font-size: 1.3rem;
+  }
+
+  .mainFooter {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .socialLinks {
+    justify-content: flex-start;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tmdbCredit {
+    justify-content: center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .socialLink {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .tmdbLogo {
+    width: 60px;
+  }
 }
