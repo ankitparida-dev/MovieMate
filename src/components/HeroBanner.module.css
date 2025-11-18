@@ -1,7 +1,7 @@
 /* 🌊 Hero Section */
 .heroSection {
   padding: 120px 0;
-  display: flex; /* This will help center the content */
+  display: flex;
   align-items: center;
   background: var(--gradient-hero);
   position: relative;
@@ -27,10 +27,10 @@
   color: var(--secondary);
 }
 
-/* --- Typing Animation Styles --- */
+/* --- Typing Animation --- */
 .typingContainer {
   margin-bottom: 25px;
-  min-height: 40px; /* Prevents layout jump */
+  min-height: 40px;
 }
 
 .typeText {
@@ -89,10 +89,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-      transparent, 
-      rgba(255, 255, 255, 0.2), 
-      transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: left 0.6s ease;
 }
 
@@ -103,37 +100,30 @@
 .playBtn {
   background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
   color: var(--primary);
-  border: 2px solid rgba(46, 196, 182, 0.3);
-  box-shadow: 
-    0 6px 20px rgba(46, 196, 182, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(46,196,182,0.3);
+  box-shadow: 0 6px 20px rgba(46,196,182,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .playBtn:hover {
   background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 
-    0 12px 30px rgba(46, 196, 182, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  border-color: rgba(46, 196, 182, 0.6);
+  box-shadow: 0 12px 30px rgba(46,196,182,0.6), inset 0 1px 0 rgba(255,255,255,0.4);
+  border-color: rgba(46,196,182,0.6);
 }
 
 .infoBtn {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255,255,255,0.08) !important;
   color: var(--text);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255,255,255,0.2);
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .infoBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   color: var(--secondary-light);
 }
 
@@ -157,31 +147,75 @@
   animation: float 6s ease-in-out infinite;
 }
 
-.floatingAnimation { /* Just in case */
-  animation: float 6s ease-in-out infinite;
-}
-
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
 }
 
-/* --- Responsive Styles --- */
+/* ===================================
+   📱 RESPONSIVE MEDIA QUERIES
+   =================================== */
+
+/* 🟦 Tablet (up to 1024px) */
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
+
+  .heroPlaceholder {
+    width: 260px;
+    height: 260px;
+    font-size: 4rem;
+  }
+}
+
+/* 🟧 Mobile (up to 768px) */
 @media (max-width: 768px) {
+  .heroSection {
+    padding: 80px 0;
+  }
+
   .heroContent {
     flex-direction: column;
     text-align: center;
+    gap: 35px;
   }
-  
+
   .heroTitle {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
-  
+
+  .typeText {
+    font-size: 1.3rem;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+
   .heroActions {
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .heroVisual {
-    display: none; /* Hide placeholder on mobile */
+    display: none;
+  }
+}
+
+/* 🟩 Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .typeText {
+    font-size: 1.1rem;
+  }
+
+  .heroBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
   }
 }

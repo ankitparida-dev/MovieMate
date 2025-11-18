@@ -1,19 +1,20 @@
-/* I removed the '*' rule. It should only be in your global.css */
-
+/* ---------------------------------------
+          LOGIN PAGE WRAPPER
+---------------------------------------- */
 .loginPageWrapper {
   display: flex;
-  /* Use min-height so it plays nice with the navbar */
-  min-height: 90vh; 
+  min-height: 90vh;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #0a192f 0%, #172a45 50%, #2ec4b6 100%);
   color: #fff;
-  padding: 40px 20px; /* Add some padding */
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
-/* THIS IS THE FIX. 
-  '.container' is now '.loginContainer' so it CANNOT conflict.
-*/
+/* ---------------------------------------
+          LOGIN CONTAINER
+---------------------------------------- */
 .loginContainer {
   display: flex;
   width: 900px;
@@ -22,8 +23,13 @@
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.1);
+  flex-wrap: wrap;
 }
 
+/* ---------------------------------------
+          LOGIN SECTION
+---------------------------------------- */
 .loginSection {
   flex: 1;
   background: transparent;
@@ -38,11 +44,12 @@
   margin-bottom: 20px;
   color: #22a699;
 }
+
 .loginSection label {
   display: block;
-  margin-bottom: 15px; 
+  margin-bottom: 10px;
   font-weight: 500;
-  color: #ccc; 
+  color: #ccc;
 }
 
 .inputBox {
@@ -57,6 +64,7 @@
   outline: none;
   background: #222;
   color: #fff;
+  font-size: 14px;
 }
 
 .loginBtn {
@@ -68,15 +76,19 @@
   font-size: 16px;
   font-weight: bold;
   background: #22a699;
-  color: #000000;
+  color: #000;
   transition: 0.3s;
   margin-top: 10px;
-  text-decoration: none; /* Moved from 'a' tag */
+  text-decoration: none;
 }
+
 .loginBtn:hover {
   opacity: 0.9;
 }
 
+/* ---------------------------------------
+          SIGNUP SECTION
+---------------------------------------- */
 .signupSection {
   flex: 1;
   background: #22a699;
@@ -104,26 +116,99 @@
   border: none;
   border-radius: 8px;
   background: #0fc2cf;
-  color: white; /* Moved from 'a' tag */
+  color: white;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
-  text-decoration: none; /* Moved from 'a' tag */
+  text-decoration: none;
 }
+
 .signupSection button:hover {
   background: #129090;
 }
 
+/* ---------------------------------------
+            RESPONSIVE STYLES
+---------------------------------------- */
+
+/* Tablets */
 @media (max-width: 850px) {
   .loginPageWrapper {
-    height: auto;
-    padding: 40px 20px;
+    padding: 30px 20px;
   }
- 
-  .loginContainer { /* Renamed from .container */
+
+  .loginContainer {
     flex-direction: column;
     max-width: 400px;
     width: 100%;
-    height: auto; 
+    height: auto;
+  }
+
+  .loginSection, .signupSection {
+    padding: 30px 20px;
+  }
+
+  .loginSection form h2 {
+    font-size: 24px;
+  }
+
+  .signupSection h2 {
+    font-size: 22px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .loginPageWrapper {
+    padding: 20px 10px;
+  }
+
+  .loginSection, .signupSection {
+    padding: 20px 15px;
+  }
+
+  .loginSection form h2 {
+    font-size: 22px;
+  }
+
+  .signupSection h2 {
+    font-size: 20px;
+  }
+
+  .inputBox input {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .loginBtn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .signupSection button {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .loginContainer {
+    margin: 10px;
+  }
+
+  .loginSection, .signupSection {
+    padding: 15px 10px;
+  }
+
+  .loginSection form h2,
+  .signupSection h2 {
+    font-size: 18px;
+  }
+
+  .loginBtn,
+  .signupSection button {
+    padding: 8px 20px;
+    font-size: 13px;
   }
 }

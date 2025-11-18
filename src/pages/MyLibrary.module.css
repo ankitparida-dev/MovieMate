@@ -1,3 +1,6 @@
+/* --------------------------
+        HEADING
+--------------------------- */
 .heading {
   color: var(--secondary);
   margin-bottom: 20px;
@@ -6,12 +9,15 @@
   border-left: 4px solid var(--secondary);
 }
 
+/* --------------------------
+        TABS
+--------------------------- */
 .tabs {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-bottom: 40px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Makes tabs wrap on small screens */
 }
 
 .tab {
@@ -38,6 +44,7 @@
   box-shadow: var(--shadow-teal);
 }
 
+/* Empty State */
 .emptyState {
   text-align: center;
   margin-top: 50px;
@@ -45,28 +52,29 @@
   font-size: 1.2rem;
 }
 
-/* --- GRID LAYOUT FIX --- */
+/* --------------------------
+        GRID RESPONSIVE
+--------------------------- */
 .grid {
   display: grid;
-  /* This creates the columns automatically */
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 40px 25px; /* Row gap 40px, Column gap 25px */
+  gap: 40px 25px;
   padding-bottom: 50px;
 }
 
-/* Wrapper ensures the card stays in shape */
+/* --------------------------
+        CARD WRAPPER
+--------------------------- */
 .cardWrapper {
   position: relative;
   width: 100%;
-  /* Forces standard movie poster ratio (2:3) */
-  aspect-ratio: 2 / 3; 
+  aspect-ratio: 2 / 3;
   border-radius: 12px;
-  transition: transform 0.3s ease, z-index 0s;
-  /* Fixes the stacking context so buttons don't get lost */
+  transition: transform 0.3s ease;
   z-index: 1;
 }
 
-/* Force the MovieCard component inside to fill the wrapper */
+/* Ensure card fits container */
 .cardWrapper > * {
   width: 100%;
   height: 100%;
@@ -75,13 +83,15 @@
   border-radius: 12px;
 }
 
-/* Hover Effect */
+/* Hover zoom */
 .cardWrapper:hover {
   transform: scale(1.05);
-  z-index: 10; /* Brings card to front on hover */
+  z-index: 10;
 }
 
-/* --- DELETE BUTTON STYLE --- */
+/* --------------------------
+        DELETE BUTTON
+--------------------------- */
 .deleteBtn {
   position: absolute;
   top: -12px;
@@ -89,25 +99,24 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #e63946; /* Red */
+  background-color: #e63946;
   color: white;
-  border: 3px solid var(--bg); /* Cutout effect matching background */
+  border: 3px solid var(--bg);
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Transition settings */
-  opacity: 0; 
+
+  opacity: 0;
   transform: scale(0.8);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s;
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-  z-index: 20; /* Always on top of everything */
+  z-index: 20;
 }
 
-/* Show button when hovering the wrapper */
+/* Show delete button on hover */
 .cardWrapper:hover .deleteBtn {
   opacity: 1;
   transform: scale(1);
@@ -116,4 +125,80 @@
 .deleteBtn:hover {
   background-color: #ff0000;
   transform: scale(1.15) rotate(90deg);
+}
+
+/* =====================================================
+          RESPONSIVE BREAKPOINTS 
+===================================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 1.7rem;
+    text-align: center;
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .tabs {
+    gap: 10px;
+  }
+
+  .tab {
+    font-size: 1rem;
+    padding: 8px 20px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 30px 20px;
+  }
+
+  .cardWrapper {
+    aspect-ratio: 2 / 3;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .tabs {
+    gap: 8px;
+    flex-direction: column; /* Stacked buttons */
+    align-items: center;
+  }
+
+  .tab {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 20px;
+  }
+
+  .deleteBtn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    right: -10px;
+    top: -10px;
+  }
+}
+
+/* Very Small Phones */
+@media (max-width: 360px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .tab {
+    padding: 7px 15px;
+    font-size: 0.9rem;
+  }
 }

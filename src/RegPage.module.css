@@ -1,17 +1,16 @@
-/* I removed the '*' and '@import' rules. 
-  These should ONLY be in your global 'index.css' file.
-*/
-
+/* ---------------------------------------
+        REGISTER PAGE WRAPPER
+---------------------------------------- */
 .regPageWrapper {
-  /* Use min-height so it plays nice with the navbar */
-  min-height: 90vh; 
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   background-size: 200% 200%;
   animation: gradientShift 8s ease infinite;
-  padding: 40px 20px; /* Add padding for mobile */
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 @keyframes gradientShift {
@@ -20,7 +19,9 @@
   100% { background-position: 0% 50%; }
 }
 
-/* This class name is now "scoped" */
+/* ---------------------------------------
+        REGISTER CONTAINER
+---------------------------------------- */
 .registerContainer {
   width: 100%;
   display: flex;
@@ -28,6 +29,9 @@
   align-items: center;
 }
 
+/* ---------------------------------------
+        FORM BOX
+---------------------------------------- */
 .formBox {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
@@ -51,6 +55,9 @@
   letter-spacing: 1px;
 }
 
+/* ---------------------------------------
+        INPUT GROUP
+---------------------------------------- */
 .inputGroup {
   position: relative;
   margin-bottom: 25px;
@@ -84,6 +91,9 @@
   color: #00bcd4;
 }
 
+/* ---------------------------------------
+        REGISTER BUTTON
+---------------------------------------- */
 .registerBtn {
   width: 100%;
   padding: 12px;
@@ -102,6 +112,9 @@
   box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
 }
 
+/* ---------------------------------------
+        LOGIN LINK
+---------------------------------------- */
 .loginLink {
   margin-top: 20px;
   font-size: 14px;
@@ -116,9 +129,91 @@
   text-decoration: underline;
 }
 
-/* This is for the error message */
+/* ---------------------------------------
+        ERROR TEXT
+---------------------------------------- */
 .errorText {
-  color: #ff6b6b; /* A light red */
+  color: #ff6b6b;
   margin-bottom: 15px;
   font-size: 0.9rem;
+}
+
+/* ---------------------------------------
+        RESPONSIVE STYLES
+---------------------------------------- */
+
+/* Tablets */
+@media (max-width: 850px) {
+  .formBox {
+    width: 90%;
+    padding: 35px 30px;
+  }
+
+  .formBox h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .inputGroup input {
+    font-size: 15px;
+    padding: 10px 8px;
+  }
+
+  .registerBtn {
+    font-size: 15px;
+    padding: 11px 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .formBox {
+    width: 95%;
+    padding: 30px 20px;
+  }
+
+  .formBox h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .inputGroup input {
+    font-size: 14px;
+    padding: 9px 8px;
+  }
+
+  .registerBtn {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .loginLink {
+    font-size: 13px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .formBox {
+    padding: 25px 15px;
+  }
+
+  .formBox h2 {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+
+  .inputGroup input {
+    font-size: 13px;
+    padding: 8px 6px;
+  }
+
+  .registerBtn {
+    font-size: 13px;
+    padding: 9px 0;
+  }
+
+  .loginLink {
+    font-size: 12px;
+  }
 }

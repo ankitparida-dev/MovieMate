@@ -1,11 +1,28 @@
+/* ============================= */
+/*      CARD GRID CONTAINER      */
+/* ============================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}
+
+/* ============================= */
+/*            CARD               */
+/* ============================= */
 .card {
-  background: var(--card); /* Your var is --panel, I'll use --card */
+  background: var(--card, #1a1a1a);
   border-radius: 12px;
-  overflow: hidden; /* <-- This fixes the encapsulation */
-  
-  display: flex;             /* <-- THIS IS THE FIX */
-  flex-direction: column;    /* <-- Stacks poster ON TOP of content */
-  
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 220px;
+
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -16,12 +33,15 @@
   box-shadow: 0 8px 22px rgba(255, 255, 255, 0.15);
 }
 
+/* ============================= */
+/*            POSTER             */
+/* ============================= */
 .poster {
   width: 100%;
-  aspect-ratio: 2 / 3; /* Use aspect ratio instead of fixed height */
+  aspect-ratio: 2 / 3;
   background-size: cover;
   background-position: center;
-  border-bottom: 1px solid var(--bg-light); /* Good separator */
+  border-bottom: 1px solid var(--bg-light, #333);
   transition: transform 0.4s ease;
 }
 
@@ -29,21 +49,55 @@
   transform: scale(1.08);
 }
 
+/* ============================= */
+/*           CONTENT             */
+/* ============================= */
 .content {
-  padding: 15px; /* Give the text a bit more room */
+  padding: 15px;
 }
 
 .title {
   font-weight: bold;
-  font-size: 1rem; /* 15px is good, 1rem is also good */
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--text); /* Make sure it's not a muted color */
+  color: var(--text, #fff);
 }
 
 .meta {
-  color: var(--text-muted); /* Your var is --muted */
-  font-size: 0.9rem; /* 13px is good */
+  color: var(--text-muted, #aaa);
+  font-size: 0.9rem;
   margin-top: 5px;
+}
+
+/* ============================= */
+/*        MEDIA QUERIES          */
+/* ============================= */
+@media (max-width: 768px) {
+  .card {
+    max-width: 180px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .meta {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-grid {
+    gap: 15px;
+  }
+
+  .card {
+    max-width: 160px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
 }

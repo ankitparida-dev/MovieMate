@@ -1,3 +1,4 @@
+/* -------- BASE LAYOUT -------- */
 .page {
   max-width: 1100px;
   margin: 0 auto;
@@ -15,6 +16,7 @@
   cursor: pointer;
 }
 
+/* -------- HERO SECTION -------- */
 .hero {
   display: flex;
   gap: 28px;
@@ -48,20 +50,37 @@
   font-size: 0.95rem;
 }
 
+/* -------- ACTION BUTTONS -------- */
 .actions { display:flex; gap:12px; margin-bottom: 18px; }
 .btnWatch, .btnList {
-  padding: 10px 16px; border-radius: 28px; border: none; cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 28px;
+  border: none;
+  cursor: pointer;
 }
-.btnWatch { background: linear-gradient(45deg,#5470a4,#2431be); color:#fff; }
-.btnList, .favBtn { background: #5b5b98; color:#fff; border-radius: 28px; padding: 10px 14px; }
+.btnWatch {
+  background: linear-gradient(45deg,#5470a4,#2431be);
+  color:#fff;
+}
+.btnList, .favBtn {
+  background: #5b5b98;
+  color:#fff;
+  padding: 10px 14px;
+}
 
+/* -------- OVERVIEW -------- */
 .overview { margin-top: 16px; }
 .overview h2 { margin: 0 0 8px; }
-.overview p { color: #b8b8d0; line-height: 1.7; }
+.overview p {
+  color: #b8b8d0;
+  line-height: 1.7;
+}
 
+/* -------- MAIN CONTENT -------- */
 .main { margin-top: 28px; }
 .sectionTitle { font-size: 24px; margin-bottom: 12px; }
 
+/* -------- DETAILS SECTION -------- */
 .details {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
@@ -71,6 +90,7 @@
 .detailItem h3 { margin-bottom: 6px; }
 .detailItem p { color: #b8b8d0; }
 
+/* -------- CAST + STAFF -------- */
 .castSection { margin-bottom: 30px; }
 .cast, .staff {
   display: grid;
@@ -91,10 +111,19 @@
   object-fit: cover;
 }
 .castItem h4, .staffItem h4 { margin: 8px 0 4px; }
-.castItem p, .staffItem p { color: #b8b8d0; margin: 0 0 8px; }
+.castItem p, .staffItem p {
+  color: #b8b8d0;
+  margin: 0 0 8px;
+}
 
-.divider { border: none; height: 1px; background: #333; margin: 16px 0; }
+.divider {
+  border: none;
+  height: 1px;
+  background: #333;
+  margin: 16px 0;
+}
 
+/* -------- RECOMMENDED -------- */
 .recommended .showGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
@@ -105,5 +134,114 @@
   border-radius: 10px;
   overflow: hidden;
 }
-.recImgWrap img { width: 100%; height: 260px; object-fit: cover; display: block; }
+.recImgWrap img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
 .showContent { padding: 10px; }
+
+/* ============================================================
+   🔥 RESPONSIVE STYLES
+   ============================================================ */
+
+/* ---------- Large Tablets (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+  .title { font-size: 28px; }
+  .posterWrap img { width: 220px; }
+  .overview p { font-size: 1rem; }
+}
+
+/* ---------- Tablets & Large Phones (<= 768px) ---------- */
+@media (max-width: 768px) {
+
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .posterWrap img {
+    width: 60%;
+    max-width: 260px;
+  }
+
+  .info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .title { font-size: 26px; }
+
+  .actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .overview p {
+    font-size: 1rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Grid adjustments */
+  .details {
+    grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  }
+
+  .cast, .staff {
+    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+  }
+
+  .recommended .showGrid {
+    grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+  }
+}
+
+/* ---------- Small Phones (<= 480px) ---------- */
+@media (max-width: 480px) {
+
+  .page { padding: 12px; }
+
+  .posterWrap img { width: 75%; }
+
+  .title { font-size: 22px; }
+
+  .boxItem {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+
+  .btnWatch, .btnList {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .details {
+    grid-template-columns: 1fr;
+  }
+
+  .cast, .staff {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recommended .showGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recImgWrap img {
+    height: 200px;
+  }
+}
+
+/* ---------- Ultra Small Devices (<= 360px) ---------- */
+@media (max-width: 360px) {
+  .title { font-size: 20px; }
+
+  .cast, .staff {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .posterWrap img { width: 85%; }
+}

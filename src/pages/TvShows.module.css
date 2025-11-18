@@ -1,25 +1,33 @@
-/* src/pages/TvShows.module.css */
+/* ---------------------------------------
+            PAGE LAYOUT
+---------------------------------------- */
 .page {
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
 }
 
+/* ---------------------------------------
+            HEADER
+---------------------------------------- */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.controls {
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap; /* responsive */
   gap: 12px;
 }
 
 .title {
   font-size: 28px;
   font-weight: bold;
+  color: var(--text);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .filterBtn {
@@ -38,7 +46,9 @@
   height: 18px;
 }
 
-/* Grid */
+/* ---------------------------------------
+              GRID
+---------------------------------------- */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -46,7 +56,9 @@
   margin-top: 20px;
 }
 
-/* Drawer styles (isolate to page) */
+/* ---------------------------------------
+            DRAWER
+---------------------------------------- */
 .drawerBackdrop {
   position: fixed;
   inset: 0;
@@ -58,6 +70,7 @@
 
 .drawer {
   width: 340px;
+  max-width: 100%; /* responsive for small screens */
   height: 100%;
   background: #141414;
   padding: 20px;
@@ -82,7 +95,7 @@
 .drawerBody {
   padding-top: 16px;
   flex: 1;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .drawerBody label {
@@ -127,8 +140,80 @@
   cursor: pointer;
 }
 
-/* simple loading UI */
+/* Loading */
 .loading {
   color: var(--text-muted);
   padding: 12px 0;
+}
+
+/* =======================================================
+                RESPONSIVE BREAKPOINTS
+======================================================= */
+
+/* ------- TABLETS (max-width: 900px) ------- */
+@media (max-width: 900px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+}
+
+/* ------- SMALL TABLETS / LARGE PHONES (max-width: 768px) ------- */
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+/* ------- MOBILE (max-width: 480px) ------- */
+@media (max-width: 480px) {
+  .page {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .filterBtn {
+    font-size: 14px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  .drawer {
+    width: 100%; /* full-screen drawer */
+  }
+}
+
+/* ------- VERY SMALL PHONES (max-width: 360px) ------- */
+@media (max-width: 360px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .filterBtn {
+    font-size: 13px;
+  }
 }

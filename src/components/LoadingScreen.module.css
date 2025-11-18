@@ -177,3 +177,128 @@
   font-size: 0.9rem;
   color: var(--text-muted);
 }
+/* ===================================
+   📱 RESPONSIVE MEDIA QUERIES
+   =================================== */
+
+/* 🟦 Tablet (up to 1024px) */
+@media (max-width: 1024px) {
+  .loadingContent {
+    max-width: 500px;
+    padding: 30px;
+  }
+
+  .loadingLogo video,
+  .logoAnimation {
+    width: 160px;
+  }
+
+  .loadingText {
+    font-size: 1.8rem;
+  }
+
+  .loadingSubtext {
+    font-size: 1rem;
+  }
+
+  .progressContainer {
+    height: 7px;
+  }
+
+  .statNumber {
+    font-size: 1.3rem;
+  }
+}
+
+/* 🟧 Mobile (up to 768px) */
+@media (max-width: 768px) {
+  .loadingContent {
+    max-width: 420px;
+    padding: 25px;
+  }
+
+  .loadingLogo video,
+  .logoAnimation {
+    width: 140px;
+  }
+
+  .loadingText {
+    font-size: 1.6rem;
+  }
+
+  .loadingSubtext {
+    font-size: 0.95rem;
+  }
+
+  .progressContainer {
+    height: 6px;
+    margin-bottom: 20px;
+  }
+
+  .loadingStats {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .stat {
+    transform: translateY(15px);
+  }
+}
+
+/* 🟩 Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .loadingContent {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .loadingLogo video,
+  .logoAnimation {
+    width: 110px;
+  }
+
+  .loadingText {
+    font-size: 1.4rem;
+  }
+
+  .loadingSubtext {
+    font-size: 0.9rem;
+  }
+
+  .progressContainer {
+    height: 5px;
+  }
+
+  .statNumber {
+    font-size: 1.2rem;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
+  }
+}
+
+/* 🟨 Extra Small Phones (up to 360px) */
+@media (max-width: 360px) {
+  .loadingText {
+    font-size: 1.2rem;
+  }
+
+  .loadingSubtext {
+    font-size: 0.8rem;
+  }
+
+  .loadingLogo video,
+  .logoAnimation {
+    width: 95px;
+  }
+
+  .loadingStats {
+    gap: 12px;
+  }
+
+  .statNumber {
+    font-size: 1rem;
+  }
+}
