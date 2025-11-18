@@ -89,7 +89,7 @@
   padding: 12px;
   border: none;
   border-radius: 25px;
-  background: linear-gradient(135deg, #00bcd4, #8e2de2);
+  background: linear-gradient(135deg, #00bcd4, #1cc3c9);
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -98,7 +98,7 @@
 }
 
 .registerBtn:hover {
-  background: linear-gradient(135deg, #8e2de2, #00bcd4);
+  background: linear-gradient(135deg, #2db2e2, #00bbd4b1);
   box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
 }
 

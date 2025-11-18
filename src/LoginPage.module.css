@@ -103,7 +103,7 @@
   padding: 12px 30px;
   border: none;
   border-radius: 8px;
-  background: #07747b;
+  background: #0fc2cf;
   color: white; /* Moved from 'a' tag */
   font-weight: bold;
   cursor: pointer;
@@ -111,7 +111,7 @@
   text-decoration: none; /* Moved from 'a' tag */
 }
 .signupSection button:hover {
-  background: #222;
+  background: #129090;
 }
 
 @media (max-width: 850px) {
