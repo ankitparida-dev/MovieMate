@@ -1,0 +1,16 @@
+# Node modules (don't commit these - too big)
+node_modules/
+
+# Environment variables (contains your secret TMDB token!)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
