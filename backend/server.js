@@ -27,7 +27,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/api/library', libraryRoutes);
 app.use('/api/tmdb', tmdbRoutes);
 
-// 4. ⚠️ NEW: 404 Handler - Catch all unmatched routes
+// 4. NEW: 404 Handler - Catch all unmatched routes
 app.use((req, res, next) => {
     const error = new Error(`Cannot ${req.method} ${req.url}`);
     error.status = 404;
@@ -38,5 +38,5 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-    console.log(`MovieMate backend blasting off on port ${PORT} 🚀`);
+    console.log(`MovieMate backend blasting off on port ${PORT} `);
 });
