@@ -12,5 +12,12 @@
     "title": "Inception",
     "poster_path": "/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
     "media_type": "movie"
+  },
+  {
+    "id": 1773297476800,
+    "movieId": 69,
+    "title": "Spider-Man",
+    "poster_path": "/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    "media_type": "movie"
   }
 ]
