@@ -1,14 +1,19 @@
+const fs = require('fs');
+const path = require('path');
 const errorHandler = (err, req, res, next) => {
-    console.error("Bruh, an error happened:", err.message);
-    
-    // Use error status if set, otherwise default to 500
-    const statusCode = err.status || 500;
-    
-    res.status(statusCode).json({
+    const errlog = ("An error happened:", err.message);
+
+    fs.appendFile(
+        path.join(__dirname, '..', 'logs', 'errorLog.txt'),
+        errlog,
+        (error) => {
+            if (error) console.error("Logging failed:", error);
+        }
+    );
+    res.status(500).json({
         success: false,
         message: "Server threw an exception",
         error: err.message
     });
 };
-
 module.exports = errorHandler;

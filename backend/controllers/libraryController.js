@@ -23,7 +23,7 @@ const addToLibrary = (req, res, next) => {
         const library = readData();
 
         if (library.find(item => item.movieId === movieId)) {
-            return res.status(400).json({ message: "Already in your library lmao" });
+            return res.status(400).json({ message: "Already in your library" });
         }
 
         const newItem = { id: Date.now(), movieId, title, poster_path, media_type };
@@ -44,7 +44,7 @@ const removeFromLibrary = (req, res, next) => {
         library = library.filter(item => item.id !== idToRemove);
         
         fs.writeFileSync(dataPath, JSON.stringify(library, null, 2));
-        res.status(200).json({ message: "Item yeeted from library." });
+        res.status(200).json({ message: "Item deleted from library." });
     } catch (error) {
         next(error);
     }
