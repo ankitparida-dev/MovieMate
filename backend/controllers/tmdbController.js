@@ -1,5 +1,6 @@
 const BASE_URL = "https://api.themoviedb.org/3";
-
+const fs = require('fs');
+const path = require('path');
 const fetchFromTMDB = async (req, res, next) => {
     try {
         const tmdbPath = req.path.replace(/^\//, '');
