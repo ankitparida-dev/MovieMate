@@ -4,6 +4,7 @@ const { getLibrary, addToLibrary, removeFromLibrary } = require('../controllers/
 
 router.get('/', getLibrary);
 router.post('/add', addToLibrary);
+
 router.delete('/remove/:id', removeFromLibrary); 
 
 module.exports = router;
