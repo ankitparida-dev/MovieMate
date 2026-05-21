@@ -184,8 +184,16 @@ app.use(errorHandler);
 // DB Connect
 connectDB();
 
-// Start Server
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`SSR Page: http://localhost:${PORT}/movies-ssr`);
-});
+// Start Server only if not testing
+if (process.env.NODE_ENV !== "test") {
+
+    server.listen(PORT, () => {
+
+        console.log(`Server running on port ${PORT}`);
+        console.log(`SSR Page: http://localhost:${PORT}/movies-ssr`);
+
+    });
+
+}
+
+module.exports = app;

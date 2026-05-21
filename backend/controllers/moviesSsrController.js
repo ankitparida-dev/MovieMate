@@ -4,8 +4,9 @@ const renderMoviesSSR = async (req, res) => {
         req.session.pageViews =
             (req.session.pageViews || 0) + 1;
 
+        const port = process.env.PORT || 5000;
         const response = await fetch(
-            "http://localhost:5000/api/tmdb/movie/popular"
+            `http://localhost:${port}/api/tmdb/movie/popular`
         );
 
         const data = await response.json();
