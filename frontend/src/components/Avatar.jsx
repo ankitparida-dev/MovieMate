@@ -74,9 +74,12 @@ const handlePhotoUpload = async (event) => {
       user.id
     );
 
+    const rawApiUrl = import.meta.env.VITE_API_URL;
+    const apiBaseUrl = rawApiUrl ? rawApiUrl.replace(/\/$/, '') : 'http://localhost:5000/api';
+
     const response =
       await fetch(
-        'http://localhost:5000/api/auth/upload-profile',
+        `${apiBaseUrl}/auth/upload-profile`,
         {
           method: 'POST',
           body: formData

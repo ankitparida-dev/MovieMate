@@ -2517,3 +2517,12 @@ GET request to /static/media_files/movielight.mp4
 [3:26:23 pm] GET /api/comments/936075
 [3:26:46 pm] OPTIONS /api/comments
 [3:26:46 pm] POST /api/comments
+[9:19:26 pm] GET /
+[9:24:22 pm] POST /api/auth/login
+[9:24:22 pm] GET /
+[9:27:47 pm] GET /
+[9:27:48 pm] POST /api/auth/login
+[9:27:48 pm] POST /api/auth/login
+[9:27:48 pm] POST /api/auth/login
+[9:27:48 pm] GET /api/library
+[9:27:48 pm] POST /api/library/add

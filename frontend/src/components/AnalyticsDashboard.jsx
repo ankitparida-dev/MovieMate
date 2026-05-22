@@ -243,11 +243,6 @@ const AnalyticsDashboard = ({ analytics, onOpen }) => {
               </div>
             ))}
           </div>
-          <div className={styles.recommendationFooter}>
-            <button className={styles.moreRecommendationsBtn}>
-              See More Recommendations <i className="fas fa-arrow-right"></i>
-            </button>
-          </div>
         </div>
       )}
     </div>

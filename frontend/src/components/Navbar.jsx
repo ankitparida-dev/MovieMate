@@ -112,11 +112,6 @@ export default function Navbar({ setPage, page, onSearch }) {
                   <i className="fas fa-chart-line"></i> Analytics
                 </button>
               </li>
-              <li className={styles.navItem}>
-                <button className={getLinkClass("profile")} onClick={() => { onSearch(""); setPage("profile"); }}>
-                  <i className="fas fa-user"></i> Profile
-                </button>
-              </li>
             </>
           )}
         </ul>

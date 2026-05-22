@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 
-const API =
-  'http://localhost:5000/api/comments';
+const rawApiUrl = import.meta.env.VITE_API_URL;
+const rawSocketUrl = import.meta.env.VITE_SOCKET_URL;
+const DEFAULT_API_URL = 'http://localhost:5000/api';
+
+const API = rawApiUrl
+  ? `${rawApiUrl.replace(/\/$/, '')}/comments`
+  : `${rawSocketUrl ? `${rawSocketUrl.replace(/\/$/, '')}/api` : DEFAULT_API_URL}/comments`;
 
 export const useComments = (
   movieId,
