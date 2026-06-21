@@ -12,6 +12,7 @@ import MyLibrary from "./pages/MyLibrary";
 import MyNotes from "./pages/MyNotes";
 import Analytics from "./pages/Analytics";
 import Profile from "./pages/Profile";
+import AdminDashboard from "./pages/AdminDashboard";  // ✅ NEW
 import LoginPage from "./LoginPage";
 import RegPage from "./RegPage";
 
@@ -38,12 +39,10 @@ export default function App() {
 
   // Socket.io connection and event listeners
   useEffect(() => {
-    // Connect to socket (if not already connected)
     if (!socket.connected) {
       socket.connect();
     }
 
-    // Listen for activity notifications
     socket.on("activity", (data) => {
       let message = "";
       if (data.category === "favorites") {
@@ -58,6 +57,12 @@ export default function App() {
       if (data.category === "rating") {
         message = `⭐ ${data.userName || 'Someone'} rated ${data.title} ${data.rating}/10`;
       }
+      if (data.category === "review") {
+        message = `📝 ${data.userName || 'Someone'} reviewed ${data.title}`;
+      }
+      if (data.category === "list") {
+        message = `📋 ${data.userName || 'Someone'} created a new list: ${data.title}`;
+      }
       if (message) {
         toast(message, {
           duration: 4000,
@@ -66,12 +71,10 @@ export default function App() {
       }
     });
 
-    // Listen for online users count
     socket.on("onlineUsers", (count) => {
       console.log("👥 Online Users:", count);
     });
 
-    // Listen for connection events
     socket.on("connect", () => {
       console.log("✅ Socket connected:", socket.id);
     });
@@ -80,7 +83,6 @@ export default function App() {
       console.log("❌ Socket disconnected");
     });
 
-    // Cleanup on unmount
     return () => {
       socket.off("activity");
       socket.off("onlineUsers");
@@ -109,6 +111,7 @@ export default function App() {
         <Navbar setPage={changePage} page={page} onSearch={setSearchQuery} />
       )}
 
+      {/* MAIN PAGES */}
       {page === "home" && <Main onOpen={openAboutPage} searchQuery={searchQuery} />}
       {page === "movies" && <Movies onOpen={openAboutPage} />}
       {page === "tvshows" && <TvShows onOpen={openAboutPage} />}
@@ -118,6 +121,9 @@ export default function App() {
       
       {/* PROFILE ROUTE */}
       {page === "profile" && <Profile setPage={changePage} />}
+      
+      {/* ✅ ADMIN DASHBOARD ROUTE */}
+      {page === "admin" && <AdminDashboard />}
       
       {/* ABOUT ROUTE */}
       {page === "about" && selected && (

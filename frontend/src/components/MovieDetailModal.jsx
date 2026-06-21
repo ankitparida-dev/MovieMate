@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import WatchPlatforms from './WatchPlatforms';
 import MovieNotes from './MovieNotes';
-import CommentSection from './CommentSection';  // ✅ ADD THIS
+import CommentSection from './CommentSection';
+import ReviewsSection from './ReviewsSection';  // ✅ ADD THIS
 import styles from './MovieDetailModal.module.css';
 import { API_TOKEN } from '../apiToken';
 import { useRecentlyViewed } from '../hooks/useRecentlyViewed';
@@ -211,7 +212,7 @@ const MovieDetailModal = ({ movie, onClose }) => {
             </div>
           </div>
 
-          {/* Tabs Section */}
+          {/* Tabs Section - ADD REVIEWS TAB HERE */}
           <div className={styles.tabsContainer}>
             <button 
               className={`${styles.tab} ${activeTab === 'overview' ? styles.active : ''}`}
@@ -237,7 +238,13 @@ const MovieDetailModal = ({ movie, onClose }) => {
             >
               <i className="fas fa-pen"></i> My Notes
             </button>
-            {/* ✅ ADD COMMENTS TAB */}
+            {/* ✅ ADD REVIEWS TAB HERE */}
+            <button 
+              className={`${styles.tab} ${activeTab === 'reviews' ? styles.active : ''}`}
+              onClick={() => setActiveTab('reviews')}
+            >
+              <i className="fas fa-star"></i> Reviews
+            </button>
             <button 
               className={`${styles.tab} ${activeTab === 'comments' ? styles.active : ''}`}
               onClick={() => setActiveTab('comments')}
@@ -291,9 +298,7 @@ const MovieDetailModal = ({ movie, onClose }) => {
             {activeTab === 'cast' && (
               <div className={styles.castTab}>
                 <div className={styles.castSection}>
-                  <h3>
-                    <i className="fas fa-star"></i> Top Cast
-                  </h3>
+                  <h3><i className="fas fa-star"></i> Top Cast</h3>
                   <div className={styles.castGrid}>
                     {credits.cast?.slice(0, 12).map(person => (
                       <div key={person.cast_id || person.id} className={styles.castCard}>
@@ -315,9 +320,7 @@ const MovieDetailModal = ({ movie, onClose }) => {
                 </div>
 
                 <div className={styles.crewSection}>
-                  <h3>
-                    <i className="fas fa-video"></i> Crew
-                  </h3>
+                  <h3><i className="fas fa-video"></i> Crew</h3>
                   <div className={styles.crewGrid}>
                     {credits.crew?.filter(c => c.job === 'Director').map(director => (
                       <div key={director.credit_id} className={styles.crewCard}>
@@ -385,7 +388,18 @@ const MovieDetailModal = ({ movie, onClose }) => {
               </div>
             )}
 
-            {/* ✅ COMMENTS TAB */}
+            {/* ✅ REVIEWS TAB CONTENT */}
+            {activeTab === 'reviews' && (
+              <div className={styles.reviewsTab}>
+                <ReviewsSection 
+                  mediaId={movie.id}
+                  mediaType={mediaType}
+                  title={title}
+                />
+              </div>
+            )}
+
+            {/* Comments Tab */}
             {activeTab === 'comments' && (
               <div className={styles.commentsTab}>
                 <CommentSection 

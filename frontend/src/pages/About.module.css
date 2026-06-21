@@ -38,10 +38,10 @@
 }
 
 .showBoxes {
-  display:flex;
-  gap:12px;
+  display: flex;
+  gap: 12px;
   margin-bottom: 18px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 }
 .boxItem {
   background: #1a1a3a;
@@ -51,7 +51,7 @@
 }
 
 /* -------- ACTION BUTTONS -------- */
-.actions { display:flex; gap:12px; margin-bottom: 18px; }
+.actions { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
 .btnWatch, .btnList {
   padding: 10px 16px;
   border-radius: 28px;
@@ -60,12 +60,55 @@
 }
 .btnWatch {
   background: linear-gradient(135deg, #0a192f 0%, #172a45 50%, #2ec4b6 100%);
-  color:#fff;
+  color: #fff;
 }
 .btnList, .favBtn {
   background: #5b5b98;
-  color:#fff;
+  color: #fff;
   padding: 10px 14px;
+}
+
+/* -------- TABS SECTION -------- */
+.tabsContainer {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.2);
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  color: var(--text-muted, #8892b0);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+}
+
+.tab:hover {
+  color: var(--text, #ffffff);
+  background: rgba(46, 196, 182, 0.1);
+}
+
+.tab.active {
+  color: #2ec4b6;
+  background: rgba(46, 196, 182, 0.15);
+}
+
+.tabContent {
+  padding: 10px 0;
+}
+
+.reviewsTab {
+  padding: 10px 0;
+}
+
+.commentsTab {
+  padding: 10px 0;
 }
 
 /* -------- OVERVIEW -------- */
@@ -83,7 +126,7 @@
 /* -------- DETAILS SECTION -------- */
 .details {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
   margin-bottom: 30px;
 }
@@ -94,7 +137,7 @@
 .castSection { margin-bottom: 30px; }
 .cast, .staff {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 18px;
   margin-bottom: 12px;
 }
@@ -126,7 +169,7 @@
 /* -------- RECOMMENDED -------- */
 .recommended .showGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 16px;
 }
 .showCard {
@@ -141,6 +184,53 @@
   display: block;
 }
 .showContent { padding: 10px; }
+
+/* -------- RECENTLY VIEWED -------- */
+.recentlyViewedSection {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 2px solid rgba(46, 196, 182, 0.15);
+}
+
+/* -------- COMMENTS SECTION -------- */
+.commentsSection {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(46, 196, 182, 0.2);
+}
+
+/* -------- LOADING STATE -------- */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 1.2rem;
+  color: var(--secondary);
+  background: var(--bg-dark);
+}
+
+/* -------- BACK BUTTON -------- */
+.backNav {
+  padding: 20px 30px 0;
+}
+
+.backBtn {
+  background: rgba(46, 196, 182, 0.15);
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  padding: 8px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.backBtn:hover {
+  background: var(--secondary);
+  color: var(--primary);
+  transform: translateX(-3px);
+}
 
 /* ============================================================
    🔥 RESPONSIVE STYLES
@@ -187,15 +277,24 @@
 
   /* Grid adjustments */
   .details {
-    grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }
 
   .cast, .staff {
-    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
 
   .recommended .showGrid {
-    grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .tabsContainer {
+    justify-content: center;
+  }
+
+  .tab {
+    font-size: 0.8rem;
+    padding: 6px 12px;
   }
 }
 
@@ -233,6 +332,15 @@
   .recImgWrap img {
     height: 200px;
   }
+
+  .tabsContainer {
+    gap: 4px;
+  }
+
+  .tab {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
 }
 
 /* ---------- Ultra Small Devices (<= 360px) ---------- */
@@ -244,50 +352,9 @@
   }
 
   .posterWrap img { width: 85%; }
-}
-/* Add to About.module.css */
 
-.recentlyViewedSection {
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 2px solid rgba(46, 196, 182, 0.15);
-}
-
-/* Loading state */
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-  font-size: 1.2rem;
-  color: var(--secondary);
-  background: var(--bg-dark);
-}
-
-/* Back button */
-.backNav {
-  padding: 20px 30px 0;
-}
-
-.backBtn {
-  background: rgba(46, 196, 182, 0.15);
-  border: 1px solid var(--secondary);
-  color: var(--secondary);
-  padding: 8px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: var(--transition);
-}
-
-.backBtn:hover {
-  background: var(--secondary);
-  color: var(--primary);
-  transform: translateX(-3px);
-}
-/* Add this to About.module.css */
-.commentsSection {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(46, 196, 182, 0.2);
+  .tab {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
 }

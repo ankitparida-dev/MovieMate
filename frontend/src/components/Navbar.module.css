@@ -89,6 +89,7 @@
     padding: 0;
     flex: 1;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .navItem {
@@ -125,6 +126,20 @@
     height: 2px;
     background: linear-gradient(90deg, var(--secondary, #2ec4b6), var(--accent, #ff9f1c));
     border-radius: 2px;
+}
+
+/* Special Admin Link */
+.navLink.adminLink {
+    color: #ff9f1c;
+}
+
+.navLink.adminLink:hover,
+.navLink.adminLink.active {
+    color: #ffb347;
+}
+
+.navLink.adminLink.active::after {
+    background: linear-gradient(90deg, #ff9f1c, #ffb347);
 }
 
 /* -------------------------- */
@@ -245,11 +260,13 @@
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
     }
     
     .rightSection {
         order: 2;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .logo video {
@@ -271,29 +288,71 @@
         padding: 5px 12px;
         font-size: 0.8rem;
     }
+    
+    .navLink {
+        font-size: 0.85rem;
+    }
 }
 
 /* Small Mobile */
 @media (max-width: 576px) {
     .middleSection {
-        gap: 8px;
+        gap: 6px;
     }
     
     .navLink {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        padding: 4px 0;
     }
     
     .searchInput {
-        width: 120px;
+        width: 100px;
+        padding: 4px 8px 4px 28px;
+        font-size: 0.7rem;
+    }
+    
+    .searchIcon {
+        left: 8px;
+        font-size: 0.7rem;
     }
     
     .onlineBadge {
         padding: 2px 6px;
-        font-size: 0.6rem;
+        font-size: 0.5rem;
     }
     
     .onlineDot {
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
+    }
+    
+    .btn {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+    
+    .logo video {
+        width: 90px;
+    }
+    
+    .rightSection {
+        gap: 6px;
+    }
+}
+
+/* Extra Small */
+@media (max-width: 400px) {
+    .middleSection {
+        gap: 4px;
+    }
+    
+    .navLink {
+        font-size: 0.6rem;
+    }
+    
+    .searchInput {
+        width: 80px;
+        padding: 4px 6px 4px 24px;
+        font-size: 0.6rem;
     }
 }

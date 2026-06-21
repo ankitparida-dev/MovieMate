@@ -11,6 +11,7 @@ export default function Navbar({ setPage, page, onSearch }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [onlineUsers, setOnlineUsers] = useState(0);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem("user"); 
@@ -19,6 +20,8 @@ export default function Navbar({ setPage, page, onSearch }) {
       try {
         const userData = JSON.parse(user);
         setUserName(userData.name || userData.email || 'User');
+        // Check if user is admin (you can set this manually or via backend)
+        setIsAdmin(userData.role === 'admin' || userData.email === 'admin@example.com');
       } catch {
         setUserName('User');
       }
@@ -112,6 +115,19 @@ export default function Navbar({ setPage, page, onSearch }) {
                   <i className="fas fa-chart-line"></i> Analytics
                 </button>
               </li>
+              <li className={styles.navItem}>
+                <button className={getLinkClass("profile")} onClick={() => { onSearch(""); setPage("profile"); }}>
+                  <i className="fas fa-user"></i> Profile
+                </button>
+              </li>
+              {/* ✅ ADMIN LINK - Only show for admin users */}
+              {isAdmin && (
+                <li className={styles.navItem}>
+                  <button className={getLinkClass("admin")} onClick={() => { onSearch(""); setPage("admin"); }}>
+                    <i className="fas fa-shield-alt"></i> Admin
+                  </button>
+                </li>
+              )}
             </>
           )}
         </ul>
