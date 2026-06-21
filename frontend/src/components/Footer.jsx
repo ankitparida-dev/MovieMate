@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Footer.module.css';
-import tmdbLogo from '../assets/tmdb-logo.svg'; // Import TMDB logo
+import tmdbLogo from '../assets/tmdb-logo.svg';
 
 const Footer = ({ setPage }) => {
   const currentYear = new Date().getFullYear();
@@ -12,7 +12,7 @@ const Footer = ({ setPage }) => {
           
           {/* Logo Section */}
           <div className={styles.footerSection}>
-            <h3 className={styles.logo}>MovieMate</h3>
+            <h3 className={styles.logo}>🎬 MovieMate</h3>
             <p className={styles.description}>
               Your ultimate destination for discovering movies and TV shows. 
               Find ratings, reviews, and where to watch all in one place.
@@ -30,6 +30,9 @@ const Footer = ({ setPage }) => {
               <a href="#" className={styles.socialLink} aria-label="YouTube">
                 <i className="fab fa-youtube"></i>
               </a>
+              <a href="#" className={styles.socialLink} aria-label="GitHub">
+                <i className="fab fa-github"></i>
+              </a>
             </div>
           </div>
 
@@ -37,10 +40,10 @@ const Footer = ({ setPage }) => {
           <div className={styles.footerSection}>
             <h3>Quick Links</h3>
             <ul className={styles.footerLinks}>
-              <li><button onClick={() => setPage("home")}>Home</button></li>
-              <li><button onClick={() => setPage("movies")}>Movies</button></li>
-              <li><button onClick={() => setPage("tvshows")}>TV Shows</button></li>
-              <li><button onClick={() => setPage("library")}>My Library</button></li>
+              <li><button onClick={() => setPage("home")}>🏠 Home</button></li>
+              <li><button onClick={() => setPage("movies")}>🎬 Movies</button></li>
+              <li><button onClick={() => setPage("tvshows")}>📺 TV Shows</button></li>
+              <li><button onClick={() => setPage("library")}>📚 My Library</button></li>
             </ul>
           </div>
 
@@ -48,10 +51,10 @@ const Footer = ({ setPage }) => {
           <div className={styles.footerSection}>
             <h3>Explore</h3>
             <ul className={styles.footerLinks}>
-              <li><button onClick={() => setPage("analytics")}>Analytics</button></li>
-              <li><button onClick={() => setPage("mynotes")}>My Notes</button></li>
-              <li><button onClick={() => setPage("profile")}>Profile</button></li>
-              <li><a href="#">Trending</a></li>
+              <li><button onClick={() => setPage("analytics")}>📊 Analytics</button></li>
+              <li><button onClick={() => setPage("mynotes")}>✍️ My Notes</button></li>
+              <li><button onClick={() => setPage("profile")}>👤 Profile</button></li>
+              <li><button onClick={() => setPage("admin")}>👑 Admin Dashboard</button></li>
             </ul>
           </div>
 

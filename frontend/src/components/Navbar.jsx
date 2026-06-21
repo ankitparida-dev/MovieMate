@@ -20,8 +20,11 @@ export default function Navbar({ setPage, page, onSearch }) {
       try {
         const userData = JSON.parse(user);
         setUserName(userData.name || userData.email || 'User');
-        // Check if user is admin (you can set this manually or via backend)
         setIsAdmin(userData.role === 'admin' || userData.email === 'admin@example.com');
+        
+        console.log('🔴 NAVBAR - userData:', userData);
+        console.log('🔴 NAVBAR - isAdmin:', userData.role === 'admin');
+        
       } catch {
         setUserName('User');
       }
@@ -88,7 +91,7 @@ export default function Navbar({ setPage, page, onSearch }) {
           )}
         </div>
 
-        {/* MIDDLE NAV */}
+        {/* MIDDLE NAV - Icons Removed to Save Space */}
         <ul className={styles.middleSection}>
           <li className={styles.navItem}>
             <button className={getLinkClass("home")} onClick={goHome}>Home</button>
@@ -103,28 +106,25 @@ export default function Navbar({ setPage, page, onSearch }) {
           {isLoggedIn && (
             <>
               <li className={styles.navItem}>
-                <button className={getLinkClass("library")} onClick={() => { onSearch(""); setPage("library"); }}>My Library</button>
+                <button className={getLinkClass("library")} onClick={() => { onSearch(""); setPage("library"); }}>Library</button>
               </li>
               <li className={styles.navItem}>
-                <button className={getLinkClass("mynotes")} onClick={() => { onSearch(""); setPage("mynotes"); }}>
-                  <i className="fas fa-pen"></i> My Notes
-                </button>
+                <button className={getLinkClass("mynotes")} onClick={() => { onSearch(""); setPage("mynotes"); }}>Notes</button>
               </li>
               <li className={styles.navItem}>
-                <button className={getLinkClass("analytics")} onClick={() => { onSearch(""); setPage("analytics"); }}>
-                  <i className="fas fa-chart-line"></i> Analytics
-                </button>
+                <button className={getLinkClass("analytics")} onClick={() => { onSearch(""); setPage("analytics"); }}>Analytics</button>
               </li>
               <li className={styles.navItem}>
-                <button className={getLinkClass("profile")} onClick={() => { onSearch(""); setPage("profile"); }}>
-                  <i className="fas fa-user"></i> Profile
-                </button>
+                <button className={getLinkClass("profile")} onClick={() => { onSearch(""); setPage("profile"); }}>Profile</button>
               </li>
-              {/* ✅ ADMIN LINK - Only show for admin users */}
+              {/* ✅ ADMIN LINK - Orange color */}
               {isAdmin && (
                 <li className={styles.navItem}>
-                  <button className={getLinkClass("admin")} onClick={() => { onSearch(""); setPage("admin"); }}>
-                    <i className="fas fa-shield-alt"></i> Admin
+                  <button 
+                    className={`${getLinkClass("admin")} ${styles.adminLink}`} 
+                    onClick={() => { onSearch(""); setPage("admin"); }}
+                  >
+                    Admin
                   </button>
                 </li>
               )}
@@ -132,7 +132,7 @@ export default function Navbar({ setPage, page, onSearch }) {
           )}
         </ul>
 
-        {/* RIGHT SIDE - Search + Avatar + Notifications + Login/Logout */}
+        {/* RIGHT SIDE */}
         <div className={styles.rightSection}>
           <div className={styles.searchContainer}>
             <i className={`fas fa-search ${styles.searchIcon}`} onClick={handleSearch} />
