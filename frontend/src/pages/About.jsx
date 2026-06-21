@@ -6,89 +6,69 @@ import { useRecentlyViewed } from "../hooks/useRecentlyViewed";
 import RecentlyViewed from "../components/RecentlyViewed";
 import WatchPlatforms from "../components/WatchPlatforms";
 import MovieNotes from "../components/MovieNotes";
+import ReviewsSection from "../components/ReviewsSection";  // ✅ ADD THIS
 import { useMovieNotes } from "../hooks/useMovieNotes";
-import CommentSection from "../components/CommentSection";  // ✅ ADD THIS
+import CommentSection from "../components/CommentSection";
 
 export default function About({ selected, setPage, onOpen }) {
   const [data, setData] = useState(null);
   const [credits, setCredits] = useState({ cast: [], crew: [] });
   const [recs, setRecs] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');  // ✅ ADD THIS
   
   const { addToRecentlyViewed, recentItems, clearRecentlyViewed, removeFromRecentlyViewed } = useRecentlyViewed();
   const { getNote, saveNote, deleteNote } = useMovieNotes();
   
   const id = selected?.id;
- const type =
-  selected?.type ||
-  selected?.media_type ||
-  "movie";
+  const type = selected?.type || selected?.media_type || "movie";
   const existingNote = getNote(id, type);
 
-  // ✅ FIXED: Removed addToRecentlyViewed from dependencies
   useEffect(() => {
-  if (!id) return;
+    if (!id) return;
+    let mounted = true;
+    setLoading(true);
+    window.scrollTo(0, 0);
 
-  let mounted = true;
-
-  setLoading(true);
-  window.scrollTo(0, 0);
-
-  async function fetchAll() {
-    try {
-      let d;
-
-      if (type === "movie") {
-        d = await getMovieDetails(id);
-      } else {
-        d = await getTvDetails(id);
-      }
-
-      if (!mounted) return;
-
-      setData(d);
-
-      // Save to history without breaking page
+    async function fetchAll() {
       try {
-        await addToHistory({
-          id: d.id,
-          title: d.title || d.name,
-          poster_path: d.poster_path,
-          media_type: type
-        });
-      } catch (historyErr) {
-        console.error("History error:", historyErr);
-      }
+        let d;
+        if (type === "movie") {
+          d = await getMovieDetails(id);
+        } else {
+          d = await getTvDetails(id);
+        }
+        if (!mounted) return;
+        setData(d);
 
-      const c = await getCredits(id, type);
+        try {
+          await addToHistory({
+            id: d.id,
+            title: d.title || d.name,
+            poster_path: d.poster_path,
+            media_type: type
+          });
+        } catch (historyErr) {
+          console.error("History error:", historyErr);
+        }
 
-      if (!mounted) return;
+        const c = await getCredits(id, type);
+        if (!mounted) return;
+        setCredits(c);
 
-      setCredits(c);
-
-      const r = await getRecommendations(id, type);
-
-      if (!mounted) return;
-
-      setRecs(r.results ?? []);
-
-    } catch (err) {
-      console.error("About fetch error:", err);
-
-    } finally {
-      if (mounted) {
-        setLoading(false);
+        const r = await getRecommendations(id, type);
+        if (!mounted) return;
+        setRecs(r.results ?? []);
+      } catch (err) {
+        console.error("About fetch error:", err);
+      } finally {
+        if (mounted) setLoading(false);
       }
     }
-  }
 
-  fetchAll();
-
-  return () => {
-    mounted = false;
-  };
-
-}, [id, type]);
+    fetchAll();
+    return () => { mounted = false; };
+  }, [id, type]);
 
   const getMovieObject = () => {
     return {
@@ -102,30 +82,23 @@ export default function About({ selected, setPage, onOpen }) {
   };
 
   const handleFav = async () => {
-  if (!data) return;
+    if (!data) return;
+    try {
+      await addToFavorites(getMovieObject());
+    } catch (err) {
+      console.error("FAVORITE ERROR:", err);
+    }
+  };
 
-  console.log("FAV BUTTON CLICKED");
+  const handleWatchlist = async () => {
+    if (!data) return;
+    try {
+      await addToWatchlist(getMovieObject());
+    } catch (err) {
+      console.error("WATCHLIST ERROR:", err);
+    }
+  };
 
-  try {
-    await addToFavorites(getMovieObject());
-    console.log("FAVORITE SUCCESS");
-  } catch (err) {
-    console.error("FAVORITE ERROR:", err);
-  }
-};
-
-const handleWatchlist = async () => {
-  if (!data) return;
-
-  console.log("WATCHLIST BUTTON CLICKED");
-
-  try {
-    await addToWatchlist(getMovieObject());
-    console.log("WATCHLIST SUCCESS");
-  } catch (err) {
-    console.error("WATCHLIST ERROR:", err);
-  }
-};
   const handleTrailer = () => {
     if (!data) return;
     const query = `${data.title || data.name} trailer`;
@@ -181,63 +154,9 @@ const handleWatchlist = async () => {
           </div>
 
           <div className={styles.actions}>
-            <button className={styles.btnWatch} onClick={handleTrailer}>
-              Trailer
-            </button>
-            <div className={styles.watchStatusButtons}>
-
-  <button
-    className={styles.btnList}
-    onClick={() =>
-      addToWatchlist(
-        getMovieObject(),
-        "planning"
-      )
-    }
-  >
-     Plan to Watch
-  </button>
-
-  <button
-    className={styles.btnList}
-    onClick={() =>
-      addToWatchlist(
-        getMovieObject(),
-        "watching"
-      )
-    }
-  >
-    Watching
-  </button>
-
-  <button
-    className={styles.btnList}
-    onClick={() =>
-      addToWatchlist(
-        getMovieObject(),
-        "completed"
-      )
-    }
-  >
-    Completed
-  </button>
-
-  <button
-    className={styles.btnList}
-    onClick={() =>
-      addToWatchlist(
-        getMovieObject(),
-        "dropped"
-      )
-    }
-  >
-    Dropped
-  </button>
-
-</div>
-            <button className={styles.favBtn} onClick={handleFav}>
-              ❤
-            </button>
+            <button className={styles.btnWatch} onClick={handleTrailer}>Trailer</button>
+            <button className={styles.btnList} onClick={handleWatchlist}>+ Watchlist</button>
+            <button className={styles.favBtn} onClick={handleFav}>❤</button>
           </div>
 
           <section className={styles.overview}>
@@ -245,23 +164,117 @@ const handleWatchlist = async () => {
             <p>{overview}</p>
           </section>
 
-          <WatchPlatforms 
-            mediaType={type}
-            id={id}
-            title={title}
-          />
+          <WatchPlatforms mediaType={type} id={id} title={title} />
 
-          <MovieNotes 
-            movie={{
-              id: id,
-              mediaType: type,
-              title: title,
-              poster_path: data?.poster_path,
-              existingNote: existingNote,
-              onSave: handleSaveNote,
-              onDelete: handleDeleteNote
-            }}
-          />
+          {/* ✅ TABS SECTION */}
+          <div className={styles.tabsContainer}>
+            <button 
+              className={`${styles.tab} ${activeTab === 'overview' ? styles.active : ''}`}
+              onClick={() => setActiveTab('overview')}
+            >
+              <i className="fas fa-info-circle"></i> Overview
+            </button>
+            <button 
+              className={`${styles.tab} ${activeTab === 'cast' ? styles.active : ''}`}
+              onClick={() => setActiveTab('cast')}
+            >
+              <i className="fas fa-users"></i> Cast & Crew
+            </button>
+            <button 
+              className={`${styles.tab} ${activeTab === 'notes' ? styles.active : ''}`}
+              onClick={() => setActiveTab('notes')}
+            >
+              <i className="fas fa-pen"></i> My Notes
+            </button>
+            <button 
+              className={`${styles.tab} ${activeTab === 'reviews' ? styles.active : ''}`}
+              onClick={() => setActiveTab('reviews')}
+            >
+              <i className="fas fa-star"></i> Reviews
+            </button>
+            <button 
+              className={`${styles.tab} ${activeTab === 'comments' ? styles.active : ''}`}
+              onClick={() => setActiveTab('comments')}
+            >
+              <i className="fas fa-comments"></i> Comments
+            </button>
+          </div>
+
+          {/* ✅ TAB CONTENT */}
+          <div className={styles.tabContent}>
+            {/* Overview Tab */}
+            {activeTab === 'overview' && (
+              <div>
+                <MovieNotes 
+                  movie={{
+                    id: id,
+                    mediaType: type,
+                    title: title,
+                    poster_path: data?.poster_path,
+                    existingNote: existingNote,
+                    onSave: handleSaveNote,
+                    onDelete: handleDeleteNote
+                  }}
+                />
+              </div>
+            )}
+
+            {/* Cast Tab */}
+            {activeTab === 'cast' && (
+              <div>
+                <section className={styles.castSection}>
+                  <h3>Cast</h3>
+                  <div className={styles.cast}>
+                    {credits.cast?.slice(0,6).map(person => (
+                      <div className={styles.castItem} key={person.cast_id ?? person.id}>
+                        <img src={person.profile_path ? `${IMG}${person.profile_path}` : "/placeholder.png"} alt={person.name} />
+                        <h4>{person.name}</h4>
+                        <p>{person.character ?? ""}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* Notes Tab */}
+            {activeTab === 'notes' && (
+              <div>
+                <MovieNotes 
+                  movie={{
+                    id: id,
+                    mediaType: type,
+                    title: title,
+                    poster_path: data?.poster_path,
+                    existingNote: existingNote,
+                    onSave: handleSaveNote,
+                    onDelete: handleDeleteNote
+                  }}
+                />
+              </div>
+            )}
+
+            {/* ✅ REVIEWS TAB */}
+            {activeTab === 'reviews' && (
+              <div className={styles.reviewsTab}>
+                <ReviewsSection 
+                  mediaId={id}
+                  mediaType={type}
+                  title={title}
+                />
+              </div>
+            )}
+
+            {/* Comments Tab */}
+            {activeTab === 'comments' && (
+              <div className={styles.commentsTab}>
+                <CommentSection 
+                  movieId={id}
+                  movieTitle={title}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -285,7 +298,7 @@ const handleWatchlist = async () => {
               <div className={styles.castItem} key={person.cast_id ?? person.id}>
                 <img src={person.profile_path ? `${IMG}${person.profile_path}` : "/placeholder.png"} alt={person.name} />
                 <h4>{person.name}</h4>
-                <p>{person.character ?? person.job ?? ""}</p>
+                <p>{person.character ?? ""}</p>
               </div>
             ))}
           </div>
@@ -349,7 +362,6 @@ const handleWatchlist = async () => {
           </div>
         )}
 
-        {/* ✅ ADD COMMENTS SECTION HERE */}
         <div className={styles.commentsSection}>
           <CommentSection 
             movieId={id}

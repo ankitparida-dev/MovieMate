@@ -8,14 +8,14 @@ const CommentSection = ({ movieId, movieTitle }) => {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
 
- const {
-  comments,
-  loading,
-  addComment,
-  updateComment,
-  deleteComment,
-  getCommentCount
-} = useComments(movieId, movieTitle);
+  const {
+    comments,
+    loading,
+    addComment,
+    updateComment,
+    deleteComment,
+    getCommentCount
+  } = useComments(movieId, movieTitle);
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -53,24 +53,23 @@ const CommentSection = ({ movieId, movieTitle }) => {
       addComment(newComment, getUserName());
       setNewComment('');
     }
-  }; 
-  const handleUpdateComment = async (id) => {
+  };
 
-  if (!editText.trim()) return;
-
-  await updateComment(id, editText);
-
-  setEditingId(null);
-  setEditText('');
-};
+  const handleUpdateComment = (id) => {
+    if (!editText.trim()) return;
+    updateComment(id, editText);
+    setEditingId(null);
+    setEditText('');
+  };
 
   const getInitials = (name) => {
+    if (!name) return '??';
     return name.slice(0, 2).toUpperCase();
   };
 
   const getAvatarColor = (name) => {
     const colors = ['#2ec4b6', '#ff9f1c', '#e63946', '#4fd1c5', '#ffb347', '#1cecff'];
-    const index = name.length % colors.length;
+    const index = (name?.length || 0) % colors.length;
     return colors[index];
   };
 
@@ -83,12 +82,15 @@ const CommentSection = ({ movieId, movieTitle }) => {
     );
   }
 
+  // ✅ FIX: Ensure comments is always an array
+  const commentsArray = Array.isArray(comments) ? comments : [];
+
   return (
     <div className={styles.commentSection}>
       <div className={styles.header}>
         <h3>
           <i className="fas fa-comments"></i>
-          Comments ({getCommentCount()})
+          Comments ({commentsArray.length})
         </h3>
       </div>
 
@@ -122,13 +124,13 @@ const CommentSection = ({ movieId, movieTitle }) => {
 
       {/* Comments List */}
       <div className={styles.commentsList}>
-        {comments.length === 0 ? (
+        {commentsArray.length === 0 ? (
           <div className={styles.emptyState}>
             <i className="fas fa-comment-dots"></i>
             <p>No comments yet. Be the first to comment!</p>
           </div>
         ) : (
-          comments.map(comment => (
+          commentsArray.map(comment => (
             <div key={comment.id} className={styles.commentItem}>
               <div className={styles.commentAvatar}>
                 {comment.userAvatar ? (
@@ -136,74 +138,65 @@ const CommentSection = ({ movieId, movieTitle }) => {
                 ) : (
                   <div 
                     className={styles.avatarPlaceholder}
-                    style={{ backgroundColor: getAvatarColor(comment.username) }}
+                    style={{ backgroundColor: getAvatarColor(comment.username || comment.userName) }}
                   >
-                    {getInitials(comment.username)}
+                    {getInitials(comment.username || comment.userName)}
                   </div>
                 )}
               </div>
               <div className={styles.commentContent}>
                 <div className={styles.commentHeader}>
-                  <span className={styles.username}>{comment.username}</span>
+                  <span className={styles.username}>{comment.username || comment.userName}</span>
                   <span className={styles.commentTime}>{formatDate(comment.createdAt)}</span>
                 </div>
-               {editingId === comment.id ? (
-  <div className={styles.editSection}>
-    <textarea
-      value={editText}
-      onChange={(e) =>
-        setEditText(e.target.value)
-      }
-      className={styles.commentInput}
-      rows={3}
-    />
-
-    <div className={styles.editActions}>
-      <button
-        type="button"
-        onClick={() =>
-          handleUpdateComment(comment.id)
-        }
-      >
-        Save
-      </button>
-
-      <button
-        type="button"
-        onClick={() => {
-          setEditingId(null);
-          setEditText('');
-        }}
-      >
-        Cancel
-      </button>
-    </div>
-  </div>
-) : (
-  <p className={styles.commentText}>
-    {comment.content}
-  </p>
-)}
+                
+                {editingId === comment.id ? (
+                  <div className={styles.editSection}>
+                    <textarea
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                      className={styles.commentInput}
+                      rows={3}
+                    />
+                    <div className={styles.editActions}>
+                      <button className={styles.saveEditBtn} onClick={() => handleUpdateComment(comment.id)}>
+                        Save
+                      </button>
+                      <button 
+                        className={styles.cancelEditBtn} 
+                        onClick={() => {
+                          setEditingId(null);
+                          setEditText('');
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <p className={styles.commentText}>{comment.content || comment.text}</p>
+                )}
+                
                 <div className={styles.commentActions}>
-                  <button
-    type="button"
-    onClick={() => {
-      setEditingId(comment.id);
-      setEditText(comment.content);
-    }}
-  >
-    <i className="fas fa-pen"></i>
-  </button>
-
-  <button
-    type="button"
-    className={styles.deleteBtn}
-    onClick={() =>
-      deleteComment(comment.id)
-    }
-  >
-    <i className="fas fa-trash"></i>
-  </button>
+                  {comment.username === getUserName() && (
+                    <>
+                      <button 
+                        className={styles.editBtn}
+                        onClick={() => {
+                          setEditingId(comment.id);
+                          setEditText(comment.content || comment.text);
+                        }}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </button>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => deleteComment(comment.id)}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
