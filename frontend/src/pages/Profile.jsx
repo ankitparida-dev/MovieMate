@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from '../components/Avatar';
+import FollowSystem from '../components/FollowSystem';  // ✅ ADD THIS
+import StatsDashboard from '../components/StatsDashboard';  // ✅ ADD THIS
 import styles from './Profile.module.css';
 
 const Profile = ({ setPage }) => {
@@ -35,7 +37,6 @@ const Profile = ({ setPage }) => {
   }, []);
 
   const handleAvatarChange = (newAvatar) => {
-    // Avatar already saved in localStorage by Avatar component
     console.log('Avatar updated');
   };
 
@@ -99,6 +100,16 @@ const Profile = ({ setPage }) => {
               <p>{stats.comments}</p>
             </div>
           </div>
+        </div>
+
+        {/* ✅ FOLLOW SYSTEM */}
+        <div className={styles.followSection}>
+          <FollowSystem username={user.name} />
+        </div>
+
+        {/* ✅ USER STATISTICS DASHBOARD */}
+        <div className={styles.statsSection}>
+          <StatsDashboard />
         </div>
 
         {/* Actions */}

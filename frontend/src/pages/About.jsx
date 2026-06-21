@@ -6,7 +6,8 @@ import { useRecentlyViewed } from "../hooks/useRecentlyViewed";
 import RecentlyViewed from "../components/RecentlyViewed";
 import WatchPlatforms from "../components/WatchPlatforms";
 import MovieNotes from "../components/MovieNotes";
-import ReviewsSection from "../components/ReviewsSection";  // ✅ ADD THIS
+import ReviewsSection from "../components/ReviewsSection";
+import MovieLists from "../components/MovieLists";  // ✅ ADD THIS
 import { useMovieNotes } from "../hooks/useMovieNotes";
 import CommentSection from "../components/CommentSection";
 
@@ -15,7 +16,7 @@ export default function About({ selected, setPage, onOpen }) {
   const [credits, setCredits] = useState({ cast: [], crew: [] });
   const [recs, setRecs] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview');  // ✅ ADD THIS
+  const [activeTab, setActiveTab] = useState('overview');
   
   const { addToRecentlyViewed, recentItems, clearRecentlyViewed, removeFromRecentlyViewed } = useRecentlyViewed();
   const { getNote, saveNote, deleteNote } = useMovieNotes();
@@ -150,7 +151,7 @@ export default function About({ selected, setPage, onOpen }) {
           <div className={styles.showBoxes}>
             <span className={styles.boxItem}>{type === "tv" ? "TV Series" : "Movie"}</span>
             {runtime && <span className={styles.boxItem}>{runtime}m</span>}
-            <span className={styles.boxItem}> {rating}</span>
+            <span className={styles.boxItem}>⭐ {rating}</span>
           </div>
 
           <div className={styles.actions}>
@@ -205,6 +206,19 @@ export default function About({ selected, setPage, onOpen }) {
             {/* Overview Tab */}
             {activeTab === 'overview' && (
               <div>
+                {/* Details Section */}
+                <h2 className={styles.sectionTitle}>Details</h2>
+                <section className={styles.details}>
+                  <article className={styles.detailItem}><h3>Original Title</h3><p>{data?.original_title ?? data?.original_name ?? "—"}</p></article>
+                  <article className={styles.detailItem}><h3>First Air / Release</h3><p>{data?.release_date ?? data?.first_air_date ?? "—"}</p></article>
+                  <article className={styles.detailItem}><h3>Duration</h3><p>{runtime ? `${runtime}m` : "-"}</p></article>
+                  <article className={styles.detailItem}><h3>Status</h3><p>{data?.status ?? "-"}</p></article>
+                  <article className={styles.detailItem}><h3>Rating</h3><p>{rating}</p></article>
+                  <article className={styles.detailItem}><h3>Genres</h3><p>{genres || "-"}</p></article>
+                  <article className={styles.detailItem}><h3>Production</h3><p>{companies || "-"}</p></article>
+                </section>
+
+                {/* My Notes inside Overview */}
                 <MovieNotes 
                   movie={{
                     id: id,
@@ -219,111 +233,79 @@ export default function About({ selected, setPage, onOpen }) {
               </div>
             )}
 
-            {/* Cast Tab */}
+            {/* Cast & Crew Tab */}
             {activeTab === 'cast' && (
               <div>
-                <section className={styles.castSection}>
-                  <h3>Cast</h3>
-                  <div className={styles.cast}>
-                    {credits.cast?.slice(0,6).map(person => (
-                      <div className={styles.castItem} key={person.cast_id ?? person.id}>
-                        <img src={person.profile_path ? `${IMG}${person.profile_path}` : "/placeholder.png"} alt={person.name} />
-                        <h4>{person.name}</h4>
-                        <p>{person.character ?? ""}</p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
+                <h3>Cast</h3>
+                <div className={styles.cast}>
+                  {credits.cast?.slice(0,6).map(person => (
+                    <div className={styles.castItem} key={person.cast_id ?? person.id}>
+                      <img src={person.profile_path ? `${IMG}${person.profile_path}` : "/placeholder.png"} alt={person.name} />
+                      <h4>{person.name}</h4>
+                      <p>{person.character ?? ""}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <hr className={styles.divider} />
+
+                <h3>Staff</h3>
+                <div className={styles.staff}>
+                  {credits.crew?.filter(c => c.job === "Director").slice(0,1).map(d => (
+                    <div className={styles.staffItem} key={d.credit_id || d.id}>
+                      <img src={d.profile_path ? `${IMG}${d.profile_path}` : "/placeholder.png"} alt={d.name} />
+                      <h4>{d.name}</h4>
+                      <p>{d.job}</p>
+                    </div>
+                  ))}
+                  {credits.crew?.filter(c => c.job === "Writer" || c.job === "Screenplay").slice(0,6).map(w => (
+                    <div className={styles.staffItem} key={w.credit_id || w.id}>
+                      <img src={w.profile_path ? `${IMG}${w.profile_path}` : "/placeholder.png"} alt={w.name} />
+                      <h4>{w.name}</h4>
+                      <p>{w.job}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
             {/* Notes Tab */}
             {activeTab === 'notes' && (
-              <div>
-                <MovieNotes 
-                  movie={{
-                    id: id,
-                    mediaType: type,
-                    title: title,
-                    poster_path: data?.poster_path,
-                    existingNote: existingNote,
-                    onSave: handleSaveNote,
-                    onDelete: handleDeleteNote
-                  }}
-                />
-              </div>
+              <MovieNotes 
+                movie={{
+                  id: id,
+                  mediaType: type,
+                  title: title,
+                  poster_path: data?.poster_path,
+                  existingNote: existingNote,
+                  onSave: handleSaveNote,
+                  onDelete: handleDeleteNote
+                }}
+              />
             )}
 
-            {/* ✅ REVIEWS TAB */}
+            {/* Reviews Tab */}
             {activeTab === 'reviews' && (
-              <div className={styles.reviewsTab}>
-                <ReviewsSection 
-                  mediaId={id}
-                  mediaType={type}
-                  title={title}
-                />
-              </div>
+              <ReviewsSection 
+                mediaId={id}
+                mediaType={type}
+                title={title}
+              />
             )}
 
             {/* Comments Tab */}
             {activeTab === 'comments' && (
-              <div className={styles.commentsTab}>
-                <CommentSection 
-                  movieId={id}
-                  movieTitle={title}
-                />
-              </div>
+              <CommentSection 
+                movieId={id}
+                movieTitle={title}
+              />
             )}
           </div>
         </div>
       </header>
 
       <main className={styles.main}>
-        <h2 className={styles.sectionTitle}>Details</h2>
-        <section className={styles.details}>
-          <article className={styles.detailItem}><h3>Original Title</h3><p>{data?.original_title ?? data?.original_name ?? "—"}</p></article>
-          <article className={styles.detailItem}><h3>First Air / Release</h3><p>{data?.release_date ?? data?.first_air_date ?? "—"}</p></article>
-          <article className={styles.detailItem}><h3>Duration</h3><p>{runtime ? `${runtime}m` : "-"}</p></article>
-          <article className={styles.detailItem}><h3>Status</h3><p>{data?.status ?? "-"}</p></article>
-          <article className={styles.detailItem}><h3>Rating</h3><p>{rating}</p></article>
-          <article className={styles.detailItem}><h3>Genres</h3><p>{genres || "-"}</p></article>
-          <article className={styles.detailItem}><h3>Production</h3><p>{companies || "-"}</p></article>
-        </section>
-
-        <section className={styles.castSection}>
-          <h2 className={styles.sectionTitle}>Cast & Staff</h2>
-          <h3>Cast</h3>
-          <div className={styles.cast}>
-            {credits.cast?.slice(0,6).map(person => (
-              <div className={styles.castItem} key={person.cast_id ?? person.id}>
-                <img src={person.profile_path ? `${IMG}${person.profile_path}` : "/placeholder.png"} alt={person.name} />
-                <h4>{person.name}</h4>
-                <p>{person.character ?? ""}</p>
-              </div>
-            ))}
-          </div>
-
-          <hr className={styles.divider} />
-
-          <h3>Staff</h3>
-          <div className={styles.staff}>
-            {credits.crew?.filter(c => c.job === "Director").slice(0,1).map(d => (
-              <div className={styles.staffItem} key={d.credit_id || d.id}>
-                <img src={d.profile_path ? `${IMG}${d.profile_path}` : "/placeholder.png"} alt={d.name} />
-                <h4>{d.name}</h4>
-                <p>{d.job}</p>
-              </div>
-            ))}
-            {credits.crew?.filter(c => c.job === "Writer" || c.job === "Screenplay").slice(0,6).map(w => (
-              <div className={styles.staffItem} key={w.credit_id || w.id}>
-                <img src={w.profile_path ? `${IMG}${w.profile_path}` : "/placeholder.png"} alt={w.name} />
-                <h4>{w.name}</h4>
-                <p>{w.job}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        {/* ✅ RECOMMENDED SECTION */}
         <section className={styles.recommended}>
           <h2 className={styles.sectionTitle}>Recommended</h2>
           <div className={styles.showGrid}>
@@ -345,7 +327,7 @@ export default function About({ selected, setPage, onOpen }) {
           </div>
         </section>
 
-        {/* Recently Viewed Section */}
+        {/* ✅ RECENTLY VIEWED SECTION */}
         {recentItems.length > 1 && (
           <div className={styles.recentlyViewedSection}>
             <RecentlyViewed 
@@ -362,11 +344,9 @@ export default function About({ selected, setPage, onOpen }) {
           </div>
         )}
 
-        <div className={styles.commentsSection}>
-          <CommentSection 
-            movieId={id}
-            movieTitle={title}
-          />
+        {/* ✅ MOVIE LISTS SECTION */}
+        <div className={styles.movieListsSection}>
+          <MovieLists />
         </div>
       </main>
     </div>

@@ -84,6 +84,18 @@
   font-weight: bold;
 }
 
+/* ✅ FOLLOW SECTION */
+.followSection {
+  padding: 0 30px;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+}
+
+/* ✅ STATS SECTION */
+.statsSection {
+  padding: 30px;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+}
+
 .profileActions {
   display: flex;
   gap: 15px;
@@ -162,6 +174,14 @@
   .actionBtn {
     padding: 10px 20px;
     font-size: 0.85rem;
+  }
+  
+  .followSection {
+    padding: 0 20px;
+  }
+  
+  .statsSection {
+    padding: 20px;
   }
 }
 
