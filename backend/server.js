@@ -10,6 +10,8 @@ const upload =
 const http = require('http');
 const { Server } = require('socket.io');
 
+
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -54,9 +56,15 @@ const errorHandler = require('./middleware/errorHandler');
 
 // Import Routes
 const commentRoutes = require('./routes/commentRoutes');
+const reviewRoutes =
+require("./routes/reviewRoutes");
 const authRoutes = require('./routes/authRoutes');
 const libraryRoutes = require('./routes/libraryRoutes');
 const tmdbRoutes = require('./routes/tmdbRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const movieListRoutes =
+    require('./routes/movieListRoutes');
+
 
 // Import SSR Controller
 const { renderMoviesSSR } = require('./controllers/moviesSsrController');
@@ -153,9 +161,18 @@ app.get('/dashboard', (req, res) => {
 });
 
 // API Routes
+app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/library', libraryRoutes);
 app.use('/api/tmdb', tmdbRoutes);
+app.use(
+    '/api/lists',
+    movieListRoutes
+);
+app.use(
+    "/api/reviews",
+    reviewRoutes
+);
 app.use('/api/comments', commentRoutes);
 
 // Home Route

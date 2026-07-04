@@ -1,78 +1,171 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-const STORAGE_KEY = 'moviemate_reviews';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const useReviews = () => {
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        setReviews(JSON.parse(stored));
-      } catch (error) {
-        console.error('Error loading reviews:', error);
-        setReviews([]);
-      }
+  const getMovieReviews = async (mediaId) => {
+    try {
+      setLoading(true);
+
+      const response = await fetch(
+        `${API_URL}/api/reviews/movie/${mediaId}`
+      );
+
+      const data = await response.json();
+
+      setReviews(data);
+
+      return data;
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      return [];
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  }, []);
-
-  const saveReviews = (newReviews) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newReviews));
-    setReviews(newReviews);
-  };
-
-  const getMovieReviews = (mediaId) => {
-    return reviews.filter(r => r.mediaId === mediaId);
   };
 
   const getAverageRating = (mediaId) => {
-    const movieReviews = getMovieReviews(mediaId);
+    const movieReviews = reviews.filter(
+      r => r.mediaId === mediaId
+    );
+
     if (movieReviews.length === 0) return 0;
-    const sum = movieReviews.reduce((acc, r) => acc + r.rating, 0);
+
+    const sum = movieReviews.reduce(
+      (acc, r) => acc + r.rating,
+      0
+    );
+
     return (sum / movieReviews.length).toFixed(1);
   };
 
-  const addReview = (mediaId, mediaType, title, content, rating, spoiler = false) => {
-    const newReview = {
-      id: Date.now(),
-      userId: 'current-user',
-      userName: JSON.parse(localStorage.getItem('user') || '{"name":"User"}').name || 'User',
-      mediaId,
-      mediaType,
-      title: title || 'Movie Review',
-      content,
-      rating,
-      spoiler,
-      likes: 0,
-      helpful: 0,
-      createdAt: new Date().toISOString()
-    };
+  const addReview = async (
+    mediaId,
+    mediaType,
+    title,
+    content,
+    rating,
+    spoiler = false
+  ) => {
+    try {
 
-    const newReviews = [newReview, ...reviews];
-    saveReviews(newReviews);
-    return newReview;
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${API_URL}/api/reviews`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            mediaId,
+            mediaType,
+            title,
+            content,
+            rating,
+            spoiler
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setReviews(prev => [data.review || data, ...prev]);
+      }
+
+      return data;
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const deleteReview = (reviewId) => {
-    const newReviews = reviews.filter(r => r.id !== reviewId);
-    saveReviews(newReviews);
+  const deleteReview = async (reviewId) => {
+    try {
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${API_URL}/api/reviews/${reviewId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          credentials: "include"
+        }
+      );
+
+      if (response.ok) {
+        setReviews(prev =>
+          prev.filter(
+            r => r._id !== reviewId
+          )
+        );
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const likeReview = (reviewId) => {
-    const updated = reviews.map(r => 
-      r.id === reviewId ? { ...r, likes: r.likes + 1 } : r
-    );
-    saveReviews(updated);
+  const likeReview = async (reviewId) => {
+    try {
+
+      const response = await fetch(
+        `${API_URL}/api/reviews/${reviewId}/like`,
+        {
+          method: "POST"
+        }
+      );
+
+      const updatedReview =
+        await response.json();
+
+      setReviews(prev =>
+        prev.map(review =>
+          review._id === reviewId
+            ? updatedReview
+            : review
+        )
+      );
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const markHelpful = (reviewId) => {
-    const updated = reviews.map(r => 
-      r.id === reviewId ? { ...r, helpful: r.helpful + 1 } : r
-    );
-    saveReviews(updated);
+  const markHelpful = async (reviewId) => {
+    try {
+
+      const response = await fetch(
+        `${API_URL}/api/reviews/${reviewId}/helpful`,
+        {
+          method: "POST"
+        }
+      );
+
+      const updatedReview =
+        await response.json();
+
+      setReviews(prev =>
+        prev.map(review =>
+          review._id === reviewId
+            ? updatedReview
+            : review
+        )
+      );
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return {
