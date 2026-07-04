@@ -20,39 +20,54 @@ const AdminDashboard = () => {
     loadData();
   }, []);
 
-  const loadData = () => {
-    // Get users from localStorage
-    const userData = localStorage.getItem('user');
-    const allUsers = [];
-    if (userData) {
-      allUsers.push(JSON.parse(userData));
-    }
-    // Also check for other users in localStorage
-    // Note: In real app, this would come from backend
-    setUsers(allUsers);
+  const loadData = async () => {
+  try {
+    const token = localStorage.getItem('token');
 
-    // Get reviews
-    const reviewData = JSON.parse(localStorage.getItem('moviemate_reviews') || '[]');
-    setReviews(reviewData);
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    };
 
-    // Get comments
-    const commentData = JSON.parse(localStorage.getItem('moviemate_comments') || '[]');
-    setComments(commentData);
+    const [
+      usersRes,
+      reviewsRes,
+      commentsRes,
+      reportsRes,
+      statsRes
+    ] = await Promise.all([
+      fetch('http://localhost:5000/api/admin/users', { headers }),
+      fetch('http://localhost:5000/api/admin/reviews', { headers }),
+      fetch('http://localhost:5000/api/admin/comments', { headers }),
+      fetch('http://localhost:5000/api/admin/reports', { headers }),
+      fetch('http://localhost:5000/api/admin/stats', { headers })
+    ]);
 
-    // Get reports
-    const reportData = JSON.parse(localStorage.getItem('moviemate_reports') || '[]');
-    setReports(reportData);
+    const usersData = usersRes.ok ? await usersRes.json() : [];
+    const reviewsData = reviewsRes.ok ? await reviewsRes.json() : [];
+    const commentsData = commentsRes.ok ? await commentsRes.json() : [];
+    const reportsData = reportsRes.ok ? await reportsRes.json() : [];
+    const statsData = statsRes.ok ? await statsRes.json() : {};
 
-    // Update stats
+    setUsers(usersData);
+    setReviews(reviewsData);
+    setComments(commentsData);
+    setReports(reportsData);
+
     setStats({
-      totalUsers: allUsers.length,
-      totalReviews: reviewData.length,
-      totalComments: commentData.length,
-      totalReports: reportData.length,
-      recentActivity: getRecentActivity(reviewData, commentData)
+      totalUsers: statsData.totalUsers || usersData.length,
+      totalReviews: statsData.totalReviews || reviewsData.length,
+      totalComments: statsData.totalComments || commentsData.length,
+      totalReports: statsData.totalReports || reportsData.length,
+      recentActivity:
+        statsData.recentActivity ||
+        getRecentActivity(reviewsData, commentsData)
     });
-  };
 
+  } catch (error) {
+    console.error('Admin dashboard load failed:', error);
+  }
+};
   const getRecentActivity = (reviews, comments) => {
     const activities = [];
     
@@ -78,38 +93,90 @@ const AdminDashboard = () => {
     return activities.sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 10);
   };
 
-  const deleteReview = (id) => {
-    if (window.confirm('Delete this review?')) {
-      const newReviews = reviews.filter(r => r.id !== id);
-      localStorage.setItem('moviemate_reviews', JSON.stringify(newReviews));
-      setReviews(newReviews);
-      alert('Review deleted successfully!');
-    }
-  };
+const deleteReview = async (id) => {
+  if (!window.confirm('Delete this review?')) return;
 
-  const deleteComment = (id) => {
-    if (window.confirm('Delete this comment?')) {
-      const newComments = comments.filter(c => c.id !== id);
-      localStorage.setItem('moviemate_comments', JSON.stringify(newComments));
-      setComments(newComments);
-      alert('Comment deleted successfully!');
-    }
-  };
+  try {
+    const token = localStorage.getItem('token');
 
-  const deleteUser = (userId) => {
-    if (window.confirm('Ban/Delete this user?')) {
-      // In real app, this would delete from database
-      alert('User banned successfully!');
-    }
-  };
+    await fetch(
+      `http://localhost:5000/api/admin/reviews/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
 
-  const resolveReport = (id) => {
-    const newReports = reports.filter(r => r.id !== id);
-    localStorage.setItem('moviemate_reports', JSON.stringify(newReports));
-    setReports(newReports);
-    alert('Report resolved!');
-  };
+    loadData();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
+const deleteComment = async (id) => {
+  if (!window.confirm('Delete this comment?')) return;
+
+  try {
+    const token = localStorage.getItem('token');
+
+    await fetch(
+      `http://localhost:5000/api/admin/comments/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    loadData();
+  } catch (error) {
+    console.error(error);
+  }
+};
+  const deleteUser = async (userId) => {
+  if (!window.confirm('Ban this user?')) return;
+
+  try {
+    const token = localStorage.getItem('token');
+
+    await fetch(
+      `http://localhost:5000/api/admin/users/${userId}/ban`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    loadData();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  const resolveReport = async (id) => {
+  try {
+    const token = localStorage.getItem('token');
+
+    await fetch(
+      `http://localhost:5000/api/admin/reports/${id}/resolve`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    loadData();
+  } catch (error) {
+    console.error(error);
+  }
+};
   return (
     <div className={styles.adminContainer}>
       <div className={styles.header}>
