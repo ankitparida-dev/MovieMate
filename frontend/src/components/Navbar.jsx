@@ -20,10 +20,11 @@ export default function Navbar({ setPage, page, onSearch }) {
       try {
         const userData = JSON.parse(user);
         setUserName(userData.name || userData.email || 'User');
-        setIsAdmin(userData.role === 'admin' || userData.email === 'admin@example.com');
+       setIsAdmin(userData.isAdmin === true);
         
         console.log('🔴 NAVBAR - userData:', userData);
-        console.log('🔴 NAVBAR - isAdmin:', userData.role === 'admin');
+       
+console.log('🔴 NAVBAR - isAdmin:', userData.isAdmin);
         
       } catch {
         setUserName('User');

@@ -97,6 +97,10 @@ const deleteReview = async(req,res)=>{
     }
 };
 const likeReview = async(req,res)=>{
+    const likeReview = async (req, res) => {
+    console.log("REQ.USER =", req.user);
+    console.log("REQ.PARAMS =", req.params);
+}
 
     const review =
         await Review.findByIdAndUpdate(

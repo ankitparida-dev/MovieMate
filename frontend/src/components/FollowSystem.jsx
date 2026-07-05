@@ -1,77 +1,140 @@
-import React, { useState } from 'react';
-import { useFollow } from '../hooks/useFollow';
-import styles from './FollowSystem.module.css';
+import React, { useEffect, useState } from "react";
+import { useFollow } from "../hooks/useFollow";
+import styles from "./FollowSystem.module.css";
 
-const FollowSystem = ({ username }) => {
-  const { followUser, unfollowUser, isFollowing, getFollowStats, getPopularUsers } = useFollow();
-  const [activeTab, setActiveTab] = useState('suggestions');
+const API_URL = "http://localhost:5000/api/follow";
 
-  const stats = getFollowStats();
-  const popularUsers = getPopularUsers();
+const FollowSystem = () => {
+    const {
+        followUser,
+        unfollowUser,
+        isFollowing,
+        getFollowStats
+    } = useFollow();
 
-  const handleFollowToggle = (user) => {
-    if (isFollowing(user)) {
-      unfollowUser(user);
-    } else {
-      followUser(user);
-    }
-  };
+    const [users, setUsers] = useState([]);
 
-  return (
-    <div className={styles.followContainer}>
-      <div className={styles.stats}>
-        <div className={styles.statItem}>
-          <span className={styles.statNumber}>{stats.following}</span>
-          <span className={styles.statLabel}>Following</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statNumber}>{stats.followers}</span>
-          <span className={styles.statLabel}>Followers</span>
-        </div>
-      </div>
+    const currentUser =
+        JSON.parse(localStorage.getItem("user") || "{}");
 
-      <div className={styles.tabs}>
-        <button 
-          className={`${styles.tab} ${activeTab === 'suggestions' ? styles.active : ''}`}
-          onClick={() => setActiveTab('suggestions')}
-        >
-          Suggestions
-        </button>
-        <button 
-          className={`${styles.tab} ${activeTab === 'following' ? styles.active : ''}`}
-          onClick={() => setActiveTab('following')}
-        >
-          Following
-        </button>
-      </div>
+    useEffect(() => {
+        fetchUsers();
+    }, []);
 
-      <div className={styles.userList}>
-        {activeTab === 'suggestions' && (
-          popularUsers.length === 0 ? (
-            <div className={styles.emptyState}>No suggestions</div>
-          ) : (
-            popularUsers.map((user, index) => (
-              <div key={index} className={styles.userItem}>
-                <div className={styles.userInfo}>
-                  <div className={styles.avatar}>{user.name[0]}</div>
-                  <div>
-                    <div className={styles.userName}>{user.name}</div>
-                    <div className={styles.userStats}>{user.followers} followers</div>
-                  </div>
+    const fetchUsers = async () => {
+        try {
+
+            const token =
+                localStorage.getItem("token");
+
+            const response = await fetch(
+                `${API_URL}/users`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            const data =
+                await response.json();
+
+            setUsers(data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const stats =
+        getFollowStats();
+
+    return (
+        <div className={styles.followContainer}>
+
+            <div className={styles.stats}>
+                <div className={styles.statItem}>
+                    <span className={styles.statNumber}>
+                        {stats.followers}
+                    </span>
+                    <span className={styles.statLabel}>
+                        Followers
+                    </span>
                 </div>
-                <button 
-                  className={isFollowing(user.name) ? styles.unfollowBtn : styles.followBtn}
-                  onClick={() => handleFollowToggle(user.name)}
-                >
-                  {isFollowing(user.name) ? 'Following' : 'Follow'}
-                </button>
-              </div>
-            ))
-          )
-        )}
-      </div>
-    </div>
-  );
+
+                <div className={styles.statItem}>
+                    <span className={styles.statNumber}>
+                        {stats.following}
+                    </span>
+                    <span className={styles.statLabel}>
+                        Following
+                    </span>
+                </div>
+            </div>
+
+            <h3>Discover Users</h3>
+
+            <div className={styles.userList}>
+
+                {users
+                    .filter(user => user._id !== currentUser.id)
+                    .map(user => (
+
+                        <div
+                            key={user._id}
+                            className={styles.userItem}
+                        >
+
+                            <div className={styles.userInfo}>
+
+                                <div className={styles.avatar}>
+                                    {user.name.charAt(0).toUpperCase()}
+                                </div>
+
+                                <div>
+                                    <div className={styles.userName}>
+                                        {user.name}
+                                    </div>
+
+                                    <div className={styles.userStats}>
+                                        {user.email}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {isFollowing(user._id) ? (
+
+                                <button
+                                    className={styles.unfollowBtn}
+                                    onClick={() =>
+                                        unfollowUser(user._id)
+                                    }
+                                >
+                                    Following
+                                </button>
+
+                            ) : (
+
+                                <button
+                                    className={styles.followBtn}
+                                    onClick={() =>
+                                        followUser(user._id)
+                                    }
+                                >
+                                    Follow
+                                </button>
+
+                            )}
+
+                        </div>
+
+                    ))}
+
+            </div>
+
+        </div>
+    );
 };
 
 export default FollowSystem;

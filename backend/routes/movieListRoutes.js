@@ -5,11 +5,18 @@ const auth = require('../middleware/auth');
 
 const {
     getLists,
+    getUserLists,
     createList,
-    addMovieToList
+    addMovieToList,
+    removeMovieFromList,
+    deleteList,
+    likeList
 } = require('../controllers/movieListController');
 
 router.get('/', getLists);
+
+router.get('/user', auth, getUserLists);
+
 router.post('/', auth, createList);
 
 router.post(
@@ -17,8 +24,23 @@ router.post(
     auth,
     addMovieToList
 );
-router.delete('/:id/movies/:movieId', auth, removeMovieFromList);
-router.delete('/:id', auth, deleteList);
-router.patch('/:id/like', auth, likeList);
+
+router.delete(
+    '/:id/movies/:movieId',
+    auth,
+    removeMovieFromList
+);
+
+router.delete(
+    '/:id',
+    auth,
+    deleteList
+);
+
+router.patch(
+    '/:id/like',
+    auth,
+    likeList
+);
 
 module.exports = router;

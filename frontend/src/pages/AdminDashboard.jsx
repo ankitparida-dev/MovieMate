@@ -179,7 +179,7 @@ const deleteComment = async (id) => {
 };
   return (
     <div className={styles.adminContainer}>
-      <div className={styles.header}>
+      <div classNamex={styles.header}>
         <h1>
           <i className="fas fa-shield-alt"></i>
           Admin Dashboard

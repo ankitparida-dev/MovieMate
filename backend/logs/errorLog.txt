@@ -104,3 +104,829 @@
 [2026-05-21T07:43:09.047Z] POST /upload-test - ERROR: Must supply api_key
 [2026-05-21T07:43:13.634Z] POST /upload-test - ERROR: Must supply api_key
 [2026-05-21T08:11:54.694Z] POST /api/auth/upload-profile - ERROR: Unexpected end of form
+[2026-07-04T17:06:50.505Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:50.509Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:52.387Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:52.391Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:52.458Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:52.477Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:52.499Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:52.514Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:58.348Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:06:58.352Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:08.834Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:08.856Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:09.744Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:09.748Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:09.812Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:09.815Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:09.877Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:09.880Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:29.363Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:29.368Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:32.080Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:32.084Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.635Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.641Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.845Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.855Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.860Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.884Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.938Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:58.942Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:59.027Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:08:59.030Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:09:03.281Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:09:03.286Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.626Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.635Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.786Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.789Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.849Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.853Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.894Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:06.906Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:11.248Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:11.257Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:13.329Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:13.336Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:13.911Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:13.914Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:14.510Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:14.514Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:14.749Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:14.752Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:14.991Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:14.994Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:15.200Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:15.202Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:22.613Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:22.618Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:23.102Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:23.106Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:23.138Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:23.141Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:23.171Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:23.173Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:24.090Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:24.094Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:24.409Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:24.416Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:25.443Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:25.445Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:25.658Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:25.661Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:26.354Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:26.357Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:29.505Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:29.518Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:29.526Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-04T17:10:29.536Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:45.044Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:45.062Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:47.053Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:47.056Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:47.130Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:47.136Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:47.192Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:16:47.200Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:06.784Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:06.796Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:06.896Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:06.898Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:07.020Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:07.022Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:07.058Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:17:07.062Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.201Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.211Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.307Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.311Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.391Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.395Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.540Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:18:13.549Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:38.767Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:38.770Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:40.819Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:40.830Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:40.935Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:40.942Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:40.987Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:20:40.983Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:21:04.138Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:21:04.142Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:21:06.228Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:21:06.233Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:21:11.438Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T07:21:11.441Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:43:15.611Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T08:43:15.680Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T08:43:15.685Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T08:43:15.738Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T08:43:15.759Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T08:43:15.860Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T08:54:27.284Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:54:27.291Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:54:29.905Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:54:29.914Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:54:30.012Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:54:30.017Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:54:30.045Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:54:30.049Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.155Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.164Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.270Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.274Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.565Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.574Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.673Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T08:58:28.678Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:02.804Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:02.815Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:02.929Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:02.934Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:03.183Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:03.187Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:03.283Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:00:03.288Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.680Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.685Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.826Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.829Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.894Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.898Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.934Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:02:03.935Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:29.356Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:29.348Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:29.413Z] GET /library?category=history - ERROR: Cannot GET /library?category=history
+[2026-07-05T09:04:29.418Z] GET /library?category=history - ERROR: Cannot GET /library?category=history
+[2026-07-05T09:04:29.734Z] POST /library/add - ERROR: Cannot POST /library/add
+[2026-07-05T09:04:30.484Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:30.511Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:30.641Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:30.645Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:30.743Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:30.747Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:04:44.145Z] POST /auth/login - ERROR: Cannot POST /auth/login
+[2026-07-05T09:05:33.208Z] POST /auth/login - ERROR: Cannot POST /auth/login
+[2026-07-05T09:07:09.658Z] POST /auth/login - ERROR: Cannot POST /auth/login
+[2026-07-05T09:16:05.873Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:16:05.884Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:16:06.971Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:16:06.974Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:16:07.169Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:16:07.181Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:16:07.266Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:16:07.270Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:37.920Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:37.912Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:39.406Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:39.411Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:39.526Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:39.531Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:39.568Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:26:39.572Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:54.426Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:54.436Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:54.671Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:54.663Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:55.312Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:55.319Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:55.341Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:31:55.349Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.314Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.320Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.864Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.877Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.921Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.924Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.961Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:13.963Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:17.295Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:32:17.298Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:33:37.525Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T09:33:37.550Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T09:33:37.553Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T09:33:37.583Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T09:33:37.623Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T09:33:37.773Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T09:35:13.744Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:13.760Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:15.490Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:15.495Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:15.694Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:15.703Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:15.739Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:15.735Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.368Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.370Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.591Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.596Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.750Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.756Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.798Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:27.803Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:31.187Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:35:31.191Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:11.152Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:11.162Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:12.930Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:12.935Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:13.055Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:13.059Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:13.093Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:13.095Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:19.031Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:40:19.044Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:46:58.627Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:46:58.647Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:00.002Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:00.007Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:00.151Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:00.155Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:00.263Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:00.267Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:07.436Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:07.440Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:24.696Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:24.703Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:25.476Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:47:25.495Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.673Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.677Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.772Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.774Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.844Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.847Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.879Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:56.883Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:59.190Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:49:59.195Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:40.587Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:40.595Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:41.648Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:41.654Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:41.802Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:41.806Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:41.873Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:41.877Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:46.911Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:51:46.906Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.042Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.060Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.208Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.211Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.257Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.260Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.315Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.320Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.413Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:41.417Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:47.774Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:47.788Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T09:59:55.490Z] POST /api/reviews/undefined/like - ERROR: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Review"
+[2026-07-05T09:59:58.999Z] POST /api/reviews/undefined/helpful - ERROR: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Review"
+[2026-07-05T10:08:06.962Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:06.974Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:08.110Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:08.114Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:08.228Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:08.234Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:08.272Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:08.278Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:12.195Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:08:12.202Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:53.319Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:53.328Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.188Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.194Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.313Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.332Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.773Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.777Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.911Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:09:57.916Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:00.428Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:00.444Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:00.479Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:00.489Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:40.705Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T10:10:40.727Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T10:10:40.730Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T10:10:40.747Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T10:10:41.809Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T10:10:41.974Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T10:10:49.729Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.748Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.857Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.876Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.922Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.925Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.950Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.954Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.983Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:10:49.985Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:07.926Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:07.929Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:10.451Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:10.453Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:10.551Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:10.558Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:10.593Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:10.597Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:14.821Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:14.826Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:36.036Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:36.043Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:37.133Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:37.138Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:37.234Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:37.238Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:37.284Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:37.288Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:42.510Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:11:42.515Z] GET /api/lists/user - ERROR: Cannot GET /api/lists/user
+[2026-07-05T10:47:32.410Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T10:47:32.436Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T10:47:32.441Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T10:47:32.458Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T10:47:32.502Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T10:47:32.619Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:01:03.347Z] GET /api/follow/users - ERROR: Cannot GET /api/follow/users
+[2026-07-05T12:01:03.363Z] GET /api/follow/users - ERROR: Cannot GET /api/follow/users
+[2026-07-05T12:03:04.048Z] GET /api/follow/users - ERROR: Cannot GET /api/follow/users
+[2026-07-05T12:03:04.042Z] GET /api/follow/users - ERROR: Cannot GET /api/follow/users
+[2026-07-05T12:38:49.447Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T12:38:49.472Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:38:49.475Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T12:38:49.502Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:38:49.552Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:38:49.640Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:39:04.767Z] DELETE /api/admin/reviews/undefined - ERROR: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Review"
+[2026-07-05T12:39:04.866Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T12:39:04.905Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:39:05.005Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:48:03.613Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T12:48:03.620Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:48:03.624Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T12:48:03.632Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:48:04.510Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T12:48:04.604Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T13:21:54.635Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T13:21:54.649Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T13:21:54.652Z] GET /api/admin/reports - ERROR: Cannot GET /api/admin/reports
+[2026-07-05T13:21:54.682Z] GET /api/admin/comments - ERROR: 
+Invalid `prisma.comment.findMany()` invocation in
+C:\5th_year\backend\controllers\adminController.js:32:43
+
+  29 };
+  30 
+  31 const getComments = async (req, res) => {
+→ 32     const comments = await prisma.comment.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T13:21:54.820Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+[2026-07-05T13:21:54.974Z] GET /api/admin/stats - ERROR: 
+Invalid `prisma.comment.count()` invocation in
+C:\5th_year\backend\controllers\adminController.js:10:48
+
+   7 const getStats = async (req, res) => {
+   8     const totalUsers = await User.countDocuments();
+   9     const totalReviews = await Review.countDocuments();
+→ 10     const totalComments = await prisma.comment.count(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1

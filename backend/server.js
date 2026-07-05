@@ -65,6 +65,9 @@ const adminRoutes = require('./routes/adminRoutes');
 const movieListRoutes =
     require('./routes/movieListRoutes');
 
+const followRoutes =
+    require("./routes/followRoutes");
+
 
 // Import SSR Controller
 const { renderMoviesSSR } = require('./controllers/moviesSsrController');
@@ -168,6 +171,11 @@ app.use('/api/tmdb', tmdbRoutes);
 app.use(
     '/api/lists',
     movieListRoutes
+);
+
+app.use(
+    "/api/follow",
+    followRoutes
 );
 app.use(
     "/api/reviews",

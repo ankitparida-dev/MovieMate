@@ -1,27 +1,26 @@
-import express from "express";
+const express = require('express');
+const router = express.Router();
 
-import auth from "../middleware/auth.js";
-import { admin } from "../middleware/admin.js";
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
-import {
+const {
     getStats,
     getUsers,
     getReviews,
     getComments,
     deleteReview,
     deleteComment
-} from "../controllers/adminController.js";
-
-const router = express.Router();
+} = require('../controllers/adminController');
 
 router.use(auth, admin);
 
-router.get("/stats", getStats);
-router.get("/users", getUsers);
-router.get("/reviews", getReviews);
-router.get("/comments", getComments);
+router.get('/stats', getStats);
+router.get('/users', getUsers);
+router.get('/reviews', getReviews);
+router.get('/comments', getComments);
 
-router.delete("/reviews/:id", deleteReview);
-router.delete("/comments/:id", deleteComment);
+router.delete('/reviews/:id', deleteReview);
+router.delete('/comments/:id', deleteComment);
 
-export default router;
+module.exports = router;
