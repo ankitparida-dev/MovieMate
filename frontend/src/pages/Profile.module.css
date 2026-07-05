@@ -190,3 +190,54 @@
     grid-template-columns: 1fr;
   }
 }
+/* ===== PROFILE INSIGHTS ===== */
+
+.insights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 30px;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+}
+
+.insightItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #172a45;
+  border-radius: 16px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.insightItem:hover {
+  transform: translateY(-3px);
+  background: #203354;
+}
+
+.insightItem i {
+  font-size: 1.8rem;
+  color: #2ec4b6;
+}
+
+.insightItem strong {
+  display: block;
+  color: white;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.insightItem p {
+  color: #8892b0;
+  margin: 0;
+  font-size: 1rem;
+}
+.tag {
+  padding: 6px 14px;
+  background: rgba(46, 196, 182, 0.1);
+  color: #2ec4b6;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  border: 1px solid rgba(46, 196, 182, 0.2);
+  transition: var(--transition);
+}

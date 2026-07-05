@@ -1,4 +1,4 @@
-export const admin = (req, res, next) => {
+const admin = (req, res, next) => {
     if (!req.user) {
         return res.status(401).json({
             message: "Authentication required"
@@ -13,3 +13,7 @@ export const admin = (req, res, next) => {
 
     next();
 };
+
+
+module.exports = admin;
+

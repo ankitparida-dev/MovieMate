@@ -1,11 +1,27 @@
 const MovieList = require('../models/MovieList');
 
-const getLists = async (req, res) => {
+const getUserLists = async (req, res) => {
     try {
-        const lists = await MovieList.find()
-            .sort({ createdAt: -1 });
+        const lists = await MovieList.find({
+            userId: req.user.id
+        }).sort({ createdAt: -1 });
 
         res.json(lists);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+const getLists = async (req, res) => {
+    try {
+        const lists = await MovieList.find({
+        isPublic: true
+    }).sort({ createdAt: -1 });
+
+    res.json(lists);
+
     }
     catch (error) {
         res.status(500).json({
@@ -55,9 +71,75 @@ const addMovieToList = async (req, res) => {
         });
     }
 };
+const removeMovieFromList = async (req, res) => {
+    try {
+        const list = await MovieList.findById(req.params.id);
+
+        if (!list) {
+            return res.status(404).json({
+                message: 'List not found'
+            });
+        }
+
+        list.movies = list.movies.filter(
+            movie => movie.mediaId !== Number(req.params.movieId)
+        );
+
+        await list.save();
+
+        res.json(list);
+    }
+    catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+const deleteList = async (req, res) => {
+    try {
+        await MovieList.findByIdAndDelete(req.params.id);
+
+        res.json({
+            message: 'List deleted successfully'
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+const likeList = async (req, res) => {
+    try {
+        const list = await MovieList.findById(req.params.id);
+
+        if (!list) {
+            return res.status(404).json({
+                message: 'List not found'
+            });
+        }
+
+        list.likes += 1;
+
+        await list.save();
+
+        res.json(list);
+    }
+    catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
 
 module.exports = {
     getLists,
     createList,
-    addMovieToList
+    addMovieToList,
+    removeMovieFromList,
+    deleteList,
+    likeList,
+    getUserLists
 };

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useMovieLists } from '../hooks/useMovieLists';
 import styles from './MovieLists.module.css';
 
-const MovieLists = () => {
-  const { lists, createList, deleteList, likeList, getPublicLists, getUserLists } = useMovieLists();
+const MovieLists = ({ movie  }) => {
+  const { lists, createList, deleteList, likeList, getPublicLists, getUserLists, addToList } = useMovieLists();
   const [showForm, setShowForm] = useState(false);
   const [listTitle, setListTitle] = useState('');
   const [listDescription, setListDescription] = useState('');
@@ -61,18 +61,46 @@ const MovieLists = () => {
           <div className={styles.emptyState}>No public lists yet.</div>
         ) : (
           allLists.map(list => (
-            <div key={list.id} className={styles.listCard}>
-              <div className={styles.listHeader}>
-                <h3>{list.title}</h3>
-                <span className={styles.likeBtn} onClick={() => likeList(list.id)}>
-                  ❤️ {list.likes || 0}
-                </span>
-              </div>
+            <div key={list._id} className={styles.listCard}>
+             <div className={styles.listHeader}>
+  <h3>{list.title}</h3>
+
+  <div>
+    <span
+      className={styles.likeBtn}
+      onClick={() => likeList(list._id)}
+    >
+      ❤️ {list.likes || 0}
+    </span>
+
+    <button
+      onClick={() => deleteList(list._id)}
+    >
+      🗑️
+    </button>
+  </div>
+</div>
               {list.description && <p className={styles.listDesc}>{list.description}</p>}
               <div className={styles.listStats}>
-                <span>📌 {list.movies.length} movies</span>
-                <span>👁️ {list.views || 0} views</span>
-              </div>
+  <span>📌 {list.movies.length} movies</span>
+  <span>👁️ {list.views || 0} views</span>
+</div>
+
+<button
+  className={styles.submitBtn}
+  onClick={() => addToList(list._id, movie)}
+> 
+  ➕ Add This Movie
+</button>
+{list.movies && list.movies.length > 0 && (
+  <div className={styles.moviePreview}>
+    {list.movies.map(movie => (
+      <div key={movie.mediaId}>
+        🎬 {movie.title}
+      </div>
+    ))}
+  </div>
+)}
               <div className={styles.listMeta}>
                 <span className={styles.author}>by {list.userName || 'Anonymous'}</span>
                 <span className={styles.date}>
