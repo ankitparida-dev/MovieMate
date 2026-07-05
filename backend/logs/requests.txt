@@ -2664,3 +2664,13 @@ GET request to /static/media_files/movielight.mp4
 [4:58:09 pm] GET /api/library?category=history
 [4:58:10 pm] GET /api/library?category=history
 [4:58:10 pm] GET /api/library?category=history
+[9:22:41 am] OPTIONS /api/library?category=favorites
+[9:22:41 am] OPTIONS /api/library?category=favorites
+[9:22:41 am] GET /api/library?category=favorites
+[9:22:41 am] GET /api/library?category=favorites
+[9:22:52 am] OPTIONS /api/library?category=history
+[9:22:52 am] OPTIONS /api/library?category=history
+[9:22:52 am] GET /api/library?category=history
+[9:22:52 am] GET /api/library?category=history
+[9:22:53 am] GET /api/library?category=history
+[9:22:53 am] GET /api/library?category=history
