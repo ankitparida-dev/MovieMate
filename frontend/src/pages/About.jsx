@@ -6,7 +6,7 @@ import { useRecentlyViewed } from "../hooks/useRecentlyViewed";
 import RecentlyViewed from "../components/RecentlyViewed";
 import WatchPlatforms from "../components/WatchPlatforms";
 import MovieNotes from "../components/MovieNotes";
-import ReviewsSection from "../components/ReviewsSection";
+
 import MovieLists from "../components/MovieLists";  // ✅ ADD THIS
 import { useMovieNotes } from "../hooks/useMovieNotes";
 import CommentSection from "../components/CommentSection";
@@ -71,16 +71,18 @@ export default function About({ selected, setPage, onOpen }) {
     return () => { mounted = false; };
   }, [id, type]);
 
-  const getMovieObject = () => {
+const getMovieObject = () => {
+    if (!data) return null;
+
     return {
-      id: data.id,
+         id: data.id,
       title: data.title || data.name,
       poster_path: data.poster_path,
       vote_average: data.vote_average,
       release_date: data.release_date || data.first_air_date,
       media_type: type 
     };
-  };
+};
 
   const handleFav = async () => {
     if (!data) return;
@@ -188,12 +190,6 @@ export default function About({ selected, setPage, onOpen }) {
               <i className="fas fa-pen"></i> My Notes
             </button>
             <button 
-              className={`${styles.tab} ${activeTab === 'reviews' ? styles.active : ''}`}
-              onClick={() => setActiveTab('reviews')}
-            >
-              <i className="fas fa-star"></i> Reviews
-            </button>
-            <button 
               className={`${styles.tab} ${activeTab === 'comments' ? styles.active : ''}`}
               onClick={() => setActiveTab('comments')}
             >
@@ -284,14 +280,7 @@ export default function About({ selected, setPage, onOpen }) {
               />
             )}
 
-            {/* Reviews Tab */}
-            {activeTab === 'reviews' && (
-              <ReviewsSection 
-                mediaId={id}
-                mediaType={type}
-                title={title}
-              />
-            )}
+
 
             {/* Comments Tab */}
             {activeTab === 'comments' && (
@@ -346,7 +335,9 @@ export default function About({ selected, setPage, onOpen }) {
 
         {/* ✅ MOVIE LISTS SECTION */}
         <div className={styles.movieListsSection}>
-          <MovieLists />
+         <MovieLists
+    movie={getMovieObject()}
+/>
         </div>
       </main>
     </div>

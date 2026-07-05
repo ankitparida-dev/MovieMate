@@ -5,13 +5,21 @@ const User = require('../models/User');
 // Generate Access + Refresh Tokens
 const generateTokens = (user) => {
     const accessToken = jwt.sign(
-        { id: user._id, email: user.email },
+        {
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            isAdmin: user.isAdmin,
+            isBanned: user.isBanned
+        },
         process.env.JWT_SECRET,
         { expiresIn: '15m' }
     );
 
     const refreshToken = jwt.sign(
-        { id: user._id },
+        {
+            id: user._id
+        },
         process.env.JWT_REFRESH_SECRET,
         { expiresIn: '7d' }
     );
@@ -109,17 +117,19 @@ const login = async (req, res) => {
             message: "User logged in"
         });
 
-        res.status(200).json({
-            success: true,
-            message: 'Login successful',
-            accessToken,
-            refreshToken,
-            user: {
-                id: user._id,
-                name: user.name,
-                email: user.email
-            }
-        });
+       res.status(200).json({
+    success: true,
+    message: 'Login successful',
+    accessToken,
+    refreshToken,
+    user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        isBanned: user.isBanned
+    }
+});
 
     } catch (error) {
         console.error(
@@ -160,11 +170,17 @@ const refresh = async (req, res) => {
             process.env.JWT_REFRESH_SECRET
         );
 
-        const newAccessToken = jwt.sign(
-            { id: user._id, email: user.email },
-            process.env.JWT_SECRET,
-            { expiresIn: '15m' }
-        );
+       const newAccessToken = jwt.sign(
+    {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+        isAdmin: user.isAdmin,
+        isBanned: user.isBanned
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '15m' }
+);
 
         res.status(200).json({
             success: true,
