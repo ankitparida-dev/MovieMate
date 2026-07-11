@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
     'http://localhost:5173',
+     "http://localhost:5174",
     'https://movie-mate-full-stack.vercel.app',
     'https://movie-mate-full-stack-96gack973-rangan-biswas-projects.vercel.app'
 ];
@@ -67,6 +68,9 @@ const movieListRoutes =
 
 const followRoutes =
     require("./routes/followRoutes");
+
+const reportRoutes =
+    require("./routes/reportRoutes");
 
 
 // Import SSR Controller
@@ -182,6 +186,7 @@ app.use(
     reviewRoutes
 );
 app.use('/api/comments', commentRoutes);
+app.use('/api/reports', reportRoutes);
 
 // Home Route
 app.get('/', (req, res) => {
