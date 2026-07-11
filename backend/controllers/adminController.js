@@ -1,71 +1,284 @@
-const User = require('../models/User');
-const Review = require('../models/Review');
+const User = require("../models/User");
+const MovieList = require("../models/MovieList");
+const Report = require("../models/Report");
 
-// Replace this with your actual Prisma import if needed
-const prisma = require('../prisma/prisma');
+// Prisma Client
+const prisma = require("../prisma/prisma");
+
+/* ===========================
+   DASHBOARD STATS
+=========================== */
 
 const getStats = async (req, res) => {
-    const totalUsers = await User.countDocuments();
-    const totalReviews = await Review.countDocuments();
-    const totalComments = await prisma.comment.count();
+    try {
 
-    res.json({
-        totalUsers,
-        totalReviews,
-        totalComments
-    });
+        const [
+            totalUsers,
+            totalComments,
+            totalLists
+        ] = await Promise.all([
+
+            User.countDocuments(),
+
+            prisma.comment.count(),
+
+            MovieList.countDocuments()
+
+        ]);
+
+        res.json({
+
+            totalUsers,
+
+            totalComments,
+
+            totalLists,
+
+            totalReports: 0,
+
+            recentActivity: []
+
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
 };
+
+/* ===========================
+   USERS
+=========================== */
 
 const getUsers = async (req, res) => {
-    const users = await User.find().select('-password');
-    res.json(users);
+    try {
+
+        const users =
+            await User.find()
+                .select("-password");
+
+        res.json(users);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
 };
 
-const getReviews = async (req, res) => {
-    const reviews = await Review.find()
-        .sort({ createdAt: -1 });
+const banUser = async (req, res) => {
+    try {
 
-    res.json(reviews);
+        const user =
+            await User.findById(req.params.id);
+
+        if (!user) {
+
+            return res.status(404).json({
+                message: "User not found"
+            });
+
+        }
+
+        user.isBanned = !user.isBanned;
+
+        await user.save();
+
+        res.json(user);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
 };
+
+/* ===========================
+   COMMENTS (Neon / Prisma)
+=========================== */
 
 const getComments = async (req, res) => {
-    const comments = await prisma.comment.findMany({
-        orderBy: {
-            createdAt: 'desc'
-        }
-    });
+    try {
 
-    res.json(comments);
-};
+        const comments =
+            await prisma.comment.findMany({
 
-const deleteReview = async (req, res) => {
-    await Review.findByIdAndDelete(req.params.id);
+                orderBy: {
+                    createdAt: "desc"
+                }
 
-    res.json({
-        message: 'Review deleted'
-    });
+            });
+
+        res.json(comments);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
 };
 
 const deleteComment = async (req, res) => {
-    await prisma.comment.delete({
-        where: {
-            id: Number(req.params.id)
-        }
-    });
+    try {
 
-    res.json({
-        message: 'Comment deleted'
-    });
+        await prisma.comment.delete({
+
+            where: {
+                id: req.params.id
+            }
+
+        });
+
+        res.json({
+            message: "Comment deleted"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
 };
 
+/* ===========================
+   MOVIE LISTS
+=========================== */
+
+const getLists = async (req, res) => {
+    try {
+
+        const lists =
+            await MovieList.find()
+                .sort({ createdAt: -1 });
+
+        res.json(lists);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+};
+
+const deleteList = async (req, res) => {
+    try {
+
+        await MovieList.findByIdAndDelete(
+            req.params.id
+        );
+
+        res.json({
+            message: "List deleted"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+};
+
+/* ===========================
+   REPORTS
+=========================== */
+
+const getReports = async (req, res) => {
+
+    try {
+
+        const reports = await Report.find()
+            .populate("reporterId", "name email")
+            .populate("reportedUserId", "name email")
+            .sort({ createdAt: -1 });
+
+        res.json(reports);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
+const resolveReport = async (req, res) => {
+
+    try {
+
+        const { id } = req.params;
+        const { status = "resolved", resolution = "Resolved by admin" } = req.body || {};
+
+        const report = await Report.findById(id);
+
+        if (!report) {
+
+            return res.status(404).json({
+                message: "Report not found"
+            });
+
+        }
+
+        report.status = status;
+        report.resolution = resolution;
+        report.resolvedBy = req.user.id;
+        report.resolvedAt = new Date();
+
+        await report.save();
+
+        res.json({
+            message: "Report resolved",
+            report
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
+/* ===========================
+   EXPORTS
+=========================== */
 
 module.exports = {
+
     getStats,
+
     getUsers,
-    getReviews,
+
+    banUser,
+
     getComments,
-    deleteReview,
-    deleteComment
+
+    deleteComment,
+
+    getLists,
+
+    deleteList,
+
+    getReports,
+
+    resolveReport
+
 };
-
-

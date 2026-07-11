@@ -1,26 +1,85 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const auth = require('../middleware/auth');
-const admin = require('../middleware/admin');
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 const {
     getStats,
+
     getUsers,
-    getReviews,
+    banUser,
+
     getComments,
-    deleteReview,
-    deleteComment
-} = require('../controllers/adminController');
+    deleteComment,
+
+    getLists,
+    deleteList,
+
+    getReports,
+    resolveReport
+
+} = require("../controllers/adminController");
 
 router.use(auth, admin);
 
-router.get('/stats', getStats);
-router.get('/users', getUsers);
-router.get('/reviews', getReviews);
-router.get('/comments', getComments);
+/* ===========================
+   DASHBOARD
+=========================== */
 
-router.delete('/reviews/:id', deleteReview);
-router.delete('/comments/:id', deleteComment);
+router.get("/stats", getStats);
+
+/* ===========================
+   USERS
+=========================== */
+
+router.get("/users", getUsers);
+
+router.patch(
+    "/users/:id/ban",
+    banUser
+);
+
+/* ===========================
+   COMMENTS
+=========================== */
+
+router.get(
+    "/comments",
+    getComments
+);
+
+router.delete(
+    "/comments/:id",
+    deleteComment
+);
+
+/* ===========================
+   MOVIE LISTS
+=========================== */
+
+router.get(
+    "/lists",
+    getLists
+);
+
+router.delete(
+    "/lists/:id",
+    deleteList
+);
+
+/* ===========================
+   REPORTS
+=========================== */
+
+router.get(
+    "/reports",
+    getReports
+);
+
+router.patch(
+    "/reports/:id",
+    resolveReport
+);
 
 module.exports = router;

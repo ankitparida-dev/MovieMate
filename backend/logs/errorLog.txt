@@ -930,3 +930,5 @@ error: Environment variable not found: DATABASE_URL.
    | 
 
 Validation Error Count: 1
+[2026-07-11T15:20:59.288Z] OPTIONS /api/auth/login - ERROR: Origin not allowed by CORS
+[2026-07-11T15:21:09.394Z] OPTIONS /api/auth/login - ERROR: Origin not allowed by CORS

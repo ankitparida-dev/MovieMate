@@ -2664,18 +2664,6 @@ GET request to /static/media_files/movielight.mp4
 [4:58:09 pm] GET /api/library?category=history
 [4:58:10 pm] GET /api/library?category=history
 [4:58:10 pm] GET /api/library?category=history
-<<<<<<< HEAD
-[9:22:41 am] OPTIONS /api/library?category=favorites
-[9:22:41 am] OPTIONS /api/library?category=favorites
-[9:22:41 am] GET /api/library?category=favorites
-[9:22:41 am] GET /api/library?category=favorites
-[9:22:52 am] OPTIONS /api/library?category=history
-[9:22:52 am] OPTIONS /api/library?category=history
-[9:22:52 am] GET /api/library?category=history
-[9:22:52 am] GET /api/library?category=history
-[9:22:53 am] GET /api/library?category=history
-[9:22:53 am] GET /api/library?category=history
-=======
 [10:05:09 pm] OPTIONS /api/auth/register
 [10:05:09 pm] POST /api/auth/register
 [10:05:22 pm] OPTIONS /api/auth/login
@@ -4819,7 +4807,6 @@ GET request to /static/media_files/movielight.mp4
 [6:51:54 pm] GET /api/admin/reviews
 [6:51:54 pm] GET /api/admin/users
 [6:51:54 pm] GET /api/admin/stats
->>>>>>> 9f5d0e07596627f84dd3ccc74621c1150333daa6
 [8:12:14 pm] OPTIONS /api/auth/login
 [8:12:14 pm] POST /api/auth/login
 [8:12:30 pm] OPTIONS /api/library?category=favorites
@@ -4999,3 +4986,4 @@ GET request to /static/media_files/movielight.mp4
 [2:30:51 pm] GET /api/lists
 [2:30:51 pm] GET /api/lists/user
 [2:30:51 pm] GET /api/lists/user
+ main
