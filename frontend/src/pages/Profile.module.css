@@ -1,3 +1,7 @@
+/* ============================================================
+   PROFILE PAGE
+   ============================================================ */
+
 .profilePage {
   min-height: calc(100vh - 200px);
   background: linear-gradient(135deg, #0a192f 0%, #0d1f2d 100%);
@@ -5,7 +9,7 @@
 }
 
 .profileContainer {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   background: rgba(17, 34, 64, 0.95);
   border-radius: 24px;
@@ -14,22 +18,28 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* ============================================================
+   HEADER
+   ============================================================ */
+
 .profileHeader {
   text-align: center;
-  padding: 40px;
+  padding: 50px 40px 40px;
   background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
   border-bottom: 1px solid rgba(46, 196, 182, 0.2);
 }
 
 .profileHeader h1 {
-  color: white;
+  color: #ffffff;
   margin-top: 15px;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .profileHeader p {
   color: #2ec4b6;
   margin-top: 5px;
+  font-size: 1rem;
 }
 
 .memberSince {
@@ -44,6 +54,10 @@
   color: #2ec4b6;
 }
 
+/* ============================================================
+   STATS GRID
+   ============================================================ */
+
 .profileStats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -56,45 +70,115 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 15px;
+  padding: 18px 20px;
   background: #0d1f2d;
   border-radius: 16px;
   transition: all 0.3s ease;
+  border: 1px solid rgba(46, 196, 182, 0.05);
 }
 
 .statCard:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   background: #172a45;
+  border-color: rgba(46, 196, 182, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-.statCard i {
+.statIcon {
   font-size: 2rem;
-  color: #2ec4b6;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(46, 196, 182, 0.1);
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .statCard h3 {
   color: #8892b0;
-  font-size: 0.75rem;
-  margin-bottom: 5px;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .statCard p {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
 }
 
-/* ✅ FOLLOW SECTION */
+/* ============================================================
+   INSIGHTS
+   ============================================================ */
+
+.insights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 30px;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+}
+
+.insightItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #0d1f2d;
+  border-radius: 16px;
+  padding: 18px 22px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(46, 196, 182, 0.05);
+}
+
+.insightItem:hover {
+  transform: translateY(-3px);
+  background: #172a45;
+  border-color: rgba(46, 196, 182, 0.2);
+}
+
+.insightItem i {
+  font-size: 1.6rem;
+  color: #2ec4b6;
+  width: 40px;
+  text-align: center;
+}
+
+.insightItem strong {
+  display: block;
+  color: #8892b0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.insightItem p {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ============================================================
+   FOLLOW SECTION
+   ============================================================ */
+
 .followSection {
   padding: 0 30px;
   border-bottom: 1px solid rgba(46, 196, 182, 0.1);
 }
 
-/* ✅ STATS SECTION */
-.statsSection {
-  padding: 30px;
-  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+.followSection > div {
+  padding: 30px 0;
 }
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
 
 .profileActions {
   display: flex;
@@ -111,17 +195,26 @@
   border-radius: 30px;
   color: #0a192f;
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .actionBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(46, 196, 182, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(46, 196, 182, 0.4);
 }
+
+.actionBtn i {
+  font-size: 1rem;
+}
+
+/* ============================================================
+   LOGIN PROMPT
+   ============================================================ */
 
 .loginPrompt {
   text-align: center;
@@ -142,7 +235,7 @@
 }
 
 .loginPrompt h2 {
-  color: white;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
@@ -151,93 +244,102 @@
   background: linear-gradient(135deg, #2ec4b6, #1a8a7e);
   border: none;
   color: #0a192f;
-  padding: 10px 24px;
+  padding: 12px 28px;
   border-radius: 30px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.loginBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(46, 196, 182, 0.4);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 992px) {
+  .profileStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .insights {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  .profileStats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-  
   .profileHeader {
-    padding: 30px;
+    padding: 35px 20px;
   }
   
   .profileHeader h1 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   
-  .actionBtn {
-    padding: 10px 20px;
-    font-size: 0.85rem;
+  .profileStats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .statCard {
+    padding: 14px 16px;
+  }
+  
+  .statIcon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .statCard p {
+    font-size: 1.3rem;
+  }
+  
+  .insights {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 20px;
   }
   
   .followSection {
     padding: 0 20px;
   }
   
-  .statsSection {
+  .profileActions {
     padding: 20px;
+    gap: 10px;
+  }
+  
+  .actionBtn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
+  .profilePage {
+    padding: 20px 10px;
+  }
+  
   .profileStats {
     grid-template-columns: 1fr;
   }
-}
-/* ===== PROFILE INSIGHTS ===== */
-
-.insights {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 30px;
-  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
-}
-
-.insightItem {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  background: #172a45;
-  border-radius: 16px;
-  padding: 20px;
-  transition: 0.3s;
-}
-
-.insightItem:hover {
-  transform: translateY(-3px);
-  background: #203354;
-}
-
-.insightItem i {
-  font-size: 1.8rem;
-  color: #2ec4b6;
-}
-
-.insightItem strong {
-  display: block;
-  color: white;
-  font-size: 0.9rem;
-  margin-bottom: 5px;
-}
-
-.insightItem p {
-  color: #8892b0;
-  margin: 0;
-  font-size: 1rem;
-}
-.tag {
-  padding: 6px 14px;
-  background: rgba(46, 196, 182, 0.1);
-  color: #2ec4b6;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  border: 1px solid rgba(46, 196, 182, 0.2);
-  transition: var(--transition);
+  
+  .profileHeader h1 {
+    font-size: 1.3rem;
+  }
+  
+  .profileActions {
+    flex-direction: column;
+  }
+  
+  .actionBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }

@@ -17,23 +17,6 @@ const Footer = ({ setPage }) => {
               Your ultimate destination for discovering movies and TV shows. 
               Find ratings, reviews, and where to watch all in one place.
             </p>
-            <div className={styles.socialLinks}>
-              <a href="#" className={styles.socialLink} aria-label="Facebook">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" className={styles.socialLink} aria-label="Twitter">
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a href="#" className={styles.socialLink} aria-label="Instagram">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="#" className={styles.socialLink} aria-label="YouTube">
-                <i className="fab fa-youtube"></i>
-              </a>
-              <a href="#" className={styles.socialLink} aria-label="GitHub">
-                <i className="fab fa-github"></i>
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -58,24 +41,6 @@ const Footer = ({ setPage }) => {
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div className={styles.footerSection}>
-            <h3>Contact</h3>
-            <ul className={styles.contactInfo}>
-              <li>
-                <i className="fas fa-envelope"></i>
-                <span>support@moviemate.com</span>
-              </li>
-              <li>
-                <i className="fas fa-phone"></i>
-                <span>+1 (555) 123-4567</span>
-              </li>
-              <li>
-                <i className="fas fa-map-marker-alt"></i>
-                <span>Movie City, CA 90210</span>
-              </li>
-            </ul>
-          </div>
         </div>
 
         {/* Bottom Bar */}
