@@ -4,7 +4,18 @@ const rawApiUrl = import.meta.env.VITE_API_URL;
 const rawSocketUrl = import.meta.env.VITE_SOCKET_URL;
 const DEFAULT_API_BASE_URL = 'http://localhost:5000/api';
 
-const API_BASE_URL = rawApiUrl || (rawSocketUrl ? `${rawSocketUrl.replace(/\/$/, '')}/api` : DEFAULT_API_BASE_URL);
+// ✅ Check if the browser is running online vs locally
+const isProduction = typeof window !== 'undefined' && 
+  window.location.hostname !== 'localhost' && 
+  window.location.hostname !== '127.0.0.1';
+
+// ✅ Force the live Render URL if in production, otherwise use env/localhost fallback
+const API_BASE_URL = isProduction 
+  ? "https://moviemate-l4ts.onrender.com/api" 
+  : (rawApiUrl || (rawSocketUrl ? `${rawSocketUrl.replace(/\/$/, '')}/api` : DEFAULT_API_BASE_URL));
+
+
+  // ... leave your getWatchProviders and getAvailableCountries functions exactly as they are
 
 export const platformApi = {
   // Get watch providers for a movie or TV show
