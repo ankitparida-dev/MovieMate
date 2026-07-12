@@ -1,11 +1,21 @@
 import toast from 'react-hot-toast';
+
 const rawApiUrl = import.meta.env.VITE_API_URL;
 const rawSocketUrl = import.meta.env.VITE_SOCKET_URL;
 const DEFAULT_API_URL = "http://localhost:5000/api";
 
-const BASE_URL = rawApiUrl || (rawSocketUrl ? `${rawSocketUrl.replace(/\/$/, '')}/api` : DEFAULT_API_URL);
+// ✅ Check if the browser is running online vs locally
+const isProduction = typeof window !== 'undefined' && 
+  window.location.hostname !== 'localhost' && 
+  window.location.hostname !== '127.0.0.1';
+
+// ✅ Force the live Render URL if in production, otherwise use env/localhost
+const BASE_URL = isProduction 
+  ? "https://moviemate-l4ts.onrender.com/api" 
+  : (rawApiUrl || (rawSocketUrl ? `${rawSocketUrl.replace(/\/$/, '')}/api` : DEFAULT_API_URL));
 
 const getToken = () => localStorage.getItem("token");
+// ... leave the rest of your functions exactly as they are
 
 const getHeaders = (hasBody = false) => {
   const headers = {};
