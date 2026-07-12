@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useFollow } from "../hooks/useFollow";
 import styles from "./FollowSystem.module.css";
 
-const API_URL = "http://localhost:5000/api/follow";
+// ✅ Check if the browser is running live on Vercel vs locally
+const isProduction = typeof window !== 'undefined' && 
+  window.location.hostname !== 'localhost' && 
+  window.location.hostname !== '127.0.0.1';
+
+// ✅ Automatically choose the production Render domain vs local fallback
+const API_URL = isProduction 
+  ? "https://moviemate-l4ts.onrender.com/api/follow" 
+  : "http://localhost:5000/api/follow";
 
 const FollowSystem = () => {
     const {

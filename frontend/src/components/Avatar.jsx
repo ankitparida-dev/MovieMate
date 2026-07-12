@@ -61,30 +61,27 @@ const handlePhotoUpload = async (event) => {
         localStorage.getItem('user')
       );
 
-    const formData =
-      new FormData();
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('userId', user.id);
 
-    formData.append(
-      'image',
-      file
+    // ✅ Check if the browser is running live on Vercel vs locally
+    const isProduction = typeof window !== 'undefined' && 
+      window.location.hostname !== 'localhost' && 
+      window.location.hostname !== '127.0.0.1';
+
+    // ✅ Force production endpoint if live, otherwise fallback to local dev string
+    const apiBaseUrl = isProduction 
+      ? "https://moviemate-l4ts.onrender.com/api" 
+      : (import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/\/$/, '') : 'http://localhost:5000/api');
+
+    const response = await fetch(
+      `${apiBaseUrl}/auth/upload-profile`,
+      {
+        method: 'POST',
+        body: formData
+      }
     );
-
-    formData.append(
-      'userId',
-      user.id
-    );
-
-    const rawApiUrl = import.meta.env.VITE_API_URL;
-    const apiBaseUrl = rawApiUrl ? rawApiUrl.replace(/\/$/, '') : 'http://localhost:5000/api';
-
-    const response =
-      await fetch(
-        `${apiBaseUrl}/auth/upload-profile`,
-        {
-          method: 'POST',
-          body: formData
-        }
-      );
 
     const data =
       await response.json();
