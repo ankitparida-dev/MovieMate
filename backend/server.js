@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:5174',
+    'http://localhost:5000',
     // ✅ Your new production links:
     'https://movie-mate-l894v3hnv-ankit-paridas-projects.vercel.app',
     'https://moviemate-l4ts.onrender.com'
