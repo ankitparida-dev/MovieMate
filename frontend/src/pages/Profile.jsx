@@ -45,13 +45,15 @@ const Profile = ({ setPage }) => {
           <Avatar name={user.name} size="xlarge" onAvatarChange={handleAvatarChange} />
           <h1>{user.name}</h1>
           <p>{user.email}</p>
+          <span className={styles.memberSince}>
+            <i className="fas fa-calendar-alt"></i> Movie Enthusiast
+          </span>
         </div>
 
-        {/* STATS GRID (NOW FULLY REAL) */}
+        {/* STATS GRID */}
         <div className={styles.profileStats}>
-
           <div className={styles.statCard}>
-            <i className="fas fa-film"></i>
+            <div className={styles.statIcon}>🎬</div>
             <div>
               <h3>Movies Watched</h3>
               <p>{analytics.totalMovies}</p>
@@ -59,15 +61,15 @@ const Profile = ({ setPage }) => {
           </div>
 
           <div className={styles.statCard}>
-            <i className="fas fa-star"></i>
+            <div className={styles.statIcon}>⭐</div>
             <div>
-              <h3>Total Ratings</h3>
-              <p>{analytics.totalRatings}</p>
+              <h3>Average Rating</h3>
+              <p>{analytics.averageRating || 0}</p>
             </div>
           </div>
 
           <div className={styles.statCard}>
-            <i className="fas fa-heart"></i>
+            <div className={styles.statIcon}>❤️</div>
             <div>
               <h3>Favorites</h3>
               <p>{analytics.favoriteCount}</p>
@@ -75,85 +77,58 @@ const Profile = ({ setPage }) => {
           </div>
 
           <div className={styles.statCard}>
-            <i className="fas fa-comment"></i>
+            <div className={styles.statIcon}>📝</div>
             <div>
               <h3>Notes</h3>
               <p>{analytics.totalNotes}</p>
             </div>
           </div>
+        </div>
 
+        {/* INSIGHTS */}
+        <div className={styles.insights}>
+          <div className={styles.insightItem}>
+            <i className="fas fa-fire"></i>
+            <div>
+              <strong>Favorite Genre</strong>
+              <p>{analytics.favoriteGenre || 'N/A'}</p>
+            </div>
+          </div>
+
+          <div className={styles.insightItem}>
+            <i className="fas fa-calendar-day"></i>
+            <div>
+              <strong>Most Active Day</strong>
+              <p>{analytics.mostActiveDay || 'N/A'}</p>
+            </div>
+          </div>
+
+          <div className={styles.insightItem}>
+            <i className="fas fa-chart-line"></i>
+            <div>
+              <strong>Completion Rate</strong>
+              <p>{analytics.totalMovies > 0 ? Math.round((analytics.totalRatings / analytics.totalMovies) * 100) : 0}%</p>
+            </div>
+          </div>
         </div>
 
         {/* FOLLOW SYSTEM */}
         <div className={styles.followSection}>
           <FollowSystem username={user.name} />
         </div>
-        <div className={styles.profileStats}>
-
-  <div className={styles.statCard}>
-    <i className="fas fa-film"></i>
-    <div>
-      <h3>Movies Watched</h3>
-      <p>{analytics.totalMovies}</p>
-    </div>
-  </div>
-
-  <div className={styles.statCard}>
-    <i className="fas fa-star"></i>
-    <div>
-      <h3>Average Rating</h3>
-      <p>{analytics.averageRating}</p>
-    </div>
-  </div>
-
-  <div className={styles.statCard}>
-    <i className="fas fa-pen"></i>
-    <div>
-      <h3>Notes Written</h3>
-      <p>{analytics.totalNotes}</p>
-    </div>
-  </div>
-
-  <div className={styles.statCard}>
-    <i className="fas fa-bullseye"></i>
-    <div>
-      <h3>Completion Rate</h3>
-      <p>{analytics.totalMovies > 0 ? Math.round((analytics.totalRatings / analytics.totalMovies) * 100) : 0}%</p>
-    </div>
-  </div>
-
-</div>
-
-        {/* INSIGHTS (from analytics hook) */}
-        <div className={styles.insights}>
-          <div>
-            <strong>Favorite Genre:</strong>
-            <p>{analytics.favoriteGenre}</p>
-          </div>
-
-          <div>
-            <strong>Most Active Day:</strong>
-            <p>{analytics.mostActiveDay}</p>
-          </div>
-
-          <div>
-            <strong>Completion Rate:</strong>
-            <p>{analytics.totalMovies > 0 ? Math.round((analytics.totalRatings / analytics.totalMovies) * 100) : 0}%</p>
-          </div>
-        </div>
 
         {/* ACTIONS */}
         <div className={styles.profileActions}>
-          <button onClick={() => setPage('mynotes')}>
-            My Notes
+          <button className={styles.actionBtn} onClick={() => setPage('mynotes')}>
+            <i className="fas fa-pen"></i> My Notes
           </button>
 
-          <button onClick={() => setPage('analytics')}>
-            Analytics
+          <button className={styles.actionBtn} onClick={() => setPage('analytics')}>
+            <i className="fas fa-chart-line"></i> Analytics
           </button>
 
-          <button onClick={() => setPage('library')}>
-            My Library
+          <button className={styles.actionBtn} onClick={() => setPage('library')}>
+            <i className="fas fa-bookmark"></i> My Library
           </button>
         </div>
 
