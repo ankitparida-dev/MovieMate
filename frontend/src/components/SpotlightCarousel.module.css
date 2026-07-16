@@ -1,8 +1,9 @@
-/* 🌊 ENHANCED INTERSTELLAR SECTION */
+/* 🌊 ENHANCED SPOTLIGHT SECTION WITH 3D EFFECTS */
 .movieSection {
   position: relative;
   height: 80vh;
   overflow: hidden;
+  perspective: 1000px;
 }
 
 .carouselImage {
@@ -13,7 +14,44 @@
   background-position: center;
   display: flex;
   align-items: center;
-  transition: background-image 1s ease-in-out;
+  transition: background-image 1s ease-in-out, transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+/* Animated Particles */
+.particlesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(46, 196, 182, 0.3);
+  border-radius: 50%;
+  animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
 }
 
 .overlay {
@@ -36,7 +74,7 @@
   max-width: 600px;
   color: var(--text);
   padding: 0 20px;
-  animation: slideInFromLeft 1s ease-out;
+  animation: slideInFromLeft 0.8s ease-out;
 }
 
 @keyframes slideInFromLeft {
@@ -48,7 +86,7 @@
 .spotlight {
   display: inline-block;
   background: linear-gradient(135deg, #2ec4b6, #147d75);
-  color: #fff; /* Ensure visible text */
+  color: #fff;
   padding: 8px 20px;
   border-radius: 25px;
   font-size: 0.9rem;
@@ -58,8 +96,11 @@
   text-transform: uppercase;
   animation: spotlightPulse 2s ease-in-out infinite;
   box-shadow: 0 4px 15px rgba(46, 196, 182, 0.4);
-  position: relative; /* Keeps it above overlay */
   z-index: 999;
+}
+
+.spotlight i {
+  margin-right: 8px;
 }
 
 @keyframes spotlightPulse {
@@ -99,26 +140,7 @@
   color: var(--text-light);
   font-weight: 500;
   font-size: 1rem;
-  position: relative;
-  padding: 0;
-  border: none;
-  background: none;
   transition: all 0.3s ease;
-}
-
-.details p::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-teal);
-  transition: width 0.3s ease;
-}
-
-.details p:hover::after {
-  width: 100%;
 }
 
 .details p:hover {
@@ -159,7 +181,6 @@
   align-items: center;
   gap: 10px;
   font-size: 1rem;
-  text-decoration: none;
 }
 
 .trailer {
@@ -173,8 +194,7 @@
   background: rgba(46, 196, 182, 0.25);
   border-color: rgba(46, 196, 182, 0.8);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 12px 30px rgba(46, 196, 182, 0.4),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 30px rgba(46, 196, 182, 0.4);
   color: var(--text);
 }
 
@@ -182,16 +202,45 @@
   background: var(--gradient-teal);
   color: var(--primary);
   border: 2px solid rgba(46, 196, 182, 0.3);
-  box-shadow: 0 6px 20px rgba(46, 196, 182, 0.4),
-              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(46, 196, 182, 0.4);
 }
 
 .detailButton:hover {
   background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 35px rgba(46, 196, 182, 0.6),
-              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 15px 35px rgba(46, 196, 182, 0.6);
   border-color: rgba(46, 196, 182, 0.6);
+}
+
+/* Carousel Indicators */
+.indicators {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  width: 30px;
+  border-radius: 10px;
+  background: #2ec4b6;
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* NEXT / PREV BUTTONS */
@@ -227,21 +276,53 @@
   box-shadow: 0 8px 20px rgba(46, 196, 182, 0.4);
 }
 
+/* Loading Spinner */
+.loadingSpinner {
+  text-align: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(46, 196, 182, 0.1);
+  border-top-color: #2ec4b6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loadingText {
+  color: var(--text-light);
+  font-size: 1.2rem;
+}
+
 /* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+  .showName { font-size: 3rem; }
+}
+
 @media (max-width: 768px) {
+  .movieSection { height: 70vh; }
   .showName { font-size: 2.5rem; }
   .movieItems { margin: 0 5%; max-width: 90%; }
   .details { gap: 15px; }
   .details p { font-size: 0.9rem; }
   .interstellarButtons { justify-content: center; }
-  .nextPrev { bottom: 20px; right: 20px; }
+  .nextPrev { bottom: 70px; right: 20px; }
   .prev, .next { width: 45px; height: 45px; font-size: 1rem; }
+  .indicators { bottom: 20px; }
 }
 
 @media (max-width: 480px) {
-  .movieSection { height: 70vh; }
-  .movieItems { margin: 0 3%; }
+  .movieSection { height: 65vh; }
   .showName { font-size: 2rem; }
-  .overview { font-size: 0.95rem; }
-  .trailer, .detailButton { padding: 12px 24px; font-size: 0.9rem; }
+  .overview { font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .trailer, .detailButton { padding: 10px 20px; font-size: 0.85rem; }
+  .spotlight { font-size: 0.7rem; padding: 5px 14px; }
+  .nextPrev { bottom: 60px; right: 15px; gap: 10px; }
+  .prev, .next { width: 38px; height: 38px; font-size: 0.8rem; }
 }

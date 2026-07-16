@@ -1,0 +1,241 @@
+/* ========================== */
+/*        OVERLAY            */
+/* ========================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========================== */
+/*         MODAL             */
+/* ========================== */
+.modal {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: linear-gradient(135deg, #112240, #0a192f);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(46, 196, 182, 0.3);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ========================== */
+/*       CLOSE BUTTON        */
+/* ========================== */
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  background: #e63946;
+  border-color: #e63946;
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* ========================== */
+/*      TRAILER CONTAINER    */
+/* ========================== */
+.trailerContainer {
+  padding: 20px;
+}
+
+.trailerWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ✅ FIX: Ensure iframe is visible */
+.trailerWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border: none;
+}
+
+/* ✅ FIX: React Player visibility */
+.reactPlayer {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 2 !important;
+}
+
+/* ========================== */
+/*      TRAILER INFO         */
+/* ========================== */
+.trailerInfo {
+  padding: 16px 0 8px;
+  color: white;
+}
+
+.trailerInfo h3 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trailerInfo h3 i {
+  color: #2ec4b6;
+}
+
+.trailerInfo p {
+  color: #8892b0;
+  font-size: 0.85rem;
+}
+
+/* ========================== */
+/*        ERROR              */
+/* ========================== */
+.errorContainer {
+  text-align: center;
+  padding: 80px 60px;
+  color: #8892b0;
+}
+
+.errorContainer i {
+  font-size: 4rem;
+  color: #e63946;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.errorContainer h3 {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.closeBtnSmall {
+  margin-top: 20px;
+  padding: 10px 30px;
+  background: linear-gradient(135deg, #2ec4b6, #1a8a7e);
+  border: none;
+  border-radius: 30px;
+  color: #0a192f;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.closeBtnSmall:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 196, 182, 0.4);
+}
+
+/* ========================== */
+/*      RESPONSIVE           */
+/* ========================== */
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    border-radius: 16px;
+  }
+  
+  .trailerContainer {
+    padding: 12px;
+  }
+  
+  .closeBtn {
+    top: 10px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+  
+  .trailerInfo h3 {
+    font-size: 1rem;
+  }
+  
+  .errorContainer {
+    padding: 60px 30px;
+  }
+  
+  .errorContainer i {
+    font-size: 3rem;
+  }
+  
+  .errorContainer h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    border-radius: 12px;
+  }
+  
+  .trailerContainer {
+    padding: 8px;
+  }
+  
+  .closeBtn {
+    top: 8px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  
+  .trailerInfo h3 {
+    font-size: 0.9rem;
+  }
+  
+  .trailerInfo p {
+    font-size: 0.75rem;
+  }
+}

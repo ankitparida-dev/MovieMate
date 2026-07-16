@@ -511,3 +511,136 @@
 .reviewsTab {
   padding: 10px 0;
 }
+/* ============================================================
+   3D EFFECTS
+   ============================================================ */
+
+/* Modal 3D Tilt Effect */
+.modal {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Poster 3D Effect */
+.posterWrapper {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.posterWrapper img {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.posterWrapper:hover img {
+  box-shadow: 0 20px 50px rgba(46, 196, 182, 0.3);
+}
+
+/* Hero Section 3D */
+.heroSection {
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Info Wrapper 3D */
+.infoWrapper {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Tab Content 3D */
+.tabContent {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Card Hover 3D Effects */
+.castCard {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.castCard:hover {
+  transform: translateY(-5px) rotateX(3deg) scale(1.02);
+  box-shadow: 0 15px 35px rgba(46, 196, 182, 0.3);
+}
+
+.crewCard {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.crewCard:hover {
+  transform: translateX(5px) rotateY(-2deg) scale(1.02);
+  box-shadow: 0 10px 25px rgba(46, 196, 182, 0.2);
+}
+
+/* Genre Tags 3D Hover */
+.genre {
+  transition: all 0.3s ease;
+}
+
+.genre:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 15px rgba(46, 196, 182, 0.3);
+}
+
+/* Buttons 3D Hover */
+.watchlistBtn, .favoriteBtn, .trailerBtn {
+  transition: all 0.3s ease;
+}
+
+.watchlistBtn:hover, .favoriteBtn:hover, .trailerBtn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Floating Particles Effect for Hero */
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(46, 196, 182, 0.05) 0%, transparent 70%);
+  animation: rotateParticles 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes rotateParticles {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Smooth Transitions for All 3D Elements */
+.modal, .heroSection, .posterWrapper, .infoWrapper, .tabContent {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Responsive 3D Adjustments */
+@media (max-width: 768px) {
+  .posterWrapper {
+    transform: none !important;
+  }
+  
+  .modal {
+    transform: none !important;
+  }
+  
+  .infoWrapper {
+    transform: none !important;
+  }
+  
+  .tabContent {
+    transform: none !important;
+  }
+}

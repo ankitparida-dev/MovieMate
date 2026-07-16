@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './HeroBanner.module.css';
+import TrailerPlayer from './TrailerPlayer';
 
 // The texts for typing animation
 const TEXTS_TO_TYPE = [
@@ -10,13 +11,14 @@ const TEXTS_TO_TYPE = [
   "Personalized Picks"
 ];
 
-// Featured movies for background carousel
+// Featured movies for carousel
 const FEATURED_MOVIES = [
   {
     id: 27205,
     title: "Inception",
     poster: "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
     backdrop: "https://image.tmdb.org/t/p/original/8ZTVqvKDQNemWeJyuMJiO9m4j3R.jpg",
+    trailerKey: "YoHD9XEInc0",
     rating: 8.8,
     year: 2010
   },
@@ -25,6 +27,7 @@ const FEATURED_MOVIES = [
     title: "Interstellar",
     poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
     backdrop: "https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5fK5VQsXEG.jpg",
+    trailerKey: "zSWdZVtXT7E",
     rating: 8.6,
     year: 2014
   },
@@ -33,6 +36,7 @@ const FEATURED_MOVIES = [
     title: "The Dark Knight",
     poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
     backdrop: "https://image.tmdb.org/t/p/original/nMKdUUepR0i5zn0y1T4CsSB5chy.jpg",
+    trailerKey: "EXeTwQWrcwY",
     rating: 9.0,
     year: 2008
   },
@@ -41,6 +45,7 @@ const FEATURED_MOVIES = [
     title: "Avengers: Endgame",
     poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
     backdrop: "https://image.tmdb.org/t/p/original/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+    trailerKey: "TcMBFSGVi1c",
     rating: 8.4,
     year: 2019
   },
@@ -49,6 +54,7 @@ const FEATURED_MOVIES = [
     title: "Parasite",
     poster: "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
     backdrop: "https://image.tmdb.org/t/p/original/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg",
+    trailerKey: "5xH0HfJHsaY",
     rating: 8.6,
     year: 2019
   }
@@ -58,11 +64,13 @@ export default function HeroBanner({ onExploreClick }) {
   const [typedText, setTypedText] = useState('');
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(false);
 
   const textIndex = useRef(0);
   const charIndex = useRef(0);
   const isDeleting = useRef(false);
   const typingSpeed = useRef(100);
+  const carouselIntervalRef = useRef(null);
 
   // Typing animation
   useEffect(() => {
@@ -95,30 +103,46 @@ export default function HeroBanner({ onExploreClick }) {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Background movie carousel
+  // ✅ Background movie carousel - PAUSED when trailer is open
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentMovieIndex((prev) => (prev + 1) % FEATURED_MOVIES.length);
-        setIsTransitioning(false);
-      }, 500);
-    }, 5000);
+    // Clear any existing interval
+    if (carouselIntervalRef.current) {
+      clearInterval(carouselIntervalRef.current);
+    }
 
-    return () => clearInterval(interval);
-  }, []);
+    // ✅ Only start carousel if trailer is NOT showing
+    if (!showTrailer) {
+      carouselIntervalRef.current = setInterval(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentMovieIndex((prev) => (prev + 1) % FEATURED_MOVIES.length);
+          setIsTransitioning(false);
+        }, 500);
+      }, 5000);
+    }
+
+    return () => {
+      if (carouselIntervalRef.current) {
+        clearInterval(carouselIntervalRef.current);
+      }
+    };
+  }, [showTrailer]); // ✅ Re-run when showTrailer changes
 
   const currentMovie = FEATURED_MOVIES[currentMovieIndex];
 
   const handleExploreClick = () => {
     if (onExploreClick) {
       onExploreClick();
-    } else {
-      const moviesSection = document.querySelector('[data-section="movies"]');
-      if (moviesSection) {
-        moviesSection.scrollIntoView({ behavior: 'smooth' });
-      }
     }
+  };
+
+  // ✅ Handle trailer open/close
+  const handleOpenTrailer = () => {
+    setShowTrailer(true);
+  };
+
+  const handleCloseTrailer = () => {
+    setShowTrailer(false);
   };
 
   return (
@@ -177,11 +201,6 @@ export default function HeroBanner({ onExploreClick }) {
               <span className={styles.cursor}>|</span>
             </div>
 
-            {/* <p className={styles.heroDescription}>
-              Explore thousands of movies and TV shows with MovieMate. Find hidden gems,
-              trending content, and personalized recommendations all in one place.
-            </p> */}
-
             <div className={styles.statsRow}>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>10K+</span>
@@ -222,10 +241,20 @@ export default function HeroBanner({ onExploreClick }) {
           {/* RIGHT SIDE - Current Movie Info */}
           <div className={styles.heroVisual}>
             <div className={styles.currentMovieCard}>
-              <div className={styles.currentMoviePoster}>
+              <div 
+                className={styles.currentMoviePoster}
+                onClick={handleOpenTrailer}
+                style={{ cursor: 'pointer' }}
+              >
                 <img src={currentMovie.poster} alt={currentMovie.title} />
                 <div className={styles.currentMovieBadge}>
                   <span>#{currentMovieIndex + 1} Featured</span>
+                </div>
+                <div className={styles.playOverlay}>
+                  <div className={styles.playIconContainer}>
+                    <i className="fas fa-play"></i>
+                    <span>Watch Trailer</span>
+                  </div>
                 </div>
               </div>
               <div className={styles.currentMovieInfo}>
@@ -237,8 +266,11 @@ export default function HeroBanner({ onExploreClick }) {
                   </span>
                 </div>
                 <div className={styles.currentMovieActions}>
-                  <button className={styles.watchNowBtn}>
-                    <i className="fas fa-play"></i> Watch Now
+                  <button 
+                    className={styles.watchNowBtn}
+                    onClick={handleOpenTrailer}
+                  >
+                    <i className="fas fa-play"></i> Watch Trailer
                   </button>
                   <button className={styles.addToListBtn}>
                     <i className="fas fa-plus"></i>
@@ -258,11 +290,14 @@ export default function HeroBanner({ onExploreClick }) {
             key={index}
             className={`${styles.indicator} ${index === currentMovieIndex ? styles.active : ''}`}
             onClick={() => {
-              setIsTransitioning(true);
-              setTimeout(() => {
-                setCurrentMovieIndex(index);
-                setIsTransitioning(false);
-              }, 300);
+              // Don't switch if trailer is open
+              if (!showTrailer) {
+                setIsTransitioning(true);
+                setTimeout(() => {
+                  setCurrentMovieIndex(index);
+                  setIsTransitioning(false);
+                }, 300);
+              }
             }}
           />
         ))}
@@ -273,6 +308,18 @@ export default function HeroBanner({ onExploreClick }) {
         <span>Scroll to explore</span>
         <i className="fas fa-chevron-down"></i>
       </div>
+
+      {/* ✅ TRAILER PLAYER - Opens on user click, carousel pauses */}
+      {showTrailer && (
+        <TrailerPlayer 
+          movieId={currentMovie.id}
+          title={currentMovie.title}
+          trailerKey={currentMovie.trailerKey}
+          poster={currentMovie.poster}
+          onClose={handleCloseTrailer}
+          autoPlay={true}
+        />
+      )}
     </section>
   );
 }
