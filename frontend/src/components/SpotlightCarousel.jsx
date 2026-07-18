@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import styles from './SpotlightCarousel.module.css';
 import { request } from '../api/tmdb';
 import TrailerPlayer from './TrailerPlayer';
@@ -15,6 +16,8 @@ const TRAILER_KEYS = {
   278: "6hB3S9bIaco",    // Shawshank Redemption
   680: "s7EdQ4FqbhY",    // Pulp Fiction
   13: "5NYt1qirBWg",     // Forrest Gump
+  603: "bLvqo1L9vPk",    // The Matrix
+  120: "2LqzF5WauAw",    // Lord of the Rings
 };
 
 const LoadingPlaceholder = () => (
@@ -31,10 +34,10 @@ export default function SpotlightCarousel({ onOpen }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
   const [showTrailer, setShowTrailer] = useState(false);
   const [currentTrailerKey, setCurrentTrailerKey] = useState(null);
+  const [currentSlideTitle, setCurrentSlideTitle] = useState('');
+  const [currentSlidePoster, setCurrentSlidePoster] = useState(null);
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -55,7 +58,7 @@ export default function SpotlightCarousel({ onOpen }) {
 
   // Auto-play carousel
   useEffect(() => {
-    if (slides.length === 0 || showTrailer) return; // ✅ Pause when trailer is open
+    if (slides.length === 0 || showTrailer) return;
     
     const interval = setInterval(() => {
       goToNext();
@@ -82,29 +85,60 @@ export default function SpotlightCarousel({ onOpen }) {
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
-  const handleMouseMove = (e) => {
-    if (carouselRef.current) {
-      const rect = carouselRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
-      setMousePosition({ x, y });
+  // ✅ Handle trailer play
+  const handlePlayTrailer = (slide) => {
+    const trailerKey = TRAILER_KEYS[slide.id];
+    if (trailerKey) {
+      setCurrentTrailerKey(trailerKey);
+      setCurrentSlideTitle(slide.title || slide.name);
+      setCurrentSlidePoster(slide.poster_path);
+      setShowTrailer(true);
+      console.log('🎬 Playing trailer for:', slide.title || slide.name);
+    } else {
+      fetchTrailerFromTMDB(slide);
     }
   };
 
-  // ✅ Handle trailer play
-  const handlePlayTrailer = (slideId) => {
-    const trailerKey = TRAILER_KEYS[slideId];
-    if (trailerKey) {
-      setCurrentTrailerKey(trailerKey);
-      setShowTrailer(true);
-    } else {
-      alert('No trailer available for this movie');
+  // ✅ Fallback: Fetch trailer from TMDB API
+  const fetchTrailerFromTMDB = async (slide) => {
+    try {
+      const mediaType = slide.media_type || 'movie';
+      const url = `https://api.themoviedb.org/3/${mediaType}/${slide.id}/videos`;
+      const token = import.meta.env.VITE_TMDB_TOKEN || process.env.REACT_APP_TMDB_TOKEN;
+      
+      const response = await fetch(url, {
+        headers: {
+          'accept': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) throw new Error('Failed to fetch');
+      
+      const data = await response.json();
+      const trailer = data.results?.find(
+        v => v.type === 'Trailer' && v.site === 'YouTube'
+      ) || data.results?.[0];
+      
+      if (trailer) {
+        setCurrentTrailerKey(trailer.key);
+        setCurrentSlideTitle(slide.title || slide.name);
+        setCurrentSlidePoster(slide.poster_path);
+        setShowTrailer(true);
+      } else {
+        alert(`No trailer available for "${slide.title || slide.name}"`);
+      }
+    } catch (error) {
+      console.error('Error fetching trailer:', error);
+      alert('Failed to load trailer. Please try again.');
     }
   };
 
   const handleCloseTrailer = () => {
     setShowTrailer(false);
     setCurrentTrailerKey(null);
+    setCurrentSlideTitle('');
+    setCurrentSlidePoster(null);
   };
 
   if (loading) {
@@ -123,115 +157,90 @@ export default function SpotlightCarousel({ onOpen }) {
   const mediaType = currentSlide.media_type;
 
   return (
-    <section 
-      className={styles.movieSection}
-      ref={carouselRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => {
-        setIsHovering(false);
-        setMousePosition({ x: 0, y: 0 });
-      }}
-    >
-      <div 
-        className={styles.carouselImage}
-        style={{
-          transform: isHovering 
-            ? `perspective(1000px) rotateY(${mousePosition.x}deg) rotateX(${-mousePosition.y}deg)` 
-            : 'perspective(1000px) rotateY(0deg) rotateX(0deg)',
-          transition: isHovering ? 'none' : 'transform 0.3s ease',
-          backgroundImage: `
-            linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), 
-            url(${backgroundUrl})
-          `
-        }}
+    <>
+      <section 
+        className={styles.movieSection}
+        ref={carouselRef}
       >
-        <div className={styles.overlay}></div>
-        
-        {/* 3D Floating Particles */}
-        <div className={styles.particlesContainer}>
-          {[...Array(15)].map((_, i) => (
-            <div 
-              key={i} 
-              className={styles.particle}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${5 + Math.random() * 10}s`,
-                width: `${2 + Math.random() * 4}px`,
-                height: `${2 + Math.random() * 4}px`
-              }}
-            />
-          ))}
-        </div>
-        
-        <div className="container" style={{ zIndex: 2, position: 'relative' }}>
-          <div className={styles.movieItems}>
-            <span className={styles.spotlight}>
-              <i className="fas fa-star"></i> #{currentIndex + 1} Spotlight
-            </span>
-            <h1 className={styles.showName}>{title}</h1>
-            <div className={styles.details}>
-              <p><i className="fas fa-play-circle"></i> {mediaType === 'tv' ? 'TV Series' : 'Movie'}</p>
-              <p><i className="far fa-calendar-alt"></i> {year}</p>
-              <p><i className="fas fa-star"></i> {rating}/10</p>
-            </div>
-            <p className={styles.overview}>{currentSlide.overview}</p>
-            <div className={styles.interstellarButtons}>
-              <button 
-                className={styles.trailer}
-                onClick={() => handlePlayTrailer(currentSlide.id)}
-              >
-                <i className="fas fa-play"></i> Watch Trailer
-              </button>
-              <button 
-                className={styles.detailButton} 
-                onClick={() => onOpen(currentSlide)}
-              >
-                <i className="fas fa-info-circle"></i> View Details
-              </button>
+        <div 
+          className={styles.carouselImage}
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.8)), 
+              url(${backgroundUrl})
+            `
+          }}
+        >
+          <div className={styles.overlay}></div>
+          
+          <div className="container" style={{ zIndex: 2, position: 'relative' }}>
+            <div className={styles.movieItems}>
+              <span className={styles.spotlight}>
+                <i className="fas fa-star"></i> #{currentIndex + 1} Spotlight
+              </span>
+              <h1 className={styles.showName}>{title}</h1>
+              <div className={styles.details}>
+                <p><i className="fas fa-play-circle"></i> {mediaType === 'tv' ? 'TV Series' : 'Movie'}</p>
+                <p><i className="far fa-calendar-alt"></i> {year}</p>
+                <p><i className="fas fa-star"></i> {rating}/10</p>
+              </div>
+              <p className={styles.overview}>{currentSlide.overview}</p>
+              <div className={styles.interstellarButtons}>
+                <button 
+                  className={styles.trailer}
+                  onClick={() => handlePlayTrailer(currentSlide)}
+                >
+                  <i className="fas fa-play"></i> Watch Trailer
+                </button>
+                <button 
+                  className={styles.detailButton} 
+                  onClick={() => onOpen(currentSlide)}
+                >
+                  <i className="fas fa-info-circle"></i> View Details
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        
-        {/* Carousel Indicators */}
-        <div className={styles.indicators}>
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${index === currentIndex ? styles.active : ''}`}
-              onClick={() => {
-                if (!isTransitioning && !showTrailer) {
-                  setIsTransitioning(true);
-                  setCurrentIndex(index);
-                  setTimeout(() => setIsTransitioning(false), 500);
-                }
-              }}
-            />
-          ))}
-        </div>
+          
+          {/* Carousel Indicators */}
+          <div className={styles.indicators}>
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.indicator} ${index === currentIndex ? styles.active : ''}`}
+                onClick={() => {
+                  if (!isTransitioning && !showTrailer) {
+                    setIsTransitioning(true);
+                    setCurrentIndex(index);
+                    setTimeout(() => setIsTransitioning(false), 500);
+                  }
+                }}
+              />
+            ))}
+          </div>
 
-        <div className={styles.nextPrev}>
-          <button className={styles.prev} onClick={goToPrevious}>
-            &#10094;
-          </button>
-          <button className={styles.next} onClick={goToNext}>
-            &#10095;
-          </button>
+          <div className={styles.nextPrev}>
+            <button className={styles.prev} onClick={goToPrevious}>
+              &#10094;
+            </button>
+            <button className={styles.next} onClick={goToNext}>
+              &#10095;
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* ✅ TRAILER PLAYER MODAL */}
-      {showTrailer && (
+      {/* ✅ TRAILER PLAYER MODAL - RENDERED WITH PORTAL AT ROOT LEVEL */}
+      {showTrailer && currentTrailerKey && ReactDOM.createPortal(
         <TrailerPlayer 
-          title={currentSlide.title || currentSlide.name}
+          title={currentSlideTitle}
           trailerKey={currentTrailerKey}
-          poster={currentSlide.poster_path}
+          poster={currentSlidePoster}
           onClose={handleCloseTrailer}
           autoPlay={true}
-        />
+        />,
+        document.body
       )}
-    </section>
+    </>
   );
 }
