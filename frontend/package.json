@@ -13,6 +13,8 @@
     "@dicebear/collection": "^9.4.2",
     "@dicebear/core": "^9.4.2",
     "@gschoppe/avataaars": "^2.2.7",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "axios": "^1.16.0",
     "chart.js": "^4.5.1",
     "dotenv": "^17.4.2",
@@ -21,7 +23,9 @@
     "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.0",
     "react-hot-toast": "^2.6.0",
-    "socket.io-client": "^4.8.3"
+    "react-player": "^3.4.0",
+    "socket.io-client": "^4.8.3",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

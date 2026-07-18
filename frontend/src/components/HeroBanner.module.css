@@ -1,3 +1,6 @@
+/* ========================== */
+/*       HERO SECTION         */
+/* ========================== */
 .heroSection {
   position: relative;
   min-height: 100vh;
@@ -6,7 +9,9 @@
   overflow: hidden;
 }
 
-/* Background Container */
+/* ========================== */
+/*     BACKGROUND CONTAINER   */
+/* ========================== */
 .backgroundContainer {
   position: absolute;
   top: 0;
@@ -55,7 +60,9 @@
   z-index: 1;
 }
 
-/* Movie Cards Carousel */
+/* ========================== */
+/*     MOVIE CARDS CAROUSEL  */
+/* ========================== */
 .carouselContainer {
   position: absolute;
   top: 0;
@@ -117,7 +124,9 @@
   color: #ffc107;
 }
 
-/* Hero Content */
+/* ========================== */
+/*       HERO CONTENT         */
+/* ========================== */
 .heroContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -128,7 +137,9 @@
   padding: 100px 0;
 }
 
-/* Hero Text */
+/* ========================== */
+/*        HERO TEXT           */
+/* ========================== */
 .heroText {
   color: white;
 }
@@ -163,7 +174,9 @@
   background-clip: text;
 }
 
-/* Typing Container */
+/* ========================== */
+/*     TYPING CONTAINER       */
+/* ========================== */
 .typingContainer {
   display: flex;
   align-items: center;
@@ -193,14 +206,9 @@
   50% { opacity: 0; }
 }
 
-.heroDescription {
-  color: #8892b0;
-  line-height: 1.6;
-  margin-bottom: 25px;
-  font-size: 1rem;
-}
-
-/* Stats Row */
+/* ========================== */
+/*        STATS ROW           */
+/* ========================== */
 .statsRow {
   display: flex;
   gap: 30px;
@@ -226,7 +234,9 @@
   color: #8892b0;
 }
 
-/* Buttons */
+/* ========================== */
+/*        BUTTONS             */
+/* ========================== */
 .heroActions {
   display: flex;
   gap: 20px;
@@ -268,7 +278,24 @@
   transform: translateY(-3px);
 }
 
-/* Trust Badges */
+.trailerBtn {
+  background: rgba(46, 196, 182, 0.15);
+  color: #e6e6e6;
+  border: 2px solid rgba(46, 196, 182, 0.4);
+  backdrop-filter: blur(15px);
+}
+
+.trailerBtn:hover {
+  background: rgba(46, 196, 182, 0.25);
+  border-color: rgba(46, 196, 182, 0.8);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(46, 196, 182, 0.4);
+  color: #ffffff;
+}
+
+/* ========================== */
+/*     TRUST BADGES           */
+/* ========================== */
 .trustBadges {
   display: flex;
   gap: 20px;
@@ -287,7 +314,9 @@
   color: #2ec4b6;
 }
 
-/* Current Movie Card (Right Side) */
+/* ========================== */
+/*    CURRENT MOVIE CARD      */
+/* ========================== */
 .heroVisual {
   display: flex;
   justify-content: center;
@@ -405,7 +434,9 @@
   background: rgba(46, 196, 182, 0.4);
 }
 
-/* Carousel Indicators */
+/* ========================== */
+/*   CAROUSEL INDICATORS      */
+/* ========================== */
 .carouselIndicators {
   position: absolute;
   bottom: 30px;
@@ -432,7 +463,9 @@
   background: #2ec4b6;
 }
 
-/* Scroll Indicator */
+/* ========================== */
+/*    SCROLL INDICATOR        */
+/* ========================== */
 .scrollIndicator {
   position: absolute;
   bottom: 30px;
@@ -453,7 +486,9 @@
   50% { transform: translateY(10px); }
 }
 
-/* Responsive */
+/* ========================== */
+/*       RESPONSIVE           */
+/* ========================== */
 @media (max-width: 1024px) {
   .heroContent {
     grid-template-columns: 1fr;
@@ -511,4 +546,164 @@
   .statNumber {
     font-size: 1.2rem;
   }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.5rem;
+  }
+  
+  .currentMovieCard {
+    width: 200px;
+    padding: 15px;
+  }
+  
+  .statsRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .heroBtn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .heroActions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+/* ========================== */
+/*   TRAILER PROGRESS BAR    */
+/* ========================== */
+.progressBarContainer {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 20px;
+  background: rgba(46, 196, 182, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(46, 196, 182, 0.2);
+  position: relative;
+}
+
+.progressBar {
+  height: 6px;
+  background: linear-gradient(90deg, #2ec4b6, #4fd1c5);
+  transition: width 1s linear;
+  border-radius: 10px;
+}
+
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #8892b0;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+/* ========================== */
+/*   SKIP & BROWSE BUTTONS   */
+/* ========================== */
+
+/* ✅ Skip Button - Appears during trailer */
+.skipBtn {
+  display: inline-block;
+  margin: 8px 5px 15px;
+  padding: 10px 24px;
+  background: rgba(46, 196, 182, 0.2);
+  border: 1px solid rgba(46, 196, 182, 0.5);
+  border-radius: 30px;
+  color: #2ec4b6;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  pointer-events: all;
+}
+
+.skipBtn:hover {
+  background: rgba(46, 196, 182, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 196, 182, 0.3);
+}
+
+.skipBtn i {
+  margin-right: 8px;
+}
+
+/* ✅ Browse All Movies Button */
+.browseBtn {
+  display: inline-block;
+  margin: 5px 5px 15px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #2ec4b6, #1a8a7e);
+  border: none;
+  border-radius: 30px;
+  color: #0a192f;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: all;
+}
+
+.browseBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 196, 182, 0.4);
+}
+
+.browseBtn i {
+  margin-right: 8px;
+}
+/* ========================== */
+/*   PLAY OVERLAY ON POSTER  */
+/* ========================== */
+.playOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.currentMovieCard:hover .playOverlay {
+  opacity: 1;
+}
+
+.playIconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.currentMovieCard:hover .playIconContainer {
+  transform: scale(1);
+}
+
+.playIconContainer i {
+  font-size: 3rem;
+  color: #2ec4b6;
+  text-shadow: 0 0 20px rgba(46, 196, 182, 0.5);
+}
+
+.playIconContainer span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 12px;
+  border-radius: 20px;
 }
