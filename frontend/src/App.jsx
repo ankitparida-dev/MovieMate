@@ -9,10 +9,10 @@ import TvShows from "./pages/TvShows";
 import About from "./pages/About";
 import Main from "./pages/Main";
 import MyLibrary from "./pages/MyLibrary";
-import MyNotes from "./pages/MyNotes";
+// ❌ REMOVED: import MyNotes from "./pages/MyNotes";
 import Analytics from "./pages/Analytics";
 import Profile from "./pages/Profile";
-import AdminDashboard from "./pages/AdminDashboard";  // ✅ NEW
+import AdminDashboard from "./pages/AdminDashboard";
 import LoginPage from "./LoginPage";
 import RegPage from "./RegPage";
 
@@ -115,17 +115,17 @@ export default function App() {
       {page === "home" && <Main onOpen={openAboutPage} searchQuery={searchQuery} />}
       {page === "movies" && <Movies onOpen={openAboutPage} />}
       {page === "tvshows" && <TvShows onOpen={openAboutPage} />}
+      
+      {/* ✅ LIBRARY - Now includes Notes & Ratings */}
       {page === "library" && <MyLibrary onOpen={openAboutPage} />}
-      {page === "mynotes" && <MyNotes onOpen={openAboutPage} />}
+      
+      {/* ❌ REMOVED: Separate MyNotes route */}
+      {/* {page === "mynotes" && <MyNotes onOpen={openAboutPage} />} */}
+      
       {page === "analytics" && <Analytics onOpen={openAboutPage} />}
-      
-      {/* PROFILE ROUTE */}
       {page === "profile" && <Profile setPage={changePage} />}
-      
-      {/* ✅ ADMIN DASHBOARD ROUTE */}
       {page === "admin" && <AdminDashboard />}
       
-      {/* ABOUT ROUTE */}
       {page === "about" && selected && (
         <About selected={selected} setPage={changePage} onOpen={openAboutPage} />
       )}
