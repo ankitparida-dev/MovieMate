@@ -9,51 +9,245 @@
   border-left: 4px solid var(--secondary);
 }
 
-/* --------------------------
-        TABS
---------------------------- */
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 40px;
-  flex-wrap: wrap; /* Makes tabs wrap on small screens */
+.heading i {
+  margin-right: 12px;
+  color: var(--secondary);
 }
 
-.tab {
+/* --------------------------
+        MAIN TABS
+--------------------------- */
+.mainTabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.mainTab {
   background: transparent;
   border: 2px solid rgba(46, 196, 182, 0.3);
   color: var(--text-muted);
   padding: 10px 25px;
   border-radius: 30px;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.tab:hover {
+.mainTab:hover {
   border-color: var(--secondary);
   color: var(--text);
 }
 
-.tab.active {
+.mainTab.active {
   background: var(--gradient-teal);
   color: var(--primary);
   border-color: transparent;
   box-shadow: var(--shadow-teal);
 }
 
-/* Empty State */
-.emptyState {
-  text-align: center;
-  margin-top: 50px;
-  color: var(--text-muted);
-  font-size: 1.2rem;
+.mainTab i {
+  font-size: 0.95rem;
 }
 
 /* --------------------------
-        GRID RESPONSIVE
+        NOTE FILTERS
+--------------------------- */
+.noteFilters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.noteFilterBtn {
+  background: transparent;
+  border: 1px solid rgba(46, 196, 182, 0.2);
+  color: var(--text-muted);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.noteFilterBtn:hover {
+  border-color: var(--secondary);
+  color: var(--text);
+}
+
+.noteFilterBtn.active {
+  background: rgba(46, 196, 182, 0.15);
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+/* --------------------------
+        NOTES GRID
+--------------------------- */
+.notesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.noteCard {
+  display: flex;
+  gap: 15px;
+  background: var(--card, #112240);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(46, 196, 182, 0.15);
+}
+
+.noteCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(46, 196, 182, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.notePoster {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.notePoster img {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.posterPlaceholder {
+  width: 100%;
+  height: 150px;
+  background: var(--bg-light, #172a45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--text-muted);
+}
+
+.noteContent {
+  flex: 1;
+  padding: 12px 14px 12px 0;
+}
+
+.noteContent h3 {
+  color: var(--text, #ffffff);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.noteContent h3:hover {
+  color: var(--secondary, #2ec4b6);
+}
+
+.rating {
+  margin-bottom: 6px;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+
+.ratingValue {
+  margin-left: 8px;
+  color: var(--text-muted, #8892b0);
+  font-size: 0.65rem;
+}
+
+.noteText {
+  color: var(--text-light, #e6e6e6);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  max-height: calc(1.4em * 3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.favoriteBadge {
+  display: inline-block;
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  margin-bottom: 6px;
+}
+
+.favoriteBadge i {
+  margin-right: 4px;
+}
+
+.noteMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  color: var(--text-muted, #8892b0);
+  margin-top: 6px;
+}
+
+.deleteNoteBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted, #8892b0);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.deleteNoteBtn:hover {
+  color: #e63946;
+  background: rgba(230, 57, 70, 0.1);
+}
+
+/* --------------------------
+        EMPTY STATE
+--------------------------- */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.emptyState i {
+  font-size: 4rem;
+  color: var(--secondary);
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.emptyState h3 {
+  color: var(--text);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.emptyState p {
+  font-size: 1rem;
+}
+
+/* --------------------------
+        GRID FOR MOVIES
 --------------------------- */
 .grid {
   display: grid;
@@ -62,9 +256,6 @@
   padding-bottom: 50px;
 }
 
-/* --------------------------
-        CARD WRAPPER
---------------------------- */
 .cardWrapper {
   position: relative;
   width: 100%;
@@ -74,7 +265,6 @@
   z-index: 1;
 }
 
-/* Ensure card fits container */
 .cardWrapper > * {
   width: 100%;
   height: 100%;
@@ -83,7 +273,6 @@
   border-radius: 12px;
 }
 
-/* Hover zoom */
 .cardWrapper:hover {
   transform: scale(1.05);
   z-index: 10;
@@ -108,7 +297,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   opacity: 0;
   transform: scale(0.8);
   transition: all 0.2s;
@@ -116,7 +304,6 @@
   z-index: 20;
 }
 
-/* Show delete button on hover */
 .cardWrapper:hover .deleteBtn {
   opacity: 1;
   transform: scale(1);
@@ -125,6 +312,16 @@
 .deleteBtn:hover {
   background-color: #ff0000;
   transform: scale(1.15) rotate(90deg);
+}
+
+/* --------------------------
+        LOADING
+--------------------------- */
+.loadingText {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px 0;
+  font-size: 1.1rem;
 }
 
 /* =====================================================
@@ -140,13 +337,13 @@
     border-left: none;
   }
 
-  .tabs {
-    gap: 10px;
+  .mainTabs {
+    gap: 8px;
   }
 
-  .tab {
-    font-size: 1rem;
-    padding: 8px 20px;
+  .mainTab {
+    font-size: 0.9rem;
+    padding: 8px 16px;
   }
 
   .grid {
@@ -154,27 +351,32 @@
     gap: 30px 20px;
   }
 
-  .cardWrapper {
-    aspect-ratio: 2 / 3;
+  .notesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .notePoster {
+    width: 80px;
   }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
   .heading {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
-  .tabs {
-    gap: 8px;
-    flex-direction: column; /* Stacked buttons */
+  .mainTabs {
+    gap: 6px;
+    flex-direction: column;
     align-items: center;
   }
 
-  .tab {
+  .mainTab {
     width: 100%;
     max-width: 250px;
     text-align: center;
+    justify-content: center;
   }
 
   .grid {
@@ -189,6 +391,27 @@
     right: -10px;
     top: -10px;
   }
+
+  .noteFilters {
+    justify-content: center;
+  }
+
+  .noteFilterBtn {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+  }
+
+  .notesGrid {
+    gap: 14px;
+  }
+
+  .notePoster {
+    width: 70px;
+  }
+
+  .noteContent h3 {
+    font-size: 0.85rem;
+  }
 }
 
 /* Very Small Phones */
@@ -197,8 +420,8 @@
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   }
 
-  .tab {
-    padding: 7px 15px;
-    font-size: 0.9rem;
+  .mainTab {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 }
