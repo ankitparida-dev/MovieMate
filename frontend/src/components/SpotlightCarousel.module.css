@@ -338,3 +338,51 @@
     font-size: 0.8rem; 
   }
 }
+/* Add these styles to SpotlightCarousel.module.css */
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.emptyStateIcon {
+  margin-bottom: 10px;
+}
+
+.emptyStateIcon i {
+  font-size: 4rem;
+  color: #2ec4b6;
+  opacity: 0.5;
+  animation: heartPulse 2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ============================================================
+   OVERRIDE DETAIL BUTTON FOR EMPTY STATE
+   ============================================================ */
+
+.detailButton {
+  background: linear-gradient(135deg, #2ec4b6, #1a8a7e);
+  color: #0a192f;
+  border: 2px solid rgba(46, 196, 182, 0.3);
+  box-shadow: 0 6px 20px rgba(46, 196, 182, 0.4);
+  padding: 15px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.detailButton:hover {
+  background: linear-gradient(135deg, #4fd1c5, #2ec4b6);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(46, 196, 182, 0.6);
+  border-color: rgba(46, 196, 182, 0.6);
+}

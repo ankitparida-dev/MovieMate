@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './SpotlightCarousel.module.css';
 import { request } from '../api/tmdb';
+import { getFavorites } from '../api/api';
 import TrailerPlayer from './TrailerPlayer';
 
 const IMG_BACKDROP_URL = "https://image.tmdb.org/t/p/original";
@@ -18,14 +19,46 @@ const TRAILER_KEYS = {
   13: "5NYt1qirBWg",     // Forrest Gump
   603: "bLvqo1L9vPk",    // The Matrix
   120: "2LqzF5WauAw",    // Lord of the Rings
+  769: "5xH0HfJHsaY",    // Goodfellas
+  550: "2LqzF5WauAw",    // Fight Club
+  122: "5NYt1qirBWg",    // Lord of the Rings: The Two Towers
 };
 
 const LoadingPlaceholder = () => (
   <div className={styles.movieSection} style={{ height: '80vh', display: 'grid', placeContent: 'center' }}>
     <div className={styles.loadingSpinner}>
       <div className={styles.spinner}></div>
-      <h2 className={styles.loadingText}>Loading Spotlight...</h2>
+      <h2 className={styles.loadingText}>Loading Your Favorites...</h2>
     </div>
+  </div>
+);
+
+const EmptyFavorites = ({ onExploreClick }) => (
+  <div className={styles.movieSection} style={{ 
+    height: '80vh', 
+    display: 'flex', 
+    flexDirection: 'column',
+    alignItems: 'center', 
+    justifyContent: 'center',
+    backgroundColor: '#0a192f',
+    color: '#ffffff',
+    textAlign: 'center',
+    padding: '20px'
+  }}>
+    <div className={styles.emptyStateIcon}>
+      <i className="fas fa-heart" style={{ fontSize: '4rem', color: '#2ec4b6', opacity: 0.5 }}></i>
+    </div>
+    <h2 style={{ marginTop: '20px', fontSize: '2rem' }}>No Favorites Yet</h2>
+    <p style={{ color: '#8892b0', maxWidth: '400px', marginTop: '10px' }}>
+      Start exploring movies and add them to your favorites to see them here!
+    </p>
+    <button 
+      className={styles.detailButton} 
+      onClick={onExploreClick}
+      style={{ marginTop: '20px' }}
+    >
+      <i className="fas fa-play"></i> Explore Movies
+    </button>
   </div>
 );
 
@@ -38,22 +71,61 @@ export default function SpotlightCarousel({ onOpen }) {
   const [currentTrailerKey, setCurrentTrailerKey] = useState(null);
   const [currentSlideTitle, setCurrentSlideTitle] = useState('');
   const [currentSlidePoster, setCurrentSlidePoster] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const carouselRef = useRef(null);
 
+  // ✅ Check if user is logged in
   useEffect(() => {
-    const fetchTopSlides = async () => {
+    const user = localStorage.getItem('user');
+    setIsLoggedIn(!!user);
+  }, []);
+
+  // ✅ Fetch user's favorite movies
+  useEffect(() => {
+    const fetchFavoriteMovies = async () => {
       setLoading(true);
       try {
-        const data = await request("/trending/all/week");
-        setSlides(data.results.slice(0, 5));
-      } catch (err) {
-        console.error("Failed to fetch slides:", err);
+        const favorites = await getFavorites();
+        
+        if (favorites && favorites.length > 0) {
+          // ✅ Fetch full details for each favorite movie
+          const movieDetails = await Promise.all(
+            favorites.slice(0, 5).map(async (fav) => {
+              try {
+                const data = await request(`/movie/${fav.id || fav.movieId}`);
+                return {
+                  id: data.id,
+                  title: data.title,
+                  poster_path: data.poster_path,
+                  backdrop_path: data.backdrop_path,
+                  vote_average: data.vote_average,
+                  release_date: data.release_date,
+                  overview: data.overview,
+                  vote_count: data.vote_count,
+                  media_type: 'movie'
+                };
+              } catch (error) {
+                console.error('Error fetching movie details:', error);
+                return null;
+              }
+            })
+          );
+
+          // ✅ Filter out any failed requests
+          const validMovies = movieDetails.filter(m => m !== null);
+          setSlides(validMovies);
+        } else {
+          setSlides([]);
+        }
+      } catch (error) {
+        console.error('Failed to fetch favorite movies:', error);
+        setSlides([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTopSlides();
+    fetchFavoriteMovies();
   }, []);
 
   // Auto-play carousel
@@ -141,12 +213,14 @@ export default function SpotlightCarousel({ onOpen }) {
     setCurrentSlidePoster(null);
   };
 
+  // ✅ Show loading state
   if (loading) {
     return <LoadingPlaceholder />;
   }
 
+  // ✅ Show empty state if no favorites
   if (slides.length === 0) {
-    return null;
+    return <EmptyFavorites onExploreClick={() => onOpen({})} />;
   }
 
   const currentSlide = slides[currentIndex];
@@ -154,7 +228,7 @@ export default function SpotlightCarousel({ onOpen }) {
   const title = currentSlide.title || currentSlide.name;
   const year = (currentSlide.release_date || currentSlide.first_air_date || "").slice(0, 4);
   const rating = currentSlide.vote_average ? currentSlide.vote_average.toFixed(1) : 'N/A';
-  const mediaType = currentSlide.media_type;
+  const mediaType = currentSlide.media_type || 'movie';
 
   return (
     <>
@@ -176,12 +250,12 @@ export default function SpotlightCarousel({ onOpen }) {
           <div className="container" style={{ zIndex: 2, position: 'relative' }}>
             <div className={styles.movieItems}>
               <span className={styles.spotlight}>
-                <i className="fas fa-star"></i> #{currentIndex + 1} Spotlight
+                <i className="fas fa-heart"></i> Your Favorites
               </span>
               <h1 className={styles.showName}>{title}</h1>
               <div className={styles.details}>
                 <p><i className="fas fa-play-circle"></i> {mediaType === 'tv' ? 'TV Series' : 'Movie'}</p>
-                <p><i className="far fa-calendar-alt"></i> {year}</p>
+                <p><i className="far fa-calendar-alt"></i> {year || 'N/A'}</p>
                 <p><i className="fas fa-star"></i> {rating}/10</p>
               </div>
               <p className={styles.overview}>{currentSlide.overview}</p>
