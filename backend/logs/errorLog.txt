@@ -932,3 +932,31 @@ error: Environment variable not found: DATABASE_URL.
 Validation Error Count: 1
 [2026-07-11T15:20:59.288Z] OPTIONS /api/auth/login - ERROR: Origin not allowed by CORS
 [2026-07-11T15:21:09.394Z] OPTIONS /api/auth/login - ERROR: Origin not allowed by CORS
+[2026-07-22T05:38:11.297Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:38:11.311Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:38:45.936Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:38:45.945Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:39:06.719Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:39:06.731Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:41:46.835Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:41:46.839Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:42:02.963Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:42:02.969Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:43:38.956Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:43:38.961Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:56:23.483Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:56:23.487Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:56:39.690Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T05:56:39.698Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:17:06.006Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:17:06.013Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:17:15.930Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:17:15.935Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:21:56.621Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:21:56.625Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:22:09.411Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:22:09.414Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:25:48.767Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:25:48.774Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:26:01.657Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user
+[2026-07-22T06:26:01.663Z] GET /api/notes/user - ERROR: Cannot GET /api/notes/user

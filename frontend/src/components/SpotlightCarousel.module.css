@@ -386,3 +386,199 @@
   box-shadow: 0 15px 35px rgba(46, 196, 182, 0.6);
   border-color: rgba(46, 196, 182, 0.6);
 }
+/* ============================================================
+   RANKING BADGE
+   ============================================================ */
+
+.rankingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px 4px 8px;
+  border-radius: 30px;
+  border: 2px solid #ffd700;
+  margin-bottom: 10px;
+  background: rgba(255, 215, 0, 0.1);
+  font-weight: 700;
+}
+
+.rankEmoji {
+  font-size: 1.4rem;
+}
+
+.rankNumber {
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+/* ============================================================
+   USER RATING DISPLAY
+   ============================================================ */
+
+.userRatingContainer {
+  background: rgba(17, 34, 64, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(46, 196, 182, 0.15);
+  display: inline-block;
+  min-width: 200px;
+}
+
+.userRatingStars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.starLabel {
+  color: #8892b0;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.starsDisplay {
+  color: #ffc107;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+}
+
+.userRatingValue {
+  color: #2ec4b6;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: rgba(46, 196, 182, 0.15);
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+.userNote {
+  color: #c8d6e5;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.favoriteTag {
+  display: inline-block;
+  margin-top: 6px;
+  color: #ff6b6b;
+  font-size: 0.75rem;
+  background: rgba(255, 107, 107, 0.15);
+  padding: 2px 12px;
+  border-radius: 12px;
+}
+
+.favoriteTag i {
+  margin-right: 4px;
+}
+
+/* ============================================================
+   INDICATOR WITH RATING
+   ============================================================ */
+
+.indicator {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #8892b0;
+  font-size: 0.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indicator.active {
+  width: 40px;
+  border-radius: 20px;
+  background: rgba(46, 196, 182, 0.3);
+  border-color: #2ec4b6;
+  color: #ffffff;
+  font-size: 0.7rem;
+}
+
+.indicator:hover {
+  background: rgba(46, 196, 182, 0.2);
+  border-color: rgba(46, 196, 182, 0.4);
+}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.emptyStateIcon {
+  margin-bottom: 10px;
+}
+
+.emptyStateIcon i {
+  animation: heartPulse 2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ============================================================
+   RESPONSIVE UPDATES
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .userRatingContainer {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .userRatingStars {
+    justify-content: center;
+  }
+  
+  .indicator {
+    width: 24px;
+    height: 24px;
+    font-size: 0.5rem;
+  }
+  
+  .indicator.active {
+    width: 32px;
+    font-size: 0.6rem;
+  }
+  
+  .rankingBadge {
+    font-size: 0.8rem;
+    padding: 3px 12px 3px 6px;
+  }
+  
+  .rankEmoji {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .indicator {
+    width: 20px;
+    height: 20px;
+    font-size: 0.4rem;
+  }
+  
+  .indicator.active {
+    width: 28px;
+    font-size: 0.5rem;
+  }
+  
+  .starsDisplay {
+    font-size: 0.7rem;
+  }
+  
+  .userRatingValue {
+    font-size: 0.75rem;
+  }
+}
