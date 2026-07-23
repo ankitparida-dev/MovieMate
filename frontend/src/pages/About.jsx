@@ -10,6 +10,7 @@ import MovieLists from "../components/MovieLists";
 import { useMovieNotes } from "../hooks/useMovieNotes";
 import CommentSection from "../components/CommentSection";
 import TrailerPlayer from "../components/TrailerPlayer";
+import ReportButton from "../components/ReportButton";
 
 export default function About({ selected, setPage, onOpen }) {
   const [data, setData] = useState(null);
@@ -18,7 +19,6 @@ export default function About({ selected, setPage, onOpen }) {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   
-  // ✅ TRAILER STATE
   const [showTrailer, setShowTrailer] = useState(false);
   const [trailerKey, setTrailerKey] = useState(null);
   const [trailerLoading, setTrailerLoading] = useState(false);
@@ -106,7 +106,6 @@ export default function About({ selected, setPage, onOpen }) {
     }
   };
 
-  // ✅ FETCH TRAILER
   const fetchTrailer = async () => {
     if (!data?.id) {
       console.error('No movie/TV ID found');
@@ -118,7 +117,6 @@ export default function About({ selected, setPage, onOpen }) {
     try {
       const mediaType = type || 'movie';
       const url = `https://api.themoviedb.org/3/${mediaType}/${data.id}/videos`;
-      
       const token = import.meta.env.VITE_TMDB_TOKEN || process.env.REACT_APP_TMDB_TOKEN || API_TOKEN;
       
       const response = await fetch(url, {
@@ -160,7 +158,6 @@ export default function About({ selected, setPage, onOpen }) {
     }
   };
 
-  // ✅ HANDLE TRAILER CLICK
   const handleTrailerClick = (e) => {
     if (e) {
       e.preventDefault();
@@ -171,7 +168,6 @@ export default function About({ selected, setPage, onOpen }) {
     }
   };
 
-  // ✅ CLOSE TRAILER
   const handleCloseTrailer = () => {
     setShowTrailer(false);
     setTrailerKey(null);
@@ -248,6 +244,14 @@ export default function About({ selected, setPage, onOpen }) {
               <button className={styles.favBtn} onClick={handleFav}>
                 <i className="fas fa-heart"></i>
               </button>
+              
+              {/* ✅ REPORT BUTTON */}
+              <ReportButton 
+                targetType="movie"
+                targetId={id}
+                targetTitle={title}
+                onReportSubmitted={() => console.log('Movie reported!')}
+              />
             </div>
 
             <section className={styles.overview}>
@@ -257,7 +261,6 @@ export default function About({ selected, setPage, onOpen }) {
 
             <WatchPlatforms mediaType={type} id={id} title={title} />
 
-            {/* Tabs */}
             <div className={styles.tabsContainer}>
               <button 
                 className={`${styles.tab} ${activeTab === 'overview' ? styles.active : ''}`}
@@ -285,7 +288,6 @@ export default function About({ selected, setPage, onOpen }) {
               </button>
             </div>
 
-            {/* Tab Content */}
             <div className={styles.tabContent}>
               {activeTab === 'overview' && (
                 <div>
@@ -417,7 +419,7 @@ export default function About({ selected, setPage, onOpen }) {
         </main>
       </div>
 
-      {/* ✅ TRAILER PLAYER MODAL - RENDERED AT ROOT LEVEL */}
+      {/* TRAILER PLAYER MODAL */}
       {showTrailer && trailerKey && (
         <TrailerPlayer 
           title={title}

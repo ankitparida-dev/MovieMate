@@ -1,3 +1,5 @@
+// frontend/src/api/api.js
+
 import toast from 'react-hot-toast';
 
 const rawApiUrl = import.meta.env.VITE_API_URL;
@@ -152,7 +154,7 @@ export const getWatchlist = () => getUserCollection("watchlist");
 export const getHistory = () => getUserCollection("history");
 
 // ============================================================
-// ✅ NEW: CHECK STATUS FUNCTIONS (For HeroBanner)
+// ✅ CHECK STATUS FUNCTIONS (For HeroBanner)
 // ============================================================
 
 export const isInFavorites = async (movieId) => {
@@ -281,6 +283,20 @@ export const getAnalytics = async () => {
 };
 
 // ============================================================
+// ✅ REPORT FUNCTIONS (NEW)
+// ============================================================
+
+export const submitReport = async (reportData) => {
+  try {
+    const response = await postData('reports/create', reportData);
+    return response;
+  } catch (error) {
+    console.error('Error submitting report:', error);
+    throw error;
+  }
+};
+
+// ============================================================
 // ✅ EXPORT DEFAULT
 // ============================================================
 
@@ -308,5 +324,6 @@ export default {
   deleteNote,
   getUserNotes,
   getRecommendations,
-  getAnalytics
+  getAnalytics,
+  submitReport // ✅ ADDED
 };
