@@ -9,7 +9,6 @@ import TvShows from "./pages/TvShows";
 import About from "./pages/About";
 import Main from "./pages/Main";
 import MyLibrary from "./pages/MyLibrary";
-// ❌ REMOVED: import MyNotes from "./pages/MyNotes";
 import Analytics from "./pages/Analytics";
 import Profile from "./pages/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -24,9 +23,19 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const openAboutPage = (item) => {
-    const type = item.media_type || (item.first_air_date ? "tv" : "movie");
-    setSelected({ ...item, type });
-    setPage("about");
+    // ✅ Handle page navigation from SpotlightCarousel
+    if (item && item.page) {
+      setPage(item.page);
+      setSelected(null);
+      return;
+    }
+    
+    // ✅ Handle movie detail navigation
+    if (item && item.id) {
+      const type = item.media_type || (item.first_air_date ? "tv" : "movie");
+      setSelected({ ...item, type });
+      setPage("about");
+    }
   };
 
   const changePage = (newPage) => {
@@ -112,15 +121,12 @@ export default function App() {
       )}
 
       {/* MAIN PAGES */}
-      {page === "home" && <Main onOpen={openAboutPage} searchQuery={searchQuery} />}
+      {page === "home" && <Main onOpen={openAboutPage} searchQuery={searchQuery} setPage={changePage} />}
       {page === "movies" && <Movies onOpen={openAboutPage} />}
       {page === "tvshows" && <TvShows onOpen={openAboutPage} />}
       
       {/* ✅ LIBRARY - Now includes Notes & Ratings */}
       {page === "library" && <MyLibrary onOpen={openAboutPage} />}
-      
-      {/* ❌ REMOVED: Separate MyNotes route */}
-      {/* {page === "mynotes" && <MyNotes onOpen={openAboutPage} />} */}
       
       {page === "analytics" && <Analytics onOpen={openAboutPage} />}
       {page === "profile" && <Profile setPage={changePage} />}

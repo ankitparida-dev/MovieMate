@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useComments } from '../hooks/useComments';
+import ReportButton from '../components/ReportButton';
 import styles from './CommentSection.module.css';
 
 const CommentSection = ({ movieId, movieTitle }) => {
@@ -82,7 +83,6 @@ const CommentSection = ({ movieId, movieTitle }) => {
     );
   }
 
-  // ✅ FIX: Ensure comments is always an array
   const commentsArray = Array.isArray(comments) ? comments : [];
 
   return (
@@ -197,6 +197,14 @@ const CommentSection = ({ movieId, movieTitle }) => {
                       </button>
                     </>
                   )}
+                  
+                  {/* ✅ REPORT BUTTON FOR EVERY COMMENT */}
+                  <ReportButton 
+                    targetType="comment"
+                    targetId={comment.id}
+                    targetTitle={`Comment by ${comment.username || comment.userName}`}
+                    onReportSubmitted={() => console.log('Comment reported!')}
+                  />
                 </div>
               </div>
             </div>
