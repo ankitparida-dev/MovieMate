@@ -6980,3 +6980,7 @@ GET request to /static/media_files/movielight.mp4
 [11:27:09 am] GET /api/lists/user
 [11:27:09 am] GET /api/lists/user
 [11:27:09 am] GET /api/lists/user
+[11:28:51 am] OPTIONS /api/lists/user
+[11:28:51 am] OPTIONS /api/lists/user
+[11:28:51 am] GET /api/lists/user
+[11:28:51 am] GET /api/lists/user
