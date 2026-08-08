@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useFollow } from "../hooks/useFollow";
+import { createReport } from "../api/api";
 import styles from "./FollowSystem.module.css";
 
 const API_URL = "http://localhost:5000/api/follow";
@@ -23,9 +25,7 @@ const FollowSystem = () => {
 
     const fetchUsers = async () => {
         try {
-
-            const token =
-                localStorage.getItem("token");
+            const token = localStorage.getItem("token");
 
             const response = await fetch(
                 `${API_URL}/users`,
@@ -36,18 +36,44 @@ const FollowSystem = () => {
                 }
             );
 
-            const data =
-                await response.json();
+            const data = await response.json();
 
             setUsers(data);
-
         } catch (error) {
             console.error(error);
         }
     };
 
-    const stats =
-        getFollowStats();
+    const handleReportUser = async (reportedUserId, reportedUserName) => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            toast.error("Please sign in to report a user.");
+            return;
+        }
+
+        const reason = prompt(`Why are you reporting ${reportedUserName}?`);
+        if (!reason || !reason.trim()) {
+            toast.error("Report reason is required.");
+            return;
+        }
+
+        const description = prompt("Please provide a brief description:");
+        if (!description || !description.trim()) {
+            toast.error("Report description is required.");
+            return;
+        }
+
+        try {
+            await createReport(reportedUserId, reason.trim(), description.trim());
+            toast.success("Report submitted successfully.");
+        } catch (error) {
+            console.error("Report failed:", error);
+            toast.error(error.message || "Failed to submit report.");
+        }
+    };
+
+    const stats = getFollowStats();
 
     return (
         <div className={styles.followContainer}>
@@ -103,29 +129,30 @@ const FollowSystem = () => {
 
                             </div>
 
-                            {isFollowing(user._id) ? (
+                            <div className={styles.userActions}>
+                                {isFollowing(user._id) ? (
+                                    <button
+                                        className={styles.unfollowBtn}
+                                        onClick={() => unfollowUser(user._id)}
+                                    >
+                                        Following
+                                    </button>
+                                ) : (
+                                    <button
+                                        className={styles.followBtn}
+                                        onClick={() => followUser(user._id)}
+                                    >
+                                        Follow
+                                    </button>
+                                )}
 
                                 <button
-                                    className={styles.unfollowBtn}
-                                    onClick={() =>
-                                        unfollowUser(user._id)
-                                    }
+                                    className={styles.reportBtn}
+                                    onClick={() => handleReportUser(user._id, user.name)}
                                 >
-                                    Following
+                                    Report
                                 </button>
-
-                            ) : (
-
-                                <button
-                                    className={styles.followBtn}
-                                    onClick={() =>
-                                        followUser(user._id)
-                                    }
-                                >
-                                    Follow
-                                </button>
-
-                            )}
+                            </div>
 
                         </div>
 

@@ -4,23 +4,31 @@ const User = require("../models/User");
 // Create a new report
 const createReport = async (req, res) => {
   try {
-    const { reason, description, reportedUserId, reportedUser } = req.body;
+    const { reason, description, reportedUserId } = req.body;
     const reporterId = req.user.id;
 
-    if (!reason || !description) {
+    if (!reason || !description || !reportedUserId) {
       return res.status(400).json({
         success: false,
-        message: "Reason and description are required"
+        message: "reportedUserId, reason, and description are required"
       });
     }
 
     const reporter = await User.findById(reporterId);
+    const reportedUser = await User.findById(reportedUserId);
+
+    if (!reportedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "Reported user not found"
+      });
+    }
 
     const report = await Report.create({
       reporterId,
       reporter: reporter.name,
-      reportedUserId,
-      reportedUser,
+      reportedUserId: reportedUser._id,
+      reportedUser: reportedUser.name,
       reason,
       description,
       status: "pending"
