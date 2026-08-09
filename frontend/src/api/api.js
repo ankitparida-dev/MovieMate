@@ -65,8 +65,20 @@ export async function loginUser(email, password) {
   return postData("auth/login", { email, password });
 }
 
+export async function verifyOtp(email, otp) {
+  return postData("auth/verify-otp", { email, otp });
+}
+
+export async function resendOtp(email) {
+  return postData("auth/resend-otp", { email });
+}
+
 export async function registerUser(name, email, password) {
   return postData("auth/register", { name, email, password });
+}
+
+export async function createReport(reportedUserId, reason, description) {
+  return postData("reports", { reportedUserId, reason, description });
 }
 
 export function logoutUser() {

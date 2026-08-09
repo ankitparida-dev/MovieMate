@@ -28,6 +28,16 @@ const userSchema = new mongoose.Schema(
         default: ""
     },
 
+    otpCode: {
+        type: String,
+        default: null
+    },
+
+    otpExpires: {
+        type: Date,
+        default: null
+    },
+
     isAdmin: {
         type: Boolean,
         default: false
