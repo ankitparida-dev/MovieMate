@@ -20,11 +20,10 @@ export default function Navbar({ setPage, page, onSearch }) {
       try {
         const userData = JSON.parse(user);
         setUserName(userData.name || userData.email || 'User');
-       setIsAdmin(userData.isAdmin === true);
+        setIsAdmin(userData.isAdmin === true);
         
         console.log('🔴 NAVBAR - userData:', userData);
-       
-console.log('🔴 NAVBAR - isAdmin:', userData.isAdmin);
+        console.log('🔴 NAVBAR - isAdmin:', userData.isAdmin);
         
       } catch {
         setUserName('User');
@@ -92,7 +91,7 @@ console.log('🔴 NAVBAR - isAdmin:', userData.isAdmin);
           )}
         </div>
 
-        {/* MIDDLE NAV - Icons Removed to Save Space */}
+        {/* MIDDLE NAV - Updated Navigation */}
         <ul className={styles.middleSection}>
           <li className={styles.navItem}>
             <button className={getLinkClass("home")} onClick={goHome}>Home</button>
@@ -107,11 +106,14 @@ console.log('🔴 NAVBAR - isAdmin:', userData.isAdmin);
           {isLoggedIn && (
             <>
               <li className={styles.navItem}>
-                <button className={getLinkClass("library")} onClick={() => { onSearch(""); setPage("library"); }}>Library</button>
+                <button className={getLinkClass("library")} onClick={() => { onSearch(""); setPage("library"); }}>
+                  Library
+                </button>
               </li>
-              <li className={styles.navItem}>
+              {/* ❌ REMOVED: Separate Notes link - now part of Library */}
+              {/* <li className={styles.navItem}>
                 <button className={getLinkClass("mynotes")} onClick={() => { onSearch(""); setPage("mynotes"); }}>Notes</button>
-              </li>
+              </li> */}
               <li className={styles.navItem}>
                 <button className={getLinkClass("analytics")} onClick={() => { onSearch(""); setPage("analytics"); }}>Analytics</button>
               </li>

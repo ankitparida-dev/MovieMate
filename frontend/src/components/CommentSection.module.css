@@ -366,3 +366,54 @@
     margin-left: 0;
   }
 }
+/* Add these styles to CommentSection.module.css */
+
+/* ✅ Report button in comment actions */
+.commentActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.commentActions .reportBtn {
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  background: rgba(230, 57, 70, 0.05);
+  border: 1px solid rgba(230, 57, 70, 0.1);
+  color: #8892b0;
+  border-radius: 12px;
+}
+
+.commentActions .reportBtn:hover {
+  background: rgba(230, 57, 70, 0.15);
+  border-color: rgba(230, 57, 70, 0.3);
+  color: #e63946;
+  transform: translateY(-1px);
+}
+
+.commentActions .reportBtn span {
+  display: none;
+}
+
+.editBtn, .deleteBtn {
+  background: none;
+  border: none;
+  color: #8892b0;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.editBtn:hover {
+  color: #2ec4b6;
+  background: rgba(46, 196, 182, 0.1);
+}
+
+.deleteBtn:hover {
+  color: #e63946;
+  background: rgba(230, 57, 70, 0.1);
+}

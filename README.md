@@ -1,89 +1,175 @@
 # 🎬 MovieMate
 
-MovieMate is a modern full-stack **movie & TV show discovery platform** built using **React.js, Node.js, Express.js, MongoDB, PostgreSQL, Prisma, and Socket.io**.  
-It provides a smooth and interactive experience for discovering movies, tracking watch activity, receiving personalized recommendations, and interacting with other users in real-time.
+MovieMate is a modern **full-stack movie & TV show discovery platform** built with **React.js, Node.js, Express.js, MongoDB, PostgreSQL, Prisma, and Socket.io**. It delivers a seamless, interactive experience for discovering movies, tracking watch activity, receiving personalized recommendations, and engaging with other users in real time.
 
 ---
 
-# ✨ Features
+## 🌐 Live Demo
 
-- 🔎 **Live Movie Search** – Dynamic search with instant filtering  
-- ⭐ **Watchlist & Favorites System** – Save and manage favorite movies  
-- 📜 **Recently Viewed Tracking** – Tracks user watch history automatically  
-- 🎥 **Movie Details Page** – Detailed movie information with dynamic routing  
-- 🎞️ **Spotlight Carousel** – Interactive hero banner slider  
-- 🎬 **Browse Movies & TV Shows** – Dedicated sections for movies and series  
-- 👤 **JWT Authentication System** – Secure login & registration using access and refresh tokens  
-- 🔐 **Protected Routes** – Secure APIs using authentication middleware  
-- 🍪 **Sessions & Cookies** – Session management using Express Sessions and Cookies  
-- 💬 **Real-Time Comments System** – Live comments and replies using Socket.io  
-- ❤️ **Like & Reply System** – Like and reply to comments instantly  
-- 📊 **Analytics Dashboard** – Graphs and insights based on watch activity  
-- 📝 **Movie Notes & Ratings** – Personal notes and ratings for movies  
-- 🎯 **Personalized Recommendations** – Suggestions based on user activity and ratings  
-- 📺 **Where to Watch Feature** – Shows OTT platform availability for movies and shows  
-- 🔔 **Real-Time Notifications** – Live notifications using Socket.io  
-- 🖼️ **Avatar Upload System** – Upload real profile photos with fallback cartoon avatars  
-- ☁️ **Cloudinary Integration** – Cloud image storage for avatar uploads  
-- 🧪 **Unit Testing** – API testing using Jest and Supertest  
-- 🚀 **Deployment Ready** – Frontend and backend deployment support  
-- 📱 **Fully Responsive UI** – Optimized for desktop, tablet, and mobile devices  
+| Service | URL |
+|---------|-----|
+| **Frontend (Vercel)** | [https://movie-mate-seven-nu.vercel.app/](https://movie-mate-seven-nu.vercel.app/) |
+| **Backend (Render)** | [https://moviemate-l4ts.onrender.com/](https://moviemate-l4ts.onrender.com/) |
 
 ---
 
-# 🧩 Tech Stack
+## ✨ Key Features
 
-| Technology | Purpose |
-|---|---|
-| **React.js (Vite)** | Frontend UI and component-based architecture |
-| **Node.js** | Backend runtime environment |
-| **Express.js** | REST API and backend framework |
-| **MongoDB + Mongoose** | NoSQL database for users, library, sessions |
-| **PostgreSQL + Prisma ORM** | Relational database for comments and reviews |
-| **Socket.io** | Real-time communication and notifications |
-| **JWT Authentication** | Secure authentication and protected routes |
-| **bcrypt** | Password hashing and security |
-| **Express Sessions & Cookies** | Session management |
-| **Multer + Cloudinary** | Avatar image upload and cloud storage |
-| **TMDB API** | Movie and TV show data provider |
-| **Chart.js / Recharts** | Analytics graphs and visualizations |
-| **Jest + Supertest** | Unit testing and API testing |
-| **Render & Vercel** | Deployment platforms |
-| **Postman** | API testing and debugging |
+### 🔎 Discovery & Search
+- **Live Movie Search** – Dynamic filtering with instant results
+- **Browse Movies & TV Shows** – Dedicated sections for movies and series
+- **🎞️ Spotlight Carousel** – Interactive hero banner slider with trending content
 
----
+### 📚 Personal Library
+- **⭐ Watchlist & Favorites System** – Save and manage favorite movies
+- **📜 Recently Viewed Tracking** – Automatically tracks user watch history
+- **📝 Movie Notes & Ratings** – Personal notes and ratings for movies
+- **🎯 Personalized Recommendations** – AI-driven suggestions based on user activity and ratings
 
-# 🧠 Learning Goals
+### 💬 Real-Time Engagement
+- **💬 Real-Time Comments System** – Live comments and replies powered by Socket.io
+- **❤️ Like & Reply System** – Instant interaction with comments and replies
+- **🔔 Real-Time Notifications** – Live notifications for user activities
 
-This project demonstrates and applies:
+### 📊 Analytics & Insights
+- **📊 Analytics Dashboard** – Visual graphs and insights based on watch activity
+- **📺 Where to Watch Feature** – Shows OTT platform availability for movies and shows
 
-- Full-stack application development  
-- REST API architecture  
-- Authentication & authorization using JWT  
-- Middleware lifecycle in Express.js  
-- Real-time communication using Socket.io  
-- Session & cookie management  
-- MongoDB and PostgreSQL database integration  
-- Prisma ORM and Mongoose ODM  
-- CRUD operations and protected APIs  
-- File upload handling with Multer and Cloudinary  
-- Responsive UI/UX design  
-- Deployment and testing workflows  
+### 🖼️ User Profile & Media
+- **👤 JWT Authentication System** – Secure login & registration with access and refresh tokens
+- **🖼️ Avatar Upload System** – Upload real profile photos with fallback cartoon avatars
+- **🎨 Cartoon Avatar Creator** – WhatsApp-style cartoon avatar creator
+
+### 🧪 Quality & Deployment
+- **🧪 Unit Testing** – API testing using Jest and Supertest
+- **🚀 Deployment Ready** – Production-ready deployment on Render and Vercel
+- **📱 Fully Responsive UI** – Optimized for desktop, tablet, and mobile devices
 
 ---
 
-# 🏗️ Project Architecture
+## 🧩 Tech Stack
 
-```text
-Frontend (React.js)
-        ↓
-Express.js Backend Server
-        ↓
-Middleware Layer
-(Auth, Logger, Error Handler)
-        ↓
-MongoDB + PostgreSQL
-        ↓
-TMDB External API
-        ↓
-Socket.io Real-Time Layer
+| Category | Technology | Purpose |
+|----------|------------|---------|
+| **Frontend** | React.js (Vite) | UI and component architecture |
+| | React Router | Client-side routing |
+| | CSS Modules | Component styling |
+| | Chart.js / Recharts | Data visualizations |
+| **Backend** | Node.js | Runtime environment |
+| | Express.js | REST API framework |
+| | Socket.io | Real-time communication |
+| **Database** | MongoDB + Mongoose | NoSQL database (users, library, sessions) |
+| | PostgreSQL + Prisma ORM | Relational database (comments, reviews) |
+| **Authentication** | JWT | Access and refresh token authentication |
+| | bcrypt | Password hashing |
+| | Express Sessions & Cookies | Session management |
+| **Storage** | Multer | File upload handling |
+| **API** | TMDB API | Movie and TV show data |
+| **Testing** | Jest + Supertest | Unit and API testing |
+| **Deployment** | Render (Backend) | Server hosting |
+| | Vercel (Frontend) | Frontend hosting |
+| **Tools** | Postman | API testing and debugging |
+| | ESLint + Prettier | Code linting and formatting |
+
+---
+
+## 🧠 Learning Goals
+
+This project demonstrates a comprehensive understanding of:
+
+- ✅ **Full-Stack Architecture** – Building and integrating frontend and backend systems
+- ✅ **REST API Design** – Creating scalable, well-structured API endpoints
+- ✅ **Authentication & Authorization** – JWT-based authentication with role-based access control
+- ✅ **Middleware Lifecycle** – Implementing middleware for auth, logging, and error handling
+- ✅ **Real-Time Communication** – Using Socket.io for live comments and notifications
+- ✅ **Session & Cookie Management** – Managing user sessions with Express Sessions
+- ✅ **Database Integration** – Working with MongoDB and PostgreSQL using Mongoose and Prisma
+- ✅ **CRUD Operations** – Full CRUD implementation on protected APIs
+- ✅ **File Upload** – Handling image uploads with Multer
+- ✅ **Responsive UI/UX** – Building mobile-first, responsive user interfaces
+- ✅ **CI/CD & Deployment** – Deploying to Render and Vercel with environment configuration
+- ✅ **Unit Testing** – Writing and running tests using Jest and Supertest
+
+---
+
+## 🏗️ Project Architecture
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CLIENT (React.js) │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────────┐ │
+│ │ React UI │ │ React │ │ Socket.io │ │ Chart.js/ │ │
+│ │ Components │ │ Router │ │ Client │ │ Recharts │ │
+│ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ EXPRESS.JS BACKEND SERVER │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ┌───────────────────────────────────────────────────────────────────────┐ │
+│ │ MIDDLEWARE LAYER │ │
+│ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │ │
+│ │ │ Auth │ │ Logger │ │ Rate │ │ Error │ │ │
+│ │ │ Middleware │ │ Middleware │ │ Limiter │ │ Handler │ │ │
+│ │ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │ │
+│ └───────────────────────────────────────────────────────────────────────┘ │
+│ │
+│ ┌───────────────────────────────────────────────────────────────────────┐ │
+│ │ API ROUTES │ │
+│ │ ┌─────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌─────────┐ │ │
+│ │ │ Auth │ │ Users │ │ Movies │ │ Notes │ │ Reviews│ │ │
+│ │ └─────────┘ └──────────┘ └──────────┘ └──────────┘ └─────────┘ │ │
+│ │ ┌─────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌─────────┐ │ │
+│ │ │Comments │ │ Lists │ │ Follow │ │ Admin │ │ Upload │ │ │
+│ │ └─────────┘ └──────────┘ └──────────┘ └──────────┘ └─────────┘ │ │
+│ └───────────────────────────────────────────────────────────────────────┘ │
+│ │
+│ ┌───────────────────────────────────────────────────────────────────────┐ │
+│ │ SOCKET.IO SERVER │ │
+│ │ ┌─────────────────┐ ┌─────────────────┐ │ │
+│ │ │ Comments │ │ Notifications │ │ │
+│ │ │ Handler │ │ Handler │ │ │
+│ │ └─────────────────┘ └─────────────────┘ │ │
+│ └───────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+│
+┌─────────────────┼─────────────────┐
+▼ ▼ ▼
+┌─────────────────────────┐ ┌─────────────────────────┐ ┌─────────────────────────┐
+│ MONGODB │ │ POSTGRESQL │ │ TMDB API │
+│ (NoSQL Database) │ │ (Relational Database) │ │ (External Data) │
+├─────────────────────────┤ ├─────────────────────────┤ ├─────────────────────────┤
+│ • Users │ │ • Comments │ │ • Movies │
+│ • Library (Watchlist) │ │ • Reviews │ │ • TV Shows │
+│ • Notes & Ratings │ │ • Likes │ │ • Cast & Crew │
+│ • Sessions │ │ • Reports │ │ • Streaming Platforms │
+│ • Notifications │ │ • Analytics │ │ • Trailers │
+└─────────────────────────┘ └─────────────────────────┘ └─────────────────────────┘
+
+---
+
+## 🚀 Deployment
+
+| Service | Platform | URL |
+|---------|----------|-----|
+| **Frontend** | Vercel | [https://movie-mate-seven-nu.vercel.app/](https://movie-mate-seven-nu.vercel.app/) |
+| **Backend** | Render | [https://moviemate-l4ts.onrender.com/](https://moviemate-l4ts.onrender.com/) |
+
+---
+
+## 📄 License
+
+This project is for educational purposes. TMDB API usage complies with their terms of service.
+
+---
+
+## 🙏 Acknowledgments
+
+- [TMDB](https://www.themoviedb.org/) – Movie data API
+- [Chart.js](https://www.chartjs.org/) – Analytics charts
+- [Font Awesome](https://fontawesome.com/) – Icons
+- [DiceBear](https://www.dicebear.com/) – Avatar library
+
+---
+
+**MovieMate – Your Ultimate Movie Companion!** 🎬🍿

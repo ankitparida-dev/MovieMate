@@ -1,3 +1,6 @@
+/* ========================== */
+/*       HERO SECTION         */
+/* ========================== */
 .heroSection {
   position: relative;
   min-height: 100vh;
@@ -6,7 +9,9 @@
   overflow: hidden;
 }
 
-/* Background Container */
+/* ========================== */
+/*     BACKGROUND CONTAINER   */
+/* ========================== */
 .backgroundContainer {
   position: absolute;
   top: 0;
@@ -55,7 +60,9 @@
   z-index: 1;
 }
 
-/* Movie Cards Carousel */
+/* ========================== */
+/*     MOVIE CARDS CAROUSEL  */
+/* ========================== */
 .carouselContainer {
   position: absolute;
   top: 0;
@@ -117,7 +124,9 @@
   color: #ffc107;
 }
 
-/* Hero Content */
+/* ========================== */
+/*       HERO CONTENT         */
+/* ========================== */
 .heroContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -128,7 +137,9 @@
   padding: 100px 0;
 }
 
-/* Hero Text */
+/* ========================== */
+/*        HERO TEXT           */
+/* ========================== */
 .heroText {
   color: white;
 }
@@ -163,7 +174,9 @@
   background-clip: text;
 }
 
-/* Typing Container */
+/* ========================== */
+/*     TYPING CONTAINER       */
+/* ========================== */
 .typingContainer {
   display: flex;
   align-items: center;
@@ -193,40 +206,9 @@
   50% { opacity: 0; }
 }
 
-.heroDescription {
-  color: #8892b0;
-  line-height: 1.6;
-  margin-bottom: 25px;
-  font-size: 1rem;
-}
-
-/* Stats Row */
-.statsRow {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 30px;
-  padding: 15px 0;
-  border-top: 1px solid rgba(46, 196, 182, 0.15);
-  border-bottom: 1px solid rgba(46, 196, 182, 0.15);
-}
-
-.statItem {
-  display: flex;
-  flex-direction: column;
-}
-
-.statNumber {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2ec4b6;
-}
-
-.statLabel {
-  font-size: 0.7rem;
-  color: #8892b0;
-}
-
-/* Buttons */
+/* ========================== */
+/*        BUTTONS             */
+/* ========================== */
 .heroActions {
   display: flex;
   gap: 20px;
@@ -268,7 +250,9 @@
   transform: translateY(-3px);
 }
 
-/* Trust Badges */
+/* ========================== */
+/*     TRUST BADGES           */
+/* ========================== */
 .trustBadges {
   display: flex;
   gap: 20px;
@@ -287,7 +271,9 @@
   color: #2ec4b6;
 }
 
-/* Current Movie Card (Right Side) */
+/* ========================== */
+/*    CURRENT MOVIE CARD      */
+/* ========================== */
 .heroVisual {
   display: flex;
   justify-content: center;
@@ -307,14 +293,8 @@
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .currentMovieCard:hover {
@@ -370,42 +350,137 @@
   display: flex;
   gap: 10px;
   justify-content: center;
-}
-
-.watchNowBtn {
-  background: linear-gradient(135deg, #2ec4b6, #1a8a7e);
-  border: none;
-  padding: 8px 20px;
-  border-radius: 25px;
-  color: #0a192f;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
 }
 
-.watchNowBtn:hover {
-  transform: scale(1.05);
-}
+/* ========================== */
+/*   ACTION ICON BUTTONS      */
+/* ========================== */
 
-.addToListBtn {
-  background: rgba(46, 196, 182, 0.2);
-  border: 1px solid rgba(46, 196, 182, 0.5);
-  padding: 8px 15px;
-  border-radius: 25px;
+.actionIconBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(46, 196, 182, 0.3);
+  background: rgba(46, 196, 182, 0.1);
   color: #2ec4b6;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
 }
 
-.addToListBtn:hover {
-  background: rgba(46, 196, 182, 0.4);
+.actionIconBtn:hover:not(:disabled) {
+  background: rgba(46, 196, 182, 0.25);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(46, 196, 182, 0.3);
 }
 
-/* Carousel Indicators */
+.actionIconBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionIconBtn.active {
+  background: rgba(46, 196, 182, 0.25);
+  border-color: #2ec4b6;
+  color: #2ec4b6;
+}
+
+.actionIconBtn.activeHeart {
+  background: rgba(230, 57, 70, 0.2);
+  border-color: #e63946;
+  color: #e63946;
+}
+
+.actionIconBtn.activeHeart:hover:not(:disabled) {
+  background: rgba(230, 57, 70, 0.3);
+  box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+}
+
+/* ========================== */
+/*   PLAY OVERLAY ON POSTER  */
+/* ========================== */
+.playOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.currentMoviePoster:hover .playOverlay {
+  opacity: 1;
+}
+
+.playIconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.currentMoviePoster:hover .playIconContainer {
+  transform: scale(1);
+}
+
+.playIconContainer i {
+  font-size: 3rem;
+  color: #2ec4b6;
+  text-shadow: 0 0 20px rgba(46, 196, 182, 0.5);
+}
+
+.playIconContainer span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ========================== */
+/*   MOVIE OVERVIEW           */
+/* ========================== */
+
+.movieOverview {
+  color: #b8b8d0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin: 8px 0 12px;
+  text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 38px;
+}
+
+.votes {
+  color: #8892b0;
+  font-size: 0.7rem;
+}
+
+.votes i {
+  color: #2ec4b6;
+  margin-right: 4px;
+}
+
+/* ========================== */
+/*   CAROUSEL INDICATORS      */
+/* ========================== */
 .carouselIndicators {
   position: absolute;
   bottom: 30px;
@@ -432,7 +507,9 @@
   background: #2ec4b6;
 }
 
-/* Scroll Indicator */
+/* ========================== */
+/*    SCROLL INDICATOR        */
+/* ========================== */
 .scrollIndicator {
   position: absolute;
   bottom: 30px;
@@ -453,7 +530,35 @@
   50% { transform: translateY(10px); }
 }
 
-/* Responsive */
+/* ========================== */
+/*    LOADING STATE           */
+/* ========================== */
+.loadingSpinner {
+  text-align: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(46, 196, 182, 0.1);
+  border-top-color: #2ec4b6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loadingText {
+  color: #8892b0;
+  font-size: 1.2rem;
+}
+
+/* ========================== */
+/*       RESPONSIVE           */
+/* ========================== */
 @media (max-width: 1024px) {
   .heroContent {
     grid-template-columns: 1fr;
@@ -469,10 +574,6 @@
     justify-content: center;
   }
   
-  .statsRow {
-    justify-content: center;
-  }
-  
   .heroActions {
     justify-content: center;
   }
@@ -483,6 +584,14 @@
   
   .carouselContainer {
     display: none;
+  }
+  
+  .currentMovieActions {
+    justify-content: center;
+  }
+  
+  .movieOverview {
+    text-align: center;
   }
 }
 
@@ -504,11 +613,46 @@
     width: 240px;
   }
   
-  .statsRow {
-    gap: 20px;
+  .actionIconBtn {
+    width: 34px;
+    height: 34px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.5rem;
   }
   
-  .statNumber {
-    font-size: 1.2rem;
+  .currentMovieCard {
+    width: 200px;
+    padding: 15px;
+  }
+  
+  .heroBtn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .heroActions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .actionIconBtn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+  
+  .movieOverview {
+    font-size: 0.7rem;
+    -webkit-line-clamp: 2;
+    min-height: 30px;
+  }
+  
+  .scrollIndicator {
+    display: none;
   }
 }

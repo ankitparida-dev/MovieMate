@@ -1,107 +1,397 @@
+/* ============================================================
+   PROFILE PAGE - ENHANCED
+   ============================================================ */
+
 .profilePage {
   min-height: calc(100vh - 200px);
   background: linear-gradient(135deg, #0a192f 0%, #0d1f2d 100%);
-  padding: 40px 20px;
+  padding: 60px 20px;
 }
 
 .profileContainer {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   background: rgba(17, 34, 64, 0.95);
-  border-radius: 24px;
+  border-radius: 28px;
   overflow: hidden;
-  border: 1px solid rgba(46, 196, 182, 0.2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(46, 196, 182, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
 }
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  gap: 20px;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(46, 196, 182, 0.1);
+  border-top-color: #2ec4b6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   HEADER WITH COVER
+   ============================================================ */
 
 .profileHeader {
-  text-align: center;
-  padding: 40px;
-  background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
-  border-bottom: 1px solid rgba(46, 196, 182, 0.2);
+  position: relative;
 }
 
-.profileHeader h1 {
-  color: white;
-  margin-top: 15px;
-  font-size: 1.8rem;
+.coverImage {
+  height: 180px;
+  background: linear-gradient(135deg, #0a192f 0%, #1a3a5c 30%, #2ec4b6 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.profileHeader p {
+.coverImage::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: rgba(46, 196, 182, 0.1);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.coverImage::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 200px;
+  height: 200px;
+  background: rgba(46, 196, 182, 0.05);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.1); }
+}
+
+.coverOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(0deg, rgba(17, 34, 64, 0.95) 0%, transparent 100%);
+  z-index: 1;
+}
+
+.coverBadge {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: rgba(46, 196, 182, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.8rem;
   color: #2ec4b6;
-  margin-top: 5px;
+  border: 1px solid rgba(46, 196, 182, 0.3);
+  z-index: 2;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.memberSince {
-  display: inline-block;
-  margin-top: 10px;
+/* ============================================================
+   PROFILE INFO
+   ============================================================ */
+
+.profileInfo {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 40px 30px;
+  margin-top: -50px;
+  position: relative;
+  z-index: 2;
+  gap: 30px;
+}
+
+.avatarWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.onlineStatus {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background: #0a192f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0a192f;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  background: #4caf50;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.9); }
+}
+
+.userDetails {
+  flex: 1;
+  padding-bottom: 10px;
+}
+
+.userDetails h1 {
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 5px;
+  letter-spacing: -0.5px;
+}
+
+.userEmail {
+  color: #8892b0;
+  font-size: 0.95rem;
+  margin: 0 0 12px;
+}
+
+.userEmail i {
+  color: #2ec4b6;
+  margin-right: 8px;
+}
+
+.userMeta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.metaItem {
   font-size: 0.8rem;
   color: #8892b0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(46, 196, 182, 0.08);
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(46, 196, 182, 0.05);
 }
 
-.memberSince i {
-  margin-right: 5px;
+.metaItem i {
   color: #2ec4b6;
 }
+
+/* ============================================================
+   STATS GRID
+   ============================================================ */
 
 .profileStats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 30px;
-  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+  gap: 16px;
+  padding: 20px 30px 30px;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.06);
 }
 
 .statCard {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 15px;
-  background: #0d1f2d;
+  gap: 16px;
+  padding: 18px 22px;
+  background: rgba(13, 31, 45, 0.6);
   border-radius: 16px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(46, 196, 182, 0.05);
 }
 
 .statCard:hover {
-  transform: translateY(-3px);
-  background: #172a45;
+  transform: translateY(-4px);
+  background: rgba(23, 42, 69, 0.8);
+  border-color: rgba(46, 196, 182, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
-.statCard i {
-  font-size: 2rem;
+.statIconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover .statIconWrapper {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.statIconWrapper i {
+  font-size: 1.4rem;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNumber {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.statLabel {
+  color: #8892b0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   INSIGHTS
+   ============================================================ */
+
+.insights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 25px 30px;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.06);
+}
+
+.insightCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(13, 31, 45, 0.4);
+  border-radius: 14px;
+  padding: 16px 20px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(46, 196, 182, 0.05);
+}
+
+.insightCard:hover {
+  background: rgba(13, 31, 45, 0.7);
+  transform: translateX(4px);
+  border-color: rgba(46, 196, 182, 0.15);
+}
+
+.insightIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(46, 196, 182, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.insightIcon i {
+  font-size: 1.2rem;
   color: #2ec4b6;
 }
 
-.statCard h3 {
+.insightContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.insightLabel {
   color: #8892b0;
-  font-size: 0.75rem;
-  margin-bottom: 5px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.statCard p {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
+.insightValue {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 2px;
 }
 
-/* ✅ FOLLOW SECTION */
+/* ============================================================
+   FOLLOW SECTION
+   ============================================================ */
+
 .followSection {
   padding: 0 30px;
-  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+  border-bottom: 1px solid rgba(46, 196, 182, 0.06);
 }
 
-/* ✅ STATS SECTION */
-.statsSection {
-  padding: 30px;
-  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
+.followSection > div {
+  padding: 25px 0;
 }
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sectionHeader h3 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sectionHeader h3 i {
+  color: #2ec4b6;
+}
+
+.sectionBadge {
+  font-size: 0.7rem;
+  color: #8892b0;
+  background: rgba(46, 196, 182, 0.08);
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(46, 196, 182, 0.05);
+}
+
+/* ============================================================
+   PROFILE ACTIONS
+   ============================================================ */
 
 .profileActions {
   display: flex;
-  gap: 15px;
-  padding: 30px;
+  gap: 12px;
+  padding: 25px 30px;
   flex-wrap: wrap;
-  justify-content: center;
+  border-bottom: 1px solid rgba(46, 196, 182, 0.06);
 }
 
 .actionBtn {
@@ -111,77 +401,242 @@
   border-radius: 30px;
   color: #0a192f;
   font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+  min-width: 140px;
 }
 
 .actionBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(46, 196, 182, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(46, 196, 182, 0.4);
 }
 
-.loginPrompt {
-  text-align: center;
-  padding: 100px 20px;
-  color: #8892b0;
-  min-height: calc(100vh - 200px);
+.actionBtnOutline {
+  background: transparent;
+  color: #e6e6e6;
+  border: 1px solid rgba(46, 196, 182, 0.3);
+}
+
+.actionBtnOutline:hover {
+  background: rgba(46, 196, 182, 0.1);
+  box-shadow: none;
+}
+
+/* ============================================================
+   PROGRESS SECTION
+   ============================================================ */
+
+.progressSection {
+  padding: 25px 30px 35px;
+}
+
+.progressHeader {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-}
-
-.loginPrompt i {
-  font-size: 4rem;
-  color: #2ec4b6;
-  margin-bottom: 20px;
-  opacity: 0.5;
-}
-
-.loginPrompt h2 {
-  color: white;
   margin-bottom: 10px;
 }
 
+.progressHeader span {
+  color: #8892b0;
+  font-size: 0.85rem;
+}
+
+.progressPercent {
+  color: #2ec4b6 !important;
+  font-weight: 700;
+  font-size: 1rem !important;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: rgba(46, 196, 182, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #2ec4b6, #4fd1c5);
+  border-radius: 10px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 10px;
+  height: 10px;
+  background: #2ec4b6;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(46, 196, 182, 0.5);
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  color: #8892b0;
+  font-size: 0.65rem;
+}
+
+/* ============================================================
+   LOGIN PROMPT
+   ============================================================ */
+
+.loginPrompt {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.loginPromptContent {
+  text-align: center;
+  background: rgba(17, 34, 64, 0.9);
+  padding: 50px 60px;
+  border-radius: 28px;
+  border: 1px solid rgba(46, 196, 182, 0.15);
+  max-width: 450px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.loginPromptContent i {
+  font-size: 4.5rem;
+  color: #2ec4b6;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.loginPromptContent h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.loginPromptContent p {
+  color: #8892b0;
+  margin-bottom: 25px;
+}
+
 .loginBtn {
-  margin-top: 20px;
   background: linear-gradient(135deg, #2ec4b6, #1a8a7e);
   border: none;
   color: #0a192f;
-  padding: 10px 24px;
+  padding: 14px 35px;
   border-radius: 30px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(46, 196, 182, 0.4);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .profileStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .insights {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  .profileStats {
-    grid-template-columns: repeat(2, 1fr);
+  .profilePage {
+    padding: 20px 10px;
+  }
+  
+  .coverImage {
+    height: 120px;
+  }
+  
+  .coverBadge {
+    top: 12px;
+    right: 16px;
+    font-size: 0.7rem;
+    padding: 4px 14px;
+  }
+  
+  .profileInfo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px 20px;
+    margin-top: -40px;
     gap: 15px;
   }
   
-  .profileHeader {
-    padding: 30px;
+  .userDetails h1 {
+    font-size: 1.6rem;
   }
   
-  .profileHeader h1 {
+  .userMeta {
+    justify-content: center;
+  }
+  
+  .profileStats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 20px;
+  }
+  
+  .statCard {
+    padding: 14px 16px;
+  }
+  
+  .statNumber {
     font-size: 1.4rem;
   }
   
-  .actionBtn {
-    padding: 10px 20px;
-    font-size: 0.85rem;
+  .insights {
+    grid-template-columns: 1fr;
+    padding: 20px;
   }
   
   .followSection {
     padding: 0 20px;
   }
   
-  .statsSection {
+  .profileActions {
     padding: 20px;
+    flex-direction: column;
+  }
+  
+  .actionBtn {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .progressSection {
+    padding: 20px;
+  }
+  
+  .loginPromptContent {
+    padding: 30px 25px;
   }
 }
 
@@ -189,55 +644,26 @@
   .profileStats {
     grid-template-columns: 1fr;
   }
-}
-/* ===== PROFILE INSIGHTS ===== */
-
-.insights {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 30px;
-  border-bottom: 1px solid rgba(46, 196, 182, 0.1);
-}
-
-.insightItem {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  background: #172a45;
-  border-radius: 16px;
-  padding: 20px;
-  transition: 0.3s;
-}
-
-.insightItem:hover {
-  transform: translateY(-3px);
-  background: #203354;
-}
-
-.insightItem i {
-  font-size: 1.8rem;
-  color: #2ec4b6;
-}
-
-.insightItem strong {
-  display: block;
-  color: white;
-  font-size: 0.9rem;
-  margin-bottom: 5px;
-}
-
-.insightItem p {
-  color: #8892b0;
-  margin: 0;
-  font-size: 1rem;
-}
-.tag {
-  padding: 6px 14px;
-  background: rgba(46, 196, 182, 0.1);
-  color: #2ec4b6;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  border: 1px solid rgba(46, 196, 182, 0.2);
-  transition: var(--transition);
+  
+  .coverImage {
+    height: 80px;
+  }
+  
+  .coverBadge {
+    display: none;
+  }
+  
+  .profileInfo {
+    margin-top: -30px;
+  }
+  
+  .userDetails h1 {
+    font-size: 1.3rem;
+  }
+  
+  .userMeta {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
 }
