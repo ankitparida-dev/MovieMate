@@ -2,73 +2,97 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
+const axios = require('axios');
 const User = require('../models/User');
 
 // ============================================================
-// ✅ GMAIL SMTP TRANSPORTER
+// ✅ MAILGUN CONFIGURATION
 // ============================================================
 
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: Number(process.env.SMTP_PORT) || 587,
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-    }
-});
+const mailgunConfig = {
+    apiKey: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN,
+    baseUrl: process.env.MAILGUN_BASE_URL || 'https://api.mailgun.net/v3'
+};
 
-// ✅ Verify connection
-transporter.verify((error, success) => {
-    if (error) {
-        console.error('❌ SMTP error:', error.message);
-    } else {
-        console.log('✅ SMTP ready to send emails');
-    }
-});
+console.log('📧 Mailgun Configuration:');
+console.log('Domain:', mailgunConfig.domain || '❌ NOT SET');
+console.log('API Key:', mailgunConfig.apiKey ? '✅ Set' : '❌ NOT SET');
+console.log('Base URL:', mailgunConfig.baseUrl);
 
 // ============================================================
-// ✅ SEND OTP EMAIL
+// ✅ SEND OTP EMAIL VIA MAILGUN
 // ============================================================
 
 const sendOtpEmail = async (email, otp) => {
-    console.log(`📧 Sending OTP to ${email} via Gmail SMTP...`);
+    console.log(`📧 Sending OTP to ${email} via Mailgun...`);
+
+    const from = process.env.EMAIL_FROM || `MovieMate <mailgun@${mailgunConfig.domain}>`;
+    const subject = 'Your MovieMate Verification Code';
+    
+    const html = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; background: #0a192f; color: #fff; padding: 20px; margin: 0; }
+                .container { max-width: 500px; margin: 0 auto; background: #112240; padding: 30px; border-radius: 12px; border: 1px solid #2ec4b6; }
+                .logo { text-align: center; font-size: 28px; color: #2ec4b6; font-weight: bold; }
+                .logo span { color: #ffffff; }
+                .message { text-align: center; color: #e6e6e6; font-size: 16px; margin-bottom: 10px; }
+                .otp { font-size: 42px; font-weight: bold; color: #2ec4b6; text-align: center; padding: 20px; letter-spacing: 12px; background: #0a192f; border-radius: 8px; margin: 20px 0; border: 1px solid rgba(46,196,182,0.2); }
+                .expiry { text-align: center; color: #8892b0; font-size: 14px; }
+                .footer { text-align: center; color: #8892b0; font-size: 12px; margin-top: 20px; border-top: 1px solid rgba(46,196,182,0.1); padding-top: 20px; }
+                .warning { color: #e63946; font-size: 13px; text-align: center; margin-top: 15px; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="logo">🎬 <span>MOVIEMATE</span></div>
+                <div class="message">Your One-Time Password (OTP) is:</div>
+                <div class="otp">${otp}</div>
+                <div class="expiry">⏱️ This code expires in <strong>10 minutes</strong></div>
+                <div class="warning">⚠️ If you didn't request this, please ignore this email.</div>
+                <div class="footer">— MovieMate Team • Secure Authentication</div>
+            </div>
+        </body>
+        </html>
+    `;
 
     try {
-        await transporter.sendMail({
-            from: process.env.EMAIL_FROM || `MovieMate <${process.env.SMTP_USER}>`,
-            to: email,
-            subject: 'Your MovieMate Verification Code',
-            html: `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <style>
-                        body { font-family: Arial, sans-serif; background: #0a192f; color: #fff; padding: 20px; }
-                        .container { max-width: 500px; margin: 0 auto; background: #112240; padding: 30px; border-radius: 12px; border: 1px solid #2ec4b6; }
-                        .logo { text-align: center; font-size: 28px; color: #2ec4b6; font-weight: bold; }
-                        .otp { font-size: 42px; font-weight: bold; color: #2ec4b6; text-align: center; padding: 20px; letter-spacing: 12px; background: #0a192f; border-radius: 8px; margin: 20px 0; border: 1px solid rgba(46,196,182,0.2); }
-                        .expiry { text-align: center; color: #8892b0; font-size: 14px; }
-                        .footer { text-align: center; color: #8892b0; font-size: 12px; margin-top: 20px; border-top: 1px solid rgba(46,196,182,0.1); padding-top: 20px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="container">
-                        <div class="logo">🎬 MOVIEMATE</div>
-                        <p style="text-align:center; color:#e6e6e6;">Your verification code is:</p>
-                        <div class="otp">${otp}</div>
-                        <div class="expiry">⏱️ This code expires in <strong>10 minutes</strong></div>
-                        <div class="footer">— MovieMate Team</div>
-                    </div>
-                </body>
-                </html>
-            `
+        const url = `${mailgunConfig.baseUrl}/${mailgunConfig.domain}/messages`;
+        
+        const form = new URLSearchParams();
+        form.append('from', from);
+        form.append('to', email);
+        form.append('subject', subject);
+        form.append('html', html);
+
+        console.log(`📧 Mailgun URL: ${url}`);
+
+        const response = await axios.post(url, form.toString(), {
+            auth: {
+                username: 'api',
+                password: mailgunConfig.apiKey
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            timeout: 15000 // 15 second timeout
         });
+
         console.log(`✅ OTP sent successfully to ${email}`);
+        console.log(`📧 Mailgun Response:`, response.status, response.statusText);
         return true;
+
     } catch (error) {
-        console.error('❌ Email error:', error.message);
+        console.error('❌ Mailgun error:');
+        if (error.response) {
+            console.error('Status:', error.response.status);
+            console.error('Data:', JSON.stringify(error.response.data, null, 2));
+        } else {
+            console.error('Message:', error.message);
+        }
         throw error;
     }
 };
@@ -138,6 +162,7 @@ const register = async (req, res) => {
             password: hashedPassword
         });
 
+        // Send socket notification
         const io = req.app.get('io');
         if (io) {
             io.emit('userActivity', {
@@ -166,7 +191,7 @@ const register = async (req, res) => {
 };
 
 // ============================================================
-// ✅ LOGIN (Send OTP in background - non-blocking)
+// ✅ LOGIN
 // ============================================================
 
 const login = async (req, res) => {
@@ -196,6 +221,14 @@ const login = async (req, res) => {
             });
         }
 
+        // ✅ Check if user is banned
+        if (user.isBanned) {
+            return res.status(403).json({
+                success: false,
+                message: 'Your account has been banned. Please contact support.'
+            });
+        }
+
         // Generate OTP
         const otpCode = generateOtp();
         user.otpCode = otpCode;
@@ -204,12 +237,15 @@ const login = async (req, res) => {
 
         console.log(`🔐 OTP generated for ${email}: ${otpCode}`);
 
-        // ✅ Send OTP in background (don't wait for email to finish)
-        sendOtpEmail(user.email, otpCode)
-            .then(() => console.log(`✅ OTP sent to ${email}`))
-            .catch(err => console.error(`❌ Failed to send OTP to ${email}:`, err.message));
+        // ✅ Send OTP via Mailgun
+        try {
+            await sendOtpEmail(user.email, otpCode);
+            console.log(`✅ OTP sent successfully to ${email}`);
+        } catch (emailError) {
+            console.error('❌ Failed to send OTP:', emailError.message);
+            // Still return success to user, but log the error
+        }
 
-        // ✅ Respond immediately to user
         res.status(200).json({
             success: true,
             otpRequired: true,
@@ -247,6 +283,14 @@ const verifyOtp = async (req, res) => {
             return res.status(401).json({
                 success: false,
                 message: 'Invalid OTP or email'
+            });
+        }
+
+        // Check if user is banned
+        if (user.isBanned) {
+            return res.status(403).json({
+                success: false,
+                message: 'Your account has been banned. Please contact support.'
             });
         }
 
@@ -332,6 +376,14 @@ const resendOtp = async (req, res) => {
             });
         }
 
+        // Check if user is banned
+        if (user.isBanned) {
+            return res.status(403).json({
+                success: false,
+                message: 'Your account has been banned. Please contact support.'
+            });
+        }
+
         // Check cooldown (30 seconds)
         if (user.otpExpires) {
             const timeSinceLastOTP = Date.now() - (user.otpExpires.getTime() - 10 * 60 * 1000);
@@ -350,10 +402,12 @@ const resendOtp = async (req, res) => {
 
         console.log(`🔄 New OTP for ${email}: ${otpCode}`);
 
-        // ✅ Send OTP in background
-        sendOtpEmail(user.email, otpCode)
-            .then(() => console.log(`✅ New OTP sent to ${email}`))
-            .catch(err => console.error(`❌ Failed to send new OTP to ${email}:`, err.message));
+        try {
+            await sendOtpEmail(user.email, otpCode);
+            console.log(`✅ New OTP sent successfully to ${email}`);
+        } catch (emailError) {
+            console.error('❌ Failed to send OTP:', emailError.message);
+        }
 
         res.status(200).json({
             success: true,
@@ -390,6 +444,14 @@ const refresh = async (req, res) => {
             return res.status(403).json({
                 success: false,
                 message: 'Invalid refresh token'
+            });
+        }
+
+        // Check if user is banned
+        if (user.isBanned) {
+            return res.status(403).json({
+                success: false,
+                message: 'Your account has been banned.'
             });
         }
 
