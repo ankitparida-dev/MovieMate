@@ -53,6 +53,9 @@ const userSchema = new mongoose.Schema(
 }
 );
 
+// ✅ OPTIONAL: Add index for faster OTP queries
+userSchema.index({ email: 1, otpCode: 1 });
+
 module.exports = mongoose.model(
     'User',
     userSchema

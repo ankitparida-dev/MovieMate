@@ -1,99 +1,105 @@
+// backend/controllers/authController.js
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const axios = require('axios');
 const User = require('../models/User');
 
-const mailgunConfig = {
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
-    baseUrl: process.env.MAILGUN_BASE_URL || 'https://api.mailgun.net/v3'
-};
+// ============================================================
+// ✅ GMAIL SMTP TRANSPORTER
+// ============================================================
 
-const smtpConfig = {
-    host: process.env.SMTP_HOST,
+const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: Number(process.env.SMTP_PORT) || 587,
-    secure: process.env.SMTP_SECURE === 'true' || process.env.SMTP_PORT === '465',
+    secure: process.env.SMTP_SECURE === 'true',
     auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
     }
-};
+});
 
-const createTransporter = () => {
-    if (!smtpConfig.host || !smtpConfig.auth.user || !smtpConfig.auth.pass) {
-        return null;
+// ✅ Verify connection
+transporter.verify((error, success) => {
+    if (error) {
+        console.error('❌ SMTP error:', error.message);
+    } else {
+        console.log('✅ SMTP ready to send emails');
     }
+});
 
-    return nodemailer.createTransport(smtpConfig);
-};
+// ============================================================
+// ✅ SEND OTP EMAIL
+// ============================================================
 
 const sendOtpEmail = async (email, otp) => {
-    const from = process.env.EMAIL_FROM || 'MovieMate <no-reply@moviemate.com>';
-    const subject = 'Your MovieMate verification code';
-    const text = `Your MovieMate verification code is ${otp}. It expires in 10 minutes.`;
-    const html = `<p>Your MovieMate verification code is <strong>${otp}</strong>.</p><p>It expires in 10 minutes.</p>`;
+    console.log(`📧 Sending OTP to ${email} via Gmail SMTP...`);
 
-    if (mailgunConfig.apiKey && mailgunConfig.domain) {
-        const url = `${mailgunConfig.baseUrl}/${mailgunConfig.domain}/messages`;
-        const form = new URLSearchParams();
-        form.append('from', from);
-        form.append('to', email);
-        form.append('subject', subject);
-        form.append('text', text);
-        form.append('html', html);
-
-        await axios.post(url, form.toString(), {
-            auth: {
-                username: 'api',
-                password: mailgunConfig.apiKey
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
+    try {
+        await transporter.sendMail({
+            from: process.env.EMAIL_FROM || `MovieMate <${process.env.SMTP_USER}>`,
+            to: email,
+            subject: 'Your MovieMate Verification Code',
+            html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body { font-family: Arial, sans-serif; background: #0a192f; color: #fff; padding: 20px; }
+                        .container { max-width: 500px; margin: 0 auto; background: #112240; padding: 30px; border-radius: 12px; border: 1px solid #2ec4b6; }
+                        .logo { text-align: center; font-size: 28px; color: #2ec4b6; font-weight: bold; }
+                        .otp { font-size: 42px; font-weight: bold; color: #2ec4b6; text-align: center; padding: 20px; letter-spacing: 12px; background: #0a192f; border-radius: 8px; margin: 20px 0; border: 1px solid rgba(46,196,182,0.2); }
+                        .expiry { text-align: center; color: #8892b0; font-size: 14px; }
+                        .footer { text-align: center; color: #8892b0; font-size: 12px; margin-top: 20px; border-top: 1px solid rgba(46,196,182,0.1); padding-top: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="logo">🎬 MOVIEMATE</div>
+                        <p style="text-align:center; color:#e6e6e6;">Your verification code is:</p>
+                        <div class="otp">${otp}</div>
+                        <div class="expiry">⏱️ This code expires in <strong>10 minutes</strong></div>
+                        <div class="footer">— MovieMate Team</div>
+                    </div>
+                </body>
+                </html>
+            `
         });
-
-        return;
+        console.log(`✅ OTP sent successfully to ${email}`);
+        return true;
+    } catch (error) {
+        console.error('❌ Email error:', error.message);
+        throw error;
     }
-
-    const transporter = createTransporter();
-
-    if (!transporter) {
-        console.warn('SMTP is not configured. OTP email will not be sent.');
-        return;
-    }
-
-    await transporter.sendMail({
-        from,
-        to: email,
-        subject,
-        text,
-        html
-    });
 };
+
+// ============================================================
+// ✅ OTP GENERATION
+// ============================================================
 
 const generateOtp = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
-// Generate Access + Refresh Tokens
+// ============================================================
+// ✅ TOKEN GENERATION
+// ============================================================
+
 const generateTokens = (user) => {
     const accessToken = jwt.sign(
         {
             id: user._id,
             email: user.email,
             name: user.name,
-            isAdmin: user.isAdmin,
-            isBanned: user.isBanned
+            isAdmin: user.isAdmin || false,
+            isBanned: user.isBanned || false
         },
         process.env.JWT_SECRET,
-        { expiresIn: '15m' }
+        { expiresIn: '7d' }
     );
 
     const refreshToken = jwt.sign(
-        {
-            id: user._id
-        },
+        { id: user._id },
         process.env.JWT_REFRESH_SECRET,
         { expiresIn: '7d' }
     );
@@ -101,62 +107,81 @@ const generateTokens = (user) => {
     return { accessToken, refreshToken };
 };
 
-// Register User
+// ============================================================
+// ✅ REGISTER
+// ============================================================
+
 const register = async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
 
-  try {
-    const { name, email, password } = req.body;
+        if (!name || !email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: 'Name, email and password required'
+            });
+        }
 
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: 'Name, email and password required'
-      });
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                success: false,
+                message: 'User already exists'
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = await User.create({
+            name,
+            email,
+            password: hashedPassword
+        });
+
+        // Send socket notification
+        const io = req.app.get('io');
+        if (io) {
+            io.emit('userActivity', {
+                message: `New user registered: ${name} 🚀`
+            });
+        }
+
+        res.status(201).json({
+            success: true,
+            message: 'Registered successfully',
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.error('REGISTER ERROR:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Registration failed',
+            error: error.message
+        });
     }
-
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      return res.status(400).json({
-        success: false,
-        message: 'User already exists'
-      });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await User.create({
-      name,
-      email,
-      password: hashedPassword
-    });
-
-    const io = req.app.get("io");
-    io.emit("userActivity", {
-      message: "New user registered 🚀"
-    });
-
-    res.status(201).json({
-      success: true,
-      message: 'Registered successfully'
-    });
-
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Registration failed',
-      error: error.message
-    });
-  }
 };
 
-// Login User
+// ============================================================
+// ✅ LOGIN
+// ============================================================
+
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email and password required'
+            });
+        }
 
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(401).json({
                 success: false,
@@ -165,7 +190,6 @@ const login = async (req, res) => {
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
-
         if (!isMatch) {
             return res.status(401).json({
                 success: false,
@@ -173,28 +197,31 @@ const login = async (req, res) => {
             });
         }
 
+        // Generate OTP
         const otpCode = generateOtp();
         user.otpCode = otpCode;
         user.otpExpires = new Date(Date.now() + 10 * 60 * 1000);
         await user.save();
 
+        console.log(`🔐 OTP generated for ${email}: ${otpCode}`);
+
+        // Send OTP via email
         try {
             await sendOtpEmail(user.email, otpCode);
+            console.log(`✅ OTP sent successfully to ${email}`);
         } catch (emailError) {
-            console.error('OTP EMAIL ERROR:', emailError);
+            console.error('❌ Failed to send OTP:', emailError.message);
         }
 
         res.status(200).json({
             success: true,
             otpRequired: true,
-            message: 'OTP sent to your email'
+            message: 'OTP sent to your email',
+            email: user.email
         });
 
     } catch (error) {
-        console.error(
-        "LOGIN CONTROLLER ERROR:",
-        error
-    );
+        console.error('LOGIN ERROR:', error);
         res.status(500).json({
             success: false,
             message: 'Login failed',
@@ -203,7 +230,10 @@ const login = async (req, res) => {
     }
 };
 
-// Verify One-Time Password
+// ============================================================
+// ✅ VERIFY OTP
+// ============================================================
+
 const verifyOtp = async (req, res) => {
     try {
         const { email, otp } = req.body;
@@ -216,7 +246,6 @@ const verifyOtp = async (req, res) => {
         }
 
         const user = await User.findOne({ email });
-
         if (!user || !user.otpCode) {
             return res.status(401).json({
                 success: false,
@@ -224,13 +253,18 @@ const verifyOtp = async (req, res) => {
             });
         }
 
+        // Check expiry
         if (!user.otpExpires || user.otpExpires < new Date()) {
+            user.otpCode = null;
+            user.otpExpires = null;
+            await user.save();
             return res.status(401).json({
                 success: false,
                 message: 'OTP has expired. Please request a new code.'
             });
         }
 
+        // Check OTP match
         if (user.otpCode !== otp) {
             return res.status(401).json({
                 success: false,
@@ -238,6 +272,7 @@ const verifyOtp = async (req, res) => {
             });
         }
 
+        // Generate tokens
         const { accessToken, refreshToken } = generateTokens(user);
 
         user.refreshToken = refreshToken;
@@ -245,17 +280,10 @@ const verifyOtp = async (req, res) => {
         user.otpExpires = null;
         await user.save();
 
-        res.cookie('token', accessToken, {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 1000
-        });
-
         const io = req.app.get('io');
         if (io) {
             io.emit('userActivity', {
-                message: 'User verified OTP and logged in'
+                message: `${user.name} logged in 🎬`
             });
         }
 
@@ -268,10 +296,12 @@ const verifyOtp = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                isAdmin: user.isAdmin,
-                isBanned: user.isBanned
+                isAdmin: user.isAdmin || false,
+                isBanned: user.isBanned || false,
+                profileImage: user.profileImage || ''
             }
         });
+
     } catch (error) {
         console.error('VERIFY OTP ERROR:', error);
         res.status(500).json({
@@ -281,6 +311,10 @@ const verifyOtp = async (req, res) => {
         });
     }
 };
+
+// ============================================================
+// ✅ RESEND OTP
+// ============================================================
 
 const resendOtp = async (req, res) => {
     try {
@@ -294,7 +328,6 @@ const resendOtp = async (req, res) => {
         }
 
         const user = await User.findOne({ email });
-
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -302,22 +335,38 @@ const resendOtp = async (req, res) => {
             });
         }
 
+        // Check cooldown (30 seconds)
+        if (user.otpExpires) {
+            const timeSinceLastOTP = Date.now() - (user.otpExpires.getTime() - 10 * 60 * 1000);
+            if (timeSinceLastOTP < 30000) {
+                return res.status(429).json({
+                    success: false,
+                    message: 'Please wait 30 seconds before requesting a new OTP'
+                });
+            }
+        }
+
         const otpCode = generateOtp();
         user.otpCode = otpCode;
         user.otpExpires = new Date(Date.now() + 10 * 60 * 1000);
         await user.save();
 
+        console.log(`🔄 New OTP for ${email}: ${otpCode}`);
+
         try {
             await sendOtpEmail(user.email, otpCode);
+            console.log(`✅ New OTP sent successfully to ${email}`);
         } catch (emailError) {
-            console.error('OTP EMAIL ERROR:', emailError);
+            console.error('❌ Failed to send OTP:', emailError.message);
         }
 
         res.status(200).json({
             success: true,
             message: 'A new OTP code was sent to your email'
         });
+
     } catch (error) {
+        console.error('RESEND OTP ERROR:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to resend OTP',
@@ -326,10 +375,13 @@ const resendOtp = async (req, res) => {
     }
 };
 
-// Refresh Access Token
+// ============================================================
+// ✅ REFRESH TOKEN
+// ============================================================
+
 const refresh = async (req, res) => {
     try {
-        const refreshToken = req.body?.refreshToken;
+        const { refreshToken } = req.body;
 
         if (!refreshToken) {
             return res.status(400).json({
@@ -339,7 +391,6 @@ const refresh = async (req, res) => {
         }
 
         const user = await User.findOne({ refreshToken });
-
         if (!user) {
             return res.status(403).json({
                 success: false,
@@ -347,22 +398,19 @@ const refresh = async (req, res) => {
             });
         }
 
-        jwt.verify(
-            refreshToken,
-            process.env.JWT_REFRESH_SECRET
-        );
+        jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
 
-       const newAccessToken = jwt.sign(
-    {
-        id: user._id,
-        email: user.email,
-        name: user.name,
-        isAdmin: user.isAdmin,
-        isBanned: user.isBanned
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: '15m' }
-);
+        const newAccessToken = jwt.sign(
+            {
+                id: user._id,
+                email: user.email,
+                name: user.name,
+                isAdmin: user.isAdmin || false,
+                isBanned: user.isBanned || false
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' }
+        );
 
         res.status(200).json({
             success: true,
@@ -370,6 +418,7 @@ const refresh = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('REFRESH ERROR:', error);
         res.status(403).json({
             success: false,
             message: 'Invalid or expired refresh token'
@@ -377,10 +426,13 @@ const refresh = async (req, res) => {
     }
 };
 
-// Logout User
+// ============================================================
+// ✅ LOGOUT
+// ============================================================
+
 const logout = async (req, res) => {
     try {
-        const refreshToken = req.body?.refreshToken;
+        const { refreshToken } = req.body;
 
         if (refreshToken) {
             await User.findOneAndUpdate(
@@ -389,14 +441,13 @@ const logout = async (req, res) => {
             );
         }
 
-        res.clearCookie("token");
-
         res.status(200).json({
             success: true,
             message: 'Logged out successfully'
         });
 
     } catch (error) {
+        console.error('LOGOUT ERROR:', error);
         res.status(500).json({
             success: false,
             message: 'Logout failed',
@@ -404,6 +455,10 @@ const logout = async (req, res) => {
         });
     }
 };
+
+// ============================================================
+// ✅ EXPORTS
+// ============================================================
 
 module.exports = {
     register,
