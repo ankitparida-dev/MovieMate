@@ -1,3 +1,5 @@
+/* frontend/src/LoginPage.module.css */
+
 /* ---------------------------------------
           LOGIN PAGE WRAPPER
 ---------------------------------------- */
@@ -104,19 +106,31 @@
   margin-top: 10px;
 }
 
-.loginBtn:hover {
+.loginBtn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: var(--shadow-teal, 0 0 20px rgba(46, 196, 182, 0.4));
 }
 
-.loginBtn:active {
-  transform: translateY(0);
+.loginBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .messageRow {
   display: grid;
   gap: 12px;
   margin-bottom: 20px;
+}
+
+.errorMessage {
+  background: rgba(230, 57, 70, 0.15);
+  border: 1px solid var(--accent-error, #e63946);
+  color: var(--accent-error, #e63946);
+  padding: 12px 16px;
+  border-radius: var(--radius-md, 10px);
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 .infoMessage {
@@ -154,9 +168,30 @@
   transition: var(--transition, all 0.2s ease);
 }
 
-.secondaryBtn:hover {
+.secondaryBtn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.08);
   transform: translateY(-1px);
+}
+
+.secondaryBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loadingSpinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--primary, #0a192f);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ---------------------------------------
@@ -208,88 +243,16 @@
 }
 
 /* ---------------------------------------
-          ERROR MESSAGE
----------------------------------------- */
-.errorMessage {
-  background: rgba(230, 57, 70, 0.15);
-  border: 1px solid var(--accent-error, #e63946);
-  color: var(--accent-error, #e63946);
-  padding: 12px 16px;
-  border-radius: var(--radius-md, 10px);
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* ---------------------------------------
-          LOADING STATE
----------------------------------------- */
-.loginBtn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.loadingSpinner {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--primary, #0a192f);
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ---------------------------------------
           RESPONSIVE STYLES
 ---------------------------------------- */
-
-/* Tablet (768px - 1024px) */
-@media (max-width: 1024px) {
-  .loginContainer {
-    width: 800px;
-    min-height: 500px;
-  }
-  
-  .loginSection {
-    padding: 40px 30px;
-  }
-  
-  .signupSection {
-    padding: 40px 30px;
-  }
-  
-  .loginSection form h2 {
-    font-size: 1.8rem;
-  }
-  
-  .signupSection h2 {
-    font-size: 1.8rem;
-  }
-}
-
-/* Mobile (481px - 768px) */
 @media (max-width: 768px) {
-  .loginPageWrapper {
-    padding: 30px 20px;
-    min-height: auto;
-  }
-
   .loginContainer {
     flex-direction: column;
     max-width: 450px;
     width: 100%;
     min-height: auto;
   }
-
+  
   .loginSection {
     padding: 35px 25px;
   }
@@ -297,39 +260,21 @@
   .signupSection {
     padding: 35px 25px;
   }
-
+  
   .loginSection form h2 {
     font-size: 1.6rem;
-    margin-bottom: 25px;
   }
   
   .signupSection h2 {
     font-size: 1.6rem;
   }
-  
-  .signupSection p {
-    margin-bottom: 20px;
-  }
-  
-  .inputBox input {
-    padding: 12px 14px;
-  }
-  
-  .loginBtn {
-    padding: 12px;
-  }
-  
-  .signupBtn {
-    padding: 10px 28px;
-  }
 }
 
-/* Small Mobile (up to 480px) */
 @media (max-width: 480px) {
   .loginPageWrapper {
     padding: 20px 15px;
   }
-
+  
   .loginSection {
     padding: 25px 20px;
   }
@@ -337,66 +282,27 @@
   .signupSection {
     padding: 25px 20px;
   }
-
+  
   .loginSection form h2 {
     font-size: 1.4rem;
-    margin-bottom: 20px;
   }
   
   .signupSection h2 {
     font-size: 1.4rem;
-  }
-  
-  .signupSection p {
-    font-size: 0.85rem;
-  }
-
-  .inputBox {
-    margin-bottom: 18px;
   }
   
   .inputBox input {
     padding: 10px 12px;
     font-size: 0.9rem;
   }
-
+  
   .loginBtn {
     font-size: 0.9rem;
     padding: 10px;
   }
-
+  
   .signupBtn {
     padding: 8px 24px;
     font-size: 0.9rem;
-  }
-  
-  .errorMessage {
-    padding: 10px 12px;
-    font-size: 0.8rem;
-  }
-}
-
-/* Extra Small (up to 360px) */
-@media (max-width: 360px) {
-  .loginSection {
-    padding: 20px 15px;
-  }
-  
-  .signupSection {
-    padding: 20px 15px;
-  }
-
-  .loginSection form h2 {
-    font-size: 1.2rem;
-  }
-  
-  .signupSection h2 {
-    font-size: 1.2rem;
-  }
-
-  .loginBtn,
-  .signupBtn {
-    font-size: 0.85rem;
-    padding: 8px 16px;
   }
 }

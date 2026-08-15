@@ -11,7 +11,7 @@ const isProduction = typeof window !== 'undefined' &&
   window.location.hostname !== 'localhost' && 
   window.location.hostname !== '127.0.0.1';
 
-// ✅ Force the live Render URL if in production, otherwise use env/localhost
+// ✅ Force the live Render URL if in production
 const BASE_URL = isProduction 
   ? "https://moviemate-l4ts.onrender.com/api" 
   : (rawApiUrl || (rawSocketUrl ? `${rawSocketUrl.replace(/\/$/, '')}/api` : DEFAULT_API_URL));
@@ -33,24 +33,42 @@ const getHeaders = (hasBody = false) => {
   return headers;
 };
 
-async function request(endpoint, { method = "GET", body } = {}) {
+// ✅ Add timeout to request function
+async function request(endpoint, { method = "GET", body, timeout = 15000 } = {}) {
   const options = {
     method,
     headers: getHeaders(!!body),
   };
 
   if (body) {
-    options.body = JSON.stringify(body);                              
+    options.body = JSON.stringify(body);
   }
 
-  const res = await fetch(`${BASE_URL}/${endpoint}`, options);
-  if (!res.ok) {
-    const errorBody = await res.json().catch(() => null);
-    const message = errorBody?.message || errorBody?.error || res.statusText;
-    throw new Error(message || `Request failed: ${endpoint}`);
-  }
+  // ✅ Abort controller for timeout
+  const controller = new AbortController();
+  options.signal = controller.signal;
 
-  return res.json();
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+  }, timeout);
+
+  try {
+    const res = await fetch(`${BASE_URL}/${endpoint}`, options);
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      const errorBody = await res.json().catch(() => null);
+      const message = errorBody?.message || errorBody?.error || res.statusText;
+      throw new Error(message || `Request failed: ${endpoint}`);
+    }
+
+    return res.json();
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out. Please try again.');
+    }
+    throw error;
+  }
 }
 
 export function getData(endpoint) {
@@ -145,10 +163,6 @@ export async function updateLibraryItem(id, data) {
   });
 }
 
-// ============================================================
-// ✅ ADD/REMOVE FUNCTIONS
-// ============================================================
-
 export const addToFavorites = (movie) => addToList("favorites", movie);
 export const addToWatchlist = (movie, watchStatus = "planning") =>
   addToList("watchlist", {
@@ -164,10 +178,6 @@ export const addToHistory = (movie) =>
 export const getFavorites = () => getUserCollection("favorites");
 export const getWatchlist = () => getUserCollection("watchlist");
 export const getHistory = () => getUserCollection("history");
-
-// ============================================================
-// ✅ CHECK STATUS FUNCTIONS (For HeroBanner)
-// ============================================================
 
 export const isInFavorites = async (movieId) => {
   try {
@@ -199,10 +209,6 @@ export const isInHistory = async (movieId) => {
   }
 };
 
-// ============================================================
-// ✅ BULK STATUS CHECK (For HeroBanner)
-// ============================================================
-
 export const getLibraryStatus = async (movieId) => {
   try {
     const [favorites, watchlist, history] = await Promise.all([
@@ -221,10 +227,6 @@ export const getLibraryStatus = async (movieId) => {
     return { isFavorite: false, isWatchlist: false, isHistory: false };
   }
 };
-
-// ============================================================
-// ✅ NOTES FUNCTIONS
-// ============================================================
 
 export const getNotes = async (movieId) => {
   try {
@@ -266,10 +268,6 @@ export const getUserNotes = async () => {
   }
 };
 
-// ============================================================
-// ✅ RECOMMENDATIONS
-// ============================================================
-
 export const getRecommendations = async () => {
   try {
     const response = await getData('recommendations');
@@ -279,10 +277,6 @@ export const getRecommendations = async () => {
     return [];
   }
 };
-
-// ============================================================
-// ✅ ANALYTICS
-// ============================================================
 
 export const getAnalytics = async () => {
   try {
@@ -294,10 +288,6 @@ export const getAnalytics = async () => {
   }
 };
 
-// ============================================================
-// ✅ REPORT FUNCTIONS (NEW)
-// ============================================================
-
 export const submitReport = async (reportData) => {
   try {
     const response = await postData('reports/create', reportData);
@@ -307,10 +297,6 @@ export const submitReport = async (reportData) => {
     throw error;
   }
 };
-
-// ============================================================
-// ✅ EXPORT DEFAULT
-// ============================================================
 
 export default {
   getData,
@@ -337,5 +323,5 @@ export default {
   getUserNotes,
   getRecommendations,
   getAnalytics,
-  submitReport // ✅ ADDED
+  submitReport
 };

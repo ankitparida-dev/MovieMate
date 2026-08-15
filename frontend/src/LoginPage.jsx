@@ -1,6 +1,9 @@
+// frontend/src/LoginPage.jsx
+
 import { useState } from "react";
 import styles from "./LoginPage.module.css";
 import { loginUser, verifyOtp, resendOtp } from "./api/api";
+import toast from 'react-hot-toast';
 
 export default function LoginPage({ setPage }) {
   const [email, setEmail] = useState("");
@@ -36,10 +39,11 @@ export default function LoginPage({ setPage }) {
         setPendingEmail(email);
         setStep("otp");
         setInfo("Check your email for the OTP code to complete login.");
+        toast.success('OTP sent to your email!');
       } else if (response?.accessToken && response?.user) {
         localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem("token", response.accessToken);
-        alert("Login successful! Welcome back.");
+        toast.success('Login successful!');
         setPage("home");
         window.location.reload();
       } else {
@@ -47,7 +51,11 @@ export default function LoginPage({ setPage }) {
       }
     } catch (err) {
       console.error("Login error:", err);
-      setError(err.message || "Invalid email or password. Please try again.");
+      if (err.message?.includes('timed out') || err.message?.includes('aborted')) {
+        setError("Server is waking up. Please wait a moment and try again.");
+      } else {
+        setError(err.message || "Invalid email or password. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -71,7 +79,7 @@ export default function LoginPage({ setPage }) {
       if (response?.accessToken && response?.user) {
         localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem("token", response.accessToken);
-        alert("Login successful! Welcome back.");
+        toast.success('Login successful!');
         setPage("home");
         window.location.reload();
       } else {
@@ -95,6 +103,7 @@ export default function LoginPage({ setPage }) {
       setIsLoading(true);
       await resendOtp(pendingEmail);
       setInfo("A new OTP was sent to your email.");
+      toast.success('New OTP sent!');
     } catch (err) {
       console.error("Resend OTP error:", err);
       setError(err.message || "Failed to resend OTP.");
@@ -113,7 +122,6 @@ export default function LoginPage({ setPage }) {
   return (
     <div className={styles.loginPageWrapper}>
       <div className={styles.loginContainer}>
-        {/* Login Section */}
         <div className={styles.loginSection}>
           <form onSubmit={step === "credentials" ? handleSubmit : handleVerifyOtp}>
             <h2>{step === "credentials" ? "Welcome Back" : "Enter OTP"}</h2>
@@ -151,7 +159,7 @@ export default function LoginPage({ setPage }) {
             ) : (
               <>
                 <p className={styles.infoText}>
-                  A one-time code was sent to <strong>{pendingEmail}</strong>. Enter it below to sign in.
+                  A one-time code was sent to <strong>{pendingEmail}</strong>
                 </p>
 
                 <label htmlFor="otp">OTP Code</label>
@@ -159,13 +167,14 @@ export default function LoginPage({ setPage }) {
                   <input 
                     type="text" 
                     id="otp" 
-                    placeholder="Enter OTP code"
+                    placeholder="Enter 6-digit OTP"
                     required
                     value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                     disabled={isLoading}
                     inputMode="numeric"
-                    pattern="\d{6}"
+                    maxLength="6"
+                    autoFocus
                   />
                 </div>
               </>
@@ -216,7 +225,6 @@ export default function LoginPage({ setPage }) {
           </form>
         </div>
 
-        {/* Sign Up Section */}
         <div className={styles.signupSection}>
           <h2>New Here?</h2>
           <p>Create an account and start your cinematic journey with MovieMate!</p>

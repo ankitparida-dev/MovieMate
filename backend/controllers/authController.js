@@ -138,7 +138,6 @@ const register = async (req, res) => {
             password: hashedPassword
         });
 
-        // Send socket notification
         const io = req.app.get('io');
         if (io) {
             io.emit('userActivity', {
@@ -167,7 +166,7 @@ const register = async (req, res) => {
 };
 
 // ============================================================
-// ✅ LOGIN
+// ✅ LOGIN (Send OTP in background - non-blocking)
 // ============================================================
 
 const login = async (req, res) => {
@@ -205,14 +204,12 @@ const login = async (req, res) => {
 
         console.log(`🔐 OTP generated for ${email}: ${otpCode}`);
 
-        // Send OTP via email
-        try {
-            await sendOtpEmail(user.email, otpCode);
-            console.log(`✅ OTP sent successfully to ${email}`);
-        } catch (emailError) {
-            console.error('❌ Failed to send OTP:', emailError.message);
-        }
+        // ✅ Send OTP in background (don't wait for email to finish)
+        sendOtpEmail(user.email, otpCode)
+            .then(() => console.log(`✅ OTP sent to ${email}`))
+            .catch(err => console.error(`❌ Failed to send OTP to ${email}:`, err.message));
 
+        // ✅ Respond immediately to user
         res.status(200).json({
             success: true,
             otpRequired: true,
@@ -353,12 +350,10 @@ const resendOtp = async (req, res) => {
 
         console.log(`🔄 New OTP for ${email}: ${otpCode}`);
 
-        try {
-            await sendOtpEmail(user.email, otpCode);
-            console.log(`✅ New OTP sent successfully to ${email}`);
-        } catch (emailError) {
-            console.error('❌ Failed to send OTP:', emailError.message);
-        }
+        // ✅ Send OTP in background
+        sendOtpEmail(user.email, otpCode)
+            .then(() => console.log(`✅ New OTP sent to ${email}`))
+            .catch(err => console.error(`❌ Failed to send new OTP to ${email}:`, err.message));
 
         res.status(200).json({
             success: true,
