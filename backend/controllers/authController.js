@@ -78,7 +78,7 @@ const sendOtpEmail = async (email, otp) => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            timeout: 15000 // 15 second timeout
+            timeout: 15000
         });
 
         console.log(`✅ OTP sent successfully to ${email}`);
@@ -162,7 +162,6 @@ const register = async (req, res) => {
             password: hashedPassword
         });
 
-        // Send socket notification
         const io = req.app.get('io');
         if (io) {
             io.emit('userActivity', {
@@ -176,7 +175,8 @@ const register = async (req, res) => {
             user: {
                 id: user._id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                createdAt: user.createdAt
             }
         });
 
@@ -221,7 +221,6 @@ const login = async (req, res) => {
             });
         }
 
-        // ✅ Check if user is banned
         if (user.isBanned) {
             return res.status(403).json({
                 success: false,
@@ -229,7 +228,6 @@ const login = async (req, res) => {
             });
         }
 
-        // Generate OTP
         const otpCode = generateOtp();
         user.otpCode = otpCode;
         user.otpExpires = new Date(Date.now() + 10 * 60 * 1000);
@@ -237,13 +235,11 @@ const login = async (req, res) => {
 
         console.log(`🔐 OTP generated for ${email}: ${otpCode}`);
 
-        // ✅ Send OTP via Mailgun
         try {
             await sendOtpEmail(user.email, otpCode);
             console.log(`✅ OTP sent successfully to ${email}`);
         } catch (emailError) {
             console.error('❌ Failed to send OTP:', emailError.message);
-            // Still return success to user, but log the error
         }
 
         res.status(200).json({
@@ -286,7 +282,6 @@ const verifyOtp = async (req, res) => {
             });
         }
 
-        // Check if user is banned
         if (user.isBanned) {
             return res.status(403).json({
                 success: false,
@@ -294,7 +289,6 @@ const verifyOtp = async (req, res) => {
             });
         }
 
-        // Check expiry
         if (!user.otpExpires || user.otpExpires < new Date()) {
             user.otpCode = null;
             user.otpExpires = null;
@@ -305,7 +299,6 @@ const verifyOtp = async (req, res) => {
             });
         }
 
-        // Check OTP match
         if (user.otpCode !== otp) {
             return res.status(401).json({
                 success: false,
@@ -313,7 +306,6 @@ const verifyOtp = async (req, res) => {
             });
         }
 
-        // Generate tokens
         const { accessToken, refreshToken } = generateTokens(user);
 
         user.refreshToken = refreshToken;
@@ -339,7 +331,8 @@ const verifyOtp = async (req, res) => {
                 email: user.email,
                 isAdmin: user.isAdmin || false,
                 isBanned: user.isBanned || false,
-                profileImage: user.profileImage || ''
+                profileImage: user.profileImage || '',
+                createdAt: user.createdAt
             }
         });
 
@@ -376,7 +369,6 @@ const resendOtp = async (req, res) => {
             });
         }
 
-        // Check if user is banned
         if (user.isBanned) {
             return res.status(403).json({
                 success: false,
@@ -384,7 +376,6 @@ const resendOtp = async (req, res) => {
             });
         }
 
-        // Check cooldown (30 seconds)
         if (user.otpExpires) {
             const timeSinceLastOTP = Date.now() - (user.otpExpires.getTime() - 10 * 60 * 1000);
             if (timeSinceLastOTP < 30000) {
@@ -447,7 +438,6 @@ const refresh = async (req, res) => {
             });
         }
 
-        // Check if user is banned
         if (user.isBanned) {
             return res.status(403).json({
                 success: false,

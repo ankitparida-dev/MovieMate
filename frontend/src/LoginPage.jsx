@@ -41,7 +41,15 @@ export default function LoginPage({ setPage }) {
         setInfo("Check your email for the OTP code to complete login.");
         toast.success('OTP sent to your email!');
       } else if (response?.accessToken && response?.user) {
-        localStorage.setItem("user", JSON.stringify(response.user));
+        localStorage.setItem("user", JSON.stringify({
+          id: response.user.id,
+          name: response.user.name,
+          email: response.user.email,
+          isAdmin: response.user.isAdmin || false,
+          isBanned: response.user.isBanned || false,
+          profileImage: response.user.profileImage || '',
+          createdAt: response.user.createdAt || new Date().toISOString()
+        }));
         localStorage.setItem("token", response.accessToken);
         toast.success('Login successful!');
         setPage("home");
@@ -77,7 +85,15 @@ export default function LoginPage({ setPage }) {
       const response = await verifyOtp(pendingEmail, otp);
 
       if (response?.accessToken && response?.user) {
-        localStorage.setItem("user", JSON.stringify(response.user));
+        localStorage.setItem("user", JSON.stringify({
+          id: response.user.id,
+          name: response.user.name,
+          email: response.user.email,
+          isAdmin: response.user.isAdmin || false,
+          isBanned: response.user.isBanned || false,
+          profileImage: response.user.profileImage || '',
+          createdAt: response.user.createdAt || new Date().toISOString()
+        }));
         localStorage.setItem("token", response.accessToken);
         toast.success('Login successful!');
         setPage("home");

@@ -1,88 +1,146 @@
+/* frontend/src/components/Avatar.module.css */
+
 .avatarContainer {
   position: relative;
   display: inline-block;
 }
 
 .avatarWrapper {
-  cursor: pointer;
   position: relative;
-  transition: transform 0.2s ease;
-}
-
-.avatarWrapper:hover {
-  transform: scale(1.05);
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 50%;
 }
 
 .avatar {
   border-radius: 50%;
-  transition: all 0.3s ease;
+  object-fit: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(46, 196, 182, 0.2);
 }
 
+.avatar:hover {
+  border-color: #2ec4b6;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(46, 196, 182, 0.2);
+}
+
+/* ✅ KEPT: Initials avatar */
 .initialsAvatar {
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.small { width: 32px; height: 32px; font-size: 12px; }
-.medium { width: 48px; height: 48px; font-size: 18px; }
-.large { width: 80px; height: 80px; font-size: 30px; }
-.xlarge { width: 120px; height: 120px; font-size: 48px; }
+/* ✅ KEPT: Photo avatar */
+.photoAvatar {
+  object-fit: cover;
+}
+
+/* ❌ REMOVED: Cartoon avatar styles */
 
 .editBadge {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: -2px;
+  right: -2px;
   background: #2ec4b6;
   border-radius: 50%;
-  width: 30%;
-  height: 30%;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #0a192f;
   border: 2px solid #0a192f;
+  font-size: 10px;
+  transition: all 0.3s ease;
 }
+
+.avatarWrapper:hover .editBadge {
+  transform: scale(1.1);
+}
+
+/* ========================== */
+/*       DROPDOWN MENU        */
+/* ========================== */
 
 .dropdownMenu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   right: 0;
-  margin-top: 8px;
   background: #112240;
+  border: 1px solid rgba(46, 196, 182, 0.15);
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  z-index: 100;
+  padding: 8px;
   min-width: 180px;
-  border: 1px solid rgba(46, 196, 182, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .menuItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 15px;
-  color: white;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-size: 14px;
+  gap: 12px;
+  padding: 10px 14px;
   width: 100%;
   background: none;
   border: none;
-  text-align: left;
+  color: #e6e6e6;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .menuItem:hover {
-  background: rgba(46, 196, 182, 0.2);
+  background: rgba(46, 196, 182, 0.1);
+  color: #2ec4b6;
 }
 
 .menuItem i {
+  font-size: 0.95rem;
+  color: #8892b0;
   width: 20px;
+  text-align: center;
+}
+
+.menuItem:hover i {
   color: #2ec4b6;
+}
+
+/* Size Classes */
+.small { width: 32px; height: 32px; font-size: 12px; }
+.medium { width: 48px; height: 48px; font-size: 18px; }
+.large { width: 80px; height: 80px; font-size: 30px; }
+.xlarge { width: 120px; height: 120px; font-size: 48px; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .dropdownMenu {
+    right: -10px;
+    min-width: 160px;
+  }
+  
+  .menuItem {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
 }

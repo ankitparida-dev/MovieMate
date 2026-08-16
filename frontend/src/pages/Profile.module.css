@@ -1,5 +1,7 @@
+/* frontend/src/pages/Profile.module.css */
+
 /* ============================================================
-   PROFILE PAGE - ENHANCED
+   PROFILE PAGE
    ============================================================ */
 
 .profilePage {
@@ -282,7 +284,7 @@
 
 .insights {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   padding: 25px 30px;
   border-bottom: 1px solid rgba(46, 196, 182, 0.06);
@@ -383,7 +385,7 @@
 }
 
 /* ============================================================
-   PROFILE ACTIONS
+   QUICK ACTIONS
    ============================================================ */
 
 .profileActions {
@@ -391,7 +393,6 @@
   gap: 12px;
   padding: 25px 30px;
   flex-wrap: wrap;
-  border-bottom: 1px solid rgba(46, 196, 182, 0.06);
 }
 
 .actionBtn {
@@ -426,68 +427,6 @@
 .actionBtnOutline:hover {
   background: rgba(46, 196, 182, 0.1);
   box-shadow: none;
-}
-
-/* ============================================================
-   PROGRESS SECTION
-   ============================================================ */
-
-.progressSection {
-  padding: 25px 30px 35px;
-}
-
-.progressHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.progressHeader span {
-  color: #8892b0;
-  font-size: 0.85rem;
-}
-
-.progressPercent {
-  color: #2ec4b6 !important;
-  font-weight: 700;
-  font-size: 1rem !important;
-}
-
-.progressBar {
-  width: 100%;
-  height: 6px;
-  background: rgba(46, 196, 182, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-
-.progressFill {
-  height: 100%;
-  background: linear-gradient(90deg, #2ec4b6, #4fd1c5);
-  border-radius: 10px;
-  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.progressFill::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: -2px;
-  width: 10px;
-  height: 10px;
-  background: #2ec4b6;
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(46, 196, 182, 0.5);
-}
-
-.progressLabels {
-  display: flex;
-  justify-content: space-between;
-  color: #8892b0;
-  font-size: 0.65rem;
 }
 
 /* ============================================================
@@ -631,10 +570,6 @@
     min-width: unset;
   }
   
-  .progressSection {
-    padding: 20px;
-  }
-  
   .loginPromptContent {
     padding: 30px 25px;
   }
@@ -665,5 +600,43 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
+  }
+}
+/* frontend/src/pages/Profile.module.css */
+
+/* Add this to the end of the file */
+
+/* ============================================================
+   JOIN DATE
+   ============================================================ */
+
+.joinDate {
+  margin-top: 10px;
+  color: #2ec4b6;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(46, 196, 182, 0.08);
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(46, 196, 182, 0.1);
+  width: fit-content;
+}
+
+.joinDate i {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .joinDate {
+    margin: 10px auto 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .joinDate {
+    font-size: 0.75rem;
+    padding: 3px 10px;
   }
 }

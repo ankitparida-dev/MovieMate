@@ -7,7 +7,6 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const upload = require('./middleware/upload');
 const http = require('http');
 const { Server } = require('socket.io');
 
@@ -55,7 +54,7 @@ app.set("io", io);
 const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
 
-// Import Routes
+// ✅ Import Routes (No SSR/EJS routes)
 const commentRoutes = require('./routes/commentRoutes');
 const reviewRoutes = require("./routes/reviewRoutes");
 const authRoutes = require('./routes/authRoutes');
@@ -66,12 +65,12 @@ const movieListRoutes = require('./routes/movieListRoutes');
 const followRoutes = require("./routes/followRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 
-// Import SSR Controller
-const { renderMoviesSSR } = require('./controllers/moviesSsrController');
+// ❌ REMOVED: SSR Controller import
+// const { renderMoviesSSR } = require('./controllers/moviesSsrController');
 
-// Set EJS as view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// ❌ REMOVED: EJS view engine
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
 
 // Session Middleware
 app.use(session({
@@ -100,7 +99,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     preflightContinue: false,
     optionsSuccessStatus: 204,
-    maxAge: 86400 // ✅ Cache CORS preflight for 24 hours
+    maxAge: 86400
 }));
 
 // Serve Static Files
@@ -142,25 +141,18 @@ io.on("connection", (socket) => {
 });
 
 // ============================================================
-// ✅ ROUTES
+// ✅ API ROUTES
 // ============================================================
 
-// SSR Route
-app.get('/movies-ssr', renderMoviesSSR);
+// ❌ REMOVED: SSR Route
+// app.get('/movies-ssr', renderMoviesSSR);
 
-app.get('/login', (req, res) => {
-    res.render('login', { error: req.query.error || '' });
-});
+// ❌ REMOVED: EJS Views Routes
+// app.get('/login', (req, res) => { ... });
+// app.get('/register', (req, res) => { ... });
+// app.get('/dashboard', (req, res) => { ... });
 
-app.get('/register', (req, res) => {
-    res.render('register', { error: req.query.error || '' });
-});
-
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard', { user: req.session.user || null });
-});
-
-// API Routes
+// ✅ API Routes
 app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/library', libraryRoutes);
@@ -172,7 +164,7 @@ app.use('/api/comments', commentRoutes);
 app.use('/api/reports', reportRoutes);
 
 // ============================================================
-// ✅ KEEP-ALIVE ENDPOINT (Prevents Render from sleeping)
+// ✅ KEEP-ALIVE ENDPOINT
 // ============================================================
 
 app.get('/api/ping', (req, res) => {
@@ -196,10 +188,12 @@ app.get('/', (req, res) => {
     res.json({
         message: 'MovieMate API is running!',
         endpoints: {
-            ssr: '/movies-ssr',
             auth: '/api/auth',
             library: '/api/library',
-            tmdb: '/api/tmdb'
+            tmdb: '/api/tmdb',
+            admin: '/api/admin',
+            comments: '/api/comments',
+            reports: '/api/reports'
         }
     });
 });
@@ -217,11 +211,11 @@ app.use(errorHandler);
 // DB Connect
 connectDB();
 
-// Start Server only if not testing
+// Start Server
 if (process.env.NODE_ENV !== "test") {
     server.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-        console.log(`SSR Page: http://localhost:${PORT}/movies-ssr`);
+        console.log(`🚀 Server running on port ${PORT}`);
+        console.log(`📧 Mailgun: ${process.env.MAILGUN_DOMAIN || 'Not configured'}`);
     });
 }
 

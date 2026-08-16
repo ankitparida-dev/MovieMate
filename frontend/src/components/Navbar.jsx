@@ -1,7 +1,9 @@
+// frontend/src/components/Navbar.jsx
+
 import { useState, useEffect } from 'react';
 import styles from "./Navbar.module.css";
 import logoVideo from "../assets/movielight.mp4";
-import Avatar from './Avatar';
+import Avatar from './Avatar';  // ✅ KEPT - for regular image avatar
 import NotificationBell from './NotificationBell';
 import socket from '../socket';
 
@@ -68,9 +70,11 @@ export default function Navbar({ setPage, page, onSearch }) {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("user_avatar");
+    // ❌ REMOVED: cartoon avatar items only
     localStorage.removeItem("avatar_type");
     localStorage.removeItem("cartoon_avatar_svg");
+    // ✅ KEPT: regular avatar
+    // localStorage.removeItem("user_avatar");
     setIsLoggedIn(false);
     goHome();
   };
@@ -110,10 +114,6 @@ export default function Navbar({ setPage, page, onSearch }) {
                   Library
                 </button>
               </li>
-              {/* ❌ REMOVED: Separate Notes link - now part of Library */}
-              {/* <li className={styles.navItem}>
-                <button className={getLinkClass("mynotes")} onClick={() => { onSearch(""); setPage("mynotes"); }}>Notes</button>
-              </li> */}
               <li className={styles.navItem}>
                 <button className={getLinkClass("analytics")} onClick={() => { onSearch(""); setPage("analytics"); }}>Analytics</button>
               </li>
@@ -149,7 +149,9 @@ export default function Navbar({ setPage, page, onSearch }) {
             />
           </div>
           
+          {/* ✅ KEPT: Regular Avatar (image upload) */}
           {isLoggedIn && <Avatar name={userName} size="medium" />}
+          
           {isLoggedIn && <NotificationBell />}
           
           {isLoggedIn ? (

@@ -1,3 +1,5 @@
+// frontend/src/pages/Profile.jsx
+
 import React, { useEffect, useState } from 'react';
 import Avatar from '../components/Avatar';
 import FollowSystem from '../components/FollowSystem';
@@ -7,13 +9,16 @@ import styles from './Profile.module.css';
 const Profile = ({ setPage }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [avatarKey, setAvatarKey] = useState(Date.now());
   const analytics = useAnalytics();
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData) {
       try {
-        setUser(JSON.parse(userData));
+        const parsedUser = JSON.parse(userData);
+        console.log('📝 User Data:', parsedUser);
+        setUser(parsedUser);
       } catch (e) {
         setUser({ name: 'User', email: 'user@example.com' });
       }
@@ -22,7 +27,24 @@ const Profile = ({ setPage }) => {
   }, []);
 
   const handleAvatarChange = () => {
+    setAvatarKey(Date.now());
     console.log('Avatar updated');
+  };
+
+  // ✅ Format join date
+  const getJoinDate = (createdAt) => {
+    if (!createdAt) return 'August 2025';
+    const date = new Date(createdAt);
+    const year = date.getFullYear();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const day = date.getDate();
+    return `${month} ${day}, ${year}`;
+  };
+
+  // ✅ Get member since
+  const getMemberSince = (createdAt) => {
+    if (!createdAt) return '2025';
+    return new Date(createdAt).getFullYear();
   };
 
   if (isLoading) {
@@ -57,12 +79,16 @@ const Profile = ({ setPage }) => {
         <div className={styles.profileHeader}>
           <div className={styles.coverImage}>
             <div className={styles.coverOverlay}></div>
-            <div className={styles.coverBadge}>🎬 Movie Enthusiast</div>
           </div>
           
           <div className={styles.profileInfo}>
             <div className={styles.avatarWrapper}>
-              <Avatar name={user.name} size="xlarge" onAvatarChange={handleAvatarChange} />
+              <Avatar 
+                key={avatarKey}
+                name={user.name} 
+                size="xlarge" 
+                onAvatarChange={handleAvatarChange} 
+              />
               <div className={styles.onlineStatus}>
                 <span className={styles.statusDot}></span>
               </div>
@@ -75,7 +101,8 @@ const Profile = ({ setPage }) => {
               </p>
               <div className={styles.userMeta}>
                 <span className={styles.metaItem}>
-                  <i className="fas fa-calendar-alt"></i> Joined 2024
+                  <i className="fas fa-calendar-alt"></i> 
+                  Joined {getMemberSince(user.createdAt)}
                 </span>
                 <span className={styles.metaItem}>
                   <i className="fas fa-film"></i> Movie Lover
@@ -84,11 +111,15 @@ const Profile = ({ setPage }) => {
                   <i className="fas fa-star"></i> 4.8 Avg Rating
                 </span>
               </div>
+              <div className={styles.joinDate}>
+                <i className="fas fa-calendar-check"></i>
+                Member since {getJoinDate(user.createdAt)}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* ✅ STATS GRID WITH ICONS */}
+        {/* ✅ STATS GRID */}
         <div className={styles.profileStats}>
           <div className={styles.statCard}>
             <div className={styles.statIconWrapper} style={{ background: 'rgba(46, 196, 182, 0.15)' }}>
@@ -106,7 +137,7 @@ const Profile = ({ setPage }) => {
             </div>
             <div className={styles.statContent}>
               <span className={styles.statNumber}>{analytics.averageRating || 0}</span>
-              <span className={styles.statLabel}>Average Rating</span>
+              <span className={styles.statLabel}>Avg Rating</span>
             </div>
           </div>
 
@@ -131,7 +162,7 @@ const Profile = ({ setPage }) => {
           </div>
         </div>
 
-        {/* ✅ INSIGHTS CARDS */}
+        {/* ✅ INSIGHTS */}
         <div className={styles.insights}>
           <div className={styles.insightCard}>
             <div className={styles.insightIcon}>
@@ -166,18 +197,6 @@ const Profile = ({ setPage }) => {
               </span>
             </div>
           </div>
-
-          <div className={styles.insightCard}>
-            <div className={styles.insightIcon}>
-              <i className="fas fa-clock"></i>
-            </div>
-            <div className={styles.insightContent}>
-              <span className={styles.insightLabel}>Total Watch Time</span>
-              <span className={styles.insightValue}>
-                {analytics.totalWatchTime || '0h'}
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* ✅ FOLLOW SYSTEM */}
@@ -194,32 +213,9 @@ const Profile = ({ setPage }) => {
           <button className={styles.actionBtn} onClick={() => setPage('library')}>
             <i className="fas fa-bookmark"></i> My Library
           </button>
-          <button className={styles.actionBtn} onClick={() => setPage('mynotes')}>
-            <i className="fas fa-pen"></i> My Notes
-          </button>
           <button className={styles.actionBtn} onClick={() => setPage('analytics')}>
             <i className="fas fa-chart-bar"></i> Analytics
           </button>
-          <button className={`${styles.actionBtn} ${styles.actionBtnOutline}`}>
-            <i className="fas fa-cog"></i> Settings
-          </button>
-        </div>
-
-        {/* ✅ STATS PROGRESS BAR */}
-        <div className={styles.progressSection}>
-          <div className={styles.progressHeader}>
-            <span>Activity Level</span>
-            <span className={styles.progressPercent}>78%</span>
-          </div>
-          <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: '78%' }}></div>
-          </div>
-          <div className={styles.progressLabels}>
-            <span>Beginner</span>
-            <span>Explorer</span>
-            <span>Cinema Pro</span>
-            <span>Legend</span>
-          </div>
         </div>
 
       </div>
