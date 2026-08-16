@@ -1,23 +1,25 @@
+// frontend/src/components/Avatar.jsx
+
 import React, { useState, useEffect, useRef } from 'react';
-import CartoonAvatar from './CartoonAvatar';
+// ❌ REMOVED: import CartoonAvatar from './CartoonAvatar';
 import styles from './Avatar.module.css';
 
 const Avatar = ({ name, size = 'medium', onAvatarChange }) => {
   const [avatarType, setAvatarType] = useState('initials');
   const [photoAvatar, setPhotoAvatar] = useState(null);
-  const [cartoonAvatar, setCartoonAvatar] = useState(null);
-  const [showCartoonEditor, setShowCartoonEditor] = useState(false);
+  // ❌ REMOVED: const [cartoonAvatar, setCartoonAvatar] = useState(null);
+  // ❌ REMOVED: const [showCartoonEditor, setShowCartoonEditor] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const fileInputRef = useRef(null);
   const menuRef = useRef(null);
 
   useEffect(() => {
     const savedPhoto = localStorage.getItem('user_avatar');
-    const savedCartoon = localStorage.getItem('cartoon_avatar_svg');
+    // ❌ REMOVED: const savedCartoon = localStorage.getItem('cartoon_avatar_svg');
     const savedType = localStorage.getItem('avatar_type');
     
     if (savedPhoto) setPhotoAvatar(savedPhoto);
-    if (savedCartoon) setCartoonAvatar(savedCartoon);
+    // ❌ REMOVED: if (savedCartoon) setCartoonAvatar(savedCartoon);
     if (savedType) setAvatarType(savedType);
   }, []);
 
@@ -30,126 +32,82 @@ const Avatar = ({ name, size = 'medium', onAvatarChange }) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-const handlePhotoUpload = async (event) => {
 
-  const file = event.target.files[0];
+  const handlePhotoUpload = async (event) => {
+    const file = event.target.files[0];
 
-  if (!file) return;
+    if (!file) return;
 
-  const allowedTypes = [
-    'image/jpeg',
-    'image/png',
-    'image/jpg',
-    'image/gif',
-    'image/webp'
-  ];
+    const allowedTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/jpg',
+      'image/gif',
+      'image/webp'
+    ];
 
-  if (!allowedTypes.includes(file.type)) {
-    alert('Please upload a valid image file');
-    return;
-  }
-
-  if (file.size > 5 * 1024 * 1024) {
-    alert('File size must be less than 5MB');
-    return;
-  }
-
-  try {
-
-    const user =
-      JSON.parse(
-        localStorage.getItem('user')
-      );
-
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('userId', user.id);
-
-    // ✅ Check if the browser is running live on Vercel vs locally
-    const isProduction = typeof window !== 'undefined' && 
-      window.location.hostname !== 'localhost' && 
-      window.location.hostname !== '127.0.0.1';
-
-    // ✅ Force production endpoint if live, otherwise fallback to local dev string
-    const apiBaseUrl = isProduction 
-      ? "https://moviemate-l4ts.onrender.com/api" 
-      : (import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/\/$/, '') : 'http://localhost:5000/api');
-
-    const response = await fetch(
-      `${apiBaseUrl}/auth/upload-profile`,
-      {
-        method: 'POST',
-        body: formData
-      }
-    );
-
-    const data =
-      await response.json();
-
-    if (data.success) {
-
-      setPhotoAvatar(
-        data.imageUrl
-      );
-
-      setAvatarType(
-        'photo'
-      );
-
-      localStorage.setItem(
-        'user_avatar',
-        data.imageUrl
-      );
-
-      localStorage.setItem(
-        'avatar_type',
-        'photo'
-      );
-
-      if (onAvatarChange) {
-        onAvatarChange(
-          data.imageUrl
-        );
-      }
-
-      alert(
-        'Profile photo updated!'
-      );
-
-    } else {
-
-      alert(
-        data.message ||
-        'Upload failed'
-      );
-
+    if (!allowedTypes.includes(file.type)) {
+      alert('Please upload a valid image file');
+      return;
     }
 
-  } catch (error) {
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
 
-    console.error(error);
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
 
-    alert(
-      'Upload failed'
-    );
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('userId', user.id);
 
-  }
+      // ✅ Check if the browser is running live on Vercel vs locally
+      const isProduction = typeof window !== 'undefined' && 
+        window.location.hostname !== 'localhost' && 
+        window.location.hostname !== '127.0.0.1';
 
-};
+      // ✅ Force production endpoint if live, otherwise fallback to local dev string
+      const apiBaseUrl = isProduction 
+        ? "https://moviemate-l4ts.onrender.com/api" 
+        : (import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/\/$/, '') : 'http://localhost:5000/api');
 
-  const handleCartoonSave = (svg) => {
-    setCartoonAvatar(svg);
-    setAvatarType('cartoon');
-    localStorage.setItem('cartoon_avatar_svg', svg);
-    localStorage.setItem('avatar_type', 'cartoon');
-    if (onAvatarChange) onAvatarChange(svg);
-    setShowCartoonEditor(false);
-    setShowMenu(false);
+      const response = await fetch(`${apiBaseUrl}/auth/upload-profile`, {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setPhotoAvatar(data.imageUrl);
+        setAvatarType('photo');
+        localStorage.setItem('user_avatar', data.imageUrl);
+        localStorage.setItem('avatar_type', 'photo');
+
+        if (onAvatarChange) {
+          onAvatarChange(data.imageUrl);
+        }
+
+        alert('Profile photo updated!');
+      } else {
+        alert(data.message || 'Upload failed');
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert('Upload failed');
+    }
   };
+
+  // ❌ REMOVED: handleCartoonSave function
 
   const resetToInitials = () => {
     setAvatarType('initials');
+    localStorage.removeItem('user_avatar');
     localStorage.setItem('avatar_type', 'initials');
+    // ❌ REMOVED: localStorage.removeItem('cartoon_avatar_svg');
     if (onAvatarChange) onAvatarChange(null);
     setShowMenu(false);
   };
@@ -176,16 +134,7 @@ const handlePhotoUpload = async (event) => {
   const dimensions = sizeMap[size] || sizeMap.medium;
 
   const renderAvatar = () => {
-    if (avatarType === 'cartoon' && cartoonAvatar) {
-      return (
-        <div 
-          dangerouslySetInnerHTML={{ __html: cartoonAvatar }}
-          className={`${styles.avatar} ${styles[size]}`}
-          style={{ width: dimensions.width, height: dimensions.height }}
-        />
-      );
-    }
-    
+    // ✅ KEPT: Photo avatar
     if (avatarType === 'photo' && photoAvatar) {
       return (
         <img
@@ -197,6 +146,9 @@ const handlePhotoUpload = async (event) => {
       );
     }
     
+    // ❌ REMOVED: Cartoon avatar render
+    
+    // ✅ KEPT: Initials avatar (default)
     return (
       <div
         className={`${styles.avatar} ${styles[size]} ${styles.initialsAvatar}`}
@@ -227,26 +179,14 @@ const handlePhotoUpload = async (event) => {
             <i className="fas fa-camera"></i> Upload Photo
             <input type="file" accept="image/*" onChange={handlePhotoUpload} style={{ display: 'none' }} />
           </label>
-          <button className={styles.menuItem} onClick={() => {
-            setShowMenu(false);
-            setShowCartoonEditor(true);
-          }}>
-            <i className="fas fa-paintbrush"></i> Create Cartoon Avatar
-          </button>
+          {/* ❌ REMOVED: Create Cartoon Avatar button */}
           <button className={styles.menuItem} onClick={resetToInitials}>
             <i className="fas fa-undo"></i> Reset to Initials
           </button>
         </div>
       )}
 
-      {/* Cartoon Editor - Rendered at body level */}
-      {showCartoonEditor && (
-        <CartoonAvatar 
-          name={name}
-          onSave={handleCartoonSave}
-          onClose={() => setShowCartoonEditor(false)}
-        />
-      )}
+      {/* ❌ REMOVED: Cartoon Editor Modal */}
     </div>
   );
 };

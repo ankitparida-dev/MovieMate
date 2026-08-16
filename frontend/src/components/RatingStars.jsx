@@ -22,7 +22,7 @@ const RatingStars = ({ rating, onRatingChange, size = 'medium', readonly = false
 
   return (
     <div className={`${styles.starsContainer} ${styles[size]}`}>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+      {[1, 2, 3, 4, 5,6,7,8,9,10].map((value) => (
         <span
           key={value}
           className={`${styles.star} ${value <= displayRating ? styles.filled : ''} ${readonly ? styles.readonly : ''}`}
