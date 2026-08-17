@@ -54,7 +54,7 @@ app.set("io", io);
 const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
 
-// ✅ Import Routes (No SSR/EJS routes)
+// ✅ Import Routes (No SSR/EJS routes, NO FOLLOW)
 const commentRoutes = require('./routes/commentRoutes');
 const reviewRoutes = require("./routes/reviewRoutes");
 const authRoutes = require('./routes/authRoutes');
@@ -62,11 +62,8 @@ const libraryRoutes = require('./routes/libraryRoutes');
 const tmdbRoutes = require('./routes/tmdbRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const movieListRoutes = require('./routes/movieListRoutes');
-const followRoutes = require("./routes/followRoutes");
+// ❌ REMOVED: const followRoutes = require("./routes/followRoutes");
 const reportRoutes = require("./routes/reportRoutes");
-
-// ❌ REMOVED: SSR Controller import
-// const { renderMoviesSSR } = require('./controllers/moviesSsrController');
 
 // ❌ REMOVED: EJS view engine
 // app.set('view engine', 'ejs');
@@ -144,21 +141,13 @@ io.on("connection", (socket) => {
 // ✅ API ROUTES
 // ============================================================
 
-// ❌ REMOVED: SSR Route
-// app.get('/movies-ssr', renderMoviesSSR);
-
-// ❌ REMOVED: EJS Views Routes
-// app.get('/login', (req, res) => { ... });
-// app.get('/register', (req, res) => { ... });
-// app.get('/dashboard', (req, res) => { ... });
-
-// ✅ API Routes
+// ✅ API Routes (NO FOLLOW)
 app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/library', libraryRoutes);
 app.use('/api/tmdb', tmdbRoutes);
 app.use('/api/lists', movieListRoutes);
-app.use("/api/follow", followRoutes);
+// ❌ REMOVED: app.use("/api/follow", followRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/reports', reportRoutes);
@@ -193,7 +182,9 @@ app.get('/', (req, res) => {
             tmdb: '/api/tmdb',
             admin: '/api/admin',
             comments: '/api/comments',
-            reports: '/api/reports'
+            reports: '/api/reports',
+            reviews: '/api/reviews',
+            lists: '/api/lists'
         }
     });
 });

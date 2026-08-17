@@ -1,6 +1,8 @@
+// frontend/src/components/CommentSection.jsx
+
 import React, { useState, useEffect } from 'react';
 import { useComments } from '../hooks/useComments';
-import ReportButton from '../components/ReportButton';
+// ❌ REMOVED: import ReportButton from '../components/ReportButton';
 import styles from './CommentSection.module.css';
 
 const CommentSection = ({ movieId, movieTitle }) => {
@@ -197,14 +199,7 @@ const CommentSection = ({ movieId, movieTitle }) => {
                       </button>
                     </>
                   )}
-                  
-                  {/* ✅ REPORT BUTTON FOR EVERY COMMENT */}
-                  <ReportButton 
-                    targetType="comment"
-                    targetId={comment.id}
-                    targetTitle={`Comment by ${comment.username || comment.userName}`}
-                    onReportSubmitted={() => console.log('Comment reported!')}
-                  />
+                  {/* ❌ REMOVED: ReportButton */}
                 </div>
               </div>
             </div>

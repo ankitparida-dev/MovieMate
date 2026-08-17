@@ -1,3 +1,5 @@
+// frontend/src/pages/About.jsx
+
 import { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import { getMovieDetails, getTvDetails, getCredits, getRecommendations, IMG } from "../api/tmdb";
@@ -10,7 +12,7 @@ import MovieLists from "../components/MovieLists";
 import { useMovieNotes } from "../hooks/useMovieNotes";
 import CommentSection from "../components/CommentSection";
 import TrailerPlayer from "../components/TrailerPlayer";
-import ReportButton from "../components/ReportButton";
+// ❌ REMOVED: import ReportButton from "../components/ReportButton";
 
 export default function About({ selected, setPage, onOpen }) {
   const [data, setData] = useState(null);
@@ -244,14 +246,7 @@ export default function About({ selected, setPage, onOpen }) {
               <button className={styles.favBtn} onClick={handleFav}>
                 <i className="fas fa-heart"></i>
               </button>
-              
-              {/* ✅ REPORT BUTTON */}
-              <ReportButton 
-                targetType="movie"
-                targetId={id}
-                targetTitle={title}
-                onReportSubmitted={() => console.log('Movie reported!')}
-              />
+              {/* ❌ REMOVED: Report Button */}
             </div>
 
             <section className={styles.overview}>
