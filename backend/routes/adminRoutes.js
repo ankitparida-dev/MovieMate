@@ -1,3 +1,5 @@
+// backend/routes/adminRoutes.js
+
 const express = require("express");
 const router = express.Router();
 
@@ -6,19 +8,15 @@ const admin = require("../middleware/admin");
 
 const {
     getStats,
-
     getUsers,
     banUser,
-
+    deleteUser, // ✅ NEW
     getComments,
     deleteComment,
-
     getLists,
     deleteList,
-
     getReports,
     resolveReport
-
 } = require("../controllers/adminController");
 
 router.use(auth, admin);
@@ -35,51 +33,32 @@ router.get("/stats", getStats);
 
 router.get("/users", getUsers);
 
-router.patch(
-    "/users/:id/ban",
-    banUser
-);
+router.patch("/users/:id/ban", banUser);
+
+router.delete("/users/:id", deleteUser); // ✅ NEW - Delete user route
 
 /* ===========================
    COMMENTS
 =========================== */
 
-router.get(
-    "/comments",
-    getComments
-);
+router.get("/comments", getComments);
 
-router.delete(
-    "/comments/:id",
-    deleteComment
-);
+router.delete("/comments/:id", deleteComment);
 
 /* ===========================
    MOVIE LISTS
 =========================== */
 
-router.get(
-    "/lists",
-    getLists
-);
+router.get("/lists", getLists);
 
-router.delete(
-    "/lists/:id",
-    deleteList
-);
+router.delete("/lists/:id", deleteList);
 
 /* ===========================
    REPORTS
 =========================== */
 
-router.get(
-    "/reports",
-    getReports
-);
+router.get("/reports", getReports);
 
-router.patch(
-    "/reports/:id",
-    resolveReport
-);
+router.patch("/reports/:id", resolveReport);
 
 module.exports = router;

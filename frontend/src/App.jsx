@@ -1,3 +1,5 @@
+// frontend/src/App.jsx
+
 import { useState, useEffect } from "react";
 import { Toaster } from 'react-hot-toast';
 import toast from "react-hot-toast";

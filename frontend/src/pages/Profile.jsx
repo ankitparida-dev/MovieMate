@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Avatar from '../components/Avatar';
-import FollowSystem from '../components/FollowSystem';
+// ❌ REMOVED: import FollowSystem from '../components/FollowSystem';
 import { useAnalytics } from '../hooks/useAnalytics';
 import styles from './Profile.module.css';
 
@@ -199,14 +199,7 @@ const Profile = ({ setPage }) => {
           </div>
         </div>
 
-        {/* ✅ FOLLOW SYSTEM */}
-        <div className={styles.followSection}>
-          <div className={styles.sectionHeader}>
-            <h3><i className="fas fa-users"></i> Community</h3>
-            <span className={styles.sectionBadge}>Connect with others</span>
-          </div>
-          <FollowSystem username={user.name} />
-        </div>
+        {/* ❌ REMOVED: FOLLOW SYSTEM SECTION */}
 
         {/* ✅ QUICK ACTIONS */}
         <div className={styles.profileActions}>

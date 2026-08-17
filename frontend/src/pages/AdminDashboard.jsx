@@ -1,3 +1,5 @@
+// frontend/src/pages/AdminDashboard.jsx
+
 import React, { useState, useEffect } from "react";
 import styles from "./AdminDashboard.module.css";
 
@@ -137,20 +139,28 @@ const AdminDashboard = () => {
     }
   };
 
+  // ✅ NEW: Delete User (permanent)
   const deleteUser = async (userId) => {
-    if (!window.confirm("Toggle this user's ban status?")) return;
+    if (!window.confirm("⚠️ Are you sure you want to permanently delete this user? This action cannot be undone!")) return;
 
     try {
       const token = localStorage.getItem("token");
-      await fetch(`${API_BASE_URL}/users/${userId}/ban`, {
-        method: "PATCH",
+      const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete user");
+      }
+
       loadData();
+      alert("User deleted successfully!");
     } catch (error) {
-      console.error(error);
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user: " + error.message);
     }
   };
 
@@ -355,9 +365,13 @@ const AdminDashboard = () => {
                           </span>
                         </td>
                         <td>
-                          <button className={styles.dangerBtn} onClick={() => deleteUser(user._id)}>
-                            <i className="fas fa-ban"></i>
-                            {user.isBanned ? " Unban" : " Ban"}
+                          {/* ✅ DELETE USER BUTTON - Replaces Ban */}
+                          <button 
+                            className={styles.dangerBtn} 
+                            onClick={() => deleteUser(user._id)}
+                            title="Permanently delete this user"
+                          >
+                            <i className="fas fa-trash-alt"></i> Delete
                           </button>
                         </td>
                       </tr>
