@@ -15,35 +15,38 @@ MovieMate is a modern **full-stack movie & TV show discovery platform** built wi
 
 ## ✨ Key Features
 
+### 🔐 Authentication & Security
+- **🔐 Google OAuth 2.0** – One-click sign-in with Google accounts
+- **✉️ Email/Password Login** – Traditional login with secure password hashing
+- **🛡️ JWT Authentication** – Secure access & refresh token system
+- **👤 User Profiles** – Customizable profiles with avatar upload
+
 ### 🔎 Discovery & Search
 - **Live Movie Search** – Dynamic filtering with instant results
 - **Browse Movies & TV Shows** – Dedicated sections for movies and series
 - **🎞️ Spotlight Carousel** – Interactive hero banner slider with trending content
 
 ### 📚 Personal Library
-- **⭐ Watchlist & Favorites System** – Save and manage favorite movies
-- **📜 Recently Viewed Tracking** – Automatically tracks user watch history
+- **⭐ Watchlist & Favorites** – Save and manage favorite movies
+- **📜 Recently Viewed** – Automatically tracks user watch history
 - **📝 Movie Notes & Ratings** – Personal notes and ratings for movies
-- **🎯 Personalized Recommendations** – AI-driven suggestions based on user activity and ratings
+- **🎯 Personalized Recommendations** – AI-driven suggestions based on user activity
 
 ### 💬 Real-Time Engagement
-- **💬 Real-Time Comments System** – Live comments and replies powered by Socket.io
-- **❤️ Like & Reply System** – Instant interaction with comments and replies
+- **💬 Live Comments** – Real-time comments powered by Socket.io
 - **🔔 Real-Time Notifications** – Live notifications for user activities
 
 ### 📊 Analytics & Insights
 - **📊 Analytics Dashboard** – Visual graphs and insights based on watch activity
-- **📺 Where to Watch Feature** – Shows OTT platform availability for movies and shows
+- **📺 Where to Watch** – Shows OTT platform availability for movies
 
-### 🖼️ User Profile & Media
-- **👤 JWT Authentication System** – Secure login & registration with access and refresh tokens
-- **🖼️ Avatar Upload System** – Upload real profile photos with fallback cartoon avatars
-- **🎨 Cartoon Avatar Creator** – WhatsApp-style cartoon avatar creator
+### 🖼️ User Profile
+- **🖼️ Avatar Upload** – Upload real profile photos
+- **📱 Fully Responsive UI** – Optimized for desktop, tablet, and mobile
 
 ### 🧪 Quality & Deployment
-- **🧪 Unit Testing** – API testing using Jest and Supertest
 - **🚀 Deployment Ready** – Production-ready deployment on Render and Vercel
-- **📱 Fully Responsive UI** – Optimized for desktop, tablet, and mobile devices
+- **📱 Fully Responsive UI** – Optimized for all devices
 
 ---
 
@@ -55,96 +58,21 @@ MovieMate is a modern **full-stack movie & TV show discovery platform** built wi
 | | React Router | Client-side routing |
 | | CSS Modules | Component styling |
 | | Chart.js / Recharts | Data visualizations |
+| | @react-oauth/google | Google OAuth integration |
 | **Backend** | Node.js | Runtime environment |
 | | Express.js | REST API framework |
 | | Socket.io | Real-time communication |
 | **Database** | MongoDB + Mongoose | NoSQL database (users, library, sessions) |
-| | PostgreSQL + Prisma ORM | Relational database (comments, reviews) |
+| | PostgreSQL + Prisma ORM | Relational database (comments) |
 | **Authentication** | JWT | Access and refresh token authentication |
 | | bcrypt | Password hashing |
-| | Express Sessions & Cookies | Session management |
-| **Storage** | Multer | File upload handling |
+| | Google Auth Library | Google OAuth 2.0 verification |
 | **API** | TMDB API | Movie and TV show data |
-| **Testing** | Jest + Supertest | Unit and API testing |
 | **Deployment** | Render (Backend) | Server hosting |
 | | Vercel (Frontend) | Frontend hosting |
-| **Tools** | Postman | API testing and debugging |
-| | ESLint + Prettier | Code linting and formatting |
 
 ---
 
-## 🧠 Learning Goals
-
-This project demonstrates a comprehensive understanding of:
-
-- ✅ **Full-Stack Architecture** – Building and integrating frontend and backend systems
-- ✅ **REST API Design** – Creating scalable, well-structured API endpoints
-- ✅ **Authentication & Authorization** – JWT-based authentication with role-based access control
-- ✅ **Middleware Lifecycle** – Implementing middleware for auth, logging, and error handling
-- ✅ **Real-Time Communication** – Using Socket.io for live comments and notifications
-- ✅ **Session & Cookie Management** – Managing user sessions with Express Sessions
-- ✅ **Database Integration** – Working with MongoDB and PostgreSQL using Mongoose and Prisma
-- ✅ **CRUD Operations** – Full CRUD implementation on protected APIs
-- ✅ **File Upload** – Handling image uploads with Multer
-- ✅ **Responsive UI/UX** – Building mobile-first, responsive user interfaces
-- ✅ **CI/CD & Deployment** – Deploying to Render and Vercel with environment configuration
-- ✅ **Unit Testing** – Writing and running tests using Jest and Supertest
-
----
-
-## 🏗️ Project Architecture
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ CLIENT (React.js) │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────────┐ │
-│ │ React UI │ │ React │ │ Socket.io │ │ Chart.js/ │ │
-│ │ Components │ │ Router │ │ Client │ │ Recharts │ │
-│ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────────┘ │
-└─────────────────────────────────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ EXPRESS.JS BACKEND SERVER │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ ┌───────────────────────────────────────────────────────────────────────┐ │
-│ │ MIDDLEWARE LAYER │ │
-│ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │ │
-│ │ │ Auth │ │ Logger │ │ Rate │ │ Error │ │ │
-│ │ │ Middleware │ │ Middleware │ │ Limiter │ │ Handler │ │ │
-│ │ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │ │
-│ └───────────────────────────────────────────────────────────────────────┘ │
-│ │
-│ ┌───────────────────────────────────────────────────────────────────────┐ │
-│ │ API ROUTES │ │
-│ │ ┌─────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌─────────┐ │ │
-│ │ │ Auth │ │ Users │ │ Movies │ │ Notes │ │ Reviews│ │ │
-│ │ └─────────┘ └──────────┘ └──────────┘ └──────────┘ └─────────┘ │ │
-│ │ ┌─────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌─────────┐ │ │
-│ │ │Comments │ │ Lists │ │ Follow │ │ Admin │ │ Upload │ │ │
-│ │ └─────────┘ └──────────┘ └──────────┘ └──────────┘ └─────────┘ │ │
-│ └───────────────────────────────────────────────────────────────────────┘ │
-│ │
-│ ┌───────────────────────────────────────────────────────────────────────┐ │
-│ │ SOCKET.IO SERVER │ │
-│ │ ┌─────────────────┐ ┌─────────────────┐ │ │
-│ │ │ Comments │ │ Notifications │ │ │
-│ │ │ Handler │ │ Handler │ │ │
-│ │ └─────────────────┘ └─────────────────┘ │ │
-│ └───────────────────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────────────────┘
-│
-┌─────────────────┼─────────────────┐
-▼ ▼ ▼
-┌─────────────────────────┐ ┌─────────────────────────┐ ┌─────────────────────────┐
-│ MONGODB │ │ POSTGRESQL │ │ TMDB API │
-│ (NoSQL Database) │ │ (Relational Database) │ │ (External Data) │
-├─────────────────────────┤ ├─────────────────────────┤ ├─────────────────────────┤
-│ • Users │ │ • Comments │ │ • Movies │
-│ • Library (Watchlist) │ │ • Reviews │ │ • TV Shows │
-│ • Notes & Ratings │ │ • Likes │ │ • Cast & Crew │
-│ • Sessions │ │ • Reports │ │ • Streaming Platforms │
-│ • Notifications │ │ • Analytics │ │ • Trailers │
-└─────────────────────────┘ └─────────────────────────┘ └─────────────────────────┘
 
 ---
 
@@ -168,7 +96,7 @@ This project is for educational purposes. TMDB API usage complies with their ter
 - [TMDB](https://www.themoviedb.org/) – Movie data API
 - [Chart.js](https://www.chartjs.org/) – Analytics charts
 - [Font Awesome](https://fontawesome.com/) – Icons
-- [DiceBear](https://www.dicebear.com/) – Avatar library
+- [Google Cloud](https://cloud.google.com/) – OAuth 2.0 authentication
 
 ---
 
