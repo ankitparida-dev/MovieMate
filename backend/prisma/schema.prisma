@@ -1,3 +1,5 @@
+// backend/prisma/schema.prisma
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,6 +16,7 @@ model Comment {
   movieTitle String
 
   username   String
+  userId     String?  // ✅ ADD THIS FIELD
   content    String
   rating     Int?
 

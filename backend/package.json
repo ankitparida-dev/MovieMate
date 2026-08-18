@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@getbrevo/brevo": "^6.0.3",
     "@prisma/client": "^6.15.0",
     "axios": "^1.15.0",
     "bcrypt": "^6.0.0",
@@ -27,7 +28,7 @@
     "multer": "^2.2.0",
     "multer-storage-cloudinary": "^2.2.1",
     "nodemailer": "^9.0.5",
-    "prisma": "^6.15.0",
+    "prisma": "^6.12.0",
     "socket.io": "^4.8.3"
   },
   "devDependencies": {

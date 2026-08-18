@@ -34,6 +34,7 @@ const getStats = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Get stats error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -50,6 +51,7 @@ const getUsers = async (req, res) => {
         res.json(users);
 
     } catch (error) {
+        console.error('Get users error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -69,16 +71,21 @@ const banUser = async (req, res) => {
         user.isBanned = !user.isBanned;
         await user.save();
 
-        res.json(user);
+        res.json({
+            success: true,
+            message: user.isBanned ? "User banned" : "User unbanned",
+            user
+        });
 
     } catch (error) {
+        console.error('Ban user error:', error);
         res.status(500).json({
             message: error.message
         });
     }
 };
 
-// ✅ NEW: Delete User (Permanent)
+// ✅ Delete User (Permanent)
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
@@ -148,6 +155,7 @@ const getComments = async (req, res) => {
         res.json(comments);
 
     } catch (error) {
+        console.error('Get comments error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -167,6 +175,7 @@ const deleteComment = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Delete comment error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -185,6 +194,7 @@ const getLists = async (req, res) => {
         res.json(lists);
 
     } catch (error) {
+        console.error('Get lists error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -200,6 +210,7 @@ const deleteList = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Delete list error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -220,6 +231,7 @@ const getReports = async (req, res) => {
         res.json(reports);
 
     } catch (error) {
+        console.error('Get reports error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -252,6 +264,7 @@ const resolveReport = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Resolve report error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -266,7 +279,7 @@ module.exports = {
     getStats,
     getUsers,
     banUser,
-    deleteUser, // ✅ NEW
+    deleteUser,
     getComments,
     deleteComment,
     getLists,

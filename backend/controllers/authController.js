@@ -2,34 +2,39 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const axios = require('axios');
 const User = require('../models/User');
+const brevo = require('@getbrevo/brevo');
 
 // ============================================================
-// ✅ MAILGUN CONFIGURATION
+// ✅ BREVO CONFIGURATION - FIXED
 // ============================================================
 
-const mailgunConfig = {
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
-    baseUrl: process.env.MAILGUN_BASE_URL || 'https://api.mailgun.net/v3'
-};
+// ✅ Try different import methods
+const TransactionalEmailsApi = brevo.TransactionalEmailsApi || brevo.TransactionalEmailsApi;
+const SendSmtpEmail = brevo.SendSmtpEmail || brevo.SendSmtpEmail;
 
-console.log('📧 Mailgun Configuration:');
-console.log('Domain:', mailgunConfig.domain || '❌ NOT SET');
-console.log('API Key:', mailgunConfig.apiKey ? '✅ Set' : '❌ NOT SET');
-console.log('Base URL:', mailgunConfig.baseUrl);
+const brevoApi = new TransactionalEmailsApi();
+brevoApi.setApiKey(
+    brevo.TransactionalEmailsApiApiKeys.apiKey || brevo.TransactionalEmailsApiApiKeys.apiKey,
+    process.env.BREVO_API_KEY
+);
+
+console.log('📧 Brevo Configuration:');
+console.log('API Key:', process.env.BREVO_API_KEY ? '✅ Set' : '❌ Not Set');
+console.log('Sender Email:', process.env.BREVO_SENDER_EMAIL || '❌ Not Set');
 
 // ============================================================
-// ✅ SEND OTP EMAIL VIA MAILGUN
+// ✅ SEND OTP EMAIL VIA BREVO
 // ============================================================
 
 const sendOtpEmail = async (email, otp) => {
-    console.log(`📧 Sending OTP to ${email} via Mailgun...`);
+    console.log(`📧 Sending OTP to ${email} via Brevo...`);
 
-    const from = process.env.EMAIL_FROM || `MovieMate <mailgun@${mailgunConfig.domain}>`;
-    const subject = 'Your MovieMate Verification Code';
-    
+    const sender = {
+        email: process.env.BREVO_SENDER_EMAIL || 'ankitparida386@gmail.com',
+        name: process.env.BREVO_SENDER_NAME || 'MovieMate'
+    };
+
     const html = `
         <!DOCTYPE html>
         <html>
@@ -60,38 +65,22 @@ const sendOtpEmail = async (email, otp) => {
     `;
 
     try {
-        const url = `${mailgunConfig.baseUrl}/${mailgunConfig.domain}/messages`;
-        
-        const form = new URLSearchParams();
-        form.append('from', from);
-        form.append('to', email);
-        form.append('subject', subject);
-        form.append('html', html);
+        const sendSmtpEmail = new SendSmtpEmail();
+        sendSmtpEmail.to = [{ email }];
+        sendSmtpEmail.sender = sender;
+        sendSmtpEmail.subject = 'Your MovieMate Verification Code';
+        sendSmtpEmail.htmlContent = html;
 
-        console.log(`📧 Mailgun URL: ${url}`);
-
-        const response = await axios.post(url, form.toString(), {
-            auth: {
-                username: 'api',
-                password: mailgunConfig.apiKey
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            timeout: 15000
-        });
-
+        const response = await brevoApi.sendTransacEmail(sendSmtpEmail);
         console.log(`✅ OTP sent successfully to ${email}`);
-        console.log(`📧 Mailgun Response:`, response.status, response.statusText);
+        console.log(`📧 Brevo Response:`, response.response?.statusCode || 'OK');
         return true;
 
     } catch (error) {
-        console.error('❌ Mailgun error:');
+        console.error('❌ Brevo error:');
+        console.error('Message:', error.message);
         if (error.response) {
-            console.error('Status:', error.response.status);
-            console.error('Data:', JSON.stringify(error.response.data, null, 2));
-        } else {
-            console.error('Message:', error.message);
+            console.error('Response:', error.response);
         }
         throw error;
     }
