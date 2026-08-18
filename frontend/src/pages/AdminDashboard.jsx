@@ -17,12 +17,10 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [lists, setLists] = useState([]);
   const [comments, setComments] = useState([]);
-  // ❌ REMOVED: const [reports, setReports] = useState([]);
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalLists: 0,
     totalComments: 0,
-    // ❌ REMOVED: totalReports: 0,
     recentActivity: []
   });
   const [loading, setLoading] = useState(true);
@@ -50,13 +48,11 @@ const AdminDashboard = () => {
         usersRes,
         listsRes,
         commentsRes,
-        // ❌ REMOVED: reportsRes,
         statsRes
       ] = await Promise.all([
         fetch(`${API_BASE_URL}/users`, { headers }),
         fetch(`${API_BASE_URL}/lists`, { headers }),
         fetch(`${API_BASE_URL}/comments`, { headers }),
-        // ❌ REMOVED: fetch(`${API_BASE_URL}/reports`, { headers }),
         fetch(`${API_BASE_URL}/stats`, { headers })
       ]);
 
@@ -67,19 +63,16 @@ const AdminDashboard = () => {
       const usersData = await usersRes.json();
       const listsData = await listsRes.json();
       const commentsData = await commentsRes.json();
-      // ❌ REMOVED: const reportsData = await reportsRes.json();
       const statsData = await statsRes.json();
 
       setUsers(usersData);
       setLists(listsData);
       setComments(commentsData);
-      // ❌ REMOVED: setReports(reportsData);
 
       setStats({
         totalUsers: statsData.totalUsers ?? usersData.length,
         totalLists: statsData.totalLists ?? listsData.length,
         totalComments: statsData.totalComments ?? commentsData.length,
-        // ❌ REMOVED: totalReports: statsData.totalReports ?? reportsData.length,
         recentActivity: statsData.recentActivity ?? getRecentActivity(listsData, commentsData)
       });
     } catch (error) {
@@ -145,7 +138,7 @@ const AdminDashboard = () => {
     }
   };
 
-  // ✅ Delete User
+  // ✅ Delete User (Only action available)
   const deleteUser = async (userId) => {
     if (!window.confirm("⚠️ Are you sure you want to permanently delete this user? This action cannot be undone!")) return;
     try {
@@ -162,23 +155,7 @@ const AdminDashboard = () => {
     }
   };
 
-  // ✅ Ban/Unban User
-  const toggleBanUser = async (userId) => {
-    if (!window.confirm("Toggle user's ban status?")) return;
-    try {
-      const response = await fetch(`${API_BASE_URL}/users/${userId}/ban`, {
-        method: "PATCH",
-        headers: getHeaders()
-      });
-      if (!response.ok) throw new Error("Failed to ban/unban user");
-      loadData();
-    } catch (error) {
-      console.error("Ban user error:", error);
-      alert("Failed to ban/unban user");
-    }
-  };
-
-  // ❌ REMOVED: resolveReport function
+  // ❌ REMOVED: toggleBanUser function
 
   if (loading) {
     return (
@@ -213,7 +190,7 @@ const AdminDashboard = () => {
         <p>Manage your MovieMate community</p>
       </div>
 
-      {/* Stats - Removed Reports */}
+      {/* Stats */}
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
           <div className={styles.statIcon}>👥</div>
@@ -236,10 +213,9 @@ const AdminDashboard = () => {
             <p>Comments</p>
           </div>
         </div>
-        {/* ❌ REMOVED: Reports stat card */}
       </div>
 
-      {/* Tabs - Removed Reports */}
+      {/* Tabs */}
       <div className={styles.tabs}>
         <button className={`${styles.tab} ${activeTab === "overview" ? styles.active : ""}`} onClick={() => setActiveTab("overview")}>
           <i className="fas fa-chart-pie"></i> Overview
@@ -253,12 +229,11 @@ const AdminDashboard = () => {
         <button className={`${styles.tab} ${activeTab === "comments" ? styles.active : ""}`} onClick={() => setActiveTab("comments")}>
           <i className="fas fa-comment"></i> Comments
         </button>
-        {/* ❌ REMOVED: Reports tab */}
       </div>
 
-      {/* Tab Content - Removed Reports */}
+      {/* Tab Content */}
       <div className={styles.tabContent}>
-        {/* Overview Tab - Removed Reports quick action */}
+        {/* Overview Tab */}
         {activeTab === "overview" && (
           <div className={styles.overviewTab}>
             <div className={styles.recentActivity}>
@@ -290,7 +265,6 @@ const AdminDashboard = () => {
                 <button className={styles.actionBtn} onClick={() => setActiveTab("users")}>
                   <i className="fas fa-users-cog"></i> Manage Users
                 </button>
-                {/* ❌ REMOVED: View Reports button */}
                 <button className={styles.actionBtn} onClick={loadData}>
                   <i className="fas fa-sync"></i> Refresh Data
                 </button>
@@ -299,7 +273,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {/* Users Tab - Unchanged */}
+        {/* Users Tab - Ban Button Removed */}
         {activeTab === "users" && (
           <div className={styles.usersTab}>
             <div className={styles.tableWrapper}>
@@ -331,11 +305,9 @@ const AdminDashboard = () => {
                           </span>
                         </td>
                         <td>
-                          <button className={styles.banBtn} onClick={() => toggleBanUser(user._id)}>
-                            <i className="fas fa-ban"></i> {user.isBanned ? "Unban" : "Ban"}
-                          </button>
+                          {/* ✅ Only Delete button - No Ban button */}
                           <button className={styles.deleteBtn} onClick={() => deleteUser(user._id)}>
-                            <i className="fas fa-trash"></i>
+                            <i className="fas fa-trash"></i> Delete
                           </button>
                         </td>
                       </tr>
@@ -347,7 +319,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {/* Lists Tab - Unchanged */}
+        {/* Lists Tab */}
         {activeTab === "lists" && (
           <div className={styles.listsTab}>
             {lists.length === 0 ? (
@@ -376,7 +348,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {/* Comments Tab - Unchanged */}
+        {/* Comments Tab */}
         {activeTab === "comments" && (
           <div className={styles.commentsTab}>
             {comments.length === 0 ? (
@@ -402,8 +374,6 @@ const AdminDashboard = () => {
             )}
           </div>
         )}
-
-        {/* ❌ REMOVED: Reports Tab */}
       </div>
     </div>
   );

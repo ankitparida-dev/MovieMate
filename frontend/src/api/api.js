@@ -79,20 +79,23 @@ export function postData(endpoint, data) {
   return request(endpoint, { method: "POST", body: data });
 }
 
+// ============================================================
+// ✅ AUTH FUNCTIONS (No OTP)
+// ============================================================
+
 export async function loginUser(email, password) {
   return postData("auth/login", { email, password });
 }
 
-export async function verifyOtp(email, otp) {
-  return postData("auth/verify-otp", { email, otp });
-}
-
-export async function resendOtp(email) {
-  return postData("auth/resend-otp", { email });
-}
+// ❌ REMOVED: verifyOtp, resendOtp
 
 export async function registerUser(name, email, password) {
   return postData("auth/register", { name, email, password });
+}
+
+// ✅ GOOGLE LOGIN
+export async function googleLogin(credential) {
+  return postData("auth/google", { token: credential });
 }
 
 export async function createReport(reportedUserId, reason, description) {
@@ -228,6 +231,10 @@ export const getLibraryStatus = async (movieId) => {
   }
 };
 
+// ============================================================
+// ✅ NOTES FUNCTIONS
+// ============================================================
+
 export const getNotes = async (movieId) => {
   try {
     const response = await getData(`notes/movie/${movieId}`);
@@ -268,6 +275,10 @@ export const getUserNotes = async () => {
   }
 };
 
+// ============================================================
+// ✅ RECOMMENDATIONS
+// ============================================================
+
 export const getRecommendations = async () => {
   try {
     const response = await getData('recommendations');
@@ -277,6 +288,10 @@ export const getRecommendations = async () => {
     return [];
   }
 };
+
+// ============================================================
+// ✅ ANALYTICS
+// ============================================================
 
 export const getAnalytics = async () => {
   try {
@@ -288,6 +303,10 @@ export const getAnalytics = async () => {
   }
 };
 
+// ============================================================
+// ✅ REPORT FUNCTIONS
+// ============================================================
+
 export const submitReport = async (reportData) => {
   try {
     const response = await postData('reports/create', reportData);
@@ -298,12 +317,17 @@ export const submitReport = async (reportData) => {
   }
 };
 
+// ============================================================
+// ✅ EXPORT DEFAULT
+// ============================================================
+
 export default {
   getData,
   postData,
   loginUser,
   registerUser,
   logoutUser,
+  googleLogin, // ✅ Added Google Login
   addToFavorites,
   addToWatchlist,
   addToHistory,

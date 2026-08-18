@@ -1,3 +1,5 @@
+/* frontend/src/RegPage.module.css */
+
 /* ---------------------------------------
           REGISTER PAGE WRAPPER
 ---------------------------------------- */
@@ -96,25 +98,29 @@
 }
 
 /* ---------------------------------------
-          REGISTER BUTTON
+          ✅ REGISTER BUTTON (FIXED)
 ---------------------------------------- */
 .registerBtn {
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: var(--radius-md, 10px);
+  border-radius: 30px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  background: var(--gradient-teal, linear-gradient(135deg, #2ec4b6, #4fd1c5));
-  color: var(--primary, #0a192f);
-  transition: var(--transition, all 0.3s ease);
+  background: linear-gradient(135deg, #2ec4b6, #1a8a7e);  /* ✅ Teal gradient */
+  color: #0a192f;  /* ✅ Dark text */
+  transition: all 0.3s ease;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .registerBtn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-teal, 0 0 20px rgba(46, 196, 182, 0.4));
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(46, 196, 182, 0.4);
 }
 
 .registerBtn:disabled {
@@ -153,7 +159,7 @@
 ---------------------------------------- */
 .loginSection {
   flex: 1;
-  background: var(--gradient-teal, linear-gradient(135deg, #2ec4b6, #1a8a7e));
+  background: linear-gradient(135deg, #2ec4b6, #1a8a7e);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -165,14 +171,14 @@
 .loginSection h2 {
   font-size: 2rem;
   margin-bottom: 16px;
-  color: var(--primary, #0a192f);
+  color: #0a192f;
   font-weight: 600;
 }
 
 .loginSection p {
   font-size: 0.95rem;
   margin-bottom: 30px;
-  color: var(--primary-dark, #051021);
+  color: #051021;
   opacity: 0.9;
   line-height: 1.5;
   max-width: 280px;
@@ -180,21 +186,21 @@
 
 .loginBtn {
   padding: 12px 32px;
-  border: 2px solid var(--primary, #0a192f);
-  border-radius: var(--radius-md, 10px);
+  border: 2px solid #0a192f;
+  border-radius: 30px;
   background: transparent;
-  color: var(--primary, #0a192f);
+  color: #0a192f;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: var(--transition, all 0.3s ease);
+  transition: all 0.3s ease;
 }
 
 .loginBtn:hover {
-  background: var(--primary, #0a192f);
-  color: var(--secondary, #2ec4b6);
+  background: #0a192f;
+  color: #2ec4b6;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.3));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ---------------------------------------
@@ -202,10 +208,10 @@
 ---------------------------------------- */
 .errorMessage {
   background: rgba(230, 57, 70, 0.15);
-  border: 1px solid var(--accent-error, #e63946);
-  color: var(--accent-error, #e63946);
+  border: 1px solid #e63946;
+  color: #e63946;
   padding: 12px 16px;
-  border-radius: var(--radius-md, 10px);
+  border-radius: 10px;
   font-size: 0.85rem;
   margin-bottom: 20px;
   text-align: center;
@@ -218,7 +224,7 @@
   display: inline-block;
   width: 18px;
   height: 18px;
-  border: 2px solid var(--primary, #0a192f);
+  border: 2px solid #0a192f;
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -227,145 +233,35 @@
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 /* ---------------------------------------
           RESPONSIVE STYLES
 ---------------------------------------- */
-
-/* Tablet (768px - 1024px) */
 @media (max-width: 1024px) {
-  .registerContainer {
-    width: 800px;
-  }
-  
-  .registerSection {
-    padding: 40px 30px;
-  }
-  
-  .loginSection {
-    padding: 40px 30px;
-  }
-  
-  .registerSection form h2 {
-    font-size: 1.8rem;
-  }
-  
-  .loginSection h2 {
-    font-size: 1.8rem;
-  }
+  .registerContainer { width: 800px; }
+  .registerSection { padding: 40px 30px; }
+  .loginSection { padding: 40px 30px; }
 }
 
-/* Mobile (481px - 768px) */
 @media (max-width: 768px) {
-  .registerPageWrapper {
-    padding: 30px 20px;
-    min-height: auto;
-  }
-
   .registerContainer {
     flex-direction: column;
     max-width: 450px;
     width: 100%;
     min-height: auto;
   }
-
-  .registerSection {
-    padding: 35px 25px;
-  }
-  
-  .loginSection {
-    padding: 35px 25px;
-  }
-
-  .registerSection form h2 {
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-  }
-  
-  .loginSection h2 {
-    font-size: 1.6rem;
-  }
-  
-  .inputBox input {
-    padding: 12px 14px;
-  }
-  
-  .registerBtn {
-    padding: 12px;
-  }
+  .registerSection { padding: 35px 25px; }
+  .loginSection { padding: 35px 25px; }
+  .registerSection form h2 { font-size: 1.6rem; }
 }
 
-/* Small Mobile (up to 480px) */
 @media (max-width: 480px) {
-  .registerPageWrapper {
-    padding: 20px 15px;
-  }
-
-  .registerSection {
-    padding: 25px 20px;
-  }
-  
-  .loginSection {
-    padding: 25px 20px;
-  }
-
-  .registerSection form h2 {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-  }
-  
-  .loginSection h2 {
-    font-size: 1.4rem;
-  }
-
-  .inputBox {
-    margin-bottom: 18px;
-  }
-  
-  .inputBox input {
-    padding: 10px 12px;
-    font-size: 0.9rem;
-  }
-
-  .registerBtn {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
-  
-  .loginBtn {
-    padding: 8px 24px;
-    font-size: 0.9rem;
-  }
-  
-  .errorMessage {
-    padding: 10px 12px;
-    font-size: 0.8rem;
-  }
-  
-  .loginSection p {
-    font-size: 0.85rem;
-  }
-}
-
-/* Extra Small (up to 360px) */
-@media (max-width: 360px) {
-  .registerSection {
-    padding: 20px 15px;
-  }
-  
-  .loginSection {
-    padding: 20px 15px;
-  }
-
-  .registerSection form h2 {
-    font-size: 1.2rem;
-  }
-  
-  .loginSection h2 {
-    font-size: 1.2rem;
-  }
+  .registerPageWrapper { padding: 20px 15px; }
+  .registerSection { padding: 25px 20px; }
+  .loginSection { padding: 25px 20px; }
+  .registerSection form h2 { font-size: 1.4rem; }
+  .inputBox input { padding: 10px 12px; font-size: 0.9rem; }
+  .registerBtn { font-size: 0.9rem; padding: 10px; }
 }

@@ -14,9 +14,8 @@ const {
     getComments,
     deleteComment,
     getLists,
-    deleteList,
-    getReports,
-    resolveReport
+    deleteList
+    // ❌ REMOVED: getReports, resolveReport
 } = require("../controllers/adminController");
 
 // ✅ All routes require authentication AND admin privileges
@@ -62,14 +61,7 @@ router.get("/lists", getLists);
 router.delete("/lists/:id", deleteList);
 
 /* ===========================
-   REPORTS MANAGEMENT
+   ❌ REPORTS MANAGEMENT (REMOVED)
 =========================== */
 
-// Get all reports
-router.get("/reports", getReports);
-
-// Resolve a report
-router.patch("/reports/:id", resolveReport);
-
 module.exports = router;
-

@@ -2,7 +2,6 @@
 
 const User = require("../models/User");
 const MovieList = require("../models/MovieList");
-const Report = require("../models/Report");
 const Library = require("../models/Library");
 const Note = require("../models/Note");
 
@@ -29,7 +28,6 @@ const getStats = async (req, res) => {
             totalUsers,
             totalComments,
             totalLists,
-            totalReports: 0,
             recentActivity: []
         });
 
@@ -116,12 +114,15 @@ const deleteUser = async (req, res) => {
         await MovieList.deleteMany({ userId: id });
 
         // Delete user's comments (Prisma)
-        await prisma.comment.deleteMany({
-            where: { userId: id }
-        });
+        try {
+            await prisma.comment.deleteMany({
+                where: { userId: id }
+            });
+        } catch (prismaError) {
+            console.log("⚠️ Prisma comment deletion skipped:", prismaError.message);
+        }
 
-        // Delete user's reports
-        await Report.deleteMany({ reporterId: id });
+        // ❌ REMOVED: Report deletion
 
         // Delete the user
         await User.findByIdAndDelete(id);
@@ -217,59 +218,7 @@ const deleteList = async (req, res) => {
     }
 };
 
-/* ===========================
-   REPORTS
-=========================== */
-
-const getReports = async (req, res) => {
-    try {
-        const reports = await Report.find()
-            .populate("reporterId", "name email")
-            .populate("reportedUserId", "name email")
-            .sort({ createdAt: -1 });
-
-        res.json(reports);
-
-    } catch (error) {
-        console.error('Get reports error:', error);
-        res.status(500).json({
-            message: error.message
-        });
-    }
-};
-
-const resolveReport = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { status = "resolved", resolution = "Resolved by admin" } = req.body || {};
-
-        const report = await Report.findById(id);
-
-        if (!report) {
-            return res.status(404).json({
-                message: "Report not found"
-            });
-        }
-
-        report.status = status;
-        report.resolution = resolution;
-        report.resolvedBy = req.user.id;
-        report.resolvedAt = new Date();
-
-        await report.save();
-
-        res.json({
-            message: "Report resolved",
-            report
-        });
-
-    } catch (error) {
-        console.error('Resolve report error:', error);
-        res.status(500).json({
-            message: error.message
-        });
-    }
-};
+// ❌ REMOVED: Reports functions (getReports, resolveReport)
 
 /* ===========================
    EXPORTS
@@ -283,7 +232,6 @@ module.exports = {
     getComments,
     deleteComment,
     getLists,
-    deleteList,
-    getReports,
-    resolveReport
+    deleteList
+    // ❌ Removed: getReports, resolveReport
 };

@@ -1,0 +1,12 @@
+/* frontend/src/components/GoogleLoginButton.module.css */
+
+.googleBtnWrapper {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.googleBtnWrapper > div {
+    width: 100%;
+    max-width: 320px;
+}
