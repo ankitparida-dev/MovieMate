@@ -20,7 +20,7 @@ const TEXTS_TO_TYPE = [
   "Personalized Picks"
 ];
 
-export default function HeroBanner({ onExploreClick }) {
+export default function HeroBanner({ onExploreClick, setPage }) {
   const [typedText, setTypedText] = useState('');
   const [movies, setMovies] = useState([]);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
@@ -288,7 +288,7 @@ export default function HeroBanner({ onExploreClick }) {
     }
   };
 
-  // ✅ Handle "Watch Trailer" - SINGLE FUNCTION
+  // ✅ Handle "Watch Trailer"
   const handleOpenTrailer = async () => {
     if (!currentMovie) return;
     
@@ -313,6 +313,43 @@ export default function HeroBanner({ onExploreClick }) {
         setCurrentMovieIndex(index);
         setIsTransitioning(false);
       }, 300);
+    }
+  };
+
+  // ✅ Handle "Explore Movies" - Navigate to Movies page
+  const handleExploreMovies = () => {
+    console.log('🔍 Explore Movies clicked');
+    
+    // Call the prop function if provided
+    if (onExploreClick) {
+      onExploreClick();
+    }
+    
+    // Navigate to movies page
+    if (setPage) {
+      setPage('movies');
+    }
+  };
+
+  // ✅ Handle "Learn More" - FIXED with multiple fallbacks
+  const handleLearnMore = () => {
+    console.log('📖 Learn More clicked');
+    
+    try {
+      // ✅ Method 1: Success toast (most reliable)
+      toast.success('🎬 MovieMate helps you discover, rate, and review your favorite movies!', {
+        duration: 4000,
+        style: {
+          background: '#112240',
+          color: '#ffffff',
+          borderLeft: '4px solid #2ec4b6',
+          padding: '16px 24px',
+          borderRadius: '12px',
+        },
+      });
+    } catch (error) {
+      // ✅ Method 2: Fallback to alert if toast fails
+      alert('🎬 MovieMate helps you discover, rate, and review your favorite movies!');
     }
   };
 
@@ -413,13 +450,16 @@ export default function HeroBanner({ onExploreClick }) {
             <div className={styles.heroActions}>
               <button 
                 className={`${styles.heroBtn} ${styles.playBtn}`}
-                onClick={onExploreClick}
+                onClick={handleExploreMovies}
               >
                 <i className="fas fa-play"></i>
                 Explore Movies
               </button>
 
-              <button className={`${styles.heroBtn} ${styles.infoBtn}`}>
+              <button 
+                className={`${styles.heroBtn} ${styles.infoBtn}`}
+                onClick={handleLearnMore}
+              >
                 <i className="fas fa-info-circle"></i>
                 Learn More
               </button>
@@ -468,7 +508,6 @@ export default function HeroBanner({ onExploreClick }) {
                   {currentMovie.overview?.slice(0, 80) || 'No overview available.'}...
                 </p>
                 <div className={styles.currentMovieActions}>
-                  {/* ✅ REMOVED DUPLICATE WATCH TRAILER BUTTON - Only Watchlist & Favorites remain */}
                   <button 
                     className={`${styles.actionIconBtn} ${isInWatchlist ? styles.active : ''}`}
                     onClick={handleAddToWatchlist}
