@@ -2,108 +2,15 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const axios = require('axios');
 const User = require('../models/User');
+const { OAuth2Client } = require('google-auth-library');
 
-// ============================================================
-// ✅ MAILGUN CONFIGURATION
-// ============================================================
+// ✅ Google OAuth Client
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-const mailgunConfig = {
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
-    baseUrl: process.env.MAILGUN_BASE_URL || 'https://api.mailgun.net/v3'
-};
-
-console.log('📧 Mailgun Configuration:');
-console.log('Domain:', mailgunConfig.domain || '❌ NOT SET');
-console.log('API Key:', mailgunConfig.apiKey ? '✅ Set' : '❌ NOT SET');
-console.log('Base URL:', mailgunConfig.baseUrl);
-
-// ============================================================
-// ✅ SEND OTP EMAIL VIA MAILGUN
-// ============================================================
-
-const sendOtpEmail = async (email, otp) => {
-    console.log(`📧 Sending OTP to ${email} via Mailgun...`);
-
-    const from = process.env.EMAIL_FROM || `MovieMate <mailgun@${mailgunConfig.domain}>`;
-    const subject = 'Your MovieMate Verification Code';
-    
-    const html = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                body { font-family: Arial, sans-serif; background: #0a192f; color: #fff; padding: 20px; margin: 0; }
-                .container { max-width: 500px; margin: 0 auto; background: #112240; padding: 30px; border-radius: 12px; border: 1px solid #2ec4b6; }
-                .logo { text-align: center; font-size: 28px; color: #2ec4b6; font-weight: bold; }
-                .logo span { color: #ffffff; }
-                .message { text-align: center; color: #e6e6e6; font-size: 16px; margin-bottom: 10px; }
-                .otp { font-size: 42px; font-weight: bold; color: #2ec4b6; text-align: center; padding: 20px; letter-spacing: 12px; background: #0a192f; border-radius: 8px; margin: 20px 0; border: 1px solid rgba(46,196,182,0.2); }
-                .expiry { text-align: center; color: #8892b0; font-size: 14px; }
-                .footer { text-align: center; color: #8892b0; font-size: 12px; margin-top: 20px; border-top: 1px solid rgba(46,196,182,0.1); padding-top: 20px; }
-                .warning { color: #e63946; font-size: 13px; text-align: center; margin-top: 15px; }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="logo">🎬 <span>MOVIEMATE</span></div>
-                <div class="message">Your One-Time Password (OTP) is:</div>
-                <div class="otp">${otp}</div>
-                <div class="expiry">⏱️ This code expires in <strong>10 minutes</strong></div>
-                <div class="warning">⚠️ If you didn't request this, please ignore this email.</div>
-                <div class="footer">— MovieMate Team • Secure Authentication</div>
-            </div>
-        </body>
-        </html>
-    `;
-
-    try {
-        const url = `${mailgunConfig.baseUrl}/${mailgunConfig.domain}/messages`;
-        
-        const form = new URLSearchParams();
-        form.append('from', from);
-        form.append('to', email);
-        form.append('subject', subject);
-        form.append('html', html);
-
-        console.log(`📧 Mailgun URL: ${url}`);
-
-        const response = await axios.post(url, form.toString(), {
-            auth: {
-                username: 'api',
-                password: mailgunConfig.apiKey
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            timeout: 15000
-        });
-
-        console.log(`✅ OTP sent successfully to ${email}`);
-        console.log(`📧 Mailgun Response:`, response.status, response.statusText);
-        return true;
-
-    } catch (error) {
-        console.error('❌ Mailgun error:');
-        if (error.response) {
-            console.error('Status:', error.response.status);
-            console.error('Data:', JSON.stringify(error.response.data, null, 2));
-        } else {
-            console.error('Message:', error.message);
-        }
-        throw error;
-    }
-};
-
-// ============================================================
-// ✅ OTP GENERATION
-// ============================================================
-
-const generateOtp = () => {
-    return Math.floor(100000 + Math.random() * 900000).toString();
-};
+console.log('🔑 Google OAuth Configuration:');
+console.log('Client ID:', process.env.GOOGLE_CLIENT_ID ? '✅ Set' : '❌ Not Set');
+console.log('Client Secret:', process.env.GOOGLE_CLIENT_SECRET ? '✅ Set' : '❌ Not Set');
 
 // ============================================================
 // ✅ TOKEN GENERATION
@@ -146,22 +53,28 @@ const register = async (req, res) => {
             });
         }
 
+        // Check if user exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({
                 success: false,
-                message: 'User already exists'
+                message: 'User already exists with this email'
             });
         }
 
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // Create user
         const user = await User.create({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            profileImage: '',
+            isAdmin: false
         });
 
+        // Socket notification
         const io = req.app.get('io');
         if (io) {
             io.emit('userActivity', {
@@ -191,7 +104,7 @@ const register = async (req, res) => {
 };
 
 // ============================================================
-// ✅ LOGIN
+// ✅ LOGIN (Email/Password - No OTP)
 // ============================================================
 
 const login = async (req, res) => {
@@ -205,6 +118,7 @@ const login = async (req, res) => {
             });
         }
 
+        // Find user
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(401).json({
@@ -213,6 +127,7 @@ const login = async (req, res) => {
             });
         }
 
+        // Check password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({
@@ -221,6 +136,7 @@ const login = async (req, res) => {
             });
         }
 
+        // Check if banned
         if (user.isBanned) {
             return res.status(403).json({
                 success: false,
@@ -228,91 +144,13 @@ const login = async (req, res) => {
             });
         }
 
-        const otpCode = generateOtp();
-        user.otpCode = otpCode;
-        user.otpExpires = new Date(Date.now() + 10 * 60 * 1000);
-        await user.save();
-
-        console.log(`🔐 OTP generated for ${email}: ${otpCode}`);
-
-        try {
-            await sendOtpEmail(user.email, otpCode);
-            console.log(`✅ OTP sent successfully to ${email}`);
-        } catch (emailError) {
-            console.error('❌ Failed to send OTP:', emailError.message);
-        }
-
-        res.status(200).json({
-            success: true,
-            otpRequired: true,
-            message: 'OTP sent to your email',
-            email: user.email
-        });
-
-    } catch (error) {
-        console.error('LOGIN ERROR:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Login failed',
-            error: error.message
-        });
-    }
-};
-
-// ============================================================
-// ✅ VERIFY OTP
-// ============================================================
-
-const verifyOtp = async (req, res) => {
-    try {
-        const { email, otp } = req.body;
-
-        if (!email || !otp) {
-            return res.status(400).json({
-                success: false,
-                message: 'Email and OTP code are required'
-            });
-        }
-
-        const user = await User.findOne({ email });
-        if (!user || !user.otpCode) {
-            return res.status(401).json({
-                success: false,
-                message: 'Invalid OTP or email'
-            });
-        }
-
-        if (user.isBanned) {
-            return res.status(403).json({
-                success: false,
-                message: 'Your account has been banned. Please contact support.'
-            });
-        }
-
-        if (!user.otpExpires || user.otpExpires < new Date()) {
-            user.otpCode = null;
-            user.otpExpires = null;
-            await user.save();
-            return res.status(401).json({
-                success: false,
-                message: 'OTP has expired. Please request a new code.'
-            });
-        }
-
-        if (user.otpCode !== otp) {
-            return res.status(401).json({
-                success: false,
-                message: 'Invalid OTP code'
-            });
-        }
-
+        // ✅ Generate tokens directly (No OTP)
         const { accessToken, refreshToken } = generateTokens(user);
 
         user.refreshToken = refreshToken;
-        user.otpCode = null;
-        user.otpExpires = null;
         await user.save();
 
+        // Socket notification
         const io = req.app.get('io');
         if (io) {
             io.emit('userActivity', {
@@ -337,38 +175,64 @@ const verifyOtp = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('VERIFY OTP ERROR:', error);
+        console.error('LOGIN ERROR:', error);
         res.status(500).json({
             success: false,
-            message: 'OTP verification failed',
+            message: 'Login failed',
             error: error.message
         });
     }
 };
 
 // ============================================================
-// ✅ RESEND OTP
+// ✅ GOOGLE AUTHENTICATION
 // ============================================================
 
-const resendOtp = async (req, res) => {
+const googleAuth = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { token } = req.body;
 
-        if (!email) {
+        if (!token) {
             return res.status(400).json({
                 success: false,
-                message: 'Email is required'
+                message: 'Google token is required'
             });
         }
 
-        const user = await User.findOne({ email });
+        // ✅ Verify Google token
+        const ticket = await googleClient.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+
+        const payload = ticket.getPayload();
+        const { email, name, sub: googleId, picture } = payload;
+
+        console.log(`👤 Google user: ${email} (${name})`);
+
+        // ✅ Find or create user
+        let user = await User.findOne({ email });
+
         if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: 'User not found'
+            // Create new user from Google
+            user = await User.create({
+                name: name || email.split('@')[0],
+                email,
+                googleId,
+                profileImage: picture || '',
+                password: null,
+                isAdmin: false
             });
+            console.log(`✅ New user created from Google: ${email}`);
+        } else if (!user.googleId) {
+            // Link existing account with Google
+            user.googleId = googleId;
+            if (picture) user.profileImage = picture;
+            await user.save();
+            console.log(`✅ Google linked to existing user: ${email}`);
         }
 
+        // Check if banned
         if (user.isBanned) {
             return res.status(403).json({
                 success: false,
@@ -376,41 +240,40 @@ const resendOtp = async (req, res) => {
             });
         }
 
-        if (user.otpExpires) {
-            const timeSinceLastOTP = Date.now() - (user.otpExpires.getTime() - 10 * 60 * 1000);
-            if (timeSinceLastOTP < 30000) {
-                return res.status(429).json({
-                    success: false,
-                    message: 'Please wait 30 seconds before requesting a new OTP'
-                });
-            }
-        }
+        // ✅ Generate tokens
+        const { accessToken, refreshToken } = generateTokens(user);
 
-        const otpCode = generateOtp();
-        user.otpCode = otpCode;
-        user.otpExpires = new Date(Date.now() + 10 * 60 * 1000);
+        user.refreshToken = refreshToken;
         await user.save();
 
-        console.log(`🔄 New OTP for ${email}: ${otpCode}`);
-
-        try {
-            await sendOtpEmail(user.email, otpCode);
-            console.log(`✅ New OTP sent successfully to ${email}`);
-        } catch (emailError) {
-            console.error('❌ Failed to send OTP:', emailError.message);
+        // Socket notification
+        const io = req.app.get('io');
+        if (io) {
+            io.emit('userActivity', {
+                message: `${user.name} logged in via Google 🎬`
+            });
         }
 
-        res.status(200).json({
+        res.json({
             success: true,
-            message: 'A new OTP code was sent to your email'
+            message: 'Login successful',
+            accessToken,
+            refreshToken,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin || false,
+                isBanned: user.isBanned || false,
+                profileImage: user.profileImage || ''
+            }
         });
 
     } catch (error) {
-        console.error('RESEND OTP ERROR:', error);
-        res.status(500).json({
+        console.error('Google auth error:', error);
+        res.status(401).json({
             success: false,
-            message: 'Failed to resend OTP',
-            error: error.message
+            message: error.message || 'Invalid Google token'
         });
     }
 };
@@ -510,8 +373,8 @@ const logout = async (req, res) => {
 module.exports = {
     register,
     login,
-    verifyOtp,
-    resendOtp,
+    googleAuth,  // ✅ Google Sign-In
     refresh,
     logout
+    // ❌ Removed: verifyOtp, resendOtp
 };

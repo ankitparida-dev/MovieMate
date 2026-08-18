@@ -10,55 +10,58 @@ const {
     getStats,
     getUsers,
     banUser,
-    deleteUser, // ✅ NEW
+    deleteUser,
     getComments,
     deleteComment,
     getLists,
-    deleteList,
-    getReports,
-    resolveReport
+    deleteList
+    // ❌ REMOVED: getReports, resolveReport
 } = require("../controllers/adminController");
 
+// ✅ All routes require authentication AND admin privileges
 router.use(auth, admin);
 
 /* ===========================
-   DASHBOARD
+   DASHBOARD STATS
 =========================== */
 
 router.get("/stats", getStats);
 
 /* ===========================
-   USERS
+   USERS MANAGEMENT
 =========================== */
 
+// Get all users
 router.get("/users", getUsers);
 
+// Ban/Unban a user
 router.patch("/users/:id/ban", banUser);
 
-router.delete("/users/:id", deleteUser); // ✅ NEW - Delete user route
+// ✅ Permanently delete a user and all associated data
+router.delete("/users/:id", deleteUser);
 
 /* ===========================
-   COMMENTS
+   COMMENTS MANAGEMENT
 =========================== */
 
+// Get all comments
 router.get("/comments", getComments);
 
+// Delete a comment
 router.delete("/comments/:id", deleteComment);
 
 /* ===========================
-   MOVIE LISTS
+   MOVIE LISTS MANAGEMENT
 =========================== */
 
+// Get all movie lists
 router.get("/lists", getLists);
 
+// Delete a movie list
 router.delete("/lists/:id", deleteList);
 
 /* ===========================
-   REPORTS
+   ❌ REPORTS MANAGEMENT (REMOVED)
 =========================== */
-
-router.get("/reports", getReports);
-
-router.patch("/reports/:id", resolveReport);
 
 module.exports = router;

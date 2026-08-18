@@ -2,252 +2,182 @@
 
 import { useState } from "react";
 import styles from "./LoginPage.module.css";
-import { loginUser, verifyOtp, resendOtp } from "./api/api";
+import { googleLogin, loginUser } from "./api/api";
+import GoogleLoginButton from "./components/GoogleLoginButton";
 import toast from 'react-hot-toast';
 
 export default function LoginPage({ setPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState("");
-  const [pendingEmail, setPendingEmail] = useState("");
-  const [step, setStep] = useState("credentials");
-  const [error, setError] = useState("");
-  const [info, setInfo] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [showEmailLogin, setShowEmailLogin] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError("");
-    setInfo("");
+  // ✅ Random Taglines
+  const taglines = [
+    "One click. Unlimited movies. Start now.",
+    "Your next favorite movie is one click away",
+    "Discover. Rate. Repeat.",
+    "Where movie lovers connect",
+    "The ultimate movie companion",
+    "Your personal cinema guide",
+    "Find your next obsession",
+    "Movies made simple",
+    "Because every movie deserves a review",
+    "Your movie journey starts here",
+    "Explore the world of cinema",
+    "The best way to discover movies",
+    "Your next movie is waiting",
+    "Watch. Rate. Share.",
+  ];
+
+  const [randomTagline] = useState(taglines[Math.floor(Math.random() * taglines.length)]);
+
+  // ✅ Google Login Handler
+  const handleGoogleSuccess = async (credential) => {
     setIsLoading(true);
+    setError("");
 
-    if (!email.trim()) {
-      setError("Email is required");
+    try {
+      const response = await googleLogin(credential);
+
+      if (response?.success) {
+        localStorage.setItem("user", JSON.stringify(response.user));
+        localStorage.setItem("token", response.accessToken);
+        toast.success('Welcome! 🎬');
+        setPage("home");
+        window.location.reload();
+      } else {
+        setError(response.message || "Google login failed");
+      }
+    } catch (err) {
+      console.error("Google login error:", err);
+      setError(err.message || "Failed to login with Google");
+    } finally {
       setIsLoading(false);
-      return;
     }
-    if (!password.trim()) {
-      setError("Password is required");
-      setIsLoading(false);
-      return;
-    }
+  };
+
+  const handleGoogleError = () => {
+    setError("Google login was cancelled or failed");
+  };
+
+  // ✅ Email Login Handler
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
 
     try {
       const response = await loginUser(email, password);
 
-      if (response?.otpRequired) {
-        setPendingEmail(email);
-        setStep("otp");
-        setInfo("Check your email for the OTP code to complete login.");
-        toast.success('OTP sent to your email!');
-      } else if (response?.accessToken && response?.user) {
-        localStorage.setItem("user", JSON.stringify({
-          id: response.user.id,
-          name: response.user.name,
-          email: response.user.email,
-          isAdmin: response.user.isAdmin || false,
-          isBanned: response.user.isBanned || false,
-          profileImage: response.user.profileImage || '',
-          createdAt: response.user.createdAt || new Date().toISOString()
-        }));
+      if (response?.success) {
+        localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem("token", response.accessToken);
         toast.success('Login successful!');
         setPage("home");
         window.location.reload();
       } else {
-        setError("Unexpected response from server.");
+        setError(response.message || "Invalid credentials");
       }
     } catch (err) {
       console.error("Login error:", err);
-      if (err.message?.includes('timed out') || err.message?.includes('aborted')) {
-        setError("Server is waking up. Please wait a moment and try again.");
-      } else {
-        setError(err.message || "Invalid email or password. Please try again.");
-      }
+      setError(err.message || "Login failed");
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleVerifyOtp = async (event) => {
-    event.preventDefault();
-    setError("");
-    setInfo("");
-    setIsLoading(true);
-
-    if (!otp.trim()) {
-      setError("OTP code is required");
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const response = await verifyOtp(pendingEmail, otp);
-
-      if (response?.accessToken && response?.user) {
-        localStorage.setItem("user", JSON.stringify({
-          id: response.user.id,
-          name: response.user.name,
-          email: response.user.email,
-          isAdmin: response.user.isAdmin || false,
-          isBanned: response.user.isBanned || false,
-          profileImage: response.user.profileImage || '',
-          createdAt: response.user.createdAt || new Date().toISOString()
-        }));
-        localStorage.setItem("token", response.accessToken);
-        toast.success('Login successful!');
-        setPage("home");
-        window.location.reload();
-      } else {
-        setError("Failed to verify OTP. Please try again.");
-      }
-    } catch (err) {
-      console.error("OTP verification error:", err);
-      setError(err.message || "Invalid OTP. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleResendOtp = async () => {
-    if (!pendingEmail) {
-      setError("No email to resend OTP to.");
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      await resendOtp(pendingEmail);
-      setInfo("A new OTP was sent to your email.");
-      toast.success('New OTP sent!');
-    } catch (err) {
-      console.error("Resend OTP error:", err);
-      setError(err.message || "Failed to resend OTP.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleBackToLogin = () => {
-    setStep("credentials");
-    setOtp("");
-    setInfo("");
-    setError("");
   };
 
   return (
     <div className={styles.loginPageWrapper}>
       <div className={styles.loginContainer}>
         <div className={styles.loginSection}>
-          <form onSubmit={step === "credentials" ? handleSubmit : handleVerifyOtp}>
-            <h2>{step === "credentials" ? "Welcome Back" : "Enter OTP"}</h2>
-            
-            {step === "credentials" ? (
-              <>
-                <label htmlFor="email">Email Address</label>
-                <div className={styles.inputBox}>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    placeholder="Enter your email"
-                    required
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={isLoading}
-                    autoComplete="email"
-                  />
-                </div>
+          <h2>Welcome Back</h2>
+          
+          {/* ✅ GOOGLE LOGIN BUTTON */}
+          <GoogleLoginButton 
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+          />
 
-                <label htmlFor="password">Password</label>
-                <div className={styles.inputBox}>
-                  <input 
-                    type="password" 
-                    id="password" 
-                    placeholder="Enter your password"
-                    required
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)}
-                    disabled={isLoading}
-                    autoComplete="current-password"
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <p className={styles.infoText}>
-                  A one-time code was sent to <strong>{pendingEmail}</strong>
-                </p>
+          {/* Divider */}
+          <div className={styles.divider}>
+            <span>or</span>
+          </div>
 
-                <label htmlFor="otp">OTP Code</label>
-                <div className={styles.inputBox}>
-                  <input 
-                    type="text" 
-                    id="otp" 
-                    placeholder="Enter 6-digit OTP"
-                    required
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                    disabled={isLoading}
-                    inputMode="numeric"
-                    maxLength="6"
-                    autoFocus
-                  />
-                </div>
-              </>
-            )}
-
-            {(error || info) && (
-              <div className={styles.messageRow}>
-                {error && <div className={styles.errorMessage}>{error}</div>}
-                {info && <div className={styles.infoMessage}>{info}</div>}
-              </div>
-            )}
-
+          {/* ✅ EMAIL LOGIN (Backup) */}
+          {!showEmailLogin ? (
             <button 
-              type="submit" 
-              className={styles.loginBtn}
-              disabled={isLoading}
+              type="button" 
+              className={styles.emailToggleBtn}
+              onClick={() => setShowEmailLogin(true)}
             >
-              {isLoading ? (
-                <>
-                  <span className={styles.loadingSpinner}></span>
-                  {step === "credentials" ? "Signing In..." : "Verifying..."}
-                </>
-              ) : (
-                step === "credentials" ? "Sign In" : "Verify OTP"
-              )}
+              <i className="fas fa-envelope"></i> Sign in with Email
             </button>
-
-            {step === "otp" && (
-              <div className={styles.otpActions}>
-                <button
-                  type="button"
-                  className={styles.secondaryBtn}
-                  onClick={handleResendOtp}
+          ) : (
+            <form onSubmit={handleEmailSubmit}>
+              <label>Email Address</label>
+              <div className={styles.inputBox}>
+                <input 
+                  type="email" 
+                  placeholder="Enter your email"
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
-                >
-                  Resend OTP
-                </button>
-                <button
-                  type="button"
-                  className={styles.secondaryBtn}
-                  onClick={handleBackToLogin}
-                  disabled={isLoading}
-                >
-                  Back to Login
-                </button>
+                />
               </div>
-            )}
-          </form>
+
+              <label>Password</label>
+              <div className={styles.inputBox}>
+                <input 
+                  type="password" 
+                  placeholder="Enter your password"
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
+
+              <button 
+                type="submit" 
+                className={styles.loginBtn}
+                disabled={isLoading}
+              >
+                {isLoading ? 'Signing In...' : 'Sign In'}
+              </button>
+
+              <button 
+                type="button" 
+                className={styles.backToGoogleBtn}
+                onClick={() => setShowEmailLogin(false)}
+              >
+                ← Back to Google Sign In
+              </button>
+            </form>
+          )}
+
+          {error && <div className={styles.errorMessage}>{error}</div>}
+
+          <p className={styles.registerLink}>
+            Don't have an account?{' '}
+            <button 
+              type="button" 
+              className={styles.linkBtn}
+              onClick={() => setPage('register')}
+            >
+              Register
+            </button>
+          </p>
         </div>
 
+        {/* ✅ RANDOM TAGLINE */}
         <div className={styles.signupSection}>
-          <h2>New Here?</h2>
-          <p>Create an account and start your cinematic journey with MovieMate!</p>
+          <h2>Welcome!</h2>
+          <p>{randomTagline}</p>
           <button 
             type="button" 
             className={styles.signupBtn}
-            onClick={() => setPage("register")}
+            onClick={() => setPage('register')}
           >
             Create Account
           </button>

@@ -1,6 +1,9 @@
+// frontend/src/RegPage.jsx
+
 import { useState } from "react";
-import styles from "./RegPage.module.css";
+import styles from "./RegPage.module.css"; // ✅ Keep this
 import { registerUser } from "./api/api";
+import toast from 'react-hot-toast';
 
 export default function RegPage({ setPage }) {
   const [fullName, setFullName] = useState("");
@@ -15,7 +18,6 @@ export default function RegPage({ setPage }) {
     setError("");
     setIsLoading(true);
 
-    // Validation
     if (!fullName.trim()) {
       setError("Full name is required");
       setIsLoading(false);
@@ -50,14 +52,13 @@ export default function RegPage({ setPage }) {
       const response = await registerUser(fullName, email, password);
       
       if (response && response.user && response.accessToken) {
-        // Auto-login after registration
         localStorage.setItem("user", JSON.stringify(response.user));
         localStorage.setItem("token", response.accessToken);
-        alert("Registration Successful! Welcome to MovieMate!");
+        toast.success('Registration Successful! Welcome to MovieMate!');
         setPage("home");
         window.location.reload();
       } else {
-        alert("Registration Successful! Please login.");
+        toast.success('Registration Successful! Please login.');
         setPage("login");
       }
     } catch (err) {

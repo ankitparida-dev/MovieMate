@@ -2,7 +2,6 @@
 
 const User = require("../models/User");
 const MovieList = require("../models/MovieList");
-const Report = require("../models/Report");
 const Library = require("../models/Library");
 const Note = require("../models/Note");
 
@@ -29,11 +28,11 @@ const getStats = async (req, res) => {
             totalUsers,
             totalComments,
             totalLists,
-            totalReports: 0,
             recentActivity: []
         });
 
     } catch (error) {
+        console.error('Get stats error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -50,6 +49,7 @@ const getUsers = async (req, res) => {
         res.json(users);
 
     } catch (error) {
+        console.error('Get users error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -69,16 +69,21 @@ const banUser = async (req, res) => {
         user.isBanned = !user.isBanned;
         await user.save();
 
-        res.json(user);
+        res.json({
+            success: true,
+            message: user.isBanned ? "User banned" : "User unbanned",
+            user
+        });
 
     } catch (error) {
+        console.error('Ban user error:', error);
         res.status(500).json({
             message: error.message
         });
     }
 };
 
-// ✅ NEW: Delete User (Permanent)
+// ✅ Delete User (Permanent)
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
@@ -109,12 +114,15 @@ const deleteUser = async (req, res) => {
         await MovieList.deleteMany({ userId: id });
 
         // Delete user's comments (Prisma)
-        await prisma.comment.deleteMany({
-            where: { userId: id }
-        });
+        try {
+            await prisma.comment.deleteMany({
+                where: { userId: id }
+            });
+        } catch (prismaError) {
+            console.log("⚠️ Prisma comment deletion skipped:", prismaError.message);
+        }
 
-        // Delete user's reports
-        await Report.deleteMany({ reporterId: id });
+        // ❌ REMOVED: Report deletion
 
         // Delete the user
         await User.findByIdAndDelete(id);
@@ -148,6 +156,7 @@ const getComments = async (req, res) => {
         res.json(comments);
 
     } catch (error) {
+        console.error('Get comments error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -167,6 +176,7 @@ const deleteComment = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Delete comment error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -185,6 +195,7 @@ const getLists = async (req, res) => {
         res.json(lists);
 
     } catch (error) {
+        console.error('Get lists error:', error);
         res.status(500).json({
             message: error.message
         });
@@ -200,63 +211,14 @@ const deleteList = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Delete list error:', error);
         res.status(500).json({
             message: error.message
         });
     }
 };
 
-/* ===========================
-   REPORTS
-=========================== */
-
-const getReports = async (req, res) => {
-    try {
-        const reports = await Report.find()
-            .populate("reporterId", "name email")
-            .populate("reportedUserId", "name email")
-            .sort({ createdAt: -1 });
-
-        res.json(reports);
-
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
-    }
-};
-
-const resolveReport = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { status = "resolved", resolution = "Resolved by admin" } = req.body || {};
-
-        const report = await Report.findById(id);
-
-        if (!report) {
-            return res.status(404).json({
-                message: "Report not found"
-            });
-        }
-
-        report.status = status;
-        report.resolution = resolution;
-        report.resolvedBy = req.user.id;
-        report.resolvedAt = new Date();
-
-        await report.save();
-
-        res.json({
-            message: "Report resolved",
-            report
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
-    }
-};
+// ❌ REMOVED: Reports functions (getReports, resolveReport)
 
 /* ===========================
    EXPORTS
@@ -266,11 +228,10 @@ module.exports = {
     getStats,
     getUsers,
     banUser,
-    deleteUser, // ✅ NEW
+    deleteUser,
     getComments,
     deleteComment,
     getLists,
-    deleteList,
-    getReports,
-    resolveReport
+    deleteList
+    // ❌ Removed: getReports, resolveReport
 };
