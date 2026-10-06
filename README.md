@@ -13,6 +13,13 @@ MovieMate is a modern **full-stack movie & TV show discovery platform** built wi
 
 ---
 
+## 📸 Screenshot
+
+<img width="1902" height="908" alt="Screenshot 2026-10-06 100241" src="https://github.com/user-attachments/assets/bfced89e-d2e9-4518-8cb7-5bed186b6eb0" />
+
+
+---
+
 ## ✨ Key Features
 
 ### 🔐 Authentication & Security
@@ -46,11 +53,46 @@ MovieMate is a modern **full-stack movie & TV show discovery platform** built wi
 
 ### 🧪 Quality & Deployment
 - **🚀 Deployment Ready** – Production-ready deployment on Render and Vercel
-- **📱 Fully Responsive UI** – Optimized for all devices
 
 ---
 
 ## 🧩 Tech Stack
+
+### 🎨 Frontend
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![CSS Modules](https://img.shields.io/badge/CSS_Modules-000000?style=for-the-badge&logo=cssmodules&logoColor=white)
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-22B5BF?style=for-the-badge&logo=recharts&logoColor=white)
+![Google OAuth](https://img.shields.io/badge/Google_OAuth-4285F4?style=for-the-badge&logo=google&logoColor=white)
+
+### ⚙️ Backend
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=white)
+![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white)
+
+### 🗄️ Database
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+
+### 🔐 Authentication
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+![bcrypt](https://img.shields.io/badge/bcrypt-003A70?style=for-the-badge&logo=letsencrypt&logoColor=white)
+![Google Auth](https://img.shields.io/badge/Google_Auth_Library-4285F4?style=for-the-badge&logo=google&logoColor=white)
+
+### 🎬 API
+![TMDB](https://img.shields.io/badge/TMDB_API-01B4E4?style=for-the-badge&logo=themoviedatabase&logoColor=white)
+
+### 🚀 Deployment
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+---
+
+## 📋 Tech Stack Overview
 
 | Category | Technology | Purpose |
 |----------|------------|---------|
@@ -70,9 +112,6 @@ MovieMate is a modern **full-stack movie & TV show discovery platform** built wi
 | **API** | TMDB API | Movie and TV show data |
 | **Deployment** | Render (Backend) | Server hosting |
 | | Vercel (Frontend) | Frontend hosting |
-
----
-
 
 ---
 
@@ -97,7 +136,3 @@ This project is for educational purposes. TMDB API usage complies with their ter
 - [Chart.js](https://www.chartjs.org/) – Analytics charts
 - [Font Awesome](https://fontawesome.com/) – Icons
 - [Google Cloud](https://cloud.google.com/) – OAuth 2.0 authentication
-
----
-
-**MovieMate – Your Ultimate Movie Companion!** 🎬🍿
