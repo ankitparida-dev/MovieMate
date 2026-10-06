@@ -13,7 +13,7 @@ MovieMate is a modern **full-stack movie & TV show discovery platform** built wi
 
 ---
 
-## 📸 Screenshot
+
 
 <img width="1902" height="908" alt="Screenshot 2026-10-06 100241" src="https://github.com/user-attachments/assets/bfced89e-d2e9-4518-8cb7-5bed186b6eb0" />
 
