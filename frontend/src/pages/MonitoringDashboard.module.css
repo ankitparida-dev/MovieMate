@@ -1,0 +1,107 @@
+.dashboardContainer {
+  padding: 40px 20px;
+  background-color: #0f172a;
+  min-height: 90vh;
+  color: white;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  color: #2ec4b6;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+}
+
+.card {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 5px solid #38bdf8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.card .value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.card .subtext {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 5px;
+}
+
+/* Specific Card Colors */
+.card.warning { border-left-color: #f59e0b; }
+.card.danger { border-left-color: #ef4444; }
+.card.success { border-left-color: #10b981; }
+
+/* Chart Section */
+.chartContainer {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid #334155;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.chartHeader h2 {
+  font-size: 1.5rem;
+  color: #e2e8f0;
+}
+
+/* Custom CSS Bar Chart */
+.barChart {
+  display: flex;
+  align-items: flex-end;
+  height: 200px;
+  gap: 5px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #334155;
+}
+
+.bar {
+  flex: 1;
+  background: linear-gradient(to top, #38bdf8, #2ec4b6);
+  border-radius: 4px 4px 0 0;
+  transition: height 0.5s ease;
+  position: relative;
+}
+
+.bar:hover::after {
+  content: attr(data-value);
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #38bdf8;
+  color: #0f172a;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}

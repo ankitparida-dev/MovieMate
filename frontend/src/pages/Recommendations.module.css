@@ -1,0 +1,139 @@
+.container {
+  padding: 40px 20px;
+  background-color: #0f172a;
+  min-height: 90vh;
+  color: white;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #2ec4b6, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.header p {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #334155;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  border-color: #38bdf8;
+}
+
+.poster {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.matchBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(16, 185, 129, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.info {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #f8fafc;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 15px;
+}
+
+/* The "Why this?" explanation box */
+.reasonBox {
+  background: #0f172a;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid #38bdf8;
+  margin-top: auto;
+}
+
+.reasonText {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.reasonLabel {
+  font-size: 0.75rem;
+  color: #38bdf8;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Loading Skeleton */
+.skeletonContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skeletonCard {
+  height: 500px;
+  background: #1e293b;
+  border-radius: 12px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
