@@ -14,6 +14,13 @@ import MyLibrary from "./pages/MyLibrary";
 import Analytics from "./pages/Analytics";
 import Profile from "./pages/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
+
+// ✅ NEW ADVANCED FEATURES
+import WatchParty from "./pages/WatchParty";                // Feature 1: Real-Time Sessions
+import SemanticSearch from "./pages/SemanticSearch";        // Feature 2: AI Semantic Search
+import MonitoringDashboard from "./pages/MonitoringDashboard"; // Feature 3: Backend Performance
+import Recommendations from "./pages/Recommendations";      // Feature 4: Smart Intelligence Engine
+
 import LoginPage from "./LoginPage";
 import RegPage from "./RegPage";
 
@@ -134,6 +141,24 @@ export default function App() {
       {page === "profile" && <Profile setPage={changePage} />}
       {page === "admin" && <AdminDashboard />}
       
+      {/* ==========================================
+          ✅ ADVANCED ENGINEERING FEATURES
+          ========================================== */}
+      
+      {/* 1. Real-Time Watch Party */}
+      {page === "watch-party" && <WatchParty />}
+      
+      {/* 2. AI Semantic Movie Search */}
+      {page === "ai-search" && <SemanticSearch />}
+      
+      {/* 3. Backend Monitoring Dashboard */}
+      {page === "monitoring" && <MonitoringDashboard />}
+
+      {/* 4. Smart Movie Intelligence Engine */}
+      {page === "recommendations" && <Recommendations />}
+      
+      {/* ========================================== */}
+
       {page === "about" && selected && (
         <About selected={selected} setPage={changePage} onOpen={openAboutPage} />
       )}

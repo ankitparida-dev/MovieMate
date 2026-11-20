@@ -1,0 +1,149 @@
+.searchContainer {
+  min-height: 85vh;
+  background-color: #0f172a;
+  color: white;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #2ec4b6, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.searchBar {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 16px 24px;
+  border-radius: 30px;
+  border: 2px solid #334155;
+  background: #1e293b;
+  color: white;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #38bdf8;
+}
+
+.searchButton {
+  padding: 0 30px;
+  border-radius: 30px;
+  border: none;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.searchButton:hover {
+  background: #2ec4b6;
+}
+
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.movieCard {
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border: 1px solid #334155;
+}
+
+.movieCard:hover {
+  transform: translateY(-5px);
+  border-color: #38bdf8;
+}
+
+.moviePoster {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.movieInfo {
+  padding: 15px;
+}
+
+.movieTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #e2e8f0;
+}
+
+.movieMeta {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.movieOverview {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.loader {
+  border: 4px solid #334155;
+  border-top: 4px solid #38bdf8;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.emptyState {
+  text-align: center;
+  color: #94a3b8;
+  margin-top: 50px;
+  font-size: 1.2rem;
+}

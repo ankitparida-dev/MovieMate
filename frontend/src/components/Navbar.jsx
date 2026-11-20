@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import styles from "./Navbar.module.css";
 import logoVideo from "../assets/movielight.mp4";
-import Avatar from './Avatar';  // ✅ KEPT - for regular image avatar
+import Avatar from './Avatar'; 
 import NotificationBell from './NotificationBell';
 import socket from '../socket';
 
@@ -70,11 +70,8 @@ export default function Navbar({ setPage, page, onSearch }) {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    // ❌ REMOVED: cartoon avatar items only
     localStorage.removeItem("avatar_type");
     localStorage.removeItem("cartoon_avatar_svg");
-    // ✅ KEPT: regular avatar
-    // localStorage.removeItem("user_avatar");
     setIsLoggedIn(false);
     goHome();
   };
@@ -117,6 +114,24 @@ export default function Navbar({ setPage, page, onSearch }) {
               <li className={styles.navItem}>
                 <button className={getLinkClass("analytics")} onClick={() => { onSearch(""); setPage("analytics"); }}>Analytics</button>
               </li>
+              
+              {/* ✅ NEW ADVANCED LINKS */}
+              <li className={styles.navItem}>
+                <button className={getLinkClass("recommendations")} onClick={() => { onSearch(""); setPage("recommendations"); }}>
+                  ⭐ For You
+                </button>
+              </li>
+              <li className={styles.navItem}>
+                <button className={getLinkClass("ai-search")} onClick={() => { onSearch(""); setPage("ai-search"); }}>
+                  AI Search
+                </button>
+              </li>
+              <li className={styles.navItem}>
+                <button className={getLinkClass("watch-party")} onClick={() => { onSearch(""); setPage("watch-party"); }}>
+                  Watch Party
+                </button>
+              </li>
+              
               <li className={styles.navItem}>
                 <button className={getLinkClass("profile")} onClick={() => { onSearch(""); setPage("profile"); }}>Profile</button>
               </li>
@@ -128,6 +143,13 @@ export default function Navbar({ setPage, page, onSearch }) {
                     onClick={() => { onSearch(""); setPage("admin"); }}
                   >
                     Admin
+                  </button>
+                </li>
+              )}
+              {isAdmin && (
+                <li className={styles.navItem}>
+                  <button className={getLinkClass("monitoring")} onClick={() => { onSearch(""); setPage("monitoring"); }}>
+                    Monitoring
                   </button>
                 </li>
               )}
@@ -149,7 +171,6 @@ export default function Navbar({ setPage, page, onSearch }) {
             />
           </div>
           
-          {/* ✅ KEPT: Regular Avatar (image upload) */}
           {isLoggedIn && <Avatar name={userName} size="medium" />}
           
           {isLoggedIn && <NotificationBell />}
